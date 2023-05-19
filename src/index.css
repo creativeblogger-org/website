@@ -6,3 +6,7 @@
   font-family: "Coco";
   src: url("../src/Assets/fonts/CocoBiker\ Regular\ Trial.ttf");
 }
+@font-face {
+  font-family: "Gears";
+  src: url("../src/Assets/fonts/GearsOfPeace.ttf");
+}

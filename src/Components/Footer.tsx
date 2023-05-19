@@ -1,9 +1,9 @@
 import { Component } from "solid-js";
-import CBLogo from "../Assets/img/CB.webp";
+import CBLogo from "../Assets/img/cb-logo.png";
 
 const Footer: Component = () => {
   return (
-    <footer class="bg-slate-800 h-auto m-auto w-11/12 p-8 my-6 rounded-md">
+    <footer class="bg-gradient-to-r from-indigo-950 to-violet-800 h-auto m-auto w-11/12 p-8 my-6 rounded-md">
       <div class="grid grid-cols-2">
         <div class="about-us-container flex-col">
           <h1 class="uppercase text-white">
@@ -28,7 +28,7 @@ const Footer: Component = () => {
           <ul class="list-none">
             <li>
               <a
-                class="text-white duration-500 hover:text-yellow-500"
+                class="text-white duration-500 hover:text-teal-300"
                 href="/posts"
               >
                 - Posts
@@ -36,7 +36,7 @@ const Footer: Component = () => {
             </li>
             <li>
               <a
-                class="text-white duration-500 hover:text-yellow-500"
+                class="text-white duration-500 hover:text-teal-300"
                 href="/about"
               >
                 - About
@@ -50,7 +50,7 @@ const Footer: Component = () => {
         <a
           href="https://opensource.org/license/mit/"
           target="_blank"
-          class="text-yellow-500"
+          class="text-teal-300"
         >
           licence MIT
         </a>

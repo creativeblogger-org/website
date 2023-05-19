@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         coco: ["Coco"],
+        gears: ["Gears"],
       },
     },
   },

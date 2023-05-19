@@ -1,7 +1,7 @@
 import { Component, lazy } from "solid-js";
 import { MetaProvider, Title, Link, Meta } from "@solidjs/meta";
 import { useFavicon } from "solidjs-use";
-import imgError404 from "../Assets/img/404-img.png";
+import imgError404 from "../Assets/img/404.png";
 
 const [icon, setIcon] = useFavicon();
 
@@ -20,13 +20,13 @@ const Error404: Component = () => {
           content="Ouuups, vous semblez perdu ! Vous avez recherché une page qui n'existe pas. Retournez en lieu sûr !"
         />
         <NavBar />
-        <h1 class="text-yellow-500 text-center text-6xl font-bold">
+        <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 to-teal-300 text-center text-6xl font-bold">
           Ouups, vous semblez perdu !
         </h1>
         <img class="mx-auto" src={imgError404} alt="Image erreur 404" />
         <div class="flex justify-center">
           <a
-            class="text-yellow-500 text-2xl bg-slate-800 p-4 flex justify-center rounded-md"
+            class="text-teal-300 text-2xl bg-gradient-to-r from-indigo-950 to-violet-800 p-4 flex justify-center rounded-md"
             href="/"
           >
             Retour en lieu sûr
