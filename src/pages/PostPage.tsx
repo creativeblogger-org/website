@@ -11,8 +11,6 @@ const [post, setPost] = createSignal({
 const fetch_post_by_slug = async (url: string) => {
   const res = await fetch(url);
   const post: Post = await res.json();
-  console.log("Fetched :");
-  console.log(post);
   setPost(post);
 };
 

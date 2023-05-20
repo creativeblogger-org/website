@@ -20,9 +20,6 @@ interface RegisterSuccess {
   token: string;
 }
 
-const NavBar = lazy(() => import("../components/NavBar"));
-const Footer = lazy(() => import("../components/Footer"));
-
 const Login: Component = () => {
   return (
     <MetaProvider>
@@ -34,7 +31,6 @@ const Login: Component = () => {
         />
       </div>
       <div>
-        <NavBar />
         <div class="flex min-h-full flex-col justify-center px-6 pb-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-16 w-auto" src={Logo} alt="Your Company" />
@@ -142,7 +138,6 @@ const Login: Component = () => {
             <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
           </div>
         </div>
-        <Footer />
       </div>
     </MetaProvider>
   );

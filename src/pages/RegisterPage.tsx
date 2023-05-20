@@ -1,4 +1,4 @@
-import { Component, createSignal, lazy } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import Logo from "../assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
@@ -19,9 +19,6 @@ interface RegisterSuccess {
   type: string;
   token: string;
 }
-
-const NavBar = lazy(() => import("../components/NavBar"));
-const Footer = lazy(() => import("../components/Footer"));
 
 const Register: Component = () => {
   return (

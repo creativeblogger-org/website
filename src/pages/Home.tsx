@@ -37,9 +37,6 @@ async function fetch_posts() {
   setPosts(posts);
 }
 
-const NavBar = lazy(() => import("../components/NavBar"));
-const Footer = lazy(() => import("../components/Footer"));
-
 const Home: Component = () => {
   onMount(() => fetch_posts());
 
@@ -52,7 +49,6 @@ const Home: Component = () => {
           content="Creative Blogger - Projet collaboratif entre bloggers"
         />
       </div>
-      <NavBar />
       <div class="p-3">
         <div class="flex justify-end w-11/12">
           <button onclick={fetch_posts} class="rounded-full border-white">
@@ -70,7 +66,6 @@ const Home: Component = () => {
           </For>
         </div>
       </div>
-      <Footer />
     </MetaProvider>
   );
 };

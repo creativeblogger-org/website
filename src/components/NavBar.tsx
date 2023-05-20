@@ -1,5 +1,5 @@
-import { Component, lazy } from "solid-js";
-import imgNavNar from "../Assets/img/cb-logo.png";
+import { Component } from "solid-js";
+import imgNavNar from "../assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
 
 const NavBar: Component = () => {
