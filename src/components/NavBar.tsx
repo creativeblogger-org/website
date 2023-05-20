@@ -1,15 +1,10 @@
-import { Component } from "solid-js";
-import imgNavNar from "../assets/img/cb-logo.png";
+import { Component, lazy } from "solid-js";
+import imgNavNar from "../Assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
 
 const NavBar: Component = () => {
   return (
     <div class="nav-bar">
-      <img
-        src={imgNavNar}
-        class=" h-20 mx-auto"
-        alt="Image officielle de Creative Blogger"
-      />
       <NavLink
         class="text-white mt-4 text-4xl font-gears text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-800"
         href="/"
