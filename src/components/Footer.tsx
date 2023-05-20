@@ -1,9 +1,9 @@
 import { Component } from "solid-js";
-import CBLogo from "../assets/img/cb-logo.png";
+import CBLogo from "../Assets/img/cb-logo.png";
 
 const Footer: Component = () => {
   return (
-    <footer class="bg-gradient-to-r from-indigo-950 to-violet-800 h-auto m-auto w-11/12 p-8 my-6 rounded-md">
+    <footer class="footer">
       <div class="grid grid-cols-2">
         <div class="about-us-container flex-col">
           <h1 class="uppercase text-white">
