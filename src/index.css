@@ -11,22 +11,41 @@
   src: url("../src/Assets/fonts/GearsOfPeace.ttf");
 }
 html{
-  background-image: url('../fond.png');
+  background-image: url('../src/Assets/img/fond.png');
   background-size: auto auto;
   background-position: auto auto;
 }
 .nav-bar{
-  background-color: orange;
+  background-color: rgb(255, 255, 255, 0.1);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: 1vmin;
-  padding-bottom: 1vmin;
-
+  height: max-content;
+  padding-top: 2vmin;
 }
 .text-white{
   display: block;
   margin-left: auto;
   margin-right: auto;
+  align-items: center;
+  text-align: center;
+}
+.footer{
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  background-color: rgb(41, 0, 94);
+}
+.p-3{
+  margin-top: 30vmin;
+}
+.m-auto{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vmin;
+  color: white;
+  width: 100%;
 }
