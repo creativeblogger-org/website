@@ -1,4 +1,4 @@
-import { Routes, Route, Router } from "@solidjs/router";
+import { Routes, Route } from "@solidjs/router";
 import { Component, lazy } from "solid-js";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -13,15 +13,13 @@ const App: Component = () => {
   return (
     <>
       <NavBar />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<ResiterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path={"/posts/:slug"} element={<PostPage />} />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<ResiterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path={"/posts/:slug"} element={<PostPage />} />
+        <Route path="*" element={<Error404 />} />
+      </Routes>
       <Footer />
     </>
   );

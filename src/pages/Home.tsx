@@ -1,4 +1,4 @@
-import { Component, For, createSignal, lazy, onMount } from "solid-js";
+import { Component, For, createSignal,  onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
