@@ -1,10 +1,10 @@
-import { Component } from "solid-js";
-import imgNavNar from "../assets/img/cb-logo.png";
+import { Component, lazy } from "solid-js";
+import imgNavNar from "../Assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
 
 const NavBar: Component = () => {
   return (
-    <div class="bg-gradient-to-r from-indigo-950 to-violet-800 h-56 m-auto w-11/12 p-8 my-6 rounded-md text-center">
+    <div class="nav-bar">
       <img
         src={imgNavNar}
         class=" h-20 mx-auto"
