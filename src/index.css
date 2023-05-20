@@ -10,3 +10,23 @@
   font-family: "Gears";
   src: url("../src/Assets/fonts/GearsOfPeace.ttf");
 }
+html{
+  background-image: url('../fond.png');
+  background-size: auto auto;
+  background-position: auto auto;
+}
+.nav-bar{
+  background-color: orange;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 1vmin;
+  padding-bottom: 1vmin;
+
+}
+.text-white{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
