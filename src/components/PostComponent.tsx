@@ -1,5 +1,5 @@
-import { For, Show } from "solid-js";
-import { Post } from "../Pages/Home";
+import { Show } from "solid-js";
+import { Post } from "../pages/Home";
 import { NavLink } from "@solidjs/router";
 
 function getHumanDate(date: string) {

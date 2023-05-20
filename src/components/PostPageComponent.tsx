@@ -1,7 +1,6 @@
 import { For, Show, lazy } from "solid-js";
-import { Post } from "../Pages/Home";
+import { Post } from "../pages/Home";
 import { NavLink } from "@solidjs/router";
-import { post } from "../Pages/PostPage";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 
 const NavBar = lazy(() => import("./NavBar"));

@@ -1,8 +1,8 @@
 import { Component, For, createSignal, lazy, onMount } from "solid-js";
-import PostComponent from "../Components/PostComponent";
+import PostComponent from "../components/PostComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import ReloadImg from "../Assets/img/bb-reload-.svg";
+import ReloadImg from "../assets/img/bb-reload-.svg";
 
 interface User {
   id: number;
@@ -37,8 +37,8 @@ async function fetch_posts() {
   setPosts(posts);
 }
 
-const NavBar = lazy(() => import("../Components/NavBar"));
-const Footer = lazy(() => import("../Components/Footer"));
+const NavBar = lazy(() => import("../components/NavBar"));
+const Footer = lazy(() => import("../components/Footer"));
 
 const Home: Component = () => {
   onMount(() => fetch_posts());

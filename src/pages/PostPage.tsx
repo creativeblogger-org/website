@@ -1,6 +1,6 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import { Post } from "./Home";
-import PostPageComponent from "../Components/PostPageComponent";
+import PostPageComponent from "../components/PostPageComponent";
 import { useParams } from "@solidjs/router";
 
 const [post, setPost] = createSignal({

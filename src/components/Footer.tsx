@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import CBLogo from "../Assets/img/cb-logo.png";
+import CBLogo from "../assets/img/cb-logo.png";
 
 const Footer: Component = () => {
   return (

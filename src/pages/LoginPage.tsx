@@ -1,9 +1,9 @@
 import { Component, createSignal, lazy } from "solid-js";
+import Logo from "../assets/img/cb-logo.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import Logo from "../Assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
 
-const [error, setError] = createSignal();
+const [error, setError] = createSignal("");
 
 interface RegisterError {
   message: string;
@@ -20,14 +20,14 @@ interface RegisterSuccess {
   token: string;
 }
 
-const NavBar = lazy(() => import("../Components/NavBar"));
-const Footer = lazy(() => import("../Components/Footer"));
+const NavBar = lazy(() => import("../components/NavBar"));
+const Footer = lazy(() => import("../components/Footer"));
 
-const Register: Component = () => {
+const Login: Component = () => {
   return (
     <MetaProvider>
       <div class="Home">
-        <Title>Creative Blogger - Register</Title>
+        <Title>Creative Blogger - Login</Title>
         <Meta
           name="description"
           content="Creative Blogger - Projet collaboratif entre bloggers"
@@ -39,18 +39,19 @@ const Register: Component = () => {
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-16 w-auto" src={Logo} alt="Your Company" />
             <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Ravis de vous accueillir !
+              Ravis de vous revoir !
             </h2>
           </div>
 
           <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form
+              class="space-y-6"
               action=""
               onsubmit={async (e) => {
                 e.preventDefault();
 
                 let res = await fetch(
-                  "https://api.creativeblogger.org/auth/register",
+                  "https://api.creativeblogger.org/auth/login",
                   {
                     method: "POST",
                     body: new FormData(
@@ -76,27 +77,13 @@ const Register: Component = () => {
                   for="username"
                   class="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Nom d'utilisateur :{" "}
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  autocomplete="off"
-                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  required
-                />
-                <label
-                  for="email"
-                  class="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Adresse mail :
+                  Adresse mail ou nom d'utilisateur :
                 </label>
                 <div class="mt-2">
                   <input
-                    name="email"
-                    id="email"
-                    type="email"
+                    name="username"
+                    id="username"
+                    type="text"
                     autocomplete="off"
                     required
                     class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -112,6 +99,14 @@ const Register: Component = () => {
                   >
                     Mot de passe :
                   </label>
+                  {/* <div class="text-sm">
+                  <a
+                    href="#"
+                    class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
+                    Mot de passe oublié ?
+                  </a>
+                </div> */}
                 </div>
                 <div class="mt-2">
                   <input
@@ -123,21 +118,9 @@ const Register: Component = () => {
                     class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                <label
-                  for="confirm-password"
-                  class="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Confirmer le mot de passe :
-                </label>
-                <input
-                  type="password"
-                  name="confirm-password"
-                  id="confirm-password"
-                  required
-                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
               </div>
-              <div class=" pt-3">
+
+              <div>
                 <button
                   type="submit"
                   class="flex w-full justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-950 to-violet-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -148,15 +131,15 @@ const Register: Component = () => {
             </form>
 
             <p class="mt-10 text-center text-sm text-gray-500">
-              Déjà un compte ?{" "}
+              Pas encore inscrit ?{" "}
               <NavLink
-                href="/login"
+                href="/register"
                 class="font-semibold leading-6 text-indigo-600 duration-100 hover:text-indigo-500"
               >
-                Connectez-vous
+                Lancez-vous dans l'aventure
               </NavLink>
             </p>
-            <h2 class="text-center text-red-500 pt-3 text-2xl">{error}</h2>
+            <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
           </div>
         </div>
         <Footer />
@@ -165,20 +148,4 @@ const Register: Component = () => {
   );
 };
 
-export default Register;
-
-{
-  /* 
-        <label for="password">Mot de passe : </label>
-        <input type="password" name="password" id="password" required />
-        <br />
-        <label for="confirm-password">Confirmer : </label>
-        <input
-          type="password"
-          name="confirm-password"
-          id="confirm-password"
-          required
-        />
-        <input type="submit" value="Créer un compte" />
-      </form> */
-}
+export default Login;

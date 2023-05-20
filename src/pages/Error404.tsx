@@ -7,8 +7,8 @@ const [icon, setIcon] = useFavicon();
 
 setIcon("/src/Assets/img/CB.webp");
 
-const NavBar = lazy(() => import("../Components/NavBar"));
-const Footer = lazy(() => import("../Components/Footer"));
+const NavBar = lazy(() => import("../components/NavBar"));
+const Footer = lazy(() => import("../components/Footer"));
 
 const Error404: Component = () => {
   return (
