@@ -1,15 +1,17 @@
-<p class="text-2xl">{props.post.content}</p>
-<div class="comments">
-        <h1 class="text-xl font-bold text-slate-800 p-4">Commentaires :</h1>
+ <div class="comments">
+        <h1 class="text-xl font-bold">Commentaires</h1>
         <For
           each={props.post.comments}
           fallback={"Aucun commentaire pour le moment..."}
         >
           {(comment, i) => (
             <div class="comment bg-gray-800 p-2 rounded-lg mt-5">
-              <a href={"/user/" + comment.author.username} class="font-bold">
+              <NavLink
+                href={"/user/" + comment.author.username}
+                class="font-bold"
+              >
                 @{comment.author.username}
-              </a>{" "}
+              </NavLink>{" "}
               <span>Posté le {getHumanDate(comment.created_at)}</span>
               <Show when={comment.created_at != comment.updated_at}>
                 <span>Modifié le {getHumanDate(comment.updated_at)}</span>

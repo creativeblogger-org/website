@@ -1,12 +1,13 @@
-import { Component, lazy, For, createSignal, onMount } from "solid-js";
-import { MetaProvider, Title, Link, Meta } from "@solidjs/meta";
-import { useFavicon } from "solidjs-use";
+import { Component, For, createSignal, lazy, onMount } from "solid-js";
 import PostComponent from "../Components/PostComponent";
-import Icon from "../Assets/img/bb-reload-.svg";
+import { NavLink } from "@solidjs/router";
+import { MetaProvider, Title, Meta } from "@solidjs/meta";
+import ReloadImg from "../Assets/img/bb-reload-.svg";
 
 interface User {
   id: number;
   username: string;
+  permission: number;
 }
 
 interface Comment {
@@ -31,20 +32,17 @@ interface Post {
 const [posts, setPosts] = createSignal([] as Post[]);
 
 async function fetch_posts() {
-  let res = await fetch("https://api.creativeblogger.org/posts");
-  let posts: Post[] = JSON.parse(await res.text());
+  const res = await fetch("https://api.creativeblogger.org/posts");
+  const posts: Post[] = await res.json();
   setPosts(posts);
 }
-
-const [icon, setIcon] = useFavicon();
-
-setIcon("/src/Assets/img/cb-logo.png");
 
 const NavBar = lazy(() => import("../Components/NavBar"));
 const Footer = lazy(() => import("../Components/Footer"));
 
 const Home: Component = () => {
   onMount(() => fetch_posts());
+
   return (
     <MetaProvider>
       <div class="Home">
@@ -53,24 +51,26 @@ const Home: Component = () => {
           name="description"
           content="Creative Blogger - Projet collaboratif entre bloggers"
         />
-        <NavBar />
-        <div class="m-auto w-11/12 my-6 rounded-md">
-          <div class="flex justify-end">
-            <button
-              onclick={fetch_posts}
-              class="rounded-full border-white border-2 active:bg-gray-70"
-            >
-              <img src={Icon} class="h-8" alt="Reload" />
-            </button>
-          </div>
-          <div class="grid grid-cols-3" id="posts">
-            <For each={posts()} fallback={"Aucun post pour le moment..."}>
-              {(post, _) => <PostComponent post={post} />}
-            </For>
-          </div>
-        </div>
-        <Footer />
       </div>
+      <NavBar />
+      <div class="p-3">
+        <div class="flex justify-end w-11/12">
+          <button onclick={fetch_posts} class="rounded-full border-white">
+            <img src={ReloadImg} class="h-8" alt="Reload image" />
+          </button>
+        </div>
+
+        <div class="m-auto w-11/12 grid grid-cols-3" id="posts">
+          <For each={posts()} fallback={"Aucun post pour le moment..."}>
+            {(post, _) => (
+              <NavLink href={`/posts/${post.slug}`}>
+                <PostComponent post={post} />
+              </NavLink>
+            )}
+          </For>
+        </div>
+      </div>
+      <Footer />
     </MetaProvider>
   );
 };

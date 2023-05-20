@@ -19,21 +19,21 @@ const NavBar: Component = () => {
       <div class="flex justify-center">
         <NavLink
           class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
-          href="/about"
+          href="/login"
         >
-          About
+          Login
         </NavLink>
         <NavLink
           class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
-          href="/about"
+          href="/register"
+        >
+          Register
+        </NavLink>
+        <NavLink
+          class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
+          href="/contact"
         >
           Contact
-        </NavLink>
-        <NavLink
-          class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
-          href="/about"
-        >
-          Guide
         </NavLink>
       </div>
     </div>
