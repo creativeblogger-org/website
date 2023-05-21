@@ -1,7 +1,8 @@
-import { For, Show, lazy } from "solid-js";
-import { Post } from "../pages/Home";
+import { For, Show } from "solid-js";
+import { Post, fetch_posts } from "../pages/Home";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
+import { getCookies } from "./CreatePostButton";
 
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
@@ -11,6 +12,31 @@ function getHumanDate(date: string) {
 
 interface Props {
   post: Post;
+}
+
+async function delete_post(post: Post) {
+  let cookies = getCookies()
+
+  if (cookies.length != 2) {
+      alert("Vous ne pouvez pas poster de posts si vous n'êtes pas connecté.")
+      return
+  }
+
+  const res = await fetch(`https://api.creativeblogger.org/posts/${post.id}`, {
+      method: "DELETE",
+      headers: {
+          "Authorization": `${cookies[0]} ${cookies[1]}`
+      }
+  })
+  
+
+  if (!res.ok) {
+    alert((await res.json()).message)
+    return
+  }
+
+  alert("Post supprimé avec succès !")
+  location.assign("/")
 }
 
 const PostPageComponent = (props: Props) => {
@@ -25,6 +51,7 @@ const PostPageComponent = (props: Props) => {
       </div>
       <div class="p-4 m-5">
         <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
+        <button class="absolute top-0 right-0 text-red-600 font-bold m-2 p-2 border-2 border-red-700 rounded-lg z-[1]" onclick={() => delete_post(props.post)}>Delete</button>
         <div class="flex justify-center m-2">
           <NavLink
             href={"/user/" + props.post.author.username}

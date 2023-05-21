@@ -31,8 +31,6 @@ async function onPostSubmit(e: Event) {
     const res = await fetch("https://api.creativeblogger.org/posts/new", {
         method: "PUT",
         headers: {
-            // 'Access-Control-Allow-Origin':'*',
-            // 'Access-Control-Request-Method': "PUT",
             "Authorization": `${cookies[0]} ${cookies[1]}`
         },
         body: new FormData(
@@ -89,3 +87,4 @@ const CreatePostButton: Component = () => {
 };
 
 export default CreatePostButton;
+export {getCookies};
