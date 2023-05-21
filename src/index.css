@@ -4,14 +4,14 @@
 
 @font-face {
   font-family: "Coco";
-  src: url("../src/Assets/fonts/CocoBiker\ Regular\ Trial.ttf");
+  src: url("../src/assets/fonts/CocoBiker\ Regular\ Trial.ttf");
 }
 @font-face {
   font-family: "Gears";
-  src: url("../src/Assets/fonts/GearsOfPeace.ttf");
+  src: url("../src/assets/fonts/GearsOfPeace.ttf");
 }
 html{
-  background-image: url('../src/Assets/img/fond.png');
+  background-image: url('../src/assets/img/fond.png');
   background-size: auto auto;
   background-position: auto auto;
 }
