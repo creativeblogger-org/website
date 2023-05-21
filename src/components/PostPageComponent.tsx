@@ -3,9 +3,6 @@ import { Post } from "../pages/Home";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 
-const NavBar = lazy(() => import("./NavBar"));
-const Footer = lazy(() => import("./Footer"));
-
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
 
@@ -26,7 +23,6 @@ const PostPageComponent = (props: Props) => {
           content="Creative Blogger - Projet collaboratif entre bloggers"
         />
       </div>
-      <NavBar />
       <div class="p-4 m-5">
         <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
         <div class="flex justify-center m-2">
@@ -75,7 +71,6 @@ const PostPageComponent = (props: Props) => {
           </For>
         </div>
       </div>
-      <Footer />
     </MetaProvider>
   );
 };

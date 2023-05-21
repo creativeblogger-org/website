@@ -7,9 +7,6 @@ const [icon, setIcon] = useFavicon();
 
 setIcon("/src/assets/img/CB.webp");
 
-const NavBar = lazy(() => import("../components/NavBar"));
-const Footer = lazy(() => import("../components/Footer"));
-
 const Error404: Component = () => {
   return (
     <MetaProvider>
@@ -19,7 +16,6 @@ const Error404: Component = () => {
           name="description"
           content="Ouuups, vous semblez perdu ! Vous avez recherché une page qui n'existe pas. Retournez en lieu sûr !"
         />
-        <NavBar />
         <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 to-teal-300 text-center text-6xl font-bold">
           Ouups, vous semblez perdu !
         </h1>
@@ -33,7 +29,6 @@ const Error404: Component = () => {
           </a>
         </div>
         <br />
-        <Footer />
       </div>
     </MetaProvider>
   );

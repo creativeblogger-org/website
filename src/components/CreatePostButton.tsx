@@ -1,4 +1,4 @@
-import { Component, Show, createSignal } from "solid-js";
+import { Component, Show, createEffect, createSignal } from "solid-js";
 import { fetch_posts } from "../pages/Home";
 
 const [showPopup, setShowPopup] = createSignal(false);
@@ -45,6 +45,7 @@ async function onPostSubmit(e: Event) {
         alert((await res.json()).errors[0].message)
         return
     }
+    alert("Post publié avec succès !")
     setShowPopup(false)
     fetch_posts()
 }
@@ -53,6 +54,14 @@ const CreatePostButton: Component = () => {
     window.addEventListener("keyup", e => {
         if (e.key == "Escape") {
             setShowPopup(false)
+        }
+    })
+
+    createEffect(() => {
+        if (showPopup()) {
+            document.body.classList.add("overflow-hidden")
+        } else {
+            document.body.classList.remove("overflow-hidden")
         }
     })
 
