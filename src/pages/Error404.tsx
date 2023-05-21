@@ -1,11 +1,11 @@
 import { Component, lazy } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { useFavicon } from "solidjs-use";
-import imgError404 from "../Assets/img/404.png";
+import imgError404 from "../assets/img/404.png";
 
 const [icon, setIcon] = useFavicon();
 
-setIcon("/src/Assets/img/CB.webp");
+setIcon("/src/assets/img/CB.webp");
 
 const NavBar = lazy(() => import("../components/NavBar"));
 const Footer = lazy(() => import("../components/Footer"));
