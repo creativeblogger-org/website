@@ -4,34 +4,29 @@ import { fetch_posts } from "../pages/Home";
 const [showPopup, setShowPopup] = createSignal(false);
 
 
-function getCookies() {
-    let headers = document.cookie.split("; ")
-    console.log(headers);
-    let type = headers.find(cookie => cookie.startsWith("type="))?.substring(5)
-    let token = headers.find(cookie => cookie.startsWith("token="))?.substring(6)
-    if (type && token) {
-        return [type, token]
-    }
-    return []
+function getToken() {
+    let headers = document.cookie
+    let token = headers.substring(6)
+    return token
 }
 
 async function onPostSubmit(e: Event) {
     e.preventDefault()
 
-    let cookies = getCookies()
+    let token = getToken()
 
-    if (cookies.length != 2) {
+    if (token.length == 0) {
         alert("Vous ne pouvez pas poster de posts si vous n'êtes pas connecté.")
         return
     }
 
-    console.log(cookies);
+    console.log(token);
     
 
     const res = await fetch("https://api.creativeblogger.org/posts/new", {
         method: "PUT",
         headers: {
-            "Authorization": `${cookies[0]} ${cookies[1]}`
+            "Authorization": `Bearer ${token}`
         },
         body: new FormData(
             document.getElementById("post-form") as HTMLFormElement
@@ -87,4 +82,4 @@ const CreatePostButton: Component = () => {
 };
 
 export default CreatePostButton;
-export {getCookies};
+export {getToken};

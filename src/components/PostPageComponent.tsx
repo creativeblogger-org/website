@@ -1,8 +1,8 @@
 import { For, Show } from "solid-js";
-import { Post, fetch_posts } from "../pages/Home";
+import { Post } from "../pages/Home";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import { getCookies } from "./CreatePostButton";
+import { getToken } from "./CreatePostButton";
 
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
@@ -15,9 +15,9 @@ interface Props {
 }
 
 async function delete_post(post: Post) {
-  let cookies = getCookies()
+  let token = getToken()
 
-  if (cookies.length != 2) {
+  if (token.length == 0) {
       alert("Vous ne pouvez pas poster de posts si vous n'êtes pas connecté.")
       return
   }
@@ -25,7 +25,7 @@ async function delete_post(post: Post) {
   const res = await fetch(`https://api.creativeblogger.org/posts/${post.id}`, {
       method: "DELETE",
       headers: {
-          "Authorization": `${cookies[0]} ${cookies[1]}`
+          "Authorization": `Bearer ${token}`
       }
   })
   
