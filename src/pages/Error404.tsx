@@ -1,5 +1,5 @@
 import { Component, lazy } from "solid-js";
-import { MetaProvider, Title, Link, Meta } from "@solidjs/meta";
+import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { useFavicon } from "solidjs-use";
 import imgError404 from "../Assets/img/404.png";
 

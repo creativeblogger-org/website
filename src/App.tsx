@@ -8,6 +8,7 @@ const ResiterPage = lazy(() => import("./pages/RegisterPage"));
 const PostPage = lazy(() => import("./pages/PostPage"));
 const NavBar = lazy(() => import("./components/NavBar"));
 const Footer = lazy(() => import("./components/Footer"));
+const CreatePostButton = lazy(() => import("./components/CreatePostButton"));
 
 const App: Component = () => {
   return (
@@ -21,6 +22,7 @@ const App: Component = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
+      <CreatePostButton />
     </>
   );
 };
