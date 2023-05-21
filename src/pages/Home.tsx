@@ -72,3 +72,4 @@ const Home: Component = () => {
 
 export default Home;
 export type { Post };
+export { fetch_posts };

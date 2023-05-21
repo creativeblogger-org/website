@@ -1,4 +1,5 @@
 import { Component, Show, createSignal } from "solid-js";
+import { fetch_posts } from "../pages/Home";
 
 const [showPopup, setShowPopup] = createSignal(false);
 
@@ -30,8 +31,8 @@ async function onPostSubmit(e: Event) {
     const res = await fetch("https://api.creativeblogger.org/posts/new", {
         method: "PUT",
         headers: {
-            'Access-Control-Allow-Origin':'*',
-            'Access-Control-Request-Method': "PUT",
+            // 'Access-Control-Allow-Origin':'*',
+            // 'Access-Control-Request-Method': "PUT",
             "Authorization": `${cookies[0]} ${cookies[1]}`
         },
         body: new FormData(
@@ -41,12 +42,20 @@ async function onPostSubmit(e: Event) {
     console.log(res);
 
     if (!res.ok) {
-        console.log((await res.json()).errors)
+        alert((await res.json()).errors[0].message)
+        return
     }
     setShowPopup(false)
+    fetch_posts()
 }
 
 const CreatePostButton: Component = () => {
+    window.addEventListener("keyup", e => {
+        if (e.key == "Escape") {
+            setShowPopup(false)
+        }
+    })
+
     return (
         <>
             <Show
