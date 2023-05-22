@@ -1,5 +1,5 @@
 import { Component, For, createSignal,  onMount } from "solid-js";
-import PostComponent from "../components/PostComponent";
+import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/img/bb-reload-.svg";
@@ -60,7 +60,7 @@ const Home: Component = () => {
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>
-                <PostComponent post={post} />
+                <PostPreviewComponent post={post} />
               </NavLink>
             )}
           </For>
