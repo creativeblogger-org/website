@@ -1,6 +1,6 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import { Post } from "./Home";
-import PostPageComponent from "../components/PostComponent";
+import PostComponent from "../components/PostComponent";
 import { useParams } from "@solidjs/router";
 
 const [post, setPost] = createSignal({
@@ -24,7 +24,7 @@ const PostPage: Component = () => {
 
   return (
     <Show when={post().id != 0} fallback="Loading...">
-      <PostPageComponent post={post()} />;
+      <PostComponent post={post()} />;
     </Show>
   );
 };

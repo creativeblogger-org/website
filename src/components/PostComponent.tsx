@@ -26,7 +26,8 @@ async function delete_post(post: Post) {
       method: "DELETE",
       headers: {
           "Authorization": `Bearer ${token}`
-      }
+      },
+      mode: "no-cors"
   })
   
 
@@ -39,7 +40,7 @@ async function delete_post(post: Post) {
   location.assign("/")
 }
 
-const PostPageComponent = (props: Props) => {
+const PostComponent = (props: Props) => {
   return (
     <MetaProvider>
       <div class="Home">
@@ -102,4 +103,4 @@ const PostPageComponent = (props: Props) => {
   );
 };
 
-export default PostPageComponent;
+export default PostComponent;

@@ -31,8 +31,8 @@ async function onPostSubmit(e: Event) {
         body: new FormData(
             document.getElementById("post-form") as HTMLFormElement
         ),
+        mode: "no-cors"
     })
-    console.log(res);
 
     if (!res.ok) {
         alert((await res.json()).errors[0].message)
