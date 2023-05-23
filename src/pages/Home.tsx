@@ -32,11 +32,7 @@ interface Post {
 const [posts, setPosts] = createSignal([] as Post[]);
 
 async function fetch_posts() {
-  const res = await fetch("https://api.creativeblogger.org/posts"/*, {
-    headers: {
-      "Origin": "https://chat.mcrk.xyz"
-    }
-  }*/);
+  const res = await fetch("https://api.creativeblogger.org/posts");
   console.log(res);
   const posts: Post[] = await res.json();
   setPosts(posts);

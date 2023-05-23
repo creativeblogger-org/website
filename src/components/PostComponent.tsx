@@ -26,8 +26,7 @@ async function delete_post(post: Post) {
       method: "DELETE",
       headers: {
           "Authorization": `Bearer ${token}`
-      },
-      mode: "no-cors"
+      }
   })
   
 

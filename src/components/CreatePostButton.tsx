@@ -30,8 +30,7 @@ async function onPostSubmit(e: Event) {
         },
         body: new FormData(
             document.getElementById("post-form") as HTMLFormElement
-        ),
-        mode: "no-cors"
+        )
     })
 
     if (!res.ok) {
