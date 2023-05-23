@@ -1,5 +1,6 @@
-import { Component, Show, createEffect, createSignal } from "solid-js";
+import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
 import { fetch_posts } from "../pages/Home";
+import { error, setError } from "../pages/RegisterPage";
 
 const [showPopup, setShowPopup] = createSignal(false);
 
@@ -21,22 +22,25 @@ async function onPostSubmit(e: Event) {
     }
 
     console.log(token);
-    
+
+    let body = new FormData(
+        document.getElementById("post-form") as HTMLFormElement
+    )
 
     const res = await fetch("https://api.creativeblogger.org/posts/new", {
         method: "PUT",
         headers: {
             "Authorization": `Bearer ${token}`
         },
-        body: new FormData(
-            document.getElementById("post-form") as HTMLFormElement
-        )
+        body: body
     })
 
     if (!res.ok) {
-        alert((await res.json()).errors[0].message)
+        const error: ServerError = await res.json();
+        setError(error.errors[0].message)
         return
     }
+    
     alert("Post publié avec succès !")
     setShowPopup(false)
     fetch_posts()
@@ -57,6 +61,10 @@ const CreatePostButton: Component = () => {
         }
     })
 
+    onMount(() => {
+        setError("")
+    })
+
     return (
         <>
             <Show
@@ -70,6 +78,7 @@ const CreatePostButton: Component = () => {
                         <input type="text" name="title" id="post-title" class="text-black p-1" required /><br />
                         <label for="content">Contenu : </label><br />
                         <textarea name="content" id="content" cols="30" rows="10" class="text-black p-1" required></textarea><br />
+                        <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
                         <input type="submit" value="Créer un nouveau post" class="bg-blue-800 border-blue-950 border-2 p-1 rounded-md" />
                     </form>
                 </div>

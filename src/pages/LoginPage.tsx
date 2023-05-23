@@ -5,21 +5,6 @@ import { NavLink } from "@solidjs/router";
 
 const [error, setError] = createSignal("");
 
-interface RegisterError {
-  message: string;
-  rule: string;
-  field: string;
-}
-
-interface RegisterErrorJson {
-  errors: RegisterError[];
-}
-
-interface RegisterSuccess {
-  type: string;
-  token: string;
-}
-
 const Login: Component = () => {
   return (
     <MetaProvider>
@@ -46,7 +31,7 @@ const Login: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
-                let res = await fetch(
+                const res = await fetch(
                   "https://api.creativeblogger.org/auth/login",
                   {
                     method: "POST",
@@ -57,13 +42,12 @@ const Login: Component = () => {
                 );
 
                 if (!res.ok) {
-                  let json: RegisterErrorJson = await res.json();
+                  let json: ServerError = await res.json();
                   setError(json.errors[0].message);
                   return;
                 }
 
-                let credentials: RegisterSuccess = await res.json();
-                document.cookie = `type=${credentials.type}`;
+                const credentials: AuthSuccess = await res.json();
                 document.cookie = `token=${credentials.token}`;
                 location.assign("/");
               }}
