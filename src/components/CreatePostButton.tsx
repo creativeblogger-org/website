@@ -21,8 +21,6 @@ async function onPostSubmit(e: Event) {
         return
     }
 
-    console.log(token);
-
     let body = new FormData(
         document.getElementById("post-form") as HTMLFormElement
     )

@@ -30,8 +30,6 @@ async function delete_post(post_id: number) {
 }
 
 const PostComponent = () => {
-  console.log(post());
-
   return (
     <MetaProvider>
       <div class="Home">
