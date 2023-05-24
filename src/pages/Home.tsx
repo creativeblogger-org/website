@@ -4,21 +4,9 @@ import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/img/bb-reload-.svg";
 import { error, setError } from "./RegisterPage";
+import { fetch_posts } from "../utils/functions_utils";
 
 const [posts, setPosts] = createSignal([] as Post[]);
-
-async function fetch_posts() {
-  const res = await fetch("https://api.creativeblogger.org/posts");
-
-  if (!res.ok) {
-    const error: ServerError = await res.json()
-    setError(error.errors[0].message)
-    return
-  }
-
-  const posts: Post[] = await res.json();
-  setPosts(posts);
-}
 
 const Home: Component = () => {
   onMount(() => {
@@ -58,4 +46,4 @@ const Home: Component = () => {
 };
 
 export default Home;
-export { fetch_posts };
+export {setPosts}

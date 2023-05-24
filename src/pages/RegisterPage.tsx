@@ -1,11 +1,15 @@
-import { Component, createSignal } from "solid-js";
+import { Component, onMount } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import Logo from "../assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
-
-const [error, setError] = createSignal("");
+import { error, setError } from "../utils/states";
+import { displayError } from "../utils/functions_utils";
 
 const Register: Component = () => {
+  onMount(() => {
+    setError("")
+  })
+
   return (
     <MetaProvider>
       <div class="Home">
@@ -41,8 +45,7 @@ const Register: Component = () => {
                 );
 
                 if (!res.ok) {
-                  let json: ServerError = await res.json();
-                  setError(json.errors[0].message);
+                  displayError(await res.json())
                   return;
                 }
 
@@ -146,19 +149,3 @@ const Register: Component = () => {
 
 export default Register;
 export {error, setError}
-
-{
-  /* 
-        <label for="password">Mot de passe : </label>
-        <input type="password" name="password" id="password" required />
-        <br />
-        <label for="confirm-password">Confirmer : </label>
-        <input
-          type="password"
-          name="confirm-password"
-          id="confirm-password"
-          required
-        />
-        <input type="submit" value="Créer un compte" />
-      </form> */
-}

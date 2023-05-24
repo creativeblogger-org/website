@@ -1,14 +1,12 @@
-import { For, Show } from "solid-js";
+import { For, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import { getToken } from "./CreatePostButton";
-import { post } from "../pages/PostPage";
+import { displayError, getHumanDate, getToken } from "../utils/functions_utils";
+import { error, setError } from "../utils/states";
 
-function getHumanDate(date: string) {
-  const parsed_date = new Date(Date.parse(date));
-
-  return `${parsed_date.toLocaleDateString()} à ${parsed_date.toLocaleTimeString()}`;
-}
+const [post, setPost] = createSignal({
+  author: {},
+  id: 0,
+} as Post);
 
 async function delete_post(post_id: number) {
   const res = await fetch(`https://api.creativeblogger.org/posts/${post_id}`, {
@@ -17,33 +15,30 @@ async function delete_post(post_id: number) {
           "Authorization": `Bearer ${getToken()}`
       }
   })
-  
+
 
   if (!res.ok) {
-    const error: ServerError = await res.json()
-    alert(error.errors[0].message)
-    return
+      displayError(await res.json())
+      return
   }
 
   alert("Post supprimé avec succès !")
   location.assign("/")
 }
 
+
 const PostComponent = () => {
+  onMount(() => setError(""))
+
   return (
-    <MetaProvider>
-      <div class="Home">
-        <Title>{post().title}</Title>
-        <Meta
-          name="description"
-          content="Creative Blogger - Projet collaboratif entre bloggers"
-        />
-      </div>
+    <div>
+      <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
       <div class="p-4 m-5">
         <h1 class="text-4xl font-bold text-center">{post().title}</h1>
-        <Show when={post().has_permission}>
+        {/* will be fixed soon */}
+        {/* <Show when={post().has_permission}> */}
           <button class="absolute top-0 right-0 text-red-600 font-bold m-2 p-2 border-2 border-red-700 rounded-lg z-[1]" onclick={() => delete_post(post().id)}>Delete</button>
-        </Show>
+        {/* </Show> */}
         <div class="flex justify-center m-2">
           <NavLink
             href={"/user/" + post().author.username}
@@ -90,8 +85,9 @@ const PostComponent = () => {
           </For>
         </div>
       </div>
-    </MetaProvider>
+    </div>
   );
 };
 
 export default PostComponent;
+export {post, setPost}

@@ -1,13 +1,8 @@
-import { Component, Show, createSignal, onMount } from "solid-js";
-import { Post } from "./Home";
-import PostComponent from "../components/PostComponent";
+import { Component, Show, onMount } from "solid-js";
+import PostComponent, { post, setPost } from "../components/PostComponent";
 import { useParams } from "@solidjs/router";
-import { getToken } from "../components/CreatePostButton";
-
-const [post, setPost] = createSignal({
-  author: {},
-  id: 0,
-} as Post);
+import { displayError, getToken } from "../utils/functions_utils";
+import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
 const fetch_post_by_slug = async (url: string) => {
   const res = await fetch(url, {
@@ -15,10 +10,12 @@ const fetch_post_by_slug = async (url: string) => {
       "Authorization": `Bearer ${getToken()}`
     }
   });
+  if (res.status == 404) {
+    location.assign("/404")
+  }
 
   if (!res.ok) {
-    let fetch_error: ServerError = await res.json();
-    alert(fetch_error.errors[0].message)
+    displayError(await res.json())
     return;
   }
 
@@ -36,10 +33,17 @@ const PostPage: Component = () => {
 
   return (
     <Show when={post().id != 0} fallback="Loading...">
-      <PostComponent />;
+      <MetaProvider>
+        <Title>{post().title} - Creative Blogger</Title>
+        <Meta
+          name="description"
+          content="Creative Blogger - Projet collaboratif entre bloggers"
+        />
+        <PostComponent />;
+      </MetaProvider>
     </Show>
   );
 };
 
 export default PostPage;
-export { post };
+export { post, setPost };

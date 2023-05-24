@@ -1,11 +1,15 @@
-import { Component, createSignal } from "solid-js";
+import { Component, onMount } from "solid-js";
 import Logo from "../assets/img/cb-logo.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-
-const [error, setError] = createSignal("");
+import { error, setError } from "./RegisterPage";
+import { displayError } from "../utils/functions_utils";
 
 const Login: Component = () => {
+  onMount(() => {
+    setError("")
+  })
+  
   return (
     <MetaProvider>
       <div class="Home">
@@ -42,8 +46,7 @@ const Login: Component = () => {
                 );
 
                 if (!res.ok) {
-                  let json: ServerError = await res.json();
-                  setError(json.errors[0].message);
+                  displayError(await res.json())
                   return;
                 }
 
