@@ -8,7 +8,7 @@ const ResiterPage = lazy(() => import("./pages/RegisterPage"));
 const PostPage = lazy(() => import("./pages/PostPage"));
 const NavBar = lazy(() => import("./components/NavBar"));
 const Footer = lazy(() => import("./components/Footer"));
-const CreatePostButton = lazy(() => import("./components/CreatePostButton"));
+const CreatePost = lazy(() => import("./pages/CreatePost"));
 
 const App: Component = () => {
   return (
@@ -19,10 +19,10 @@ const App: Component = () => {
         <Route path="/register" element={<ResiterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path={"/posts/:slug"} element={<PostPage />} />
+        <Route path={"/create"} element={<CreatePost />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
-      <CreatePostButton />
     </>
   );
 };

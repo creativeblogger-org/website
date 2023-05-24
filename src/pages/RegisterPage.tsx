@@ -7,8 +7,8 @@ import { customFetch, displayError } from "../utils/functions_utils";
 
 const Register: Component = () => {
   onMount(() => {
-    setError("")
-  })
+    setError("");
+  });
 
   return (
     <MetaProvider>
@@ -22,8 +22,7 @@ const Register: Component = () => {
       <div>
         <div class="flex min-h-full flex-col justify-center px-6 pb-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-16 w-auto" src={Logo} alt="Your Company" />
-            <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Ravis de vous accueillir !
             </h2>
           </div>
@@ -34,12 +33,16 @@ const Register: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
-                const res = await customFetch("https://api.creativeblogger.org/auth/register", "POST", new FormData(
-                  document.querySelector("form") as HTMLFormElement
-                ))
+                const res = await customFetch(
+                  "https://api.creativeblogger.org/auth/register",
+                  "POST",
+                  new FormData(
+                    document.querySelector("form") as HTMLFormElement
+                  )
+                );
 
                 if (!res.ok) {
-                  displayError(await res.json())
+                  displayError(await res.json());
                   return;
                 }
 
@@ -117,9 +120,9 @@ const Register: Component = () => {
               <div class=" pt-3">
                 <button
                   type="submit"
-                  class="flex w-full justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-950 to-violet-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  class="flex w-full justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sésame ouvre-toi
+                  Sésame crée-toi
                 </button>
               </div>
             </form>
@@ -128,7 +131,7 @@ const Register: Component = () => {
               Déjà un compte ?{" "}
               <NavLink
                 href="/login"
-                class="font-semibold leading-6 text-indigo-600 duration-100 hover:text-indigo-500"
+                class="font-semibold leading-6 text-teal-500 duration-150 hover:text-indigo-500"
               >
                 Connectez-vous
               </NavLink>
@@ -142,4 +145,4 @@ const Register: Component = () => {
 };
 
 export default Register;
-export {error, setError}
+export { error, setError };

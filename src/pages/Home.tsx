@@ -1,4 +1,4 @@
-import { Component, For, createSignal,  onMount } from "solid-js";
+import { Component, For, createSignal, onMount } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
@@ -10,8 +10,8 @@ const [posts, setPosts] = createSignal([] as Post[]);
 
 const Home: Component = () => {
   onMount(() => {
-    setError("")
-    fetch_posts()
+    setError("");
+    fetch_posts();
   });
 
   return (
@@ -31,7 +31,7 @@ const Home: Component = () => {
         </div>
 
         <div class="m-auto w-11/12 grid grid-cols-3" id="posts">
-          <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
+          {/* <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2> */}
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>
@@ -46,4 +46,4 @@ const Home: Component = () => {
 };
 
 export default Home;
-export {setPosts}
+export { setPosts };

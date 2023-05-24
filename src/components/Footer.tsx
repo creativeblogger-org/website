@@ -3,7 +3,7 @@ import CBLogo from "../assets/img/cb-logo.png";
 
 const Footer: Component = () => {
   return (
-    <footer class="footer">
+    <footer class="bg-slate-800 p-8 my-6 mx-auto rounded-md w-11/12">
       <div class="grid grid-cols-2">
         <div class="about-us-container flex-col">
           <h1 class="uppercase text-white">
@@ -28,7 +28,7 @@ const Footer: Component = () => {
           <ul class="list-none">
             <li>
               <a
-                class="text-white duration-500 hover:text-teal-300"
+                class=" text-teal-500 duration-150 hover:text-indigo-500"
                 href="/posts"
               >
                 - Posts
@@ -36,7 +36,7 @@ const Footer: Component = () => {
             </li>
             <li>
               <a
-                class="text-white duration-500 hover:text-teal-300"
+                class="text-teal-500 duration-150 hover:text-indigo-500"
                 href="/about"
               >
                 - About
@@ -50,7 +50,7 @@ const Footer: Component = () => {
         <a
           href="https://opensource.org/license/mit/"
           target="_blank"
-          class="text-teal-300"
+          class="text-teal-500 duration-150 hover:text-indigo-500"
         >
           licence MIT
         </a>

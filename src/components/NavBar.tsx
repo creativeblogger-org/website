@@ -1,30 +1,33 @@
 import { Component } from "solid-js";
 import { NavLink } from "@solidjs/router";
 
+import Logo from "../assets/img/cb-logo.png";
+
 const NavBar: Component = () => {
   return (
-    <div class="nav-bar">
+    <div class="text-center bg-slate-800 p-4 mt-6 mx-auto rounded-md w-11/12">
+      <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-3" />
       <NavLink
-        class="text-white mt-4 text-4xl font-gears text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-800"
+        class=" mt-4 text-4xl font-gears text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
         href="/"
       >
         Creative Blogger
       </NavLink>
       <div class="flex justify-center">
         <NavLink
-          class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
           href="/login"
         >
           Login
         </NavLink>
         <NavLink
-          class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
           href="/register"
         >
           Register
         </NavLink>
         <NavLink
-          class="text-white text-2xl p-5 duration-500 hover:text-teal-300"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
           href="/contact"
         >
           Contact
