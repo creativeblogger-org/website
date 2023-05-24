@@ -1,5 +1,5 @@
 import { Component, Show, createEffect, createSignal, onCleanup, onMount } from "solid-js";
-import { fetch_posts, getToken } from "../utils/functions_utils";
+import { customFetch, fetch_posts, getToken } from "../utils/functions_utils";
 
 const [showPopup, setShowPopup] = createSignal(false);
 const [error, setError] = createSignal("")
@@ -14,15 +14,9 @@ async function onPostSubmit(e: Event) {
         return
     }
 
-    const res = await fetch("https://api.creativeblogger.org/posts/new", {
-        method: "PUT",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        body: new FormData(
-            document.getElementById("post-form") as HTMLFormElement
-        )
-    })
+    const res = await customFetch("https://api.creativeblogger.org/posts/new", "PUT", new FormData(
+        document.getElementById("post-form") as HTMLFormElement
+    ))
 
     if (!res.ok) {
         const error: ServerError = await res.json()

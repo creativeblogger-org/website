@@ -21,7 +21,7 @@ function getToken() {
 }
 
 async function fetch_posts() {
-    const res = await fetch("https://api.creativeblogger.org/posts");
+    const res = await customFetch("https://api.creativeblogger.org/posts")
 
     if (!res.ok) {
         displayError(await res.json())
@@ -36,4 +36,14 @@ function displayError(error: ServerError) {
     setError(error.errors[0].message)
 }
 
-export {getHumanDate, fetch_posts, getToken, displayError}
+async function customFetch(url: string, method: string = "GET", body?: BodyInit) {
+    return await fetch(url, {
+        method: method,
+        body: body,
+        headers: {
+            "Authorization": `Bearer ${getToken()}`
+        }
+    })
+}
+
+export {getHumanDate, fetch_posts, getToken, displayError, customFetch}

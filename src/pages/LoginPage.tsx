@@ -3,7 +3,7 @@ import Logo from "../assets/img/cb-logo.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import { error, setError } from "./RegisterPage";
-import { displayError } from "../utils/functions_utils";
+import { customFetch, displayError } from "../utils/functions_utils";
 
 const Login: Component = () => {
   onMount(() => {
@@ -35,15 +35,9 @@ const Login: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
-                const res = await fetch(
-                  "https://api.creativeblogger.org/auth/login",
-                  {
-                    method: "POST",
-                    body: new FormData(
-                      document.querySelector("form") as HTMLFormElement
-                    ),
-                  }
-                );
+                const res = await customFetch("https://api.creativeblogger.org/auth/login", "POST", new FormData(
+                  document.querySelector("form") as HTMLFormElement
+                ))
 
                 if (!res.ok) {
                   displayError(await res.json())

@@ -1,6 +1,6 @@
 import { For, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { displayError, getHumanDate, getToken } from "../utils/functions_utils";
+import { customFetch, displayError, getHumanDate, getToken } from "../utils/functions_utils";
 import { error, setError } from "../utils/states";
 
 const [post, setPost] = createSignal({
@@ -9,13 +9,7 @@ const [post, setPost] = createSignal({
 } as Post);
 
 async function delete_post(post_id: number) {
-  const res = await fetch(`https://api.creativeblogger.org/posts/${post_id}`, {
-      method: "DELETE",
-      headers: {
-          "Authorization": `Bearer ${getToken()}`
-      }
-  })
-
+  const res = await customFetch(`https://api.creativeblogger.org/posts/${post_id}`, "DELETE")
 
   if (!res.ok) {
       displayError(await res.json())

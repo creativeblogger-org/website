@@ -3,7 +3,7 @@ import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import Logo from "../assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
 import { error, setError } from "../utils/states";
-import { displayError } from "../utils/functions_utils";
+import { customFetch, displayError } from "../utils/functions_utils";
 
 const Register: Component = () => {
   onMount(() => {
@@ -34,15 +34,9 @@ const Register: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
-                const res = await fetch(
-                  "https://api.creativeblogger.org/auth/register",
-                  {
-                    method: "POST",
-                    body: new FormData(
-                      document.querySelector("form") as HTMLFormElement
-                    ),
-                  }
-                );
+                const res = await customFetch("https://api.creativeblogger.org/auth/register", "POST", new FormData(
+                  document.querySelector("form") as HTMLFormElement
+                ))
 
                 if (!res.ok) {
                   displayError(await res.json())
