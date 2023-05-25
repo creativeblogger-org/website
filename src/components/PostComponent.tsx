@@ -1,7 +1,10 @@
 import { For, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, getHumanDate, getToken } from "../utils/functions_utils";
+import { customFetch, displayError, getHumanDate } from "../utils/functions_utils";
 import { error, setError } from "../utils/states";
+import EditIcon from "../assets/button_icons/edit.svg"
+import DeleteIcon from "../assets/button_icons/trash.svg"
+import SaveIcon from "../assets/button_icons/save.svg"
 
 const [post, setPost] = createSignal({
   author: {},
@@ -20,18 +23,39 @@ async function delete_post(post_id: number) {
   location.assign("/")
 }
 
+async function update_post(post: Post, new_content: string) {
+  post.content = new_content;
+  const res = await customFetch(`https://api.creativeblogger.org${location.pathname}`, "PUT", JSON.stringify(post))
+  
+  if (res.status == 404) {
+    alert("Erreur 404")
+  }
+
+  if (!res.ok) {
+    displayError(await res.json())
+    return
+  }
+
+  alert("Success !")
+}
+
 
 const PostComponent = () => {
   onMount(() => setError(""))
 
+  const [editing, setEditing] = createSignal(false);
+
   return (
     <div>
       <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
-      <div class="p-4 m-5">
+      <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center">{post().title}</h1>
         {/* will be fixed soon */}
         {/* <Show when={post().has_permission}> */}
-          <button class="absolute top-0 right-0 text-red-600 font-bold m-2 p-2 border-2 border-red-700 rounded-lg z-[1]" onclick={() => delete_post(post().id)}>Delete</button>
+          <div class="absolute top-0 right-0">
+            <button onclick={() => setEditing(true)}><img src={EditIcon} alt="Edit icon" /></button>
+            <button class="m-2 p-2z-[1]" onclick={() => delete_post(post().id)}><img src={DeleteIcon} alt="Delete icon" width={24} height={24}></img></button>
+          </div>
         {/* </Show> */}
         <div class="flex justify-center m-2">
           <NavLink
@@ -50,9 +74,14 @@ const PostComponent = () => {
           </Show>
         </div>
         <hr />
-        <div class="mt-5 w-11/12 m-auto mb-10">
-          <h2>{post().content}</h2>
+        <div class="mt-5 w-11/12 m-auto mb-3">
+          <h2 contentEditable={editing()} class="post-content">{post().content}</h2>
         </div>
+        <Show when={editing()}>
+          <div class="text-center">
+            <button onclick={() => update_post(post(), (document.querySelector(".post-content") as HTMLElement).textContent!)}><img src={SaveIcon} alt="Save icon" width={24} height={24} /></button>
+          </div>
+        </Show>
         <div class="m-auto w-5/6">
           <h1 class="text-xl font-bold">Commentaires :</h1>
           <For
