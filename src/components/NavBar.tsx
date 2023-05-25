@@ -15,19 +15,19 @@ const NavBar: Component = () => {
       </NavLink>
       <div class="flex justify-center">
         <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
           href="/login"
         >
           Login
         </NavLink>
         <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
           href="/register"
         >
           Register
         </NavLink>
         <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500"
+          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
           href="/contact"
         >
           Contact

@@ -3,16 +3,12 @@ import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/img/bb-reload-.svg";
-import { error, setError } from "./RegisterPage";
 import { fetch_posts } from "../utils/functions_utils";
 
 const [posts, setPosts] = createSignal([] as Post[]);
 
 const Home: Component = () => {
-  onMount(() => {
-    setError("");
-    fetch_posts();
-  });
+  onMount(() => fetch_posts());
 
   return (
     <MetaProvider>

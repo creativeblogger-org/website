@@ -1,7 +1,6 @@
-import { For, Show, createSignal, onMount } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, getHumanDate } from "../utils/functions_utils";
-import { error, setError } from "../utils/states";
+import { customFetch, getError, getHumanDate } from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg"
 import DeleteIcon from "../assets/button_icons/trash.svg"
 import SaveIcon from "../assets/button_icons/save.svg"
@@ -11,11 +10,13 @@ const [post, setPost] = createSignal({
   id: 0,
 } as Post);
 
+const [error, setError] = createSignal("");
+
 async function delete_post(post_id: number) {
   const res = await customFetch(`https://api.creativeblogger.org/posts/${post_id}`, "DELETE")
 
   if (!res.ok) {
-      displayError(await res.json())
+      setError(getError(await res.json()))
       return
   }
 
@@ -32,7 +33,7 @@ async function update_post(post: Post, new_content: string) {
   }
 
   if (!res.ok) {
-    displayError(await res.json())
+    setError(getError(await res.json()))
     return
   }
 
@@ -41,8 +42,6 @@ async function update_post(post: Post, new_content: string) {
 
 
 const PostComponent = () => {
-  onMount(() => setError(""))
-
   const [editing, setEditing] = createSignal(false);
 
   return (
@@ -75,7 +74,7 @@ const PostComponent = () => {
         </div>
         <hr />
         <div class="mt-5 w-11/12 m-auto mb-3">
-          <h2 contentEditable={editing()} class="post-content">{post().content}</h2>
+          <h2 contentEditable={editing()} class="post-content break-all">{post().content}</h2>
         </div>
         <Show when={editing()}>
           <div class="text-center">

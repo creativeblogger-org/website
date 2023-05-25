@@ -1,5 +1,6 @@
 import { Component } from "solid-js";
 import CBLogo from "../assets/img/cb-logo.png";
+import { NavLink } from "@solidjs/router";
 
 const Footer: Component = () => {
   return (
@@ -27,33 +28,33 @@ const Footer: Component = () => {
           <h1 class="text-white">Liens :</h1>
           <ul class="list-none">
             <li>
-              <a
-                class=" text-teal-500 duration-150 hover:text-indigo-500"
-                href="/posts"
+              <NavLink
+                class=" text-teal-500 duration-150 hover:text-indigo-500 hover:underline"
+                href="/"
               >
-                - Posts
-              </a>
+                - Page d'accueil
+              </NavLink>
             </li>
             <li>
-              <a
-                class="text-teal-500 duration-150 hover:text-indigo-500"
+              <NavLink
+                class="text-teal-500 duration-150 hover:text-indigo-500 hover:underline"
                 href="/about"
               >
-                - About
-              </a>
+                - A propos de nous
+              </NavLink>
             </li>
           </ul>
         </div>
       </div>
       <p class="text-center text-white">
-        Ce site est sous la{" "}
-        <a
+        Ce site est sous la 
+        <NavLink
           href="https://opensource.org/license/mit/"
           target="_blank"
-          class="text-teal-500 duration-150 hover:text-indigo-500"
+          class="text-teal-500 duration-150 hover:text-indigo-500 hover:underline"
         >
           licence MIT
-        </a>
+        </NavLink>
         .
       </p>
     </footer>

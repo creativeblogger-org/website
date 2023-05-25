@@ -2,11 +2,9 @@ import {
   Component,
   Show,
   createEffect,
-  createSignal,
-  onCleanup,
-  onMount,
+  createSignal
 } from "solid-js";
-import { customFetch, fetch_posts, getToken } from "../utils/functions_utils";
+import { customFetch, fetch_posts, getToken, isConnected } from "../utils/functions_utils";
 
 const [showPopup, setShowPopup] = createSignal(false);
 const [error, setError] = createSignal("");
@@ -14,9 +12,7 @@ const [error, setError] = createSignal("");
 async function onPostSubmit(e: Event) {
   e.preventDefault();
 
-  let token = getToken();
-
-  if (token.length == 0) {
+  if (isConnected()) {
     alert("Vous ne pouvez pas poster de posts si vous n'êtes pas connecté.");
     return;
   }
@@ -34,24 +30,14 @@ async function onPostSubmit(e: Event) {
   }
 
   alert("Post publié avec succès !");
-  close_popup();
-  fetch_posts();
-}
-
-function close_popup() {
-  setError("");
   setShowPopup(false);
-}
-
-function open_popup() {
-  setError("");
-  setShowPopup(true);
+  fetch_posts();
 }
 
 const CreatePostButton: Component = () => {
   window.addEventListener("keyup", (e) => {
     if (e.key == "Escape") {
-      close_popup();
+      setShowPopup(false)
     }
   });
 
@@ -63,22 +49,18 @@ const CreatePostButton: Component = () => {
     }
   });
 
-  onMount(() => setError(""));
-
-  onCleanup(() => setError(""));
-
   return (
     <>
       <Show when={showPopup()}>
-        <div class="text-white fixed p-40 pt-10 top-0 left-0 h-screen z-[2] w-full">
+        <div class="text-white fixed p-40 pt-10 top-0 left-0 h-screen z-[2] w-screen">
           <form
             onsubmit={onPostSubmit}
-            class=" bg-slate-400 z-[3] relative p-2 rounded-xl"
+            class=" bg-blue-700 z-[3] relative p-2 rounded-xl text-center"
             id="post-form"
           >
             <button
               class="absolute top-0 left-0 p-2 m-2 font-bold"
-              onclick={close_popup}
+              onclick={() => setShowPopup(false)}
             >
               X
             </button>
@@ -88,7 +70,7 @@ const CreatePostButton: Component = () => {
               type="text"
               name="title"
               id="post-title"
-              class=" p-1"
+              class="text-black p-1"
               required
             />
             <br />
@@ -114,8 +96,8 @@ const CreatePostButton: Component = () => {
       </Show>
 
       <button
-        onclick={open_popup}
-        class="bg-teal-500 duration-150 hover:bg-indigo-500 rounded-md border p-6 text-5xl m-6"
+        onclick={() => setShowPopup(true)}
+        class="bg-teal-500 duration-150 hover:bg-indigo-500 rounded-full border p-4 text-5xl fixed right-0 bottom-0"
       >
         +
       </button>

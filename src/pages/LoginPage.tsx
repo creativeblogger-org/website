@@ -1,15 +1,11 @@
-import { Component, onMount } from "solid-js";
-import Logo from "../assets/img/cb-logo.png";
+import { Component, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-import { error, setError } from "./RegisterPage";
-import { customFetch, displayError } from "../utils/functions_utils";
+import { customFetch, getError } from "../utils/functions_utils";
+
+const [error, setError] = createSignal("")
 
 const Login: Component = () => {
-  onMount(() => {
-    setError("");
-  });
-
   return (
     <MetaProvider>
       <div class="Home">
@@ -43,7 +39,7 @@ const Login: Component = () => {
                 );
 
                 if (!res.ok) {
-                  displayError(await res.json());
+                  setError(getError(await res.json()));
                   return;
                 }
 
@@ -79,14 +75,6 @@ const Login: Component = () => {
                   >
                     Mot de passe :
                   </label>
-                  {/* <div class="text-sm">
-                  <a
-                    href="#"
-                    class="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Mot de passe oublié ?
-                  </a>
-                </div> */}
                 </div>
                 <div class="mt-2">
                   <input

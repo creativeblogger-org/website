@@ -1,15 +1,11 @@
-import { Component, onMount } from "solid-js";
+import { Component, createSignal, onMount } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import Logo from "../assets/img/cb-logo.png";
 import { NavLink } from "@solidjs/router";
-import { error, setError } from "../utils/states";
-import { customFetch, displayError } from "../utils/functions_utils";
+import { customFetch, getError } from "../utils/functions_utils";
+
+const [error, setError] = createSignal("");
 
 const Register: Component = () => {
-  onMount(() => {
-    setError("");
-  });
-
   return (
     <MetaProvider>
       <div class="Home">
@@ -42,7 +38,7 @@ const Register: Component = () => {
                 );
 
                 if (!res.ok) {
-                  displayError(await res.json());
+                  setError(getError(await res.json()));
                   return;
                 }
 

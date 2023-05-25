@@ -1,5 +1,4 @@
 import { setPosts } from "../pages/Home";
-import { setError } from "./states";
 
 function getHumanDate(date: string) {
     const parsed_date = new Date(Date.parse(date));
@@ -20,20 +19,23 @@ function getToken() {
     return ""
 }
 
+function isConnected() {
+    return getToken().length != 0
+}
+
 async function fetch_posts() {
     const res = await customFetch("https://api.creativeblogger.org/posts")
 
     if (!res.ok) {
-        displayError(await res.json())
-        return
+        return getError(await res.json())
     }
 
     const posts: Post[] = await res.json();
     setPosts(posts);
 }
 
-function displayError(error: ServerError) {
-    setError(error.errors[0].message)
+function getError(error: ServerError) {
+    return error.errors[0].message
 }
 
 async function customFetch(url: string, method: string = "GET", body?: BodyInit) {
@@ -46,4 +48,4 @@ async function customFetch(url: string, method: string = "GET", body?: BodyInit)
     })
 }
 
-export {getHumanDate, fetch_posts, getToken, displayError, customFetch}
+export {getHumanDate, fetch_posts, getToken, isConnected, getError, customFetch}

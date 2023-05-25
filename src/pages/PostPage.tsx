@@ -1,8 +1,10 @@
-import { Component, Show, onMount } from "solid-js";
+import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent, { post, setPost } from "../components/PostComponent";
 import { useParams } from "@solidjs/router";
-import { customFetch, displayError, getToken } from "../utils/functions_utils";
+import { customFetch, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
+
+const [error, setError] = createSignal("")
 
 const fetch_post_by_slug = async (url: string) => {
   const res = await customFetch(url)
@@ -12,7 +14,7 @@ const fetch_post_by_slug = async (url: string) => {
   }
 
   if (!res.ok) {
-    displayError(await res.json())
+    setError(getError(await res.json()))
     return;
   }
 
@@ -29,16 +31,19 @@ const PostPage: Component = () => {
   });
 
   return (
-    <Show when={post().id != 0} fallback="Chargement...">
-      <MetaProvider>
-        <Title>{post().title} - Creative Blogger</Title>
-        <Meta
-          name="description"
-          content="Creative Blogger - Projet collaboratif entre bloggers"
-        />
-        <PostComponent />;
-      </MetaProvider>
-    </Show>
+    <>
+      <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
+      <Show when={post().id != 0} fallback="Chargement...">
+        <MetaProvider>
+          <Title>{post().title} - Creative Blogger</Title>
+          <Meta
+            name="description"
+            content="Creative Blogger - Projet collaboratif entre bloggers"
+          />
+          <PostComponent />;
+        </MetaProvider>
+      </Show>
+    </>
   );
 };
 
