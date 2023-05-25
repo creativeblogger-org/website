@@ -1,6 +1,6 @@
 import { Component, lazy } from "solid-js";
 
-const CreatePostButton = lazy(() => import("../components/CreatePostButton"));
+const CreatePostButton = lazy(() => import("../components/CreatePostComponent"));
 
 const CreatePost: Component = () => {
   return (

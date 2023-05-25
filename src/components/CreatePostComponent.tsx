@@ -29,7 +29,7 @@ async function onPostSubmit(e: Event) {
   fetch_posts();
 }
 
-const CreatePostButton: Component = () => {
+const CreatePostComponent: Component = () => {
   window.addEventListener("keyup", (e) => {
     if (e.key == "Escape") {
       setShowPopup(false)
@@ -54,10 +54,10 @@ const CreatePostButton: Component = () => {
             id="post-form"
           >
             <button
-              class="absolute top-0 left-0 p-2 m-2 font-bold"
+              class="absolute top-0 right-0 p-2 font-bold hover:bg-red-600 rounded-tr-xl"
               onclick={() => setShowPopup(false)}
             >
-              X
+              x
             </button>
             <h1 class="text-2xl m-5">Créer un post</h1>
             <label for="title">Titre du post : </label>
@@ -106,4 +106,4 @@ const CreatePostButton: Component = () => {
   );
 };
 
-export default CreatePostButton;
+export default CreatePostComponent;
