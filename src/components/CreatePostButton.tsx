@@ -4,7 +4,7 @@ import {
   createEffect,
   createSignal
 } from "solid-js";
-import { customFetch, fetch_posts, getToken, isConnected } from "../utils/functions_utils";
+import { customFetch, fetch_posts, isConnected } from "../utils/functions_utils";
 
 const [showPopup, setShowPopup] = createSignal(false);
 const [error, setError] = createSignal("");
