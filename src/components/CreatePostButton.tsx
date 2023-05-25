@@ -12,11 +12,6 @@ const [error, setError] = createSignal("");
 async function onPostSubmit(e: Event) {
   e.preventDefault();
 
-  if (isConnected()) {
-    alert("Vous ne pouvez pas poster de posts si vous n'êtes pas connecté.");
-    return;
-  }
-
   const res = await customFetch(
     "https://api.creativeblogger.org/posts/new",
     "PUT",
@@ -96,7 +91,13 @@ const CreatePostButton: Component = () => {
       </Show>
 
       <button
-        onclick={() => setShowPopup(true)}
+        onclick={() => {
+          if (!isConnected()) {
+            alert("Vous ne pouvez poster de post que si vous êtes connecté.");
+            return;
+          }
+          setShowPopup(true)
+        }}
         class="bg-teal-500 duration-150 hover:bg-indigo-500 rounded-full border p-4 text-5xl fixed right-0 bottom-0"
       >
         +
