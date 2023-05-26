@@ -47,10 +47,10 @@ const CreatePostComponent: Component = () => {
   return (
     <>
       <Show when={showPopup()}>
-        <div class="text-white fixed p-40 pt-10 top-0 left-0 h-screen z-[2] w-screen">
+        <div class="fixed p-[20vw] pt-[10vh] pb-[10vh] top-0 left-0 h-screen z-[2] w-screen">
           <form
             onsubmit={onPostSubmit}
-            class=" bg-blue-700 z-[3] relative p-2 rounded-xl text-center"
+            class=" bg-blue-700 z-[3] relative p-4 rounded-xl text-center"
             id="post-form"
           >
             <button
@@ -59,13 +59,13 @@ const CreatePostComponent: Component = () => {
             >
               x
             </button>
-            <h1 class="text-2xl m-5">Créer un post</h1>
+            <h1 class="text-2xl">Créer un post</h1>
             <label for="title">Titre du post : </label>
             <input
               type="text"
               name="title"
               id="post-title"
-              class="text-black p-1"
+              class="text-black p-1 w-full"
               required
             />
             <br />
@@ -74,9 +74,7 @@ const CreatePostComponent: Component = () => {
             <textarea
               name="content"
               id="content"
-              cols="30"
-              rows="10"
-              class="text-black p-1"
+              class="text-black p-1 w-full h-[25vh]"
               required
             ></textarea>
             <br />
@@ -84,7 +82,7 @@ const CreatePostComponent: Component = () => {
             <input
               type="submit"
               value="Créer un nouveau post"
-              class="bg-blue-800 border-blue-950 border-2 p-1 rounded-md"
+              class="bg-blue-800 border-blue-950 border-2 p-1 rounded-md max-w-full"
             />
           </form>
         </div>
