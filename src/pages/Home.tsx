@@ -22,7 +22,6 @@ async function fetch_posts() {
   }
 
   const posts: Post[] = await res.json();
-  posts.reverse();
   setPosts(posts);
   setIsLoading(false);
 }
