@@ -1,14 +1,35 @@
-import { Component, For, createSignal, onMount } from "solid-js";
+import { Component, For, createEffect, createSignal, onMount } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import ReloadImg from "../assets/img/bb-reload-.svg";
-import { fetch_posts } from "../utils/functions_utils";
+import ReloadImg from "../assets/button_icons/refresh.svg";
+import { customFetch, getError } from "../utils/functions_utils";
 
 const [posts, setPosts] = createSignal([] as Post[]);
+const [isLoading, setIsLoading] = createSignal(false);
+
+async function fetch_posts() {
+  setIsLoading(true)
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  const res = await customFetch("https://api.creativeblogger.org/posts")
+
+  if (!res.ok) {
+      return getError(await res.json())
+  }
+
+  const posts: Post[] = await res.json();
+  setPosts(posts);
+  setIsLoading(false)
+}
 
 const Home: Component = () => {
   onMount(() => fetch_posts());
+
+  createEffect(() => {
+    if (isLoading()) {
+      document.querySelector(".reload-button")?.classList.add("animate-spin")
+    }
+  })
 
   return (
     <MetaProvider>
@@ -21,7 +42,9 @@ const Home: Component = () => {
       </div>
       <div class="p-3">
         <div class="flex justify-end w-11/12">
-          <button onclick={fetch_posts} class="rounded-full border-white">
+          <button onclick={() => {
+            fetch_posts()
+          }} class={`${isLoading() ? "animate-spin " : ""}rounded-full border-white`}>
             <img src={ReloadImg} class="h-8" alt="Reload image" />
           </button>
         </div>
@@ -42,4 +65,4 @@ const Home: Component = () => {
 };
 
 export default Home;
-export { setPosts };
+export { setPosts, fetch_posts };
