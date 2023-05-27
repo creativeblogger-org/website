@@ -1,12 +1,7 @@
 import { Component, lazy } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import { useFavicon } from "solidjs-use";
 import imgError404 from "../assets/img/404.png";
 import { NavLink } from "@solidjs/router";
-
-const [icon, setIcon] = useFavicon();
-
-setIcon("/src/assets/img/CB.webp");
 
 const Error404: Component = () => {
   return (

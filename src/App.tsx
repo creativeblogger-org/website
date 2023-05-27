@@ -1,5 +1,10 @@
 import { Routes, Route } from "@solidjs/router";
 import { Component, lazy } from "solid-js";
+import { useFavicon } from "solidjs-use";
+
+const [icon, setIcon] = useFavicon();
+
+setIcon("/src/assets/img/logo.png");
 
 const Home = lazy(() => import("./pages/Home"));
 const Error404 = lazy(() => import("./pages/Error404"));
