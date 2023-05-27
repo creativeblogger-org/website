@@ -11,6 +11,8 @@ const [post, setPost] = createSignal({
   id: 0,
 } as Post);
 
+const [comments, setComments] = createSignal([] as Comment[])
+
 const [error, setError] = createSignal("");
 
 async function delete_post(post_id: number) {
@@ -27,7 +29,7 @@ async function delete_post(post_id: number) {
 
 async function update_post(post: Post, new_content: string) {
   post.content = new_content;
-  const res = await customFetch(`https://api.creativeblogger.org${location.pathname}`, "PUT", JSON.stringify(post))
+  const res = await customFetch(`https://api.creativeblogger.org${location.pathname}`, "PATCH", JSON.stringify(post))
   
   if (res.status == 404) {
     alert("Erreur 404")
@@ -59,13 +61,12 @@ const PostComponent = () => {
       <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
       <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center">{post().title}</h1>
-        {/* will be fixed soon */}
-        {/* <Show when={post().has_permission}> */}
+        <Show when={post().has_permission}>
           <div class="absolute top-0 right-0">
             <button onclick={() => setEditing(edit => !edit)}><img src={editIcon()} alt="Edit icon" /></button>
             <button class="m-2 p-2z-[1]" onclick={() => delete_post(post().id)}><img src={DeleteIcon} alt="Delete icon" width={24} height={24}></img></button>
           </div>
-        {/* </Show> */}
+        </Show>
         <div class="flex justify-center m-2">
           <NavLink
             href={"/user/" + post().author.username}
@@ -94,7 +95,7 @@ const PostComponent = () => {
         <div class="m-auto w-5/6">
           <h1 class="text-xl font-bold">Commentaires :</h1>
           <For
-            each={post().comments}
+            each={comments()}
             fallback={"Aucun commentaire pour le moment..."}
           >
             {(comment, i) => (

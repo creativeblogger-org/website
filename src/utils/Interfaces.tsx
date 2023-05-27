@@ -13,16 +13,15 @@ interface Comment {
   }
   
 interface Post {
-    id: number;
-    title: string;
-    slug: string;
-    content: string;
-    created_at: string;
-    updated_at: string;
-    author: User;
-    comments: Comment[];
-    has_permission: boolean
-  }
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  author: User;
+  has_permission: boolean
+}
 
 interface ServerError {
     errors: {

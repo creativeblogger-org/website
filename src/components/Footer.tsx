@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import CBLogo from "../assets/img/cb-logo.png";
+import CBLogo from "../assets/img/logo.png";
 import { NavLink } from "@solidjs/router";
 
 const Footer: Component = () => {

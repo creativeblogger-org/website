@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { NavLink } from "@solidjs/router";
 
-import Logo from "../assets/img/cb-logo.png";
+import Logo from "../assets/img/logo.png";
 
 const NavBar: Component = () => {
   return (

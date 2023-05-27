@@ -14,7 +14,7 @@ async function onPostSubmit(e: Event) {
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts/new",
-    "PUT",
+    "POST",
     new FormData(document.getElementById("post-form") as HTMLFormElement)
   );
 
