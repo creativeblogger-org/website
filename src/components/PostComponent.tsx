@@ -17,7 +17,7 @@ const [error, setError] = createSignal("");
 
 async function delete_post() {
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts/${location.pathname}`,
+    `https://api.creativeblogger.org${location.pathname}`,
     "DELETE"
   );
 
