@@ -10,10 +10,14 @@ const [isLoading, setIsLoading] = createSignal(false);
 
 async function fetch_posts() {
   setIsLoading(true);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   const res = await customFetch("https://api.creativeblogger.org/posts");
 
   if (!res.ok) {
+    setIsLoading(false)
+    if (res.status === 500) {
+      alert("Erreur serveur")
+      return
+    }
     return getError(await res.json());
   }
 
