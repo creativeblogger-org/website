@@ -9,17 +9,18 @@ const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
 async function fetch_posts() {
-  setIsLoading(true)
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  const res = await customFetch("https://api.creativeblogger.org/posts")
+  setIsLoading(true);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const res = await customFetch("https://api.creativeblogger.org/posts");
 
   if (!res.ok) {
-      return getError(await res.json())
+    return getError(await res.json());
   }
 
   const posts: Post[] = await res.json();
+  posts.reverse();
   setPosts(posts);
-  setIsLoading(false)
+  setIsLoading(false);
 }
 
 const Home: Component = () => {
@@ -27,9 +28,9 @@ const Home: Component = () => {
 
   createEffect(() => {
     if (isLoading()) {
-      document.querySelector(".reload-button")?.classList.add("animate-spin")
+      document.querySelector(".reload-button")?.classList.add("animate-spin");
     }
-  })
+  });
 
   return (
     <MetaProvider>
@@ -42,9 +43,14 @@ const Home: Component = () => {
       </div>
       <div class="p-3">
         <div class="flex justify-end w-11/12">
-          <button onclick={() => {
-            fetch_posts()
-          }} class={`${isLoading() ? "animate-spin " : ""}rounded-full border-white`}>
+          <button
+            onclick={() => {
+              fetch_posts();
+            }}
+            class={`${
+              isLoading() ? "animate-spin " : ""
+            }rounded-full border-white`}
+          >
             <img src={ReloadImg} class="h-8" alt="Reload image" />
           </button>
         </div>
