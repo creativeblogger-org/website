@@ -15,9 +15,9 @@ const [comments, setComments] = createSignal([] as Comment[]);
 
 const [error, setError] = createSignal("");
 
-async function delete_post(post_id: number) {
+async function delete_post(slug: string) {
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts/${post_id}`,
+    `https://api.creativeblogger.org/posts/${slug}`,
     "DELETE"
   );
 
@@ -72,7 +72,7 @@ const PostComponent = () => {
             <button onclick={() => setEditing((edit) => !edit)}>
               <img src={editIcon()} alt="Edit icon" />
             </button>
-            <button class="m-2 p-2z-[1]" onclick={() => delete_post(post().id)}>
+            <button class="m-2 p-2z-[1]" onclick={() => delete_post(post().slug)}>
               <img
                 src={DeleteIcon}
                 alt="Delete icon"
