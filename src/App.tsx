@@ -1,8 +1,9 @@
 import { Routes, Route } from "@solidjs/router";
-import { Component, lazy } from "solid-js";
+import { Component, Show, lazy } from "solid-js";
 import CreatePostButton from "./components/CreatePostComponent";
 import favicon from "./assets/img/logo.png";
 import { MetaProvider, Link } from "@solidjs/meta";
+import { isConnected } from "./utils/functions_utils";
 
 const Home = lazy(() => import("./pages/Home"));
 const Error404 = lazy(() => import("./pages/Error404"));
@@ -32,7 +33,9 @@ const App: Component = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
-      <CreatePostButton />
+      <Show when={isConnected()}>
+        <CreatePostButton />
+      </Show>
     </>
   );
 };
