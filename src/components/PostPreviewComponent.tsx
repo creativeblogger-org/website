@@ -9,7 +9,7 @@ function getHumanDate(date: string) {
 
 const PostPreviewComponent = (props: { post: Post }) => {
   return (
-    <div class="rounded-lg p-4 m-5 border duration-150 hover:border-indigo-500">
+    <div class="rounded-lg p-4 m-5 border w-auto duration-150 hover:border-indigo-500">
       <h1 class="text-2xl font-bold text-center duration-150 hover:text-indigo-500">
         {props.post.title}
       </h1>

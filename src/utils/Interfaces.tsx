@@ -1,17 +1,17 @@
 interface User {
-    id: number;
-    username: string;
-    permission: number;
-  }
-  
+  id: number;
+  username: string;
+  permission: number;
+}
+
 interface Comment {
-    id: number;
-    author: User;
-    content: string;
-    created_at: string;
-    updated_at: string;
-  }
-  
+  id: number;
+  author: User;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
 interface Post {
   id: number;
   title: string;
@@ -20,15 +20,15 @@ interface Post {
   created_at: string;
   updated_at: string;
   author: User;
-  has_permission: boolean
+  has_permission: boolean;
 }
 
 interface ServerError {
-    errors: {
-        message: string
-    }[];
+  errors: {
+    message: string;
+  }[];
 }
 
 interface AuthSuccess {
-    token: string
+  token: string;
 }
