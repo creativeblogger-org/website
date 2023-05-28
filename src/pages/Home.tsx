@@ -4,7 +4,6 @@ import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 import { customFetch, getError } from "../utils/functions_utils";
-
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
@@ -13,10 +12,10 @@ async function fetch_posts() {
   const res = await customFetch("https://api.creativeblogger.org/posts");
 
   if (!res.ok) {
-    setIsLoading(false)
+    setIsLoading(false);
     if (res.status === 500) {
-      alert("Erreur serveur")
-      return
+      alert("Erreur serveur");
+      return;
     }
     return getError(await res.json());
   }

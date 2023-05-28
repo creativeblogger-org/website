@@ -3,7 +3,7 @@ import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import { customFetch, getError } from "../utils/functions_utils";
 
-const [error, setError] = createSignal("")
+const [error, setError] = createSignal("");
 
 const Login: Component = () => {
   return (

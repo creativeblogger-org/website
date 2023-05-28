@@ -4,17 +4,17 @@ import { useParams } from "@solidjs/router";
 import { customFetch, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
-const [error, setError] = createSignal("")
+const [error, setError] = createSignal("");
 
 const fetch_post_by_slug = async (url: string) => {
-  const res = await customFetch(url)
+  const res = await customFetch(url);
 
   if (res.status == 404) {
-    location.assign("/404")
+    location.assign("/404");
   }
 
   if (!res.ok) {
-    setError(getError(await res.json()))
+    setError(getError(await res.json()));
     return;
   }
 
