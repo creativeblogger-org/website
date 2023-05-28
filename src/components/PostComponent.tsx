@@ -34,7 +34,7 @@ async function update_post(post: Post, new_content: string) {
   post.content = new_content;
   const res = await customFetch(
     `https://api.creativeblogger.org${location.pathname}`,
-    "PATCH",
+    "PUT",
     JSON.stringify(post)
   );
 

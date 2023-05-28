@@ -2,7 +2,7 @@ import { Routes, Route } from "@solidjs/router";
 import { Component, lazy } from "solid-js";
 import CreatePostButton from "./components/CreatePostComponent";
 import favicon from "./assets/img/logo.png";
-import { MetaProvider, Title, Meta, Link } from "@solidjs/meta";
+import { MetaProvider, Link } from "@solidjs/meta";
 
 const Home = lazy(() => import("./pages/Home"));
 const Error404 = lazy(() => import("./pages/Error404"));
