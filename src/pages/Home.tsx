@@ -1,4 +1,4 @@
-import { Component, For, createEffect, createSignal, onMount } from "solid-js";
+import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
@@ -7,9 +7,11 @@ import { customFetch, getError } from "../utils/functions_utils";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
+const [page, setPage] = createSignal(1);
+
 async function fetch_posts() {
   setIsLoading(true);
-  const res = await customFetch("https://api.creativeblogger.org/posts");
+  const res = await customFetch(`https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`);
 
   if (!res.ok) {
     setIsLoading(false);
@@ -26,13 +28,12 @@ async function fetch_posts() {
 }
 
 const Home: Component = () => {
-  onMount(() => fetch_posts());
-
   createEffect(() => {
-    if (isLoading()) {
-      document.querySelector(".reload-button")?.classList.add("animate-spin");
-    }
-  });
+    const urlParams = new URLSearchParams(location.search);
+    const paramValue = urlParams.get('page');
+    setPage(parseInt(paramValue || "") || 1);
+    fetch_posts()
+  })
 
   return (
     <MetaProvider>
@@ -46,9 +47,7 @@ const Home: Component = () => {
       <div class="p-3">
         <div class="flex justify-end w-11/12">
           <button
-            onclick={() => {
-              fetch_posts();
-            }}
+            onclick={fetch_posts}
             class={`${
               isLoading() ? "animate-spin " : ""
             }rounded-full border-white`}
@@ -67,6 +66,14 @@ const Home: Component = () => {
             )}
           </For>
         </div>
+        <Show when={page() > 1}>
+          <button onclick={() => {
+            location.search = `?page=${page() - 1}`
+          }}>Page précédente</button>
+        </Show>
+        <button onclick={() => {
+          location.search = `?page=${page() + 1}`
+        }}>Page suivante</button>
       </div>
     </MetaProvider>
   );
