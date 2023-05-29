@@ -70,4 +70,4 @@ const PanelPage: Component = () => {
 };
 
 export default PanelPage;
-export { setPosts };
+export { setPosts, fetch_users };

@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js";
 import { customFetch, getError } from "../utils/functions_utils";
+import { fetch_users } from "../pages/PanelPage";
 
 function findPermissions(permission: number) {
   if (permission === 0) {
@@ -24,9 +25,8 @@ const UsersPreviewComponent = (props: { user: User }) => {
       return;
     }
 
-    console.log(await res.json());
-
     alert("Utilisateur supprimé avec succès !");
+    fetch_users()
   }
 
   return (
