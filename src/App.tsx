@@ -15,6 +15,7 @@ const Footer = lazy(() => import("./components/Footer"));
 const CreatePost = lazy(() => import("./pages/CreatePost"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PanelPage = lazy(() => import("./pages/PanelPage"));
+const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 
 const App: Component = () => {
   return (
@@ -32,6 +33,7 @@ const App: Component = () => {
         <Route path={"/posts/:slug"} element={<PostPage />} />
         <Route path={"/create"} element={<CreatePost />} />
         <Route path={"/admin"} element={<PanelPage />} />
+        <Route path={"/panel"} element={<AdminPanel />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />

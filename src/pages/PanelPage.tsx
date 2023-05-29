@@ -1,31 +1,15 @@
-import { Component, For, createEffect, createSignal, onMount } from "solid-js";
+import { Component, For, createSignal, onMount } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import UsersPreviewComponent from "../components/UsersPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 import { customFetch, getError } from "../utils/functions_utils";
+import { fetch_posts } from "./Home";
+
 const [posts, setPosts] = createSignal([] as Post[]);
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
-
-async function fetch_posts() {
-  setIsLoading(true);
-  const res = await customFetch("https://api.creativeblogger.org/panel");
-
-  if (!res.ok) {
-    setIsLoading(false);
-    if (res.status === 500) {
-      alert("Erreur serveur");
-      return;
-    }
-    return getError(await res.json());
-  }
-
-  const posts: Post[] = await res.json();
-  setPosts(posts);
-  setIsLoading(false);
-}
 
 async function fetch_users() {
   setIsLoading(true);
@@ -46,13 +30,9 @@ async function fetch_users() {
 }
 
 const PanelPage: Component = () => {
-  onMount(() => fetch_posts());
-  onMount(() => fetch_users());
-
-  createEffect(() => {
-    if (isLoading()) {
-      document.querySelector(".reload-button")?.classList.add("animate-spin");
-    }
+  onMount(() => {
+    fetch_posts()
+    fetch_users()
   });
 
   return (
@@ -90,4 +70,4 @@ const PanelPage: Component = () => {
 };
 
 export default PanelPage;
-export { setPosts, fetch_posts };
+export { setPosts };

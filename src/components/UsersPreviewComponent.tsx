@@ -1,12 +1,5 @@
-import { Show, createSignal } from "solid-js";
-import { NavLink } from "@solidjs/router";
+import { createSignal } from "solid-js";
 import { customFetch, getError } from "../utils/functions_utils";
-
-function getHumanDate(date: string) {
-  const parsed_date = new Date(Date.parse(date));
-
-  return `${parsed_date.toLocaleDateString()} à ${parsed_date.toLocaleTimeString()}`;
-}
 
 function findPermissions(permission: number) {
   if (permission === 0) {
@@ -30,6 +23,8 @@ const UsersPreviewComponent = (props: { user: User }) => {
       setError(getError(await res.json()));
       return;
     }
+
+    console.log(await res.json());
 
     alert("Utilisateur supprimé avec succès !");
   }

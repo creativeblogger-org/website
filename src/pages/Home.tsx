@@ -66,14 +66,16 @@ const Home: Component = () => {
             )}
           </For>
         </div>
-        <Show when={page() > 1}>
+        <Show when={posts().length != 0}>
+          <Show when={page() > 1}>
+            <button onclick={() => {
+              location.search = `?page=${page() - 1}`
+            }}>Page précédente</button>
+          </Show>
           <button onclick={() => {
-            location.search = `?page=${page() - 1}`
-          }}>Page précédente</button>
+            location.search = `?page=${page() + 1}`
+          }}>Page suivante</button>
         </Show>
-        <button onclick={() => {
-          location.search = `?page=${page() + 1}`
-        }}>Page suivante</button>
       </div>
     </MetaProvider>
   );
