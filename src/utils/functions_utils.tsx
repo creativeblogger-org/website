@@ -1,5 +1,3 @@
-import { setPosts } from "../pages/Home";
-
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
 

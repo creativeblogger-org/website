@@ -124,7 +124,7 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
           </div>
         </Show>
         <div class="m-auto w-5/6">
-          <h1 class="text-xl font-bold">Commentaires :</h1>
+          <h1 class="text-xl font-bold">Commentaires ({props.comments.length}) :</h1>
           <For
             each={props.comments}
             fallback={"Aucun commentaire pour le moment..."}
