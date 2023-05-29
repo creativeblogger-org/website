@@ -35,7 +35,8 @@ const Login: Component = () => {
                   "POST",
                   new FormData(
                     document.querySelector("form") as HTMLFormElement
-                  )
+                  ),
+                  false
                 );
 
                 if (!res.ok) {

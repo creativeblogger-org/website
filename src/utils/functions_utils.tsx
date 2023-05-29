@@ -28,14 +28,26 @@ function getError(error: ServerError) {
 async function customFetch(
   url: string,
   method: string = "GET",
-  body?: BodyInit
+  body?: BodyInit,
+  json: boolean = true
 ) {
+
+  let headers = {};
+  if (json) {
+    headers = {
+      "Authorization": `Bearer ${getToken()}`,
+      "Content-Type": "application/json"
+    }
+  } else {
+    headers = {
+      "Authorization": `Bearer ${getToken()}`
+    }
+  }
+
   return await fetch(url, {
     method: method,
     body: body,
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
+    headers: headers,
   });
 }
 
