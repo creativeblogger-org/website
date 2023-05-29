@@ -1,10 +1,10 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
-import { useParams } from "@solidjs/router";
 import { customFetch, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
 const [error, setError] = createSignal("");
+const [success, setSuccess] = createSignal("");
 const [post, setPost] = createSignal({author: {}} as PostWithoutComments)
 const [comments, setComments] = createSignal([] as Comment[]);
 
@@ -17,6 +17,7 @@ const fetch_post_by_slug = async () => {
 
   if (!res.ok) {
     setError(getError(await res.json()));
+    setSuccess("")
     return;
   }
 
@@ -26,8 +27,6 @@ const fetch_post_by_slug = async () => {
 };
 
 const PostPage: Component = () => {
-  const params = useParams<{ slug: string }>();
-
   onMount(() => {
     setPost({ author: {}, id: 0 } as Post);
     fetch_post_by_slug();
@@ -35,7 +34,8 @@ const PostPage: Component = () => {
 
   return (
     <>
-      <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
+      <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
+      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
       <Show when={post().id != 0} fallback="Chargement...">
         <MetaProvider>
           <Title>{post().title} - Creative Blogger</Title>
@@ -51,4 +51,4 @@ const PostPage: Component = () => {
 };
 
 export default PostPage;
-export { fetch_post_by_slug };
+export { fetch_post_by_slug, setError, setSuccess };

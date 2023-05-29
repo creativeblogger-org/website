@@ -1,22 +1,25 @@
 import { NavLink } from "@solidjs/router";
 import { Show, createEffect, createSignal } from "solid-js";
 import { customFetch, getError, getHumanDate } from "../utils/functions_utils";
-import { fetch_post_by_slug } from "../pages/PostPage";
+import { fetch_post_by_slug, setSuccess } from "../pages/PostPage";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
+import { setError } from "./PostComponent";
 
 async function update_comment(comment: RudimentaryComment, new_content: string) {
     comment.content = new_content;
     const res = await customFetch(`https://api.creativeblogger.org/comments/${comment.id}`, "PUT", JSON.stringify(comment))
 
     if (!res.ok) {
-        alert(getError(await res.json()))
+        setError(getError(await res.json()))
+        setSuccess("")
         return
     }
 
-    alert("Commentaire mis à jour avec succès !");
+    setError("")
+    setSuccess("Commentaire mis à jour avec succès !");
     fetch_post_by_slug()
 }
 
@@ -24,11 +27,13 @@ async function delete_comment(id: number) {
     const res = await customFetch(`https://api.creativeblogger.org/comments/${id}`, "DELETE")
 
     if (!res.ok) {
-        alert(getError(await res.json()))
+        setError(getError(await res.json()))
+        setSuccess("")
         return
     }
 
-    alert("Commentaire supprimé avec succès !");
+    setError("")
+    setSuccess("Commentaire supprimé avec succès !");
     fetch_post_by_slug()
 }
 
@@ -74,12 +79,12 @@ function CommentComponent(props: {comment: Comment}) {
             <textarea
                 name="comment-content"
                 readOnly={!editing()}
-                class="comment-content max-h-screen h-[50vh] w-full p-2 text-xl"
+                class="comment-content max-h-screen h-[50vh] w-full p-2 text-lg"
             >
                 {props.comment.content}
             </textarea>
         }>
-            <h2 class="text-xl w-full break-all p-2">{props.comment.content}</h2>
+            <h2 class="text-lg w-full break-all p-2">{props.comment.content}</h2>
         </Show>
         <Show when={editing()}>
           <div class="text-center">

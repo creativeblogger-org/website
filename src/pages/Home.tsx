@@ -8,6 +8,7 @@ const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
 const [page, setPage] = createSignal(1);
+const [error, setError] = createSignal("");
 
 async function fetch_posts() {
   setIsLoading(true);
@@ -15,11 +16,8 @@ async function fetch_posts() {
 
   if (!res.ok) {
     setIsLoading(false);
-    if (res.status === 500) {
-      alert("Erreur serveur");
-      return;
-    }
-    return getError(await res.json());
+    setError(getError(await res.json()));
+    return
   }
 
   const posts: Post[] = await res.json();
@@ -44,6 +42,7 @@ const Home: Component = () => {
           content="Creative Blogger - Projet collaboratif entre bloggers"
         />
       </div>
+      <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
       <div class="p-3">
         <div class="flex justify-end w-11/12">
           <button

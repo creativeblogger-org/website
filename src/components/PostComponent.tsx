@@ -5,11 +5,9 @@ import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
-import { fetch_post_by_slug } from "../pages/PostPage";
+import { fetch_post_by_slug, setError, setSuccess } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
-
-const [error, setError] = createSignal("");
 
 const [editing, setEditing] = createSignal(false);
 
@@ -21,10 +19,12 @@ async function delete_post() {
 
   if (!res.ok) {
     setError(getError(await res.json()));
+    setSuccess("")
     return;
   }
 
-  alert("Post supprimé avec succès !");
+  setError("")
+  setSuccess("Post supprimé avec succès !");
   location.assign("/");
 }
 
@@ -35,17 +35,15 @@ async function update_post(post: RudimentaryPost, new_content: string) {
     "PUT",
     JSON.stringify(post)
   );
-  
-  if (res.status == 404) {
-    alert("Erreur 404");
-  }
 
   if (!res.ok) {
     setError(getError(await res.json()));
+    setSuccess("")
     return;
   }
 
-  alert("Success !");
+  setError("")
+  setSuccess("Success !");
 
   setEditing(false);
 
@@ -56,11 +54,14 @@ async function post_comment(url: string, content: string) {
   const res = await customFetch(url, "POST", JSON.stringify({content: content}));
 
   if (!res.ok) {
-    alert(getError(await res.json()))
+    setError(getError(await res.json()))
+    setSuccess("")
     return
   }
 
-  alert("Commentaire créé avec succès !")
+  setError("");
+  setSuccess("Commentaire créé avec succès !");
+  (document.getElementById("content") as HTMLInputElement).value = ""
 
   fetch_post_by_slug()
 }
@@ -78,7 +79,6 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
 
   return (
     <div>
-      <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
       <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
         <Show when={props.post.has_permission}>
@@ -167,3 +167,4 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
 };
 
 export default PostComponent;
+export {setError};

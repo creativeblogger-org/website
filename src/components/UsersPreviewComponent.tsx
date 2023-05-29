@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import { customFetch, getError } from "../utils/functions_utils";
-import { fetch_users } from "../pages/PanelPage";
+import { error, fetch_users, setError } from "../pages/PanelPage";
 
 function findPermissions(permission: number) {
   if (permission === 0) {
@@ -13,7 +13,6 @@ function findPermissions(permission: number) {
 }
 
 const UsersPreviewComponent = (props: { user: User }) => {
-  const [error, setError] = createSignal("");
   async function delete_user() {
     const res = await customFetch(
       `https://api.creativeblogger.org/users/${props.user.username}`,
