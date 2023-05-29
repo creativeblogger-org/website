@@ -28,9 +28,9 @@ const NavBar: Component = () => {
         </NavLink>
         <NavLink
           class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
-          href="/contact"
+          href="/about"
         >
-          Contact
+          About
         </NavLink>
       </div>
     </div>
