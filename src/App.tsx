@@ -15,7 +15,7 @@ const Footer = lazy(() => import("./components/Footer"));
 const CreatePost = lazy(() => import("./pages/CreatePost"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PanelPage = lazy(() => import("./pages/PanelPage"));
-const AdminPanel = lazy(() => import("./pages/AdminPanel"));
+const AdminPanel = lazy(() => import("./pages/PanelPage"));
 
 const App: Component = () => {
   return (
