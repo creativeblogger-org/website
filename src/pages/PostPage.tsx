@@ -1,10 +1,12 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
-import PostComponent, { post, setPost } from "../components/PostComponent";
+import PostComponent from "../components/PostComponent";
 import { useParams } from "@solidjs/router";
 import { customFetch, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
 const [error, setError] = createSignal("");
+const [post, setPost] = createSignal({author: {}} as PostWithoutComments)
+const [comments, setComments] = createSignal([] as Comment[]);
 
 const fetch_post_by_slug = async (url: string) => {
   const res = await customFetch(url);
@@ -19,6 +21,7 @@ const fetch_post_by_slug = async (url: string) => {
   }
 
   const post: Post = await res.json();
+  setComments(post.comments);
   setPost(post);
 };
 
@@ -40,7 +43,7 @@ const PostPage: Component = () => {
             name="description"
             content="Creative Blogger - Projet collaboratif entre bloggers"
           />
-          <PostComponent />;
+          <PostComponent post={post()} comments={comments()} />;
         </MetaProvider>
       </Show>
     </>
@@ -48,4 +51,4 @@ const PostPage: Component = () => {
 };
 
 export default PostPage;
-export { post, setPost };
+export { fetch_post_by_slug };

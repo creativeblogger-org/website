@@ -5,15 +5,11 @@ import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
-
-const [post, setPost] = createSignal({
-  author: {},
-  id: 0,
-} as Post);
-
-const [comments, setComments] = createSignal([] as Comment[]);
+import { fetch_post_by_slug } from "../pages/PostPage";
 
 const [error, setError] = createSignal("");
+
+const [editing, setEditing] = createSignal(false);
 
 async function delete_post() {
   const res = await customFetch(
@@ -30,14 +26,14 @@ async function delete_post() {
   location.assign("/");
 }
 
-async function update_post(post: Post, new_content: string) {
+async function update_post(post: RudimentaryPost, new_content: string) {
   post.content = new_content;
   const res = await customFetch(
     `https://api.creativeblogger.org${location.pathname}`,
     "PUT",
     JSON.stringify(post)
   );
-
+  
   if (res.status == 404) {
     alert("Erreur 404");
   }
@@ -48,15 +44,19 @@ async function update_post(post: Post, new_content: string) {
   }
 
   alert("Success !");
+
+  setEditing(false);
+
+  fetch_post_by_slug(`https://api.creativeblogger.org/posts/${post.slug}`);
 }
 
-const PostComponent = () => {
-  const [editing, setEditing] = createSignal(false);
+const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) => {
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
   createEffect(() => {
     if (!editing()) {
       setEditIcon(EditIcon);
+      (document.querySelector(".post-content") as HTMLTextAreaElement).value = props.post.content
     } else {
       setEditIcon(CancelEditIcon);
     }
@@ -66,8 +66,8 @@ const PostComponent = () => {
     <div>
       <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2>
       <div class="p-4 m-5 relative">
-        <h1 class="text-4xl font-bold text-center">{post().title}</h1>
-        <Show when={post().has_permission}>
+        <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
+        <Show when={props.post.has_permission}>
           <div class="absolute top-0 right-0">
             <button onclick={() => setEditing((edit) => !edit)}>
               <img src={editIcon()} alt="Edit icon" />
@@ -84,18 +84,18 @@ const PostComponent = () => {
         </Show>
         <div class="flex justify-center m-2">
           <NavLink
-            href={"/user/" + post().author.username}
+            href={"/user/" + props.post.author.username}
             class="font-bold duration-150 hover:text-indigo-800 hover:underline"
           >
-            @{post().author.username}
+            @{props.post.author.username}
           </NavLink>
         </div>
         <div class="flex justify-center">
-          <span>Créé le {getHumanDate(post().created_at)}</span>
+          <span>Créé le {getHumanDate(props.post.created_at)}</span>
         </div>
         <div class="flex justify-center mb-5">
-          <Show when={post().created_at != post().updated_at}>
-            <span>Mis à jour le {getHumanDate(post().updated_at)}</span>
+          <Show when={props.post.created_at != props.post.updated_at}>
+            <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
           </Show>
         </div>
         <hr />
@@ -105,7 +105,7 @@ const PostComponent = () => {
             readOnly={!editing()}
             class="post-content resize-none max-h-screen h-[50vh] w-full p-2"
           >
-            {post().content}
+            {props.post.content}
           </textarea>
         </div>
         <Show when={editing()}>
@@ -113,9 +113,9 @@ const PostComponent = () => {
             <button
               onclick={() =>
                 update_post(
-                  post(),
-                  (document.querySelector(".post-content") as HTMLElement)
-                    .textContent!
+                  props.post,
+                  (document.querySelector(".post-content") as HTMLTextAreaElement)
+                    .value
                 )
               }
             >
@@ -126,7 +126,7 @@ const PostComponent = () => {
         <div class="m-auto w-5/6">
           <h1 class="text-xl font-bold">Commentaires :</h1>
           <For
-            each={comments()}
+            each={props.comments}
             fallback={"Aucun commentaire pour le moment..."}
           >
             {(comment, i) => (
@@ -154,4 +154,3 @@ const PostComponent = () => {
 };
 
 export default PostComponent;
-export { post, setPost };
