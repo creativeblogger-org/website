@@ -8,8 +8,8 @@ const [error, setError] = createSignal("");
 const [post, setPost] = createSignal({author: {}} as PostWithoutComments)
 const [comments, setComments] = createSignal([] as Comment[]);
 
-const fetch_post_by_slug = async (url: string) => {
-  const res = await customFetch(url);
+const fetch_post_by_slug = async () => {
+  const res = await customFetch(`https://api.creativeblogger.org${location.pathname}`);
 
   if (res.status == 404) {
     location.assign("/404");
@@ -30,7 +30,7 @@ const PostPage: Component = () => {
 
   onMount(() => {
     setPost({ author: {}, id: 0 } as Post);
-    fetch_post_by_slug(`https://api.creativeblogger.org/posts/${params.slug}`);
+    fetch_post_by_slug();
   });
 
   return (

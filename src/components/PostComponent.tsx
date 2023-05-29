@@ -7,6 +7,7 @@ import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
+import CommentComponent from "./CommentComponent";
 
 const [error, setError] = createSignal("");
 
@@ -48,7 +49,7 @@ async function update_post(post: RudimentaryPost, new_content: string) {
 
   setEditing(false);
 
-  fetch_post_by_slug(`https://api.creativeblogger.org/posts/${post.slug}`);
+  fetch_post_by_slug();
 }
 
 async function post_comment(url: string, content: string) {
@@ -61,7 +62,7 @@ async function post_comment(url: string, content: string) {
 
   alert("Commentaire créé avec succès !")
 
-  fetch_post_by_slug(`https://api.creativeblogger.org${location.pathname}`)
+  fetch_post_by_slug()
 }
 
 const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) => {
@@ -152,22 +153,8 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
             each={props.comments}
             fallback={"Aucun commentaire pour le moment..."}
           >
-            {(comment, i) => (
-              <div class="p-2 rounded-lg border mt-5">
-                <NavLink
-                  href={"/user/" + comment.author.username}
-                  class="font-bold duration-150 hover:text-indigo-800"
-                >
-                  @{comment.author.username}
-                </NavLink>{" "}
-                <span>
-                  a posté ce commentaire le {getHumanDate(comment.created_at)}.{" "}
-                </span>
-                <Show when={comment.created_at != comment.updated_at}>
-                  <span>Modifié le {getHumanDate(comment.updated_at)}</span>
-                </Show>
-                <p class=" p-4">{comment.content}</p>
-              </div>
+            {(comment, _) => (
+              <CommentComponent comment={comment} />
             )}
           </For>
         </div>
