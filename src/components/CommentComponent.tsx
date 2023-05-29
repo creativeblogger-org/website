@@ -33,14 +33,12 @@ async function delete_comment(id: number) {
 }
 
 function CommentComponent(props: {comment: Comment}) {
-
     const [editing, setEditing] = createSignal(false);
     const [editIcon, setEditIcon] = createSignal(EditIcon);
 
     createEffect(() => {
         if (!editing()) {
             setEditIcon(EditIcon);
-            (document.querySelector(".comment-content") as HTMLTextAreaElement).value = props.comment.content
         } else {
             setEditIcon(CancelEditIcon);
         }
@@ -72,7 +70,17 @@ function CommentComponent(props: {comment: Comment}) {
                 ></img>
             </button>
         </div>
-        <textarea readOnly={!editing()} class="comment-content p-4 w-full">{props.comment.content}</textarea>
+        <Show when={!editing()} fallback={
+            <textarea
+                name="comment-content"
+                readOnly={!editing()}
+                class="comment-content max-h-screen h-[50vh] w-full p-2 text-xl"
+            >
+                {props.comment.content}
+            </textarea>
+        }>
+            <h2 class="text-xl w-full break-all p-2">{props.comment.content}</h2>
+        </Show>
         <Show when={editing()}>
           <div class="text-center">
             <button

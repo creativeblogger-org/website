@@ -71,7 +71,6 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
   createEffect(() => {
     if (!editing()) {
       setEditIcon(EditIcon);
-      (document.querySelector(".post-content") as HTMLTextAreaElement).value = props.post.content
     } else {
       setEditIcon(CancelEditIcon);
     }
@@ -115,13 +114,17 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
         </div>
         <hr />
         <div class="mt-5 w-11/12 max-h-[75vh] m-auto mb-3">
-          <textarea
-            name="post-content"
-            readOnly={!editing()}
-            class="post-content resize-none max-h-screen h-[50vh] w-full p-2"
-          >
-            {props.post.content}
-          </textarea>
+          <Show when={!editing()} fallback={
+            <textarea
+              name="post-content"
+              readOnly={!editing()}
+              class="post-content max-h-screen h-[50vh] w-full p-2 text-xl"
+            >
+              {props.post.content}
+            </textarea>
+          }>
+            <h2 class="text-xl w-full break-all p-2">{props.post.content}</h2>
+          </Show>
         </div>
         <Show when={editing()}>
           <div class="text-center">
