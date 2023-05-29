@@ -6,6 +6,7 @@ import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_post_by_slug } from "../pages/PostPage";
+import SendIcon from "../assets/button_icons/send.svg";
 
 const [error, setError] = createSignal("");
 
@@ -48,6 +49,19 @@ async function update_post(post: RudimentaryPost, new_content: string) {
   setEditing(false);
 
   fetch_post_by_slug(`https://api.creativeblogger.org/posts/${post.slug}`);
+}
+
+async function post_comment(url: string, content: string) {
+  const res = await customFetch(url, "POST", JSON.stringify({content: content}));
+
+  if (!res.ok) {
+    alert(getError(await res.json()))
+    return
+  }
+
+  alert("Commentaire créé avec succès !")
+
+  fetch_post_by_slug(`https://api.creativeblogger.org${location.pathname}`)
 }
 
 const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) => {
@@ -124,7 +138,16 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
           </div>
         </Show>
         <div class="m-auto w-5/6">
-          <h1 class="text-xl font-bold">Commentaires ({props.comments.length}) :</h1>
+          {/* Way to get number of posts will be modified in the v2 of the API */}
+          <h1 class="text-xl font-bold">Commentaires ({props.comments.length})</h1>
+          <form onsubmit={e => {
+            e.preventDefault()
+
+            post_comment(`https://api.creativeblogger.org/posts/${props.post.slug}/comment`, (document.getElementById("content") as HTMLInputElement).value)
+          }}>
+            <input type="text" name="content" id="content" placeholder="Ajoutez un commentaire..." />
+            <button type="submit"><img src={SendIcon} alt="Send icon" /></button>
+          </form>
           <For
             each={props.comments}
             fallback={"Aucun commentaire pour le moment..."}
