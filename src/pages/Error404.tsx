@@ -1,4 +1,4 @@
-import { Component, lazy } from "solid-js";
+import { Component } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import imgError404 from "../assets/img/404.png";
 import { NavLink } from "@solidjs/router";

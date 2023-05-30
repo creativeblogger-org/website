@@ -1,3 +1,5 @@
+import { createSignal } from "solid-js";
+
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
 
@@ -51,4 +53,27 @@ async function customFetch(
   });
 }
 
-export { getHumanDate, getToken, isConnected, getError, customFetch };
+const [error, setError] = createSignal("");
+const [success, setSuccess] = createSignal("");
+const [errorTimer, setErrorTimer] = createSignal<number>();
+const [successTimer, setSuccessTimer] = createSignal<number>();
+
+function displayError(error: string) {
+  setSuccess("")
+  setError(error)
+  clearTimeout(errorTimer())
+  setErrorTimer(setTimeout(() => {
+    setError("")
+  }, 2000))
+}
+
+function displaySuccess(success: string) {
+  setSuccess(success)
+  setError("")
+  clearTimeout(successTimer())
+  setSuccessTimer(setTimeout(() => {
+    setSuccess("")
+  }, 2000))
+}
+
+export { getHumanDate, getToken, isConnected, getError, customFetch, displayError, displaySuccess, error, success };

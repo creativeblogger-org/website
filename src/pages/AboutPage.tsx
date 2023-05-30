@@ -1,8 +1,7 @@
 import { Component } from "solid-js";
-import { MetaProvider, Title, Meta, Link } from "@solidjs/meta";
+import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import gifRiccardo from "../assets/gif/gif-riccardo.gif";
 import gifMael from "../assets/gif/gif-mael.gif";
-import gifMicorksen from "../assets/gif/gif-micorksen.gif";
 import { NavLink } from "@solidjs/router";
 
 const AboutPage: Component = () => {

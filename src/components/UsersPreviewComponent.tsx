@@ -1,6 +1,5 @@
-import { createSignal } from "solid-js";
-import { customFetch, getError } from "../utils/functions_utils";
-import { error, fetch_users, setError } from "../pages/PanelPage";
+import { customFetch, displayError, getError } from "../utils/functions_utils";
+import { fetch_users } from "../pages/PanelPage";
 
 function findPermissions(permission: number) {
   if (permission === 0) {
@@ -20,7 +19,7 @@ const UsersPreviewComponent = (props: { user: User }) => {
     );
 
     if (!res.ok) {
-      setError(getError(await res.json()));
+      displayError(getError(await res.json()));
       return;
     }
 

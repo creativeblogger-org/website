@@ -1,10 +1,8 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
-import { customFetch, getError } from "../utils/functions_utils";
+import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
-const [error, setError] = createSignal("");
-const [success, setSuccess] = createSignal("");
 const [post, setPost] = createSignal({author: {}} as PostWithoutComments)
 const [comments, setComments] = createSignal([] as Comment[]);
 
@@ -16,8 +14,7 @@ const fetch_post_by_slug = async () => {
   }
 
   if (!res.ok) {
-    setError(getError(await res.json()));
-    setSuccess("")
+    displayError(getError(await res.json()));
     return;
   }
 
@@ -51,4 +48,4 @@ const PostPage: Component = () => {
 };
 
 export default PostPage;
-export { fetch_post_by_slug, setError, setSuccess };
+export { fetch_post_by_slug };

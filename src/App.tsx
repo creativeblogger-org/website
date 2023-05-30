@@ -2,7 +2,7 @@ import { Routes, Route } from "@solidjs/router";
 import { Component, Show, lazy } from "solid-js";
 import favicon from "./assets/img/logo.png";
 import { MetaProvider, Link } from "@solidjs/meta";
-import { isConnected } from "./utils/functions_utils";
+import { displayError, displaySuccess, isConnected } from "./utils/functions_utils";
 
 const Home = lazy(() => import("./pages/Home"));
 const CreatePostButton = lazy(() => import("./components/CreatePostComponent"));
@@ -18,6 +18,9 @@ const PanelPage = lazy(() => import("./pages/PanelPage"));
 const MicorksenPage = lazy(() => import("./pages/Micorksen"));
 
 const App: Component = () => {
+  window.addEventListener('offline', () => displayError("Tu es hors ligne !"));
+  window.addEventListener('online', () => displaySuccess("Tu es de nouveau en ligne !"));
+
   return (
     <>
       <MetaProvider>

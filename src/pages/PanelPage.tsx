@@ -3,13 +3,12 @@ import PostPreviewComponent from "../components/PostPreviewComponent";
 import UsersPreviewComponent from "../components/UsersPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import { customFetch, getError } from "../utils/functions_utils";
+import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
 
 const [posts, setPosts] = createSignal([] as Post[]);
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
-const [error, setError] = createSignal("");
 
 async function fetch_users() {
   setIsLoading(true);
@@ -17,7 +16,7 @@ async function fetch_users() {
 
   if (!res.ok) {
     setIsLoading(false);
-    setError(getError(await res.json()));
+    displayError(getError(await res.json()));
     return;
   }
 
@@ -42,6 +41,7 @@ const PanelPage: Component = () => {
         />
       </div>
       <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
+      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
       <div class="p-3 w-full">
         <h1 class="text-4xl text-center">Articles :</h1>
         <div class="m-auto w-11/12 grid grid-cols-2" id="posts">
@@ -66,4 +66,4 @@ const PanelPage: Component = () => {
 };
 
 export default PanelPage;
-export { setPosts, fetch_users, error, setError };
+export { setPosts, fetch_users };

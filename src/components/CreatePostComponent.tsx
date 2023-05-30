@@ -4,11 +4,10 @@ import {
   createEffect,
   createSignal
 } from "solid-js";
-import { customFetch, getError, isConnected } from "../utils/functions_utils";
+import { customFetch, displayError, error, getError, isConnected, success } from "../utils/functions_utils";
 import { fetch_posts } from "../pages/Home";
 
 const [showPopup, setShowPopup] = createSignal(false);
-const [error, setError] = createSignal("");
 
 async function onPostSubmit(e: Event) {
   e.preventDefault();
@@ -21,7 +20,7 @@ async function onPostSubmit(e: Event) {
   );
 
   if (!res.ok) {
-    setError(getError(await res.json()));
+    displayError(getError(await res.json()));
     return;
   }
 
@@ -80,6 +79,7 @@ const CreatePostComponent: Component = () => {
             ></textarea>
             <br />
             <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
+            <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
             <input
               type="submit"
               value="Créer un nouveau post"

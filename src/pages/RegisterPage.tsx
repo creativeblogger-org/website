@@ -1,9 +1,7 @@
-import { Component, createSignal, onMount } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-import { customFetch, getError } from "../utils/functions_utils";
-
-const [error, setError] = createSignal("");
+import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
 
 const Register: Component = () => {
   return (
@@ -39,7 +37,7 @@ const Register: Component = () => {
                 );
 
                 if (!res.ok) {
-                  setError(getError(await res.json()));
+                  displayError(getError(await res.json()));
                   return;
                 }
 
@@ -134,6 +132,7 @@ const Register: Component = () => {
               </NavLink>
             </p>
             <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
+            <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
           </div>
         </div>
       </div>
@@ -142,4 +141,3 @@ const Register: Component = () => {
 };
 
 export default Register;
-export { error, setError };

@@ -3,12 +3,11 @@ import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
-import { customFetch, getError } from "../utils/functions_utils";
+import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
 const [page, setPage] = createSignal(1);
-const [error, setError] = createSignal("");
 
 async function fetch_posts() {
   setIsLoading(true);
@@ -16,7 +15,7 @@ async function fetch_posts() {
 
   if (!res.ok) {
     setIsLoading(false);
-    setError(getError(await res.json()));
+    displayError(getError(await res.json()));
     return
   }
 
@@ -45,6 +44,7 @@ const Home: Component = () => {
         />
       </div>
       <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
+      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
       <div class="p-3">
         <div class="flex justify-end w-11/12">
           <button
@@ -58,7 +58,6 @@ const Home: Component = () => {
         </div>
 
         <div class="m-auto w-11/12 grid grid-cols-3" id="posts">
-          {/* <h2 class="text-center text-red-500 pt-3 text-2xl">{error()}</h2> */}
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>

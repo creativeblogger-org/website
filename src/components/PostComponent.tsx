@@ -1,11 +1,11 @@
 import { For, Show, createEffect, createSignal } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { customFetch, getError, getHumanDate } from "../utils/functions_utils";
+import { customFetch, displayError, displaySuccess, getError, getHumanDate } from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
-import { fetch_post_by_slug, setError, setSuccess } from "../pages/PostPage";
+import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
 
@@ -18,13 +18,11 @@ async function delete_post() {
   );
 
   if (!res.ok) {
-    setError(getError(await res.json()));
-    setSuccess("")
+    displayError(getError(await res.json()));
     return;
   }
 
-  setError("")
-  setSuccess("Post supprimé avec succès !");
+  displaySuccess("Post supprimé avec succès !");
   location.assign("/");
 }
 
@@ -37,13 +35,11 @@ async function update_post(post: RudimentaryPost, new_content: string) {
   );
 
   if (!res.ok) {
-    setError(getError(await res.json()));
-    setSuccess("")
+    displayError(getError(await res.json()));
     return;
   }
 
-  setError("")
-  setSuccess("Success !");
+  displaySuccess("Success !");
 
   setEditing(false);
 
@@ -54,13 +50,11 @@ async function post_comment(url: string, content: string) {
   const res = await customFetch(url, "POST", JSON.stringify({content: content}));
 
   if (!res.ok) {
-    setError(getError(await res.json()))
-    setSuccess("")
+    displayError(getError(await res.json()))
     return
   }
 
-  setError("");
-  setSuccess("Commentaire créé avec succès !");
+  displaySuccess("Commentaire créé avec succès !");
   (document.getElementById("content") as HTMLInputElement).value = ""
 
   fetch_post_by_slug()
@@ -167,4 +161,3 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
 };
 
 export default PostComponent;
-export {setError};

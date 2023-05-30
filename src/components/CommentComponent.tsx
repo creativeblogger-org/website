@@ -1,25 +1,22 @@
 import { NavLink } from "@solidjs/router";
 import { Show, createEffect, createSignal } from "solid-js";
-import { customFetch, getError, getHumanDate } from "../utils/functions_utils";
-import { fetch_post_by_slug, setSuccess } from "../pages/PostPage";
+import { customFetch, displayError, displaySuccess, getError, getHumanDate } from "../utils/functions_utils";
+import { fetch_post_by_slug } from "../pages/PostPage";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
-import { setError } from "./PostComponent";
 
 async function update_comment(comment: RudimentaryComment, new_content: string) {
     comment.content = new_content;
     const res = await customFetch(`https://api.creativeblogger.org/comments/${comment.id}`, "PUT", JSON.stringify(comment))
 
     if (!res.ok) {
-        setError(getError(await res.json()))
-        setSuccess("")
+        displayError(getError(await res.json()))
         return
     }
 
-    setError("")
-    setSuccess("Commentaire mis à jour avec succès !");
+    displaySuccess("Commentaire mis à jour avec succès !");
     fetch_post_by_slug()
 }
 
@@ -27,13 +24,11 @@ async function delete_comment(id: number) {
     const res = await customFetch(`https://api.creativeblogger.org/comments/${id}`, "DELETE")
 
     if (!res.ok) {
-        setError(getError(await res.json()))
-        setSuccess("")
-        return
+        displayError(getError(await res.json()));
+        return;
     }
 
-    setError("")
-    setSuccess("Commentaire supprimé avec succès !");
+    displaySuccess("Commentaire supprimé avec succès !");
     fetch_post_by_slug()
 }
 
