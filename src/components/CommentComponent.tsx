@@ -62,19 +62,21 @@ function CommentComponent(props: {comment: Comment}) {
         <Show when={props.comment.created_at != props.comment.updated_at}>
             <span>Modifié le {getHumanDate(props.comment.updated_at)}</span>
         </Show>
-        <div class="absolute top-0 right-0">
-            <button class="m-1" onclick={() => setEditing((edit) => !edit)}>
-                <img src={editIcon()} alt="Edit icon" />
-            </button>
-            <button class="m-1" onclick={() => delete_comment(props.comment.id)}>
-                <img
-                src={DeleteIcon}
-                alt="Delete icon"
-                width={24}
-                height={24}
-                ></img>
-            </button>
-        </div>
+        <Show when={props.comment.has_permission}>
+            <div class="absolute top-0 right-0">
+                <button class="m-1" onclick={() => setEditing((edit) => !edit)}>
+                    <img src={editIcon()} alt="Edit icon" />
+                </button>
+                <button class="m-1" onclick={() => delete_comment(props.comment.id)}>
+                    <img
+                    src={DeleteIcon}
+                    alt="Delete icon"
+                    width={24}
+                    height={24}
+                    ></img>
+                </button>
+            </div>
+        </Show>
         <Show when={!editing()} fallback={
             <>
                 <textarea

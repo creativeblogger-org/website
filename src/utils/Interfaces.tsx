@@ -10,6 +10,7 @@ interface Comment {
   content: string;
   created_at: string;
   updated_at: string;
+  has_permission: boolean;
 }
 
 interface RudimentaryComment {

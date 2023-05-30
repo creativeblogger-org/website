@@ -82,11 +82,11 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
       <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
         <Show when={props.post.has_permission}>
-          <div class="absolute top-0 right-0">
+          <div class="absolute top-0 right-0 p-2 flex gap-2">
             <button onclick={() => setEditing((edit) => !edit)}>
               <img src={editIcon()} alt="Edit icon" />
             </button>
-            <button class="m-2 p-2z-[1]" onclick={() => delete_post()}>
+            <button onclick={() => delete_post()}>
               <img
                 src={DeleteIcon}
                 alt="Delete icon"
