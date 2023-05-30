@@ -4,7 +4,7 @@ import {
   createEffect,
   createSignal
 } from "solid-js";
-import { customFetch, isConnected } from "../utils/functions_utils";
+import { customFetch, getError, isConnected } from "../utils/functions_utils";
 import { fetch_posts } from "../pages/Home";
 
 const [showPopup, setShowPopup] = createSignal(false);
@@ -21,8 +21,7 @@ async function onPostSubmit(e: Event) {
   );
 
   if (!res.ok) {
-    const error: ServerError = await res.json();
-    setError(error.errors[0].message);
+    setError(getError(await res.json()));
     return;
   }
 

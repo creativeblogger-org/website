@@ -63,10 +63,10 @@ function CommentComponent(props: {comment: Comment}) {
             <span>Modifié le {getHumanDate(props.comment.updated_at)}</span>
         </Show>
         <div class="absolute top-0 right-0">
-            <button onclick={() => setEditing((edit) => !edit)}>
+            <button class="m-1" onclick={() => setEditing((edit) => !edit)}>
                 <img src={editIcon()} alt="Edit icon" />
             </button>
-            <button class="m-2 p-2z-[1]" onclick={() => delete_comment(props.comment.id)}>
+            <button class="m-1" onclick={() => delete_comment(props.comment.id)}>
                 <img
                 src={DeleteIcon}
                 alt="Delete icon"
@@ -76,30 +76,27 @@ function CommentComponent(props: {comment: Comment}) {
             </button>
         </div>
         <Show when={!editing()} fallback={
-            <textarea
-                name="comment-content"
-                readOnly={!editing()}
-                class="comment-content max-h-screen h-[50vh] w-full p-2 text-lg"
-            >
-                {props.comment.content}
-            </textarea>
+            <>
+                <textarea
+                    readOnly={!editing()}
+                    class="comment-content max-h-screen w-full p-2 text-lg"
+                >
+                    {props.comment.content}
+                </textarea>
+                <button
+                    onclick={() =>
+                        update_comment(
+                        props.comment,
+                        (document.querySelector(".comment-content") as HTMLTextAreaElement)
+                            .value
+                        )
+                    }
+                >
+                    <img src={SaveIcon} alt="Save icon" width={24} height={24} />
+                </button>
+            </>
         }>
             <h2 class="text-lg w-full break-all p-2">{props.comment.content}</h2>
-        </Show>
-        <Show when={editing()}>
-          <div class="text-center">
-            <button
-              onclick={() =>
-                update_comment(
-                  props.comment,
-                  (document.querySelector(".comment-content") as HTMLTextAreaElement)
-                    .value
-                )
-              }
-            >
-              <img src={SaveIcon} alt="Save icon" width={24} height={24} />
-            </button>
-          </div>
         </Show>
     </div>;
 };

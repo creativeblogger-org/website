@@ -1,6 +1,6 @@
 import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
-import { NavLink } from "@solidjs/router";
+import { NavLink, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 import { customFetch, getError } from "../utils/functions_utils";
@@ -32,6 +32,8 @@ const Home: Component = () => {
     setPage(parseInt(paramValue || "") || 1);
     fetch_posts()
   })
+
+  const navigate = useNavigate();
 
   return (
     <MetaProvider>
@@ -65,16 +67,18 @@ const Home: Component = () => {
             )}
           </For>
         </div>
-        <Show when={posts().length != 0}>
-          <Show when={page() > 1}>
+        <div class="gap-2 flex justify-center">
+          <Show when={posts().length != 0}>
+            <Show when={page() > 1}>
             <button onclick={() => {
-              location.search = `?page=${page() - 1}`
+              navigate(`/?page=${page() - 1}`)
             }}>Page précédente</button>
           </Show>
           <button onclick={() => {
-            location.search = `?page=${page() + 1}`
+            navigate(`/?page=${page() + 1}`)
           }}>Page suivante</button>
         </Show>
+        </div>
       </div>
     </MetaProvider>
   );
