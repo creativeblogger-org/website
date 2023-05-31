@@ -1,6 +1,6 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
-import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
+import { customFetch, displayError, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
 const [post, setPost] = createSignal({author: {}} as PostWithoutComments)

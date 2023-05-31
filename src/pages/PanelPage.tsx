@@ -3,7 +3,7 @@ import PostPreviewComponent from "../components/PostPreviewComponent";
 import UsersPreviewComponent from "../components/UsersPreviewComponent";
 import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
+import { customFetch, displayError, getError } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
 
 const [posts, setPosts] = createSignal([] as Post[]);

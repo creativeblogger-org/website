@@ -3,7 +3,7 @@ import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
-import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
+import { customFetch, displayError, getError } from "../utils/functions_utils";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 

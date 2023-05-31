@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, error, getError, success } from "../utils/functions_utils";
+import { customFetch, displayError, getError } from "../utils/functions_utils";
 
 const Login: Component = () => {
   return (
