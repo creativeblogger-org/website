@@ -12,11 +12,13 @@ const [showPopup, setShowPopup] = createSignal(false);
 async function onPostSubmit(e: Event) {
   e.preventDefault();
 
+  const title = (document.getElementById("create-post-title") as HTMLInputElement).value;
+  const content = (document.getElementById("create-post-content") as HTMLElement).innerHTML;
+
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
     "POST",
-    new FormData(document.getElementById("post-form") as HTMLFormElement),
-    false
+    JSON.stringify({title: title, content: content})
   );
 
   if (!res.ok) {
@@ -68,7 +70,7 @@ const CreatePostComponent: Component = () => {
             <input
               type="text"
               name="title"
-              id="post-title"
+              id="create-post-title"
               class="text-black p-2 w-full m-1 rounded-md"
               autocomplete="off"
               required
@@ -76,12 +78,11 @@ const CreatePostComponent: Component = () => {
             <br />
             <label for="content">Contenu : </label>
             <br />
-            <textarea
-              name="content"
-              id="content"
-              class="text-black p-2 w-full h-[25vh] m-1 rounded-md"
-              required
-            ></textarea>
+            <div
+              id="create-post-content"
+              class="text-left bg-white text-black p-2 w-full break-words min-h-[25vh] m-1 rounded-md"
+              contentEditable
+            ></div>
             <br />
             <br />
             <input

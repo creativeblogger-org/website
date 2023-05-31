@@ -14,6 +14,7 @@ import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
+import { Marked } from "@ts-stack/markdown";
 
 const [editing, setEditing] = createSignal(false);
 
@@ -84,6 +85,10 @@ const PostComponent = (props: {
     }
   });
 
+  createEffect(() => {
+
+  })
+
   return (
     <div>
       <div class="p-4 m-5 relative">
@@ -120,24 +125,7 @@ const PostComponent = (props: {
           </Show>
         </div>
         <hr />
-        <div class="mt-5 w-11/12 flex justify-center max-h-[75vh] m-auto mb-3">
-          <Show
-            when={!editing()}
-            fallback={
-              <textarea
-                name="post-content"
-                readOnly={!editing()}
-                class="post-content max-h-screen h-[50vh] w-full p-2 text-xl"
-              >
-                {props.post.content}
-              </textarea>
-            }
-          >
-            <h2 class="text-xl text-center w-2/3 break-all p-2">
-              {props.post.content}
-            </h2>
-          </Show>
-        </div>
+        <div class="post-content text-xl break-words p-2 w-full m-3" contentEditable={editing()} innerHTML={!editing() ? Marked.parse(props.post.content) : `<h2>${props.post.content}</h2>`}></div>
         <Show when={editing()}>
           <div class="text-center">
             <button
@@ -147,8 +135,8 @@ const PostComponent = (props: {
                   (
                     document.querySelector(
                       ".post-content"
-                    ) as HTMLTextAreaElement
-                  ).value
+                    ) as HTMLElement
+                  ).innerHTML
                 )
               }
             >

@@ -23,6 +23,7 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.5",
     "@solidjs/router": "^0.8.2",
+    "@ts-stack/markdown": "^1.4.0",
     "marked": "^5.0.3",
     "solid-js": "^1.6.10",
     "solidjs-use": "^2.1.0"
