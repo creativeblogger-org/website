@@ -1,10 +1,10 @@
+import { Component, Show, createEffect, createSignal } from "solid-js";
 import {
-  Component,
-  Show,
-  createEffect,
-  createSignal
-} from "solid-js";
-import { customFetch, displayError, getError, isConnected } from "../utils/functions_utils";
+  customFetch,
+  displayError,
+  getError,
+  isConnected,
+} from "../utils/functions_utils";
 import { fetch_posts } from "../pages/Home";
 
 const [showPopup, setShowPopup] = createSignal(false);
@@ -32,7 +32,7 @@ async function onPostSubmit(e: Event) {
 const CreatePostComponent: Component = () => {
   window.addEventListener("keyup", (e) => {
     if (e.key == "Escape") {
-      setShowPopup(false)
+      setShowPopup(false);
     }
   });
 
@@ -47,10 +47,10 @@ const CreatePostComponent: Component = () => {
   return (
     <>
       <Show when={showPopup()}>
-        <div class="fixed p-[20vw] pt-[10vh] pb-[10vh] top-0 left-0 h-screen z-[2] w-screen">
+        <div class="fixed p-[20vw] pt-[10vh] pb-[10vh] top-0 left-0 h-full z-[2] w-11/12">
           <form
             onsubmit={onPostSubmit}
-            class=" bg-blue-700 z-[3] relative p-4 rounded-xl text-center"
+            class=" bg-slate-800 text-white z-[3] relative p-10 rounded-xl text-center"
             id="post-form"
           >
             <button
@@ -59,13 +59,18 @@ const CreatePostComponent: Component = () => {
             >
               x
             </button>
-            <h1 class="text-2xl">Créer un post</h1>
-            <label for="title">Titre du post : </label>
+            <h1 class="text-4xl pb-5 text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500">
+              Créer un post
+            </h1>
+            <label class="pb-3" for="title">
+              Titre du post :{" "}
+            </label>
             <input
               type="text"
               name="title"
               id="post-title"
-              class="text-black p-1 w-full"
+              class="text-black p-2 w-full m-1 rounded-md"
+              autocomplete="off"
               required
             />
             <br />
@@ -74,14 +79,15 @@ const CreatePostComponent: Component = () => {
             <textarea
               name="content"
               id="content"
-              class="text-black p-1 w-full h-[25vh]"
+              class="text-black p-2 w-full h-[25vh] m-1 rounded-md"
               required
             ></textarea>
+            <br />
             <br />
             <input
               type="submit"
               value="Créer un nouveau post"
-              class="bg-blue-800 border-blue-950 border-2 p-1 rounded-md max-w-full"
+              class="shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 p-2 rounded-md max-w-full"
             />
           </form>
         </div>
@@ -93,7 +99,7 @@ const CreatePostComponent: Component = () => {
             alert("Vous ne pouvez poster de post que si vous êtes connecté.");
             return;
           }
-          setShowPopup(true)
+          setShowPopup(true);
         }}
         class="bg-teal-500 duration-150 hover:bg-indigo-500 rounded-full border p-4 text-5xl fixed right-0 bottom-0"
       >

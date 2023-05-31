@@ -11,12 +11,14 @@ const [page, setPage] = createSignal(1);
 
 async function fetch_posts() {
   setIsLoading(true);
-  const res = await customFetch(`https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`);
+  const res = await customFetch(
+    `https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`
+  );
 
   if (!res.ok) {
     setIsLoading(false);
     displayError(getError(await res.json()));
-    return
+    return;
   }
 
   const posts: Post[] = await res.json();
@@ -27,10 +29,10 @@ async function fetch_posts() {
 const Home: Component = () => {
   createEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const paramValue = urlParams.get('page');
+    const paramValue = urlParams.get("page");
     setPage(parseInt(paramValue || "") || 1);
-    fetch_posts()
-  })
+    fetch_posts();
+  });
 
   const navigate = useNavigate();
 
@@ -55,7 +57,7 @@ const Home: Component = () => {
           </button>
         </div>
 
-        <div class="m-auto w-11/12 grid grid-cols-3" id="posts">
+        <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>
@@ -67,14 +69,24 @@ const Home: Component = () => {
         <div class="gap-2 flex justify-center">
           <Show when={posts().length != 0}>
             <Show when={page() > 1}>
-            <button onclick={() => {
-              location.search = `?page=${page() - 1}`
-            }}>Page précédente</button>
+              <button
+                class="flex w-1/6 justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-teal-500 to-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onclick={() => {
+                  location.search = `?page=${page() - 1}`;
+                }}
+              >
+                Page précédente
+              </button>
+            </Show>
+            <button
+              class="flex w-1/6 justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onclick={() => {
+                location.search = `?page=${page() + 1}`;
+              }}
+            >
+              Page suivante
+            </button>
           </Show>
-          <button onclick={() => {
-            location.search = `?page=${page() + 1}`
-          }}>Page suivante</button>
-        </Show>
         </div>
       </div>
     </MetaProvider>

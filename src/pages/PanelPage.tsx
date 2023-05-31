@@ -27,8 +27,8 @@ async function fetch_users() {
 
 const PanelPage: Component = () => {
   onMount(() => {
-    fetch_posts()
-    fetch_users()
+    fetch_posts();
+    fetch_users();
   });
 
   return (
@@ -41,19 +41,9 @@ const PanelPage: Component = () => {
         />
       </div>
       <div class="p-3 w-full">
-        <h1 class="text-4xl text-center">Articles :</h1>
-        <div class="m-auto w-11/12 grid grid-cols-2" id="posts">
-          <For each={posts()} fallback={"Aucun post pour le moment..."}>
-            {(post, _) => (
-              <NavLink href={`/posts/${post.slug}`}>
-                <PostPreviewComponent post={post} />
-              </NavLink>
-            )}
-          </For>
-        </div>
         <hr class="m-5" />
         <h1 class="text-center text-4xl">Utilisateurs :</h1>
-        <div class=" w-11/12 grid grid-cols-4 m-auto" id="users">
+        <div class=" w-11/12 grid grid-cols-2 m-auto md:grid-cols-4" id="users">
           <For each={users()} fallback={"Aucun utilisateur pour le moment..."}>
             {(user, _) => <UsersPreviewComponent user={user} />}
           </For>

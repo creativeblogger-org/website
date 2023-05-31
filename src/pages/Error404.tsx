@@ -18,7 +18,7 @@ const Error404: Component = () => {
         <img class="mx-auto" src={imgError404} alt="Image erreur 404" />
         <div class="flex justify-center">
           <NavLink
-            class="text-teal-300 text-2xl bg-gradient-to-r from-indigo-950 to-violet-800 p-4 flex justify-center rounded-md"
+            class="text-white text-2xl shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 p-4 flex justify-center rounded-md"
             href="/"
           >
             Retour en lieu sûr

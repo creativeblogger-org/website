@@ -1,6 +1,12 @@
 import { For, Show, createEffect, createSignal } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, displaySuccess, getError, getHumanDate } from "../utils/functions_utils";
+import {
+  customFetch,
+  displayError,
+  displaySuccess,
+  getError,
+  getHumanDate,
+} from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
@@ -47,20 +53,27 @@ async function update_post(post: RudimentaryPost, new_content: string) {
 }
 
 async function post_comment(url: string, content: string) {
-  const res = await customFetch(url, "POST", JSON.stringify({content: content}));
+  const res = await customFetch(
+    url,
+    "POST",
+    JSON.stringify({ content: content })
+  );
 
   if (!res.ok) {
-    displayError(getError(await res.json()))
-    return
+    displayError(getError(await res.json()));
+    return;
   }
 
   displaySuccess("Commentaire posté avec succès !");
-  (document.getElementById("content") as HTMLInputElement).value = ""
+  (document.getElementById("content") as HTMLInputElement).value = "";
 
-  fetch_post_by_slug()
+  fetch_post_by_slug();
 }
 
-const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) => {
+const PostComponent = (props: {
+  post: PostWithoutComments;
+  comments: Comment[];
+}) => {
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
   createEffect(() => {
@@ -107,17 +120,22 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
           </Show>
         </div>
         <hr />
-        <div class="mt-5 w-11/12 max-h-[75vh] m-auto mb-3">
-          <Show when={!editing()} fallback={
-            <textarea
-              name="post-content"
-              readOnly={!editing()}
-              class="post-content max-h-screen h-[50vh] w-full p-2 text-xl"
-            >
+        <div class="mt-5 w-11/12 flex justify-center max-h-[75vh] m-auto mb-3">
+          <Show
+            when={!editing()}
+            fallback={
+              <textarea
+                name="post-content"
+                readOnly={!editing()}
+                class="post-content max-h-screen h-[50vh] w-full p-2 text-xl"
+              >
+                {props.post.content}
+              </textarea>
+            }
+          >
+            <h2 class="text-xl text-center w-2/3 break-all p-2">
               {props.post.content}
-            </textarea>
-          }>
-            <h2 class="text-xl w-full break-all p-2">{props.post.content}</h2>
+            </h2>
           </Show>
         </div>
         <Show when={editing()}>
@@ -126,8 +144,11 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
               onclick={() =>
                 update_post(
                   props.post,
-                  (document.querySelector(".post-content") as HTMLTextAreaElement)
-                    .value
+                  (
+                    document.querySelector(
+                      ".post-content"
+                    ) as HTMLTextAreaElement
+                  ).value
                 )
               }
             >
@@ -137,22 +158,34 @@ const PostComponent = (props: {post: PostWithoutComments, comments: Comment[]}) 
         </Show>
         <div class="m-auto w-5/6">
           {/* Way to get number of posts will be modified in the v2 of the API */}
-          <h1 class="text-xl font-bold">Commentaires ({props.comments.length})</h1>
-          <form onsubmit={e => {
-            e.preventDefault()
+          <h1 class="text-xl font-bold">
+            Commentaires ({props.comments.length})
+          </h1>
+          <form
+            onsubmit={(e) => {
+              e.preventDefault();
 
-            post_comment(`https://api.creativeblogger.org/posts/${props.post.slug}/comment`, (document.getElementById("content") as HTMLInputElement).value)
-          }}>
-            <input type="text" name="content" id="content" placeholder="Ajoutez un commentaire..." />
-            <button type="submit"><img src={SendIcon} alt="Send icon" /></button>
+              post_comment(
+                `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
+                (document.getElementById("content") as HTMLInputElement).value
+              );
+            }}
+          >
+            <input
+              type="text"
+              name="content"
+              id="content"
+              placeholder="Ajoutez un commentaire..."
+            />
+            <button type="submit">
+              <img src={SendIcon} alt="Send icon" />
+            </button>
           </form>
           <For
             each={props.comments}
             fallback={"Aucun commentaire pour le moment..."}
           >
-            {(comment, _) => (
-              <CommentComponent comment={comment} />
-            )}
+            {(comment, _) => <CommentComponent comment={comment} />}
           </For>
         </div>
       </div>
