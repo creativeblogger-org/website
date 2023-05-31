@@ -30,20 +30,16 @@ const PostPage: Component = () => {
   });
 
   return (
-    <>
-      <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
-      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
-      <Show when={post().id != 0} fallback="Chargement...">
-        <MetaProvider>
-          <Title>{post().title} - Creative Blogger</Title>
-          <Meta
-            name="description"
-            content="Creative Blogger - Projet collaboratif entre bloggers"
-          />
-          <PostComponent post={post()} comments={comments()} />;
-        </MetaProvider>
-      </Show>
-    </>
+    <Show when={post().id != 0} fallback="Chargement...">
+      <MetaProvider>
+        <Title>{post().title} - Creative Blogger</Title>
+        <Meta
+          name="description"
+          content="Creative Blogger - Projet collaboratif entre bloggers"
+        />
+        <PostComponent post={post()} comments={comments()} />;
+      </MetaProvider>
+    </Show>
   );
 };
 

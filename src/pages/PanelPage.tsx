@@ -40,8 +40,6 @@ const PanelPage: Component = () => {
           content="Creative Blogger - Projet collaboratif entre bloggers"
         />
       </div>
-      <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
-      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
       <div class="p-3 w-full">
         <h1 class="text-4xl text-center">Articles :</h1>
         <div class="m-auto w-11/12 grid grid-cols-2" id="posts">

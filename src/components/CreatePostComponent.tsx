@@ -78,8 +78,6 @@ const CreatePostComponent: Component = () => {
               required
             ></textarea>
             <br />
-            <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
-            <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
             <input
               type="submit"
               value="Créer un nouveau post"
