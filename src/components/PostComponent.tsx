@@ -39,7 +39,7 @@ async function update_post(post: RudimentaryPost, new_content: string) {
     return;
   }
 
-  displaySuccess("Success !");
+  displaySuccess("Post mis à jour avec succès !");
 
   setEditing(false);
 
@@ -54,7 +54,7 @@ async function post_comment(url: string, content: string) {
     return
   }
 
-  displaySuccess("Commentaire créé avec succès !");
+  displaySuccess("Commentaire posté avec succès !");
   (document.getElementById("content") as HTMLInputElement).value = ""
 
   fetch_post_by_slug()

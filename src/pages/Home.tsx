@@ -1,6 +1,6 @@
 import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
-import { NavLink, useNavigate } from "@solidjs/router";
+import { NavLink, useLocation, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
@@ -68,11 +68,11 @@ const Home: Component = () => {
           <Show when={posts().length != 0}>
             <Show when={page() > 1}>
             <button onclick={() => {
-              navigate(`/?page=${page() - 1}`)
+              location.search = `?page=${page() - 1}`
             }}>Page précédente</button>
           </Show>
           <button onclick={() => {
-            navigate(`/?page=${page() + 1}`)
+            location.search = `?page=${page() + 1}`
           }}>Page suivante</button>
         </Show>
         </div>
