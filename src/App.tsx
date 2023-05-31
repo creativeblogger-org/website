@@ -27,8 +27,12 @@ const App: Component = () => {
         <div class="Home"></div>
         <Link rel="icon" type="image/png" sizes="128x128" href={favicon} />
       </MetaProvider>
-      <h2 class="text-center text-red-500 pt-3 text-2xl fixed top-0 w-screen">{error()}</h2>
-      <h2 class="text-center text-green-600 pt-3 text-2xl fixed top-0 w-screen">{success()}</h2>
+      <Show when={error().length > 0}>
+        <h2 class="text-center text-red-500 pt-3 bg-white opacity-75 text-2xl fixed top-0 w-screen">{error()}</h2>
+      </Show>
+      <Show when={success().length > 0}>
+        <h2 class="text-center text-green-600 pt-3 bg-white opacity-75 text-2xl fixed top-0 w-screen">{success()}</h2>
+      </Show>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
