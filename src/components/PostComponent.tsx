@@ -85,9 +85,7 @@ const PostComponent = (props: {
     }
   });
 
-  createEffect(() => {
-
-  })
+  createEffect(() => {});
 
   return (
     <div>
@@ -125,18 +123,23 @@ const PostComponent = (props: {
           </Show>
         </div>
         <hr />
-        <div class="post-content text-xl break-words p-2 w-full m-3" contentEditable={editing()} innerHTML={!editing() ? Marked.parse(props.post.content) : `${props.post.content}`}></div>
+        <div
+          class="post-content text-xl break-words p-2 w-full m-3"
+          contentEditable={editing()}
+          innerHTML={
+            !editing()
+              ? Marked.parse(props.post.content)
+              : `${props.post.content}`
+          }
+        ></div>
         <Show when={editing()}>
           <div class="text-center">
             <button
               onclick={() =>
                 update_post(
                   props.post,
-                  (
-                    document.querySelector(
-                      ".post-content"
-                    ) as HTMLElement
-                  ).innerText
+                  (document.querySelector(".post-content") as HTMLElement)
+                    .innerText
                 )
               }
             >
@@ -155,7 +158,8 @@ const PostComponent = (props: {
 
               post_comment(
                 `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
-                (document.getElementById("post-content") as HTMLInputElement).innerText
+                (document.getElementById("post-content") as HTMLInputElement)
+                  .innerText
               );
             }}
           >
@@ -163,6 +167,7 @@ const PostComponent = (props: {
               type="text"
               name="content"
               id="content"
+              class="rounded-md p-2 m-2 w-1/3"
               placeholder="Ajoutez un commentaire..."
             />
             <button type="submit">
