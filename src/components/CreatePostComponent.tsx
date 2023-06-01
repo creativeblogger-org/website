@@ -13,7 +13,7 @@ async function onPostSubmit(e: Event) {
   e.preventDefault();
 
   const title = (document.getElementById("create-post-title") as HTMLInputElement).value;
-  const content = (document.getElementById("create-post-content") as HTMLElement).innerHTML;
+  const content = (document.getElementById("create-post-content") as HTMLElement).innerText;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",

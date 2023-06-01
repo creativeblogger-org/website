@@ -125,7 +125,7 @@ const PostComponent = (props: {
           </Show>
         </div>
         <hr />
-        <div class="post-content text-xl break-words p-2 w-full m-3" contentEditable={editing()} innerHTML={!editing() ? Marked.parse(props.post.content) : `<h2>${props.post.content}</h2>`}></div>
+        <div class="post-content text-xl break-words p-2 w-full m-3" contentEditable={editing()} innerHTML={!editing() ? Marked.parse(props.post.content) : `${props.post.content}`}></div>
         <Show when={editing()}>
           <div class="text-center">
             <button
@@ -136,7 +136,7 @@ const PostComponent = (props: {
                     document.querySelector(
                       ".post-content"
                     ) as HTMLElement
-                  ).innerHTML
+                  ).innerText
                 )
               }
             >
@@ -155,7 +155,7 @@ const PostComponent = (props: {
 
               post_comment(
                 `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
-                (document.getElementById("content") as HTMLInputElement).value
+                (document.getElementById("post-content") as HTMLInputElement).innerText
               );
             }}
           >
