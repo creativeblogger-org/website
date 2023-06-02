@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - developpement
+      - main
 
 jobs:
   build:
@@ -22,8 +22,8 @@ jobs:
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ${{ secrets.SERVERTEST }}
-          username: ${{ secrets.USERTEST }}
-          password: ${{ secrets.PASSWORDTEST }}
-          local-dir: dist/
+          server: ${{ secrets.SERVER }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: /
           server-dir: /
