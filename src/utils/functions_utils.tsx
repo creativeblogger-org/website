@@ -23,6 +23,16 @@ function isConnected() {
   return getToken().length != 0;
 }
 
+function isNotConnected() {
+  return getToken().length === 0;
+}
+
+function getCookie(name: any) {
+  return document.cookie.split(";").some((c) => {
+    return c.trim().startsWith(name + "=");
+  });
+}
+
 function getError(error: ServerError) {
   return error.errors[0].message;
 }
@@ -33,17 +43,16 @@ async function customFetch(
   body?: BodyInit,
   json: boolean = true
 ) {
-
   let headers = {};
   if (json) {
     headers = {
-      "Authorization": `Bearer ${getToken()}`,
-      "Content-Type": "application/json"
-    }
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
+    };
   } else {
     headers = {
-      "Authorization": `Bearer ${getToken()}`
-    }
+      Authorization: `Bearer ${getToken()}`,
+    };
   }
 
   return await fetch(url, {
@@ -59,21 +68,37 @@ const [errorTimer, setErrorTimer] = createSignal<number>();
 const [successTimer, setSuccessTimer] = createSignal<number>();
 
 function displayError(error: string) {
-  setSuccess("")
-  setError(error)
-  clearTimeout(errorTimer())
-  setErrorTimer(setTimeout(() => {
-    setError("")
-  }, 2000))
+  setSuccess("");
+  setError(error);
+  clearTimeout(errorTimer());
+  setErrorTimer(
+    setTimeout(() => {
+      setError("");
+    }, 2000)
+  );
 }
 
 function displaySuccess(success: string) {
-  setSuccess(success)
-  setError("")
-  clearTimeout(successTimer())
-  setSuccessTimer(setTimeout(() => {
-    setSuccess("")
-  }, 2000))
+  setSuccess(success);
+  setError("");
+  clearTimeout(successTimer());
+  setSuccessTimer(
+    setTimeout(() => {
+      setSuccess("");
+    }, 2000)
+  );
 }
 
-export { getHumanDate, getToken, isConnected, getError, customFetch, displayError, displaySuccess, error, success };
+export {
+  getHumanDate,
+  getToken,
+  isConnected,
+  isNotConnected,
+  getError,
+  customFetch,
+  displayError,
+  displaySuccess,
+  error,
+  success,
+  getCookie,
+};
