@@ -1,15 +1,10 @@
-import { customFetch, displayError, getError } from "../utils/functions_utils";
+import {
+  customFetch,
+  displayError,
+  findPermissions,
+  getError,
+} from "../utils/functions_utils";
 import { fetch_users } from "../pages/PanelPage";
-
-function findPermissions(permission: number) {
-  if (permission === 0) {
-    return "membre";
-  } else if (permission === 1) {
-    return "rédacteur";
-  } else {
-    return "admin";
-  }
-}
 
 const UsersPreviewComponent = (props: { user: User }) => {
   async function delete_user() {
@@ -24,7 +19,7 @@ const UsersPreviewComponent = (props: { user: User }) => {
     }
 
     alert("Utilisateur supprimé avec succès !");
-    fetch_users()
+    fetch_users();
   }
 
   return (

@@ -2,6 +2,10 @@ interface User {
   id: number;
   username: string;
   permission: number;
+  email: string;
+  created_at: string;
+  update_at: string;
+  password: string;
 }
 
 interface Comment {
@@ -14,8 +18,8 @@ interface Comment {
 }
 
 interface RudimentaryComment {
-  id: number,
-  content: string
+  id: number;
+  content: string;
 }
 
 interface Post {
@@ -27,7 +31,7 @@ interface Post {
   updated_at: string;
   author: User;
   has_permission: boolean;
-  comments: Comment[]
+  comments: Comment[];
 }
 
 interface PostWithoutComments {

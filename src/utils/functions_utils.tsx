@@ -89,6 +89,16 @@ function displaySuccess(success: string) {
   );
 }
 
+function findPermissions(permission: number) {
+  if (permission === 0) {
+    return "membre";
+  } else if (permission === 1) {
+    return "rédacteur";
+  } else {
+    return "admin";
+  }
+}
+
 export {
   getHumanDate,
   getToken,
@@ -101,4 +111,5 @@ export {
   error,
   success,
   getCookie,
+  findPermissions,
 };
