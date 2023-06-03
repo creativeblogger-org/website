@@ -2,6 +2,7 @@ import { Component } from "solid-js";
 import { NavLink } from "@solidjs/router";
 
 import Logo from "../assets/img/logo.png";
+import RegisterIcon from "../assets/button_icons/register.png";
 
 const NavBar: Component = () => {
   return (
@@ -13,25 +14,29 @@ const NavBar: Component = () => {
       >
         Creative Blogger
       </NavLink>
-      <div class="flex justify-center">
-        <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
-          href="/login"
-        >
-          Login
-        </NavLink>
-        <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
-          href="/register"
-        >
-          Register
-        </NavLink>
-        <NavLink
-          class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
-          href="/about"
-        >
-          About
-        </NavLink>
+      <div class="flex justify-between">
+        <div class="m-4">
+          <NavLink
+            class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+            href="/about"
+          >
+            A Propos
+          </NavLink>
+        </div>
+        <div class="m-4">
+          <NavLink
+            class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+            href="/login"
+          >
+            Connexion
+          </NavLink>
+          <NavLink
+            class="text-teal-500 text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+            href="/register"
+          >
+            Inscription
+          </NavLink>
+        </div>
       </div>
     </div>
   );

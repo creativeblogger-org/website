@@ -12,13 +12,17 @@ const [showPopup, setShowPopup] = createSignal(false);
 async function onPostSubmit(e: Event) {
   e.preventDefault();
 
-  const title = (document.getElementById("create-post-title") as HTMLInputElement).value;
-  const content = (document.getElementById("create-post-content") as HTMLElement).innerText;
+  const title = (
+    document.getElementById("create-post-title") as HTMLInputElement
+  ).value;
+  const content = (
+    document.getElementById("create-post-content") as HTMLElement
+  ).innerText;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
     "POST",
-    JSON.stringify({title: title, content: content})
+    JSON.stringify({ title: title, content: content })
   );
 
   if (!res.ok) {
@@ -100,7 +104,7 @@ const CreatePostComponent: Component = () => {
             alert("Vous ne pouvez poster de post que si vous êtes connecté.");
             return;
           }
-          setShowPopup(true);
+          location.assign("/create");
         }}
         class="bg-teal-500 duration-150 hover:bg-indigo-500 rounded-full border p-4 text-5xl fixed right-0 bottom-0"
       >
