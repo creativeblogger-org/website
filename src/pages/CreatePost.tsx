@@ -89,7 +89,7 @@ const CreatePost: Component = () => {
           <input
             type="submit"
             value="Créer un nouveau post"
-            class="shadow-indigo-500/50 bg-gradient-to-l text-white from-indigo-500 to-teal-500 p-2 rounded-md max-w-full"
+            class="shadow-indigo-500/50 duration-200 hover:rounded-2xl bg-gradient-to-l text-white from-indigo-500 to-teal-500 p-2 rounded-md max-w-full"
           />
         </form>
       </div>
