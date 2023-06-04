@@ -66,7 +66,9 @@ const NavBar: Component = () => {
   }
 
   onMount(() => {
-    getInfos();
+    if (isConnected() === true) {
+      getInfos();
+    }
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
