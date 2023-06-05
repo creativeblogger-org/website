@@ -10,3 +10,10 @@
   font-family: "Gears";
   src: url("../src/assets/fonts/GearsOfPeace.ttf");
 }
+
+img {
+  margin: auto;
+}
+a {
+  color: rgb(20, 184, 166);
+}

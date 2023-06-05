@@ -124,7 +124,7 @@ const PostComponent = (props: {
         </div>
         <hr />
         <div
-          class="post-content text-xl break-words p-2 w-full m-3"
+          class="post-content text-xl break-words w-2/3 border rounded-md p-8 mx-auto m-3"
           contentEditable={editing()}
           innerHTML={
             !editing()
