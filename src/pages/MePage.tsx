@@ -46,11 +46,15 @@ const MePage: Component = () => {
             <label class="text-3xl text-black" for="username">
               Nom d'utilisateur : 
             </label>
-            <input type="text" class="p-2 mb-2" name="username"  id="username" value={infos().username} required /><br />
+            <input type="text" class="p-2 mb-2" name="username"  id="username" value={infos().username} autocomplete="off" required /><br />
             <label class="text-3xl text-black" for="email">
               Adresse email : 
             </label>
-            <input type="email" class="p-2 mb-2" name="email" id="email" value={infos().email} required /><br />
+            <input type="email" class="p-2 mb-2" name="email" id="email" value={infos().email} autocomplete="off" required /><br />
+            <label class="text-3xl text-black" for="password">
+              Changer le mot de passe : 
+            </label>
+            <input type="password" class="p-2 mb-2" name="password" id="password" autocomplete="off" required /><br />
             <label class="text-3xl text-black">
               Permissions : 
             </label>
