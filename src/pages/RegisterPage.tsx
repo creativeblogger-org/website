@@ -44,7 +44,7 @@ const Register: Component = () => {
                 const credentials: AuthSuccess = await res.json();
                 document.cookie = `token=${credentials.token}`;
 
-                displaySuccess("Connecté avec succès ! Redirection...")
+                displaySuccess("Compte créé avec succès ! Redirection...")
 
                 setTimeout(() => location.assign("/"), 1000)
               }}
