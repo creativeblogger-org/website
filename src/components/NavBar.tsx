@@ -10,7 +10,6 @@ import {
   customFetch,
   displayError,
   displaySuccess,
-  getCookie,
   getError,
   isConnected,
   isNotConnected,
@@ -167,3 +166,4 @@ const NavBar: Component = () => {
 };
 
 export default NavBar;
+export {getInfos, infos}
