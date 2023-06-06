@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, getError } from "../utils/functions_utils";
+import { customFetch, displayError, displaySuccess, getError } from "../utils/functions_utils";
 
 const Register: Component = () => {
   return (
@@ -43,7 +43,10 @@ const Register: Component = () => {
 
                 const credentials: AuthSuccess = await res.json();
                 document.cookie = `token=${credentials.token}`;
-                location.assign("/");
+
+                displaySuccess("Connecté avec succès ! Redirection...")
+
+                setTimeout(() => location.assign("/"), 1000)
               }}
             >
               <div>

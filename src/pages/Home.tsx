@@ -79,10 +79,11 @@ const Home: Component = () => {
               </button>
             </Show>
             <button
-              class="flex w-1/6 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              class="flex w-1/6 duration-200 enabled:hover:rounded-2xl justify-center rounded-md enabled:shadow-indigo-500/50 enabled:bg-gradient-to-l enabled:from-indigo-500 enabled:to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 enabled:focus-visible:outline-indigo-600 disabled:bg-gray-400"
               onclick={() => {
                 location.search = `?page=${page() + 1}`;
               }}
+              disabled={posts().length < 20}
             >
               Page suivante
             </button>
