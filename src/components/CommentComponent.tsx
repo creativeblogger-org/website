@@ -46,7 +46,7 @@ function CommentComponent(props: {comment: Comment}) {
   
   return <div class="p-2 rounded-lg border mt-5 relative">
         <NavLink
-            href={"/user/" + props.comment.author.username}
+            href={"/users/" + props.comment.author.username}
             class="font-bold duration-150 hover:text-indigo-800"
         >
             @{props.comment.author.username}

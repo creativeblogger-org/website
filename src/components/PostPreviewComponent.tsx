@@ -15,7 +15,7 @@ const PostPreviewComponent = (props: { post: Post }) => {
       </h1>
       <div class="flex justify-center m-2">
         <NavLink
-          href={"/user/" + props.post.author.username}
+          href={"/users/" + props.post.author.username}
           class="font-bold duration-150 text-black hover:text-indigo-800"
         >
           @{props.post.author.username}

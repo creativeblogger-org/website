@@ -48,13 +48,13 @@ const Footer: Component = () => {
       </div>
       <p class="text-center text-white">
         Ce site est sous la 
-        <NavLink
+        <a
           href="https://opensource.org/license/mit/"
           target="_blank"
           class="text-teal-500 duration-150 hover:text-indigo-500 hover:underline"
         >
           licence MIT
-        </NavLink>
+        </a>
         .
       </p>
     </footer>

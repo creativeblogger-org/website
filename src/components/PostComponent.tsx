@@ -108,7 +108,7 @@ const PostComponent = (props: {
         </Show>
         <div class="flex justify-center m-2">
           <NavLink
-            href={"/user/" + props.post.author.username}
+            href={"/users/" + props.post.author.username}
             class="font-bold duration-150 hover:text-indigo-800 hover:underline"
           >
             @{props.post.author.username}
