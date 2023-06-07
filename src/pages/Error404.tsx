@@ -12,7 +12,7 @@ const Error404: Component = () => {
           name="description"
           content="Ouuups, vous semblez perdu ! Vous avez recherché une page qui n'existe pas. Retournez en lieu sûr !"
         />
-        <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 to-teal-300 text-center text-6xl font-bold">
+        <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 text-center text-6xl font-bold">
           Ouups, vous semblez perdu !
         </h1>
         <img class="mx-auto" src={imgError404} alt="Image erreur 404" />
