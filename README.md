@@ -21,7 +21,7 @@ Ceci est le repository de l'actuelle version du site web de [creative blogger](h
 - [x] Site web
 - [x] API
 - [x] Serveur discord
-- [ ] Réseaux sociaux
+- [x] Réseaux sociaux
 
 ## Réutilisation :
 
