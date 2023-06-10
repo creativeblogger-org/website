@@ -1,6 +1,6 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
+  "name": "creative-blogger",
+  "version": "1.0.0",
   "description": "Projet collaboratif entre bloggers",
   "scripts": {
     "start": "vite",

@@ -130,25 +130,16 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={ProfileImg} class="" alt="Profile Img" />
                     <NavLink
-                      class="rounded-t bg-gray-200 w-full hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-t bg-white w-full duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
                     >
                       Profile
                     </NavLink>
                   </li>
                   <li class="flex">
-                    <img src={HelpImg} alt="Help Img" />
-                    <NavLink
-                      class="bg-gray-200 w-full hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                      href="#"
-                    >
-                      Aide
-                    </NavLink>
-                  </li>
-                  <li class="flex">
                     <img src={LogoutImg} class="" alt="Logout Img" />
                     <NavLink
-                      class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-b bg-white duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
                       href="/"
                       onclick={logout}
                     >
@@ -166,4 +157,4 @@ const NavBar: Component = () => {
 };
 
 export default NavBar;
-export {getInfos, infos}
+export { getInfos, infos };
