@@ -159,7 +159,7 @@ const PostComponent = (props: {
               post_comment(
                 `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
                 (document.getElementById("comment-content") as HTMLInputElement)
-                  .innerText
+                  .value
               );
             }}
           >
