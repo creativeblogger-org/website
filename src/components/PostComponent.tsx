@@ -66,7 +66,7 @@ async function post_comment(url: string, content: string) {
   }
 
   displaySuccess("Commentaire posté avec succès !");
-  (document.getElementById("content") as HTMLInputElement).value = "";
+  (document.getElementById("comment-content") as HTMLInputElement).value = "";
 
   fetch_post_by_slug();
 }
