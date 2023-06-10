@@ -158,15 +158,15 @@ const PostComponent = (props: {
 
               post_comment(
                 `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
-                (document.getElementById("post-content") as HTMLInputElement)
+                (document.getElementById("comment-content") as HTMLInputElement)
                   .innerText
               );
             }}
           >
             <input
               type="text"
-              name="content"
-              id="content"
+              name="comment-content"
+              id="comment-content"
               class="rounded-md p-2 m-2 w-1/3"
               placeholder="Ajoutez un commentaire..."
             />
