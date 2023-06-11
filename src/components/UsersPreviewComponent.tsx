@@ -22,6 +22,20 @@ const UsersPreviewComponent = (props: { user: User }) => {
     fetch_users();
   }
 
+  async function become_writer() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/users/${props.user.username}/1`,
+      "PUT"
+    );
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    alert("L'utilisateur est bel et bien devenu rédacteur !");
+    fetch_users();
+  }
+
   return (
     <div class="rounded-lg p-4 m-5 border w-auto duration-150 hover:border-indigo-500">
       <h1 class="text-3xl font-bold text-center duration-150 hover:text-indigo-500">
@@ -31,7 +45,14 @@ const UsersPreviewComponent = (props: { user: User }) => {
       <h3 class="text-center">
         Permission de l'utilisateur : {findPermissions(props.user.permission)}
       </h3>
-      <button onclick={delete_user}>Delete</button>
+      <div class="flex justify-center">
+        {/* <button class="bg-green-500 p-2 m-3 rounded-md" onclick={become_writer}>
+          Writer
+        </button> */}
+        <button class="bg-red-500 p-2 m-3 rounded-md" onclick={delete_user}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
