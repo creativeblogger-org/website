@@ -52,7 +52,7 @@ const MePage: Component = () => {
         <Title>Creative Blogger - {infos().username}</Title>
       </div>
       <h1 class="text-center text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500 text-5xl m-5">
-        Votre profile :
+        Votre profil :
       </h1>
       <div class="text-center text-teal-500 text-2xl">
         <form

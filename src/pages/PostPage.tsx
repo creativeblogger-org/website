@@ -3,11 +3,13 @@ import PostComponent from "../components/PostComponent";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
-const [post, setPost] = createSignal({author: {}} as PostWithoutComments)
+const [post, setPost] = createSignal({ author: {} } as PostWithoutComments);
 const [comments, setComments] = createSignal([] as Comment[]);
 
 const fetch_post_by_slug = async () => {
-  const res = await customFetch(`https://api.creativeblogger.org${location.pathname}`);
+  const res = await customFetch(
+    `https://api.creativeblogger.org${location.pathname}`
+  );
 
   if (res.status == 404) {
     location.assign("/404");
@@ -35,7 +37,7 @@ const PostPage: Component = () => {
         <Title>{post().title} - Creative Blogger</Title>
         <Meta
           name="description"
-          content="Creative Blogger - Projet collaboratif entre bloggers"
+          content={post().title + " | Creative Blogger"}
         />
         <PostComponent post={post()} comments={comments()} />;
       </MetaProvider>
