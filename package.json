@@ -26,6 +26,7 @@
     "@ts-stack/markdown": "^1.4.0",
     "flowbite": "^1.6.5",
     "marked": "^5.0.3",
+    "remark-gfm": "^3.0.1",
     "solid-js": "^1.6.10",
     "solidjs-use": "^2.1.0",
     "tw-elements": "^1.0.0-beta2"

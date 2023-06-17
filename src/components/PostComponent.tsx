@@ -87,6 +87,8 @@ const PostComponent = (props: {
 
   createEffect(() => {});
 
+  const content: string = props.post.content!;
+
   return (
     <div>
       <div class="p-4 m-5 relative">
@@ -129,7 +131,7 @@ const PostComponent = (props: {
           innerHTML={
             !editing()
               ? Marked.parse(props.post.content)
-              : `${props.post.content}`
+              : Marked.parse(props.post.content)
           }
         ></div>
         <Show when={editing()}>
