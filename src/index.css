@@ -13,7 +13,13 @@
 
 img {
   margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 a {
   color: rgb(20, 184, 166);
+}
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

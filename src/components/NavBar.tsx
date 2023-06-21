@@ -85,7 +85,7 @@ const NavBar: Component = () => {
       <div class="flex justify-between">
         <div class="m-4">
           <NavLink
-            class="text-teal-500 md:text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+            class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
             href="/about"
           >
             A Propos
@@ -94,13 +94,13 @@ const NavBar: Component = () => {
         <div class="m-4">
           <Show when={isNotConnected()}>
             <NavLink
-              class="text-teal-500 md:text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
               href="/login"
             >
               Connexion
             </NavLink>
             <NavLink
-              class="text-teal-500 md:text-2xl p-5 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
               href="/register"
             >
               Inscription
