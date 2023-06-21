@@ -24,6 +24,7 @@ const PanelPage = lazy(() => import("./pages/PanelPage"));
 const MicorksenPage = lazy(() => import("./pages/Micorksen"));
 const MePage = lazy(() => import("./pages/MePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
+const BecomePage = lazy(() => import("./pages/BecomePage"));
 
 const App: Component = () => {
   window.addEventListener("offline", () => displayError("Tu es hors ligne !"));
@@ -59,6 +60,7 @@ const App: Component = () => {
         <Route path={"/micorksen"} element={<MicorksenPage />} />
         <Route path={"/profile"} element={<MePage />} />
         <Route path={"/users/:username"} element={<UserPage />} />
+        <Route path={"/become"} element={<BecomePage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
