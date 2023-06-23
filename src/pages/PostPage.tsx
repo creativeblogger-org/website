@@ -35,10 +35,7 @@ const PostPage: Component = () => {
     <Show when={post().id != 0} fallback="Chargement...">
       <MetaProvider>
         <Title>{post().title} - Creative Blogger</Title>
-        <Meta
-          name="description"
-          content={post().title + " | Creative Blogger"}
-        />
+        <Meta name="description" content={post().description} />
         <PostComponent post={post()} comments={comments()} />;
       </MetaProvider>
     </Show>

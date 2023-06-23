@@ -1,6 +1,11 @@
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 import { Component, createSignal, lazy, onMount } from "solid-js";
-import { customFetch, displayError, getError } from "../utils/functions_utils";
+import {
+  customFetch,
+  displayError,
+  displaySuccess,
+  getError,
+} from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
 
 const [posts, setPosts] = createSignal([] as Post[]);
@@ -13,6 +18,9 @@ async function onPostSubmit(e: Event) {
   const title = (
     document.getElementById("create-post-title") as HTMLInputElement
   ).value;
+  const description = (
+    document.getElementById("create-post-description") as HTMLInputElement
+  ).value;
   const content = (
     document.getElementById("create-post-content") as HTMLElement
   ).innerText;
@@ -20,7 +28,7 @@ async function onPostSubmit(e: Event) {
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
     "POST",
-    JSON.stringify({ title: title, content: content })
+    JSON.stringify({ title: title, description: description, content: content })
   );
 
   if (!res.ok) {
@@ -28,7 +36,7 @@ async function onPostSubmit(e: Event) {
     return;
   }
 
-  alert("Post publié avec succès !");
+  displaySuccess("Post publié avec succès !");
   fetch_posts();
 }
 
@@ -72,6 +80,18 @@ const CreatePost: Component = () => {
             type="text"
             name="title"
             id="create-post-title"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
+            autocomplete="off"
+            required
+          />
+          <br />
+          <label class="pb-3" for="title">
+            Description du post :{" "}
+          </label>
+          <input
+            type="text"
+            name="description"
+            id="create-post-description"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
             autocomplete="off"
             required
