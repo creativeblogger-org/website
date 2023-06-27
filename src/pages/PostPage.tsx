@@ -1,6 +1,8 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
+import ReloadImg from "../assets/button_icons/refresh.svg";
+const [isLoading, setIsLoading] = createSignal(false);
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 
 const [post, setPost] = createSignal({ author: {} } as PostWithoutComments);
@@ -32,13 +34,27 @@ const PostPage: Component = () => {
   });
 
   return (
-    <Show when={post().id != 0} fallback="Chargement...">
+    <div>
+      <Show when={post().id === 0}>
+        <div class="flex justify-center m-5">
+          <button
+            onclick={fetch_post_by_slug}
+            class={`${
+              isLoading() ? "animate-spin " : ""
+            }rounded-full border-white`}
+          >
+            <img src={ReloadImg} class="h-8" alt="Reload image" />
+          </button>
+        </div>
+      </Show>
+      {/* <Show when={post().id != 0} fallback="Chargement..."> */}
       <MetaProvider>
         <Title>{post().title} - Creative Blogger</Title>
         <Meta name="description" content={post().description} />
         <PostComponent post={post()} comments={comments()} />;
       </MetaProvider>
-    </Show>
+      {/* </Show> */}
+    </div>
   );
 };
 
