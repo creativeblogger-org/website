@@ -57,13 +57,10 @@ const AboutPage: Component = () => {
       </div>
       <a
         href="/become"
-        class="flex mx-auto mt-7 w-1/6 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="flex mx-auto mt-7 mb-7 w-1/6 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
         Nous rejoindre !
       </a>
-      <NavLink href="/micorksen" class="fixed text-xs left-0 bottom-0">
-        Ps : bisous Micorksen ! Force à toi dans tes projets
-      </NavLink>
     </MetaProvider>
   );
 };

@@ -25,6 +25,10 @@ const MicorksenPage = lazy(() => import("./pages/Micorksen"));
 const MePage = lazy(() => import("./pages/MePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const BecomePage = lazy(() => import("./pages/BecomePage"));
+const NewsPage = lazy(() => import("./pages/NewsPage"));
+const TechPage = lazy(() => import("./pages/TechPage"));
+const CulturePage = lazy(() => import("./pages/CulturePage"));
+const FakeOrRealPage = lazy(() => import("./pages/FakeOrRealPage"));
 
 const App: Component = () => {
   window.addEventListener("offline", () => displayError("Tu es hors ligne !"));
@@ -61,6 +65,10 @@ const App: Component = () => {
         <Route path={"/profile"} element={<MePage />} />
         <Route path={"/users/:username"} element={<UserPage />} />
         <Route path={"/become"} element={<BecomePage />} />
+        <Route path={"/news"} element={<NewsPage />} />
+        <Route path={"/culture"} element={<CulturePage />} />
+        <Route path={"/tech"} element={<TechPage />} />
+        <Route path={"/fakeorreal"} element={<FakeOrRealPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />

@@ -4,7 +4,7 @@ import { NavLink } from "@solidjs/router";
 
 const Footer: Component = () => {
   return (
-    <footer class="bg-slate-800 p-8 my-6 mx-auto rounded-md w-11/12">
+    <footer class="bg-slate-800 p-8 mx-auto w-full bottom-0">
       <div class="grid grid-cols-2">
         <div class="about-us-container flex-col">
           <h1 class="uppercase text-white">
@@ -47,7 +47,7 @@ const Footer: Component = () => {
         </div>
       </div>
       <p class="text-center text-white">
-        Ce site est sous la 
+        Ce site est sous la{" "}
         <a
           href="https://opensource.org/license/mit/"
           target="_blank"

@@ -33,6 +33,7 @@ interface Post {
   has_permission: boolean;
   comments: Comment[];
   description: string;
+  tags: string;
 }
 
 interface PostWithoutComments {
@@ -45,6 +46,7 @@ interface PostWithoutComments {
   author: User;
   has_permission: boolean;
   description: string;
+  tags: string;
 }
 
 interface RudimentaryPost {

@@ -9,10 +9,12 @@ const [isLoading, setIsLoading] = createSignal(false);
 
 const [page, setPage] = createSignal(1);
 
-async function fetch_posts() {
+async function fetch_posts_by_news() {
   setIsLoading(true);
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`
+    `https://api.creativeblogger.org/posts/tag/tech/?limit=20&page=${
+      page() - 1
+    }`
   );
 
   if (!res.ok) {
@@ -26,12 +28,12 @@ async function fetch_posts() {
   setIsLoading(false);
 }
 
-const Home: Component = () => {
+const NewsPage: Component = () => {
   createEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const paramValue = urlParams.get("page");
     setPage(parseInt(paramValue || "") || 1);
-    fetch_posts();
+    fetch_posts_by_news();
   });
 
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const Home: Component = () => {
   return (
     <MetaProvider>
       <div class="Home">
-        <Title>Creative Blogger - Home</Title>
+        <Title>Creative Blogger - Tech</Title>
         <Meta
           name="description"
           content="Creative Blogger - Projet collaboratif entre bloggers"
@@ -48,7 +50,7 @@ const Home: Component = () => {
       <div class="p-3">
         <div class="flex justify-end w-11/12">
           <button
-            onclick={fetch_posts}
+            onclick={fetch_posts_by_news}
             class={`${
               isLoading() ? "animate-spin " : ""
             }rounded-full border-white`}
@@ -94,5 +96,5 @@ const Home: Component = () => {
   );
 };
 
-export default Home;
-export { setPosts, fetch_posts };
+export default NewsPage;
+export { setPosts, fetch_posts_by_news };

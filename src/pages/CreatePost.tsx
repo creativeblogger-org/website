@@ -24,12 +24,21 @@ async function onPostSubmit(e: Event) {
   const content = (
     document.getElementById("create-post-content") as HTMLElement
   ).innerText;
+  const tags = (document.getElementById("create-post-tags") as HTMLInputElement)
+    .value;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
     "POST",
-    JSON.stringify({ title: title, description: description, content: content })
+    JSON.stringify({
+      title: title,
+      description: description,
+      content: content,
+      tags: tags,
+    })
   );
+
+  console.log(tags);
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -82,10 +91,9 @@ const CreatePost: Component = () => {
             id="create-post-title"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
             autocomplete="off"
-            required
           />
           <br />
-          <label class="pb-3" for="title">
+          <label class="pb-3" for="description">
             Description du post :{" "}
           </label>
           <input
@@ -94,7 +102,17 @@ const CreatePost: Component = () => {
             id="create-post-description"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
             autocomplete="off"
-            required
+          />
+          <br />
+          <label class="pb-3" for="tags">
+            Tags du post :{" "}
+          </label>
+          <input
+            type="text"
+            name="tags"
+            id="create-post-tags"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
+            autocomplete="off"
           />
           <br />
           <label for="content">Contenu : </label>
