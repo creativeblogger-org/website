@@ -142,7 +142,7 @@ const MePage: Component = () => {
           </NavLink>
         </Show>
         <hr class="m-2 p-2" />
-        <Show when={infos().permission === 2}>
+        <Show when={infos().permission === 3}>
           <NavLink
             class="duration-150 hover:text-indigo-500 hover:underline"
             href="/admin"
