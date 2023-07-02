@@ -94,6 +94,8 @@ function findPermissions(permission: number) {
     return "membre";
   } else if (permission === 1) {
     return "rédacteur";
+  } else if (permission === 2) {
+    return "modérateur";
   } else {
     return "admin";
   }
