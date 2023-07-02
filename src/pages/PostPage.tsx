@@ -51,7 +51,7 @@ const PostPage: Component = () => {
       <MetaProvider>
         <Title>{post().title} - Creative Blogger</Title>
         <Meta name="description" content={post().description} />
-        <PostComponent post={post()} comments={comments()} />;
+        <PostComponent post={post()} comments={comments()} />
       </MetaProvider>
       {/* </Show> */}
     </div>
