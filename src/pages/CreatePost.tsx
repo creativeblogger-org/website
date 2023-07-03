@@ -178,7 +178,7 @@ const CreatePost: Component = () => {
             </label>
             <label
               class="mt-px cursor-pointer select-none font-light text-gray-700"
-              for="react"
+              for="tech"
             >
               Tech
             </label>
