@@ -11,6 +11,12 @@ import { fetch_posts } from "./Home";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
+const [selectedValue, setSelectedValue] = createSignal("");
+
+function handleRadioChange(event: any) {
+  setSelectedValue(event.target.value);
+  console.log(selectedValue());
+}
 
 async function onPostSubmit(e: Event) {
   e.preventDefault();
@@ -24,8 +30,6 @@ async function onPostSubmit(e: Event) {
   const content = (
     document.getElementById("create-post-content") as HTMLElement
   ).innerText;
-  const tags = (document.getElementById("create-post-tags") as HTMLInputElement)
-    .value;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
@@ -34,11 +38,9 @@ async function onPostSubmit(e: Event) {
       title: title,
       description: description,
       content: content,
-      tags: tags,
+      tags: selectedValue(),
     })
   );
-
-  console.log(tags);
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -47,6 +49,13 @@ async function onPostSubmit(e: Event) {
 
   displaySuccess("Post publié avec succès !");
   fetch_posts();
+}
+
+function tesr() {
+  const test = (
+    document.querySelector('input[name="rate"]:checked') as HTMLInputElement
+  ).value;
+  console.log(test);
 }
 
 async function fetch_users() {
@@ -107,13 +116,139 @@ const CreatePost: Component = () => {
           <label class="pb-3" for="tags">
             Tags du post :{" "}
           </label>
-          <input
-            type="text"
-            name="tags"
-            id="create-post-tags"
-            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
-            autocomplete="off"
-          />
+          <br />
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="news"
+              data-ripple-dark="true"
+            >
+              <input
+                id="news"
+                name="theme"
+                value="news"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "news"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              for="news"
+            >
+              Actualités
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="tech"
+              data-ripple-dark="true"
+            >
+              <input
+                id="tech"
+                name="theme"
+                value="tech"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "tech"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              for="react"
+            >
+              Tech
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="culture"
+              data-ripple-dark="true"
+            >
+              <input
+                id="culture"
+                name="theme"
+                value="culture"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "cuture"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              for="culture"
+            >
+              Culture
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="fakeorreal"
+              data-ripple-dark="true"
+            >
+              <input
+                id="fakeorreal"
+                name="theme"
+                value="fakeorreal"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "fakeorreal"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              for="fakeorreal"
+            >
+              Démystification
+            </label>
+          </div>
           <br />
           <label for="content">Contenu : </label>
           <br />

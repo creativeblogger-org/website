@@ -209,25 +209,25 @@ const NavBar: Component = () => {
       </div>
       <div class="flex justify-center">
         <NavLink
-          class="px-5 text-teal-500 md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
           href="/news"
         >
           Actualités
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
           href="/tech"
         >
           Tech
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
           href="/culture"
         >
           Culture
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
           href="/fakeorreal"
         >
           Démystification
