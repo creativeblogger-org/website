@@ -16,6 +16,7 @@ img {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 a {
   color: rgb(20, 184, 166);
 }
@@ -25,4 +26,22 @@ hr {
 }
 .root {
   height: 100vh;
+}
+.title-post:hover {
+  animation: 2s anim-flipX ease infinite;
+}
+@keyframes anim-flipX {
+  0% {
+    opacity: 0;
+    transform: rotateX(90def);
+  }
+  50% {
+    opacity: 1;
+    transform: rotateX(720deg);
+  }
+  100% {
+    /* animate nothing to pause animation at the end */
+    opacity: 1;
+    transform: rotateX(720deg);
+  }
 }

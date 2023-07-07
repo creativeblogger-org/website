@@ -34,6 +34,7 @@ interface Post {
   comments: Comment[];
   description: string;
   tags: string;
+  image: string;
 }
 
 interface PostWithoutComments {
@@ -47,6 +48,7 @@ interface PostWithoutComments {
   has_permission: boolean;
   description: string;
   tags: string;
+  image: string;
 }
 
 interface RudimentaryPost {

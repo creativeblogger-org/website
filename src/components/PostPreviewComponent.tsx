@@ -7,27 +7,39 @@ function getHumanDate(date: string) {
   return `${parsed_date.toLocaleDateString()} à ${parsed_date.toLocaleTimeString()}`;
 }
 
+const date = new Date().getDay();
+
 const PostPreviewComponent = (props: { post: Post }) => {
+  const style = `background-image: url('${props.post.image}');`;
   return (
-    <div class="rounded-lg p-4 m-5 border w-auto duration-150 hover:border-indigo-500">
-      <h1 class="text-sm font-bold text-center duration-150 text-black hover:text-indigo-500 md:text-2xl">
-        {props.post.title}
-      </h1>
-      <div class="flex justify-center m-2">
-        <NavLink
-          href={"/users/" + props.post.author.username}
-          class="font-bold duration-150 text-black hover:text-indigo-800"
-        >
-          @{props.post.author.username}
-        </NavLink>
-      </div>
-      <div class="flex justify-center text-black">
-        <span>Créé le {getHumanDate(props.post.created_at)}</span>
-      </div>
-      <div class="flex justify-center text-black">
-        <Show when={props.post.created_at != props.post.updated_at}>
-          <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
-        </Show>
+    <div
+      class="rounded-md m-5 border w-auto duration-150 hover:border-indigo-500"
+      style={style}
+    >
+      <div
+        class="h-full w-full overflow-hidden bg-fixed p-4 m-0 rounded-md"
+        style="background-color: rgba(0, 0, 0, 0.4)"
+      >
+        <h1 class="text-sm font-bold text-center duration-150 text-white hover:text-indigo-500 md:text-2xl title-post">
+          {props.post.title}
+        </h1>
+        <div class="flex justify-center m-2">
+          <NavLink
+            href={"/users/" + props.post.author.username}
+            class="font-bold duration-150 text-white hover:text-indigo-800"
+          >
+            @{props.post.author.username}
+          </NavLink>
+        </div>
+        <div class="flex justify-center text-white">
+          <span>Créé le {getHumanDate(props.post.created_at)}</span>
+        </div>
+        <div class="flex justify-center text-white">
+          <Show when={props.post.created_at != props.post.updated_at}>
+            <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
+          </Show>
+          <h2 class="text-center pt-2">{props.post.description}</h2>
+        </div>
       </div>
     </div>
   );

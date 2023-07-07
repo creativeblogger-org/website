@@ -1,4 +1,4 @@
-import { For, Show, createEffect, createSignal } from "solid-js";
+import { For, Show, createEffect, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
 import {
   customFetch,
@@ -15,6 +15,7 @@ import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
 import { Marked } from "@ts-stack/markdown";
+import PostPreviewComponent from "./PostPreviewComponent";
 
 const [editing, setEditing] = createSignal(false);
 
@@ -151,7 +152,7 @@ const PostComponent = (props: {
         </Show>
         <div class="m-auto w-5/6">
           {/* Way to get number of posts will be modified in the v2 of the API */}
-          <h1 class="text-xl font-bold">
+          <h1 class="text-xl mt-8 font-bold">
             Commentaires ({props.comments.length})
           </h1>
           <form

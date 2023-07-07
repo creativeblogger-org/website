@@ -17,6 +17,7 @@ async function fetch_users() {
   if (!res.ok) {
     setIsLoading(false);
     displayError(getError(await res.json()));
+
     return;
   }
 
