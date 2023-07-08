@@ -38,6 +38,8 @@ const PostPreviewComponent = (props: { post: Post }) => {
           <Show when={props.post.created_at != props.post.updated_at}>
             <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
           </Show>
+        </div>
+        <div class="flex justify-center text-white">
           <h2 class="text-center pt-2">{props.post.description}</h2>
         </div>
       </div>

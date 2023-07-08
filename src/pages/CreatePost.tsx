@@ -13,10 +13,6 @@ const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
 const [selectedValue, setSelectedValue] = createSignal("");
 
-const [title, setTitle] = createSignal("");
-const [description, setDescription] = createSignal("");
-const [image, setImage] = createSignal("");
-
 function handleRadioChange(event: any) {
   setSelectedValue(event.target.value);
   console.log(selectedValue());
@@ -59,27 +55,6 @@ async function onPostSubmit(e: Event) {
   fetch_posts();
 }
 
-function titleKeyUp() {
-  const title = (
-    document.getElementById("create-post-title") as HTMLInputElement
-  ).value;
-  setTitle(title);
-}
-
-function descriptionKeyUp() {
-  const desc = (
-    document.getElementById("create-post-description") as HTMLInputElement
-  ).value;
-  setDescription(desc);
-}
-
-function imageKeyUp() {
-  const image = (
-    document.getElementById("create-post-image") as HTMLInputElement
-  ).value;
-  setImage(image);
-}
-
 async function fetch_users() {
   setIsLoading(true);
   const res = await customFetch("https://api.creativeblogger.org/verif/writer");
@@ -99,43 +74,16 @@ const CreatePost: Component = () => {
   onMount(() => {
     fetch_users();
   });
-  const style = `background-image: url('${image}');`;
   return (
     <MetaProvider>
       <div class="Home">
         <Title>Creative Blogger - Create</Title>
       </div>
       <div class="flex justify-center w-full">
-        <div
-          class="rounded-md m-5 border w-auto duration-150 hover:border-indigo-500"
-          style={style}
-        >
-          <div
-            class="h-full w-full overflow-hidden bg-fixed p-4 m-0 rounded-md"
-            style="background-color: rgba(0, 0, 0, 0.4)"
-          >
-            <h1 class="text-sm font-bold text-center duration-150 text-white hover:text-indigo-500 md:text-2xl title-post">
-              {title}
-            </h1>
-            <div class="flex justify-center m-2">
-              <h1 class="font-bold duration-150 text-white hover:text-indigo-800 hover:cursor-pointer">
-                Jean Jacques
-              </h1>
-            </div>
-            <div class="flex justify-center text-white">
-              <span>Créé le ...</span>
-            </div>
-            <div class="flex justify-center text-white">
-              <h2 class="text-center pt-2">{description}</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center w-full">
         <form
-          onsubmit={onPostSubmit}
           class="p-10 rounded-xl text-center w-11/12"
           id="post-form"
+          onsubmit={onPostSubmit}
         >
           <h1 class="text-4xl pb-5 text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500">
             Créer un post
@@ -144,7 +92,6 @@ const CreatePost: Component = () => {
             Titre du post :{" "}
           </label>
           <input
-            onkeyup={titleKeyUp}
             type="text"
             name="title"
             id="create-post-title"
@@ -156,7 +103,6 @@ const CreatePost: Component = () => {
             URL de l'image du post :
           </label>
           <input
-            onkeyup={imageKeyUp}
             type="text"
             name="image"
             id="create-post-image"
@@ -169,7 +115,6 @@ const CreatePost: Component = () => {
             Description du post :{" "}
           </label>
           <input
-            onkeyup={descriptionKeyUp}
             type="text"
             name="description"
             id="create-post-description"
