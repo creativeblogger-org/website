@@ -17,6 +17,52 @@ import CommentComponent from "./CommentComponent";
 import { Marked } from "@ts-stack/markdown";
 import PostPreviewComponent from "./PostPreviewComponent";
 
+function convertMarkdownToHtml(markdown: string): string {
+  if (markdown !== undefined && markdown !== null) {
+    return (
+      markdown
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(.+?)\*/g, "<em>$1</em>")
+        .replace(
+          /`(.+?)`/g,
+          "<p class='bg-slate-800 p-4 m-5 rounded-md text-white'>$1</p>"
+        )
+        .replace(/!\[(.*?)\]\((.*?)\)/g, "<img alt='$1' src='$2'>")
+        .replace(/\---/g, "<hr />")
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+        .replace(/\n/g, "<br />")
+        // .replace(/\$\$(.*?)\$\$/g, '<span class="text-teal-500">$1</span>')
+        // .replace(/\$(.*?)\$/g, '<span class="text-indigo-500">$1</span>')
+        .replace(/\$red\$(.*?)\$red\$/g, '<span style="color: red;">$1</span>')
+        .replace(
+          /\$blue\$(.*?)\$blue\$/g,
+          '<span style="color: blue;">$1</span>'
+        )
+        .replace(
+          /\$green\$(.*?)\$green\$/g,
+          '<span style="color: green;">$1</span>'
+        )
+        .replace(/\^(.+?)\^/g, "<div>$1</div>")
+        .replace(
+          /\&(.*?)\&(.*?)\&(.*?)&/g,
+          "<div class='grid grid-cols-$1'>$2</div>"
+        )
+        .replace(/^- (.*)$/gm, "<ul class='list-disc'><li>$1</li></ul>")
+        .replace(/^# (.*)$/gm, "<h1 class='text-6xl'>$1</h1>")
+        .replace(/^## (.*)$/gm, "<h2 class='text-5xl'>$1</h2>")
+        .replace(/^### (.*)$/gm, "<h3 class='text-4xl'>$1</h3>")
+        .replace(/^#### (.*)$/gm, "<h4 class='text-3xl'>$1</h4>")
+        .replace(/^##### (.*)$/gm, "<h5 class='text-2xl'>$1</h5>")
+        .replace(/^###### (.*)$/gm, "<h6 class='text-xl'>$1</h6>")
+        .replace(/\|(.*?)\|/g, "<div class='flex justify-center'>$1</div>")
+        .replace(
+          /\[!\[\]\((.*?)\)\]\((.*?)\)/g,
+          '<div><a href="$2"><img src="$1" alt="YouTube Video"></a></div><div>YouTube Video: <a href="$2">$2</a></div>'
+        )
+    );
+  }
+}
+
 const [editing, setEditing] = createSignal(false);
 
 async function delete_post() {
@@ -86,9 +132,9 @@ const PostComponent = (props: {
     }
   });
 
-  createEffect(() => {});
-
-  const content: string = props.post.content!;
+  onMount(() => {
+    console.log(convertMarkdownToHtml(props.post.content));
+  });
 
   return (
     <div>
@@ -131,8 +177,8 @@ const PostComponent = (props: {
           contentEditable={editing()}
           innerHTML={
             !editing()
-              ? Marked.parse(props.post.content)
-              : Marked.parse(props.post.content)
+              ? convertMarkdownToHtml(props.post.content)
+              : props.post.content
           }
         ></div>
         <Show when={editing()}>

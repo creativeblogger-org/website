@@ -28,7 +28,7 @@ async function onPostSubmit(e: Event) {
     document.getElementById("create-post-description") as HTMLInputElement
   ).value;
   const content = (
-    document.getElementById("create-post-content") as HTMLElement
+    document.getElementById("create-post-content") as HTMLTextAreaElement
   ).innerText;
   const image = (
     document.getElementById("create-post-image") as HTMLInputElement
@@ -70,7 +70,131 @@ async function fetch_users() {
   setIsLoading(false);
 }
 
+function convertToMarkdown(text: any) {
+  return (
+    text
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.+?)\*/g, "<em>$1</em>")
+      .replace(
+        /`(.+?)`/g,
+        "<p class='bg-slate-800 p-4 m-5 rounded-md text-white'>$1</p>"
+      )
+      .replace(/!\[(.*?)\]\((.*?)\)/g, "<img alt='$1' src='$2'>")
+      .replace(/\---/g, "<hr />")
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+      .replace(/\n/g, "<br />")
+      // .replace(/\$\$(.*?)\$\$/g, '<span class="text-teal-500">$1</span>')
+      // .replace(/\$(.*?)\$/g, '<span class="text-indigo-500">$1</span>')
+      .replace(/\$red\$(.*?)\$red\$/g, '<span style="color: red;">$1</span>')
+      .replace(/\$blue\$(.*?)\$blue\$/g, '<span style="color: blue;">$1</span>')
+      .replace(
+        /\$green\$(.*?)\$green\$/g,
+        '<span style="color: green;">$1</span>'
+      )
+      .replace(/\^(.+?)\^/g, "<div>$1</div>")
+      .replace(
+        /\&(.*?)\&(.*?)\&(.*?)&/g,
+        "<div class='grid grid-cols-$1'>$2</div>"
+      )
+      .replace(/^- (.*)$/gm, "<ul class='list-disc'><li>$1</li></ul>")
+      .replace(/^# (.*)$/gm, "<h1 class='text-6xl'>$1</h1>")
+      .replace(/^## (.*)$/gm, "<h2 class='text-5xl'>$1</h2>")
+      .replace(/^### (.*)$/gm, "<h3 class='text-4xl'>$1</h3>")
+      .replace(/^#### (.*)$/gm, "<h4 class='text-3xl'>$1</h4>")
+      .replace(/^##### (.*)$/gm, "<h5 class='text-2xl'>$1</h5>")
+      .replace(/^###### (.*)$/gm, "<h6 class='text-xl'>$1</h6>")
+      .replace(/\|(.*?)\|/g, "<div class='flex justify-center'>$1</div>")
+      .replace(
+        /\[!\[\]\((.*?)\)\]\((.*?)\)/g,
+        '<div><a href="$2"><img src="$1" alt="YouTube Video"></a></div><div>YouTube Video: <a href="$2">$2</a></div>'
+      )
+  );
+}
+
 const CreatePost: Component = () => {
+  const [text, setText] = createSignal("");
+
+  function handleInputChange(event: any) {
+    setText(event.target.value);
+  }
+
+  function handleBoldClick() {
+    wrapTextSelection("**");
+  }
+
+  function handleItalicClick() {
+    wrapTextSelection("*");
+  }
+
+  function handleCodeClick() {
+    wrapTextSelection("`");
+  }
+
+  function handleLinkClick() {
+    wrapSelection("[le lien](https://creativeblogger.org)");
+  }
+
+  function handleImageClick() {
+    wrapSelection(
+      "![nom de votre image](https://creativeblogger.org/image.png)"
+    );
+  }
+
+  function handleHrClick() {
+    wrapSelection("\n---");
+  }
+
+  function handleYtbClick() {
+    wrapSelection(
+      "[![](https://markdown-videos.vercel.app/youtube/VIDEO_ID)](https://www.youtube.com/watch?v=VIDEO_ID)"
+    );
+  }
+
+  function handleGridClick() {
+    wrapSelection("&2&^Hello^^Hello 2^&2&");
+  }
+
+  function handleListClick() {
+    wrapSelection("- ");
+  }
+
+  function handleColorButtonClick(color: string) {
+    wrapTextSelection(`$${color}$`);
+  }
+
+  function handleTextClick() {
+    wrapSelection("# Ajoutez des '#' si vous voulez le texte en plus petit");
+  }
+
+  function handleCenterClick() {
+    wrapTextSelection("|");
+  }
+
+  function wrapTextSelection(wrapper: any) {
+    const textarea = document.getElementById(
+      "create-post-content"
+    ) as HTMLTextAreaElement;
+    const { selectionStart, selectionEnd } = textarea;
+    const selectedText = text().substring(selectionStart, selectionEnd);
+    const newText = `${text().substring(
+      0,
+      selectionStart
+    )}${wrapper}${selectedText}${wrapper}${text().substring(selectionEnd)}`;
+    setText(newText);
+  }
+
+  function wrapSelection(wrapper: any) {
+    const textarea = document.getElementById(
+      "create-post-content"
+    ) as HTMLTextAreaElement;
+    const { selectionStart, selectionEnd } = textarea;
+    const newText = `${text().substring(
+      0,
+      selectionStart
+    )}${wrapper}${text().substring(selectionEnd)}`;
+    setText(newText);
+  }
+
   onMount(() => {
     fetch_users();
   });
@@ -261,11 +385,114 @@ const CreatePost: Component = () => {
           <br />
           <label for="content">Contenu : </label>
           <br />
-          <div
+          <br />
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:font-bold"
+            type="button"
+            onClick={handleBoldClick}
+          >
+            Gras
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:italic"
+            type="button"
+            onClick={handleItalicClick}
+          >
+            Italique
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleCodeClick}
+          >
+            Code
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleCenterClick}
+          >
+            Centrer
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-teal-500"
+            type="button"
+            onClick={handleLinkClick}
+          >
+            Lien
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleImageClick}
+          >
+            Image
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleHrClick}
+          >
+            Séparation
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleYtbClick}
+          >
+            Youtube
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleListClick}
+          >
+            Liste
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleGridClick}
+          >
+            Colonne
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
+            type="button"
+            onClick={handleTextClick}
+          >
+            Text
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-red-500"
+            type="button"
+            onClick={() => handleColorButtonClick("red")}
+          >
+            Red
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-blue-500"
+            type="button"
+            onClick={() => handleColorButtonClick("blue")}
+          >
+            Blue
+          </button>
+          <button
+            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-green-500"
+            type="button"
+            onClick={() => handleColorButtonClick("green")}
+          >
+            Green
+          </button>
+
+          <br />
+          <br />
+          <textarea
             id="create-post-content"
             class="text-left bg-white text-black border-black border-2 p-2 w-full break-words min-h-[50vh] m-1 rounded-md"
-            contentEditable
-          ></div>
+            value={text()}
+            onInput={handleInputChange}
+          ></textarea>
           <br />
           <br />
           <input
@@ -274,6 +501,10 @@ const CreatePost: Component = () => {
             class="shadow-indigo-500/50 duration-200 hover:rounded-2xl bg-gradient-to-l text-white from-indigo-500 to-teal-500 p-2 rounded-md max-w-full"
           />
         </form>
+      </div>
+      <div class="my-5">
+        <h2 class="text-center text-3xl">Preview :</h2>
+        <div class="p-10" innerHTML={convertToMarkdown(text())}></div>
       </div>
     </MetaProvider>
   );
