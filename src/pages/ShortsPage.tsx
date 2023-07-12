@@ -1,17 +1,9 @@
-import {
-  Component,
-  For,
-  Show,
-  createEffect,
-  createSignal,
-  onMount,
-} from "solid-js";
+import { For, Show, createEffect, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
   displaySuccess,
   getError,
-  isAcceptShortConditions,
   isConnected,
   isNotAcceptShortConditions,
 } from "../utils/functions_utils";
@@ -20,10 +12,8 @@ import SendLogo from "../assets/button_icons/send-logo.png";
 import ArrowUpLogo from "../assets/button_icons/arow-up.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 
-const [shorts, setShorts] = createSignal([] as Shorts[]);
+const [shorts, setShorts] = createSignal([] as Short[]);
 const [isLoading, setIsLoading] = createSignal(false);
-
-const [shortsInfo, setShortsInfos] = createSignal({} as Shorts);
 
 const [page, setPage] = createSignal(1);
 
@@ -44,9 +34,8 @@ async function fetch_shorts() {
     return;
   }
 
-  const shorts: Shorts[] = await res.json();
+  const shorts: Short[] = await res.json();
   setShorts(shorts);
-  setShortsInfos(await res.json());
   setIsLoading(false);
 }
 

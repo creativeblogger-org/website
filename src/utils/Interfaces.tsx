@@ -74,7 +74,7 @@ interface ServerToClientEvents {
 interface ClientToServerEvents {
   ok: (msg: string) => void;
 }
-interface Shorts {
+interface Short {
   id: number;
   title: string;
   content: string;

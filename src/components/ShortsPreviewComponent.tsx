@@ -47,7 +47,7 @@ async function delete_comment(id: number) {
   fetch_shorts();
 }
 
-const ShortsPreviewComponent = (props: { shorts: Shorts; infos: User }) => {
+const ShortsPreviewComponent = (props: { shorts: Short; infos: User }) => {
   const [editing, setEditing] = createSignal(false);
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
