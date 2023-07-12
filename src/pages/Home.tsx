@@ -1,4 +1,11 @@
-import { Component, For, Show, createEffect, createSignal } from "solid-js";
+import {
+  Component,
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  onMount,
+} from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink, useLocation, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";

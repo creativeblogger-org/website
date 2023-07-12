@@ -66,11 +66,3 @@ interface ServerError {
 interface AuthSuccess {
   token: string;
 }
-
-interface ServerToClientEvents {
-  connected: (msg: string) => void
-}
-
-interface ClientToServerEvents {
-  ok: (msg: string) => void;
-}

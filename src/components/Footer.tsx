@@ -43,6 +43,14 @@ const Footer: Component = () => {
                 - A propos de nous
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                class="text-teal-500 duration-150 hover:text-indigo-500 hover:underline"
+                href="/shorts"
+              >
+                - Short Blog
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

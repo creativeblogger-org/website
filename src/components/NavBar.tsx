@@ -1,10 +1,8 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
-
 import Logo from "../assets/img/logo.png";
 import LogoutImg from "../assets/button_icons/logout.png";
 import ProfileImg from "../assets/button_icons/profile.png";
-
 import {
   customFetch,
   displayError,
@@ -13,6 +11,27 @@ import {
   isConnected,
   isNotConnected,
 } from "../utils/functions_utils";
+import { setPosts } from "../pages/Home";
+
+const [isLoading, setIsLoading] = createSignal(false);
+const [page, setPage] = createSignal(1);
+
+async function fetch_posts() {
+  setIsLoading(true);
+  const res = await customFetch(
+    `https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`
+  );
+
+  if (!res.ok) {
+    setIsLoading(false);
+    displayError(getError(await res.json()));
+    return;
+  }
+
+  const posts: Post[] = await res.json();
+  setPosts(posts);
+  setIsLoading(false);
+}
 
 function delete_cookie() {
   document.cookie = "token" + "=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
@@ -93,6 +112,7 @@ const NavBar: Component = () => {
       <NavLink
         class=" mt-4 text-3xl md:text-4xl font-gears text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
         href="/"
+        onclick={fetch_posts}
       >
         Creative Blogger
       </NavLink>
@@ -140,6 +160,15 @@ const NavBar: Component = () => {
                     onclick={toggleMenuMore}
                   >
                     Nous rejoindre
+                  </NavLink>
+                </li>
+                <li class="flex">
+                  <NavLink
+                    class="rounded-b bg-white duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block w-full whitespace-no-wrap"
+                    href="/shorts"
+                    onclick={toggleMenuMore}
+                  >
+                    Short Blog
                   </NavLink>
                 </li>
               </ul>
