@@ -66,3 +66,13 @@ interface ServerError {
 interface AuthSuccess {
   token: string;
 }
+
+interface Shorts {
+  id: number;
+  title: string;
+  content: string;
+  author: User;
+  created_at: string;
+  updated_at: string;
+  has_permission: boolean;
+}

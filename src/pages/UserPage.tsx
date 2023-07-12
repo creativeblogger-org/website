@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount } from "solid-js";
+import { Component, For, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
@@ -7,6 +7,8 @@ import {
   getHumanDate,
 } from "../utils/functions_utils";
 import { MetaProvider, Title } from "@solidjs/meta";
+import { NavLink } from "@solidjs/router";
+import PostPreviewComponent from "../components/PostPreviewComponent";
 
 const [user, setUser] = createSignal({} as User);
 
@@ -26,8 +28,33 @@ async function getUser() {
   setUser(user);
 }
 
+const [posts, setPosts] = createSignal([] as Post[]);
+const [isLoading, setIsLoading] = createSignal(false);
+
+const [page, setPage] = createSignal(1);
+
 const UserPage: Component = () => {
-  onMount(() => getUser());
+  onMount(() => {
+    getUser();
+    fetch_posts();
+  });
+
+  async function fetch_posts() {
+    setIsLoading(true);
+    const res = await customFetch(
+      `https://api.creativeblogger.org/posts/username/${user().id}`
+    );
+
+    if (!res.ok) {
+      setIsLoading(false);
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    const posts: Post[] = await res.json();
+    setPosts(posts);
+    setIsLoading(false);
+  }
 
   return (
     <MetaProvider>
@@ -54,6 +81,15 @@ const UserPage: Component = () => {
             {getHumanDate(user().created_at)}
           </strong>
         </h2>
+      </div>
+      <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
+        <For each={posts()} fallback={"Aucun post pour le moment..."}>
+          {(post, _) => (
+            <NavLink href={`/posts/${post.slug}`}>
+              <PostPreviewComponent post={post} />
+            </NavLink>
+          )}
+        </For>
       </div>
     </MetaProvider>
   );

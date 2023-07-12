@@ -137,7 +137,7 @@ const PostComponent = (props: {
   });
 
   return (
-    <div>
+    <div class="flex">
       <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
         <Show when={props.post.has_permission}>
