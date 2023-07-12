@@ -34,8 +34,7 @@ async function fetch_shorts() {
     return;
   }
 
-  const shorts: Short[] = await res.json();
-  setShorts(shorts);
+  setShorts(await res.json());
   setIsLoading(false);
 }
 
