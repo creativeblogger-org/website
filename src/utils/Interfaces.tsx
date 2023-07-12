@@ -66,3 +66,28 @@ interface ServerError {
 interface AuthSuccess {
   token: string;
 }
+
+interface ServerToClientEvents {
+  connected: (msg: string) => void;
+}
+
+interface ClientToServerEvents {
+  ok: (msg: string) => void;
+}
+interface Shorts {
+  id: number;
+  title: string;
+  content: string;
+  author: User;
+  created_at: string;
+  updated_at: string;
+  has_permission: boolean;
+}
+
+interface ServerToClientEvents {
+  connected: (msg: string) => void;
+}
+
+interface ClientToServerEvents {
+  ok: (msg: string) => void;
+}
