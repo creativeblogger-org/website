@@ -1,5 +1,5 @@
 import { Routes, Route } from "@solidjs/router";
-import { Component, Show, lazy } from "solid-js";
+import { Component, Show, createEffect, lazy, on, onMount } from "solid-js";
 import favicon from "./assets/img/logo.png";
 import { MetaProvider, Link } from "@solidjs/meta";
 import {
@@ -9,6 +9,7 @@ import {
   isConnected,
   success,
 } from "./utils/functions_utils";
+import { Socket, io } from "socket.io-client";
 
 const Home = lazy(() => import("./pages/Home"));
 const CreatePostButton = lazy(() => import("./components/CreatePostComponent"));
@@ -31,10 +32,22 @@ const CulturePage = lazy(() => import("./pages/CulturePage"));
 const FakeOrRealPage = lazy(() => import("./pages/FakeOrRealPage"));
 
 const App: Component = () => {
-  window.addEventListener("offline", () => displayError("Tu es hors ligne !"));
-  window.addEventListener("online", () =>
-    displaySuccess("Tu es de nouveau en ligne !")
-  );
+  onMount(() => {
+    window.addEventListener("offline", () =>
+      displayError("Tu es hors ligne !")
+    );
+    window.addEventListener("online", () =>
+      displaySuccess("Tu es de nouveau en ligne !")
+    );
+
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
+
+    socket.on("connected", (msg: string) => {
+      console.log(msg);
+    });
+
+    socket.emit("ok", "slt");
+  });
 
   return (
     <>
