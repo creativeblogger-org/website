@@ -1,6 +1,6 @@
 import { Component, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
-import Logo from "../assets/img/logo.png";
+import Logo from "../assets/img/logo2.png";
 import LogoutImg from "../assets/button_icons/logout.png";
 import ProfileImg from "../assets/button_icons/profile.png";
 import {

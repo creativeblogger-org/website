@@ -1,6 +1,6 @@
 import { Routes, Route } from "@solidjs/router";
 import { Component, Show, createEffect, lazy, on, onMount } from "solid-js";
-import favicon from "./assets/img/logo.png";
+import favicon from "./assets/img/logo2.png";
 import { MetaProvider, Link } from "@solidjs/meta";
 import {
   displayError,
@@ -54,7 +54,7 @@ const App: Component = () => {
     <>
       <MetaProvider>
         <div class="Home"></div>
-        <Link rel="icon" type="image/png" sizes="128x128" href={favicon} />
+        <Link rel="icon" type="image/png" href={favicon} />
       </MetaProvider>
       <Show when={error().length > 0}>
         <h2 class="text-center text-red-500 pt-3 bg-white opacity-90 text-2xl fixed top-0 w-screen">
