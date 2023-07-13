@@ -20,27 +20,31 @@ const PostPreviewComponent = (props: { post: Post }) => {
         class="h-full w-full overflow-hidden bg-fixed p-4 m-0 rounded-md"
         style="background-color: rgba(0, 0, 0, 0.4)"
       >
-        <h1 class="text-sm font-bold text-center duration-150 text-white hover:text-indigo-500 md:text-2xl title-post">
+        <h1 class="text-xl font-bold font-garamond text-center duration-150 text-white hover:text-indigo-500 md:text-4xl title-post">
           {props.post.title}
         </h1>
         <div class="flex justify-center m-2">
           <NavLink
             href={"/users/" + props.post.author.username}
-            class="font-bold duration-150 text-white hover:text-indigo-800"
+            class="font-bold text-xl font-garamond duration-150 text-white hover:text-indigo-800"
           >
             @{props.post.author.username}
           </NavLink>
         </div>
         <div class="flex justify-center text-white">
-          <span>Créé le {getHumanDate(props.post.created_at)}</span>
+          <span class="text-sm">
+            Créé le {getHumanDate(props.post.created_at)}
+          </span>
         </div>
         <div class="flex justify-center text-white">
           <Show when={props.post.created_at != props.post.updated_at}>
-            <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
+            <span class="text-sm">
+              Mis à jour le {getHumanDate(props.post.updated_at)}
+            </span>
           </Show>
         </div>
         <div class="flex justify-center text-white">
-          <h2 class="text-center pt-2">{props.post.description}</h2>
+          <h2 class="text-center pt-2 text-xl">{props.post.description}</h2>
         </div>
       </div>
     </div>

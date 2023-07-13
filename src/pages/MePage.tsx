@@ -154,7 +154,7 @@ const MePage: Component = () => {
         <br />
         <button
           onclick={verif}
-          class="mx-auto w-1/4 bg-red-500 text-white p-2 rounded-md"
+          class="mx-auto w-1/3 sm:w-1/2 md:w-1/6 bg-red-500 text-white p-2 rounded-md"
         >
           Supprimer mon compte
         </button>

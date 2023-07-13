@@ -30,7 +30,7 @@ const BecomePage: Component = () => {
           <h2 class="text-center m-7 text-2xl">Pourquoi ?</h2>
           {showDiv1() ? (
             <div
-              class="bg-slate-800 w-1/2 rounded-md p-7 mx-auto border-4 duration-150 hover:cursor-pointer hover:border-indigo-500"
+              class="bg-slate-800 w-3/4 md:w-1/2 rounded-md p-7 mx-auto border-4 duration-150 hover:cursor-pointer hover:border-indigo-500"
               onClick={handleDiv1Click}
             >
               <p class="flex justify-end text-white text-2xl">01, click me</p>
@@ -48,7 +48,7 @@ const BecomePage: Component = () => {
           ) : null}
           {showDiv2() ? (
             <div
-              class="bg-slate-800 w-1/2 rounded-md p-7 mx-auto border-4 duration-150 hover:cursor-pointer hover:border-indigo-500"
+              class="bg-slate-800 w-3/4 md:w-1/2 rounded-md p-7 mx-auto border-4 duration-150 hover:cursor-pointer hover:border-indigo-500"
               onClick={handleDiv2Click}
             >
               <p class="flex justify-end text-white text-2xl">02, click me</p>
@@ -71,7 +71,7 @@ const BecomePage: Component = () => {
           ) : null}
           <h1 class="text-3xl text-center mt-10 mb-10">Alors, convaincus ?</h1>
           <div class="flex justify-center">
-            <a class="text-3xl" href="https://discord.gg/uT8zVVn6rQ">
+            <a class="text-3xl pb-8" href="https://discord.gg/uT8zVVn6rQ">
               C'est ici !
             </a>
           </div>

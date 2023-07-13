@@ -6,6 +6,8 @@ module.exports = {
       fontFamily: {
         coco: ["Coco"],
         gears: ["Gears"],
+        garamond: ["Garamond"],
+        pangolin: ["Pangolin"],
       },
     },
   },

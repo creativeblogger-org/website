@@ -63,16 +63,15 @@ const ShortsPreviewComponent = (props: { shorts: Short; infos: User }) => {
   return (
     <div>
       <div class="p-2 relative w-full md:w-1/2 xl:w-1/3">
-        <NavLink
-          href={"/users/" + props.shorts.author.username}
-          class="font-bold duration-150 hover:text-indigo-800"
-        >
-          @{props.shorts.author.username}
-        </NavLink>{" "}
-        <span>| {getHumanDate(props.shorts.created_at)}. </span>
-        <Show when={props.shorts.created_at != props.shorts.updated_at}>
-          <span>Modifié le {getHumanDate(props.shorts.updated_at)}</span>
-        </Show>
+        <h1>
+          <NavLink
+            href={"/users/" + props.shorts.author.username}
+            class="font-garamond text-xl duration-150 hover:text-indigo-800"
+          >
+            @{props.shorts.author.username}
+          </NavLink>{" "}
+          à dit <span class="font-bold text-2xl">{props.shorts.title}</span>
+        </h1>
         <Show when={props.shorts.has_permission}>
           <div class="absolute top-0 right-0">
             <button class="m-1" onclick={() => setEditing((edit) => !edit)}>
@@ -115,8 +114,9 @@ const ShortsPreviewComponent = (props: { shorts: Short; infos: User }) => {
             </>
           }
         >
-          <h1 class="text-xl pt-2 font-bold">{props.shorts.title}</h1>
-          <h2 class="text-lg w-full break-all p-2">{props.shorts.content}</h2>
+          <h2 class="text-lg w-full break-all p-2 pt-4">
+            {props.shorts.content}
+          </h2>
           <hr class="p-1 m-1" />
         </Show>
       </div>

@@ -10,6 +10,14 @@
   font-family: "Gears";
   src: url("../src/assets/fonts/GearsOfPeace.ttf");
 }
+@font-face {
+  font-family: "Garamond";
+  src: url("../src/assets/fonts/EBGaramond-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Pangolin";
+  src: url("../src/assets/fonts/Pangolin-Regular.ttf");
+}
 
 img {
   margin: auto;

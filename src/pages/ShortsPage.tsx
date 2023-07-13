@@ -11,6 +11,7 @@ import ShortsPreviewComponent from "../components/ShortsPreviewComponent";
 import SendLogo from "../assets/button_icons/send-logo.png";
 import ArrowUpLogo from "../assets/button_icons/arow-up.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
+import ReloadImg from "../assets/button_icons/refresh.svg";
 
 const [shorts, setShorts] = createSignal([] as Short[]);
 const [isLoading, setIsLoading] = createSignal(false);
@@ -99,13 +100,25 @@ const ShortsPage = () => {
         />
       </div>
       <div>
+        <div class="px-5 flex justify-end">
+          <button
+            onclick={fetch_shorts}
+            class={`${
+              isLoading() ? "animate-spin " : ""
+            }rounded-full border-white`}
+          >
+            <img src={ReloadImg} class="h-8" alt="Reload image" />
+          </button>
+        </div>
+
         <Show when={isNotAcceptShortConditions()}>
           <div class="p-4 border rounded-md my-5 mx-7 bg-slate-100">
-            <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-4 font-pangolin text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
               Short Blog, Welcome !
             </h2>
             <p class="mt-2 italic text-center">
-              Service d'envoie de messages brefs à but informatifs
+              Service d'envoie de messages brefs à but informatifs d'une durée
+              de vie de 24h
             </p>
             <p class="mb-4 text-center">
               Veuillez rester cordial dans vos propos. Vous pouvez y exprimer
@@ -114,6 +127,8 @@ const ShortsPage = () => {
               ce que vous postez. Vous pourrez modifier ou supprimer vos posts
               qui, dans ce cas, se retrouveront supprimés de la base de données.{" "}
               <br />
+              Après 24h d'existence, les shorts sont supprimés en ne laissant
+              aucune trace. <br />
               Creative Blogger Org ne peut en aucun cas être tenus responsable
               du contenu posté par ses membres. <br />
               Nous vous rappelons également que, dans un cadre juridique, nous
@@ -166,6 +181,7 @@ const ShortsPage = () => {
           </form>
         </div>
       </div>
+      <br />
     </MetaProvider>
   );
 };

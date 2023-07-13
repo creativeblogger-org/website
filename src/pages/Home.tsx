@@ -1,11 +1,4 @@
-import {
-  Component,
-  For,
-  Show,
-  createEffect,
-  createSignal,
-  onMount,
-} from "solid-js";
+import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink, useLocation, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
@@ -63,8 +56,10 @@ const Home: Component = () => {
             <img src={ReloadImg} class="h-8" alt="Reload image" />
           </button>
         </div>
-
-        <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
+        <div
+          class="m-auto w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+          id="posts"
+        >
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>

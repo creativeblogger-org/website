@@ -107,10 +107,10 @@ const NavBar: Component = () => {
     };
   });
   return (
-    <div class="text-center bg-slate-800 p-4 mx-auto w-full">
+    <div class="text-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 mx-auto w-full">
       <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-3" />
       <NavLink
-        class=" mt-4 text-3xl md:text-4xl font-gears text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
+        class=" mt-4 text-4xl md:text-5xl font-pangolin text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
         href="/"
         onclick={fetch_posts}
       >
@@ -129,7 +129,7 @@ const NavBar: Component = () => {
             class="text-teal-500 font-semibold rounded inline-flex items-center"
             onclick={toggleMenuMore}
           >
-            <span class="mr-1 text-3xl">Plus</span>
+            <span class="mr-1 text-3xl font-garamond">Plus</span>
             <svg
               class="fill-current h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +146,7 @@ const NavBar: Component = () => {
               <ul>
                 <li class="flex">
                   <NavLink
-                    class="rounded-t bg-white w-full duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
+                    class="rounded-t bg-white w-full duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                     href="/about"
                     onclick={toggleMenuMore}
                   >
@@ -155,7 +155,7 @@ const NavBar: Component = () => {
                 </li>
                 <li class="flex">
                   <NavLink
-                    class="rounded-b bg-white duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
+                    class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                     href="/become"
                     onclick={toggleMenuMore}
                   >
@@ -164,7 +164,7 @@ const NavBar: Component = () => {
                 </li>
                 <li class="flex">
                   <NavLink
-                    class="rounded-b bg-white duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block w-full whitespace-no-wrap"
+                    class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block w-full whitespace-no-wrap"
                     href="/shorts"
                     onclick={toggleMenuMore}
                   >
@@ -178,13 +178,13 @@ const NavBar: Component = () => {
         <div class="m-4">
           <Show when={isNotConnected()}>
             <NavLink
-              class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
               href="/login"
             >
               Connexion
             </NavLink>
             <NavLink
-              class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
               href="/register"
             >
               Inscription
@@ -196,7 +196,9 @@ const NavBar: Component = () => {
               class="text-teal-500 font-semibold rounded inline-flex items-center"
               onclick={toggleMenu}
             >
-              <span class="mr-1 text-3xl">{infos().username}</span>
+              <span class="mr-1 text-3xl font-garamond">
+                {infos().username}
+              </span>
               <svg
                 class="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -214,7 +216,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={ProfileImg} class="" alt="Profile Img" />
                     <NavLink
-                      class="rounded-t bg-white w-full duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-t bg-white w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
                     >
                       Profile
@@ -223,7 +225,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={LogoutImg} class="" alt="Logout Img" />
                     <NavLink
-                      class="rounded-b bg-white duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                       href="/"
                       onclick={logout}
                     >
@@ -238,25 +240,25 @@ const NavBar: Component = () => {
       </div>
       <div class="flex justify-center">
         <NavLink
-          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href="/news"
         >
           Actualités
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href="/tech"
         >
           Tech
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href="/culture"
         >
           Culture
         </NavLink>
         <NavLink
-          class="px-5 text-teal-500 text-sm md:text-2xl duration-150 hover:text-indigo-500 hover:underline"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href="/fakeorreal"
         >
           Démystification

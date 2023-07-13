@@ -17,7 +17,7 @@ import CommentComponent from "./CommentComponent";
 import { Marked } from "@ts-stack/markdown";
 import PostPreviewComponent from "./PostPreviewComponent";
 
-function convertMarkdownToHtml(markdown: string): string {
+function convertMarkdownToHtml(markdown: string) {
   if (markdown !== undefined && markdown !== null) {
     return (
       markdown
@@ -139,7 +139,9 @@ const PostComponent = (props: {
   return (
     <div class="flex">
       <div class="p-4 m-5 relative">
-        <h1 class="text-4xl font-bold text-center">{props.post.title}</h1>
+        <h1 class="text-4xl font-bold text-center font-pangolin">
+          {props.post.title}
+        </h1>
         <Show when={props.post.has_permission}>
           <div class="absolute top-0 right-0 p-2 flex gap-2">
             <button onclick={() => setEditing((edit) => !edit)}>
@@ -158,7 +160,7 @@ const PostComponent = (props: {
         <div class="flex justify-center m-2">
           <NavLink
             href={"/users/" + props.post.author.username}
-            class="font-bold duration-150 hover:text-indigo-800 hover:underline"
+            class="font-bold text-xl duration-150 font-garamond hover:text-indigo-800 hover:underline"
           >
             @{props.post.author.username}
           </NavLink>
@@ -196,7 +198,7 @@ const PostComponent = (props: {
             </button>
           </div>
         </Show>
-        <div class="m-auto w-5/6">
+        <div class="m-auto w-full md:w-2/3">
           {/* Way to get number of posts will be modified in the v2 of the API */}
           <h1 class="text-xl mt-8 font-bold">
             Commentaires ({props.comments.length})
