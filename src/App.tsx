@@ -22,14 +22,9 @@ const Footer = lazy(() => import("./components/Footer"));
 const CreatePost = lazy(() => import("./pages/CreatePost"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PanelPage = lazy(() => import("./pages/PanelPage"));
-const MicorksenPage = lazy(() => import("./pages/Micorksen"));
 const MePage = lazy(() => import("./pages/MePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const BecomePage = lazy(() => import("./pages/BecomePage"));
-const NewsPage = lazy(() => import("./pages/NewsPage"));
-const TechPage = lazy(() => import("./pages/TechPage"));
-const CulturePage = lazy(() => import("./pages/CulturePage"));
-const FakeOrRealPage = lazy(() => import("./pages/FakeOrRealPage"));
 const ShortsPage = lazy(() => import("./pages/ShortsPage"));
 
 const App: Component = () => {
@@ -75,14 +70,9 @@ const App: Component = () => {
         <Route path={"/posts/:slug"} element={<PostPage />} />
         <Route path={"/create"} element={<CreatePost />} />
         <Route path={"/admin"} element={<PanelPage />} />
-        <Route path={"/micorksen"} element={<MicorksenPage />} />
         <Route path={"/profile"} element={<MePage />} />
         <Route path={"/users/:username"} element={<UserPage />} />
         <Route path={"/become"} element={<BecomePage />} />
-        <Route path={"/news"} element={<NewsPage />} />
-        <Route path={"/culture"} element={<CulturePage />} />
-        <Route path={"/tech"} element={<TechPage />} />
-        <Route path={"/fakeorreal"} element={<FakeOrRealPage />} />
         <Route path={"/shorts"} element={<ShortsPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

@@ -11,7 +11,7 @@ import {
   isConnected,
   isNotConnected,
 } from "../utils/functions_utils";
-import { setPosts } from "../pages/Home";
+import { fetch_posts_by_tags, setPosts } from "../pages/Home";
 
 const [isLoading, setIsLoading] = createSignal(false);
 const [page, setPage] = createSignal(1);
@@ -241,25 +241,37 @@ const NavBar: Component = () => {
       <div class="flex justify-center">
         <NavLink
           class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
-          href="/news"
+          href=""
+          onclick={() => {
+            fetch_posts_by_tags("news");
+          }}
         >
           Actualités
         </NavLink>
         <NavLink
           class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
-          href="/tech"
+          href=""
+          onclick={() => {
+            fetch_posts_by_tags("tech");
+          }}
         >
           Tech
         </NavLink>
         <NavLink
           class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
-          href="/culture"
+          href=""
+          onclick={() => {
+            fetch_posts_by_tags("culture");
+          }}
         >
           Culture
         </NavLink>
         <NavLink
           class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
-          href="/fakeorreal"
+          href=""
+          onclick={() => {
+            fetch_posts_by_tags("fakeorreal");
+          }}
         >
           Démystification
         </NavLink>
