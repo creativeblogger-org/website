@@ -10,8 +10,9 @@ import {
 import ShortsPreviewComponent from "../components/ShortsPreviewComponent";
 import SendLogo from "../assets/button_icons/send-logo.png";
 import ArrowUpLogo from "../assets/button_icons/arow-up.png";
-import { MetaProvider, Title, Meta } from "@solidjs/meta";
+import { MetaProvider, Title, Meta, Link } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
+import Logo from "../assets/img/short-logo.png";
 
 const [shorts, setShorts] = createSignal([] as Short[]);
 const [isLoading, setIsLoading] = createSignal(false);
@@ -98,6 +99,7 @@ const ShortsPage = () => {
           name="description"
           content="Short Blog - Service d'envoie de messages brefs à but informatifs"
         />
+        <Link rel="icon" type="image/png" href={Logo} />
       </div>
       <div>
         <div class="px-5 flex justify-end">

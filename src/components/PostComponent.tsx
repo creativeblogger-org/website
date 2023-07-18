@@ -6,16 +6,17 @@ import {
   displaySuccess,
   getError,
   getHumanDate,
+  isConnected,
 } from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
+import ShortIcon from "../assets/img/short-logo.png";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
-import { Marked } from "@ts-stack/markdown";
-import PostPreviewComponent from "./PostPreviewComponent";
+import { fetch_shorts } from "../pages/ShortsPage";
 
 function convertMarkdownToHtml(markdown: string) {
   if (markdown !== undefined && markdown !== null) {
@@ -132,9 +133,30 @@ const PostComponent = (props: {
     }
   });
 
-  onMount(() => {
-    console.log(convertMarkdownToHtml(props.post.content));
-  });
+  async function postShort() {
+    const title = props.post.title;
+    const desc =
+      props.post.description +
+      `<br /> [Découvrez l'article !](https://creativeblogger.org/posts/${props.post.slug})`;
+
+    const res = await customFetch(
+      "https://api.creativeblogger.org/shorts",
+      "POST",
+      JSON.stringify({
+        title: title,
+        content: desc,
+      })
+    );
+
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("Short publié avec succès !");
+    location.assign("/shorts");
+    fetch_shorts();
+  }
 
   return (
     <div class="flex">
@@ -142,8 +164,15 @@ const PostComponent = (props: {
         <h1 class="text-4xl font-bold text-center font-pangolin">
           {props.post.title}
         </h1>
+        <Show when={isConnected() === true}>
+          <div class="absolute top-20 left-0 p-2 flex gap-2 sm:top-0">
+            <button onclick={() => postShort()}>
+              <img src={ShortIcon} alt="Short Blog icon" class="h-8 sm:h-10" />
+            </button>
+          </div>
+        </Show>
         <Show when={props.post.has_permission}>
-          <div class="absolute top-0 right-0 p-2 flex gap-2">
+          <div class="absolute top-0 right-0 p-2 flex gap-2 invisible sm:visible">
             <button onclick={() => setEditing((edit) => !edit)}>
               <img src={editIcon()} alt="Edit icon" />
             </button>
@@ -168,7 +197,7 @@ const PostComponent = (props: {
         <div class="flex justify-center">
           <span>Créé le {getHumanDate(props.post.created_at)}</span>
         </div>
-        <div class="flex justify-center mb-5">
+        <div class="flex justify-center mb-4">
           <Show when={props.post.created_at != props.post.updated_at}>
             <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
           </Show>
@@ -238,3 +267,4 @@ const PostComponent = (props: {
 };
 
 export default PostComponent;
+export { convertMarkdownToHtml };

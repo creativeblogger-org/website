@@ -13,6 +13,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/marked": "^5.0.0",
+    "@types/twit": "^2.2.31",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
@@ -25,6 +26,7 @@
     "@solidjs/router": "^0.8.2",
     "@ts-stack/markdown": "^1.4.0",
     "@types/showdown": "^2.0.1",
+    "dotenv": "^16.3.1",
     "flowbite": "^1.6.5",
     "highlight.js": "^11.8.0",
     "marked": "^5.0.3",
@@ -35,6 +37,8 @@
     "socket.io-client": "^4.7.1",
     "solid-js": "^1.6.10",
     "solidjs-use": "^2.1.0",
-    "tw-elements": "^1.0.0-beta2"
+    "tw-elements": "^1.0.0-beta2",
+    "twit": "^2.2.11",
+    "twitter-api-v2": "^1.15.0"
   }
 }

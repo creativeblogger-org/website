@@ -13,7 +13,7 @@ const fetch_post_by_slug = async () => {
     `https://api.creativeblogger.org${location.pathname}`
   );
 
-  if (res.status == 404) {
+  if (res.status === 404) {
     location.assign("/404");
   }
 

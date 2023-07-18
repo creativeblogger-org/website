@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
 import CBLogo from "../assets/img/logo2.png";
 import { NavLink } from "@solidjs/router";
+import TwitterLogo from "../assets/button_icons/twitter.png";
 
 const Footer: Component = () => {
   return (
@@ -51,11 +52,19 @@ const Footer: Component = () => {
                 - Short Blog
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
+                href="https://twitter.com/cblogorg1"
+              >
+                <img src={TwitterLogo} alt="Logo twitter" />
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
 
-      <p class="text-center text-white mt-4 font-garamond md:text-xl text-lg">
+      <p class="text-center text-white mt-2 font-garamond md:text-xl text-lg">
         Ce site est sous la{" "}
         <a
           href="https://opensource.org/license/mit/"

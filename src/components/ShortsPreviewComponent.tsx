@@ -14,6 +14,7 @@ import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_shorts } from "../pages/ShortsPage";
 import { infos } from "./NavBar";
+import { convertMarkdownToHtml } from "./PostComponent";
 
 async function update_comment(short: RudimentaryComment, new_content: string) {
   short.content = new_content;
@@ -45,6 +46,7 @@ async function delete_comment(id: number) {
 
   displaySuccess("Short supprimé avec succès !");
   fetch_shorts();
+  location.reload();
 }
 
 const ShortsPreviewComponent = (props: { shorts: Short; infos: User }) => {
@@ -114,9 +116,10 @@ const ShortsPreviewComponent = (props: { shorts: Short; infos: User }) => {
             </>
           }
         >
-          <h2 class="text-lg w-full break-all p-2 pt-4">
-            {props.shorts.content}
-          </h2>
+          <h2
+            innerHTML={convertMarkdownToHtml(props.shorts.content)}
+            class="text-lg w-full break-all p-2 pt-4"
+          ></h2>
           <hr class="p-1 m-1" />
         </Show>
       </div>

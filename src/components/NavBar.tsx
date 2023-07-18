@@ -106,6 +106,7 @@ const NavBar: Component = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   });
+
   return (
     <div class="text-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 mx-auto w-full">
       <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-3" />
@@ -129,7 +130,9 @@ const NavBar: Component = () => {
             class="text-teal-500 font-semibold rounded inline-flex items-center"
             onclick={toggleMenuMore}
           >
-            <span class="mr-1 text-3xl font-garamond">Plus</span>
+            <span class="mr-1 text-xl sm:text-2xl md:text-3xl font-garamond">
+              Plus
+            </span>
             <svg
               class="fill-current h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -162,18 +165,15 @@ const NavBar: Component = () => {
                     Nous rejoindre
                   </NavLink>
                 </li>
-                <li class="flex">
-                  <NavLink
-                    class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block w-full whitespace-no-wrap"
-                    href="/shorts"
-                    onclick={toggleMenuMore}
-                  >
-                    Short Blog
-                  </NavLink>
-                </li>
               </ul>
             </div>
           )}
+          <NavLink
+            class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+            href="/shorts"
+          >
+            Short Blog
+          </NavLink>
         </div>
         <div class="m-4">
           <Show when={isNotConnected()}>
