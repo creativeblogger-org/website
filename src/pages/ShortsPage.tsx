@@ -99,7 +99,6 @@ const ShortsPage = () => {
           name="description"
           content="Short Blog - Service d'envoie de messages brefs à but informatifs"
         />
-        <Link rel="icon" type="image/png" href={Logo} />
       </div>
       <div>
         <div class="px-5 flex justify-end">
@@ -178,7 +177,7 @@ const ShortsPage = () => {
               class="p-0 mb-10 px-2 mx-8 border rounded-md duration-150 hover:border-indigo-500"
               type="submit"
             >
-              <img class="h-8" src={SendLogo} alt="Send shorts" />
+              <img class="h-10" src={Logo} alt="Send shorts" />
             </button>
           </form>
         </div>
