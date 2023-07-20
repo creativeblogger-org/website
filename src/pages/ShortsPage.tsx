@@ -175,7 +175,7 @@ const ShortsPage = () => {
             <br />
             <button
               class="p-0 mb-10 px-2 mx-8 border rounded-md duration-150 hover:border-indigo-500"
-              type="submit"
+              type="submit" title="Envoyer le short"
             >
               <img class="h-10" src={Logo} alt="Send shorts" />
             </button>
