@@ -1,4 +1,11 @@
-import { Component, For, createSignal, onMount } from "solid-js";
+import {
+  Component,
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  onMount,
+} from "solid-js";
 import {
   customFetch,
   displayError,
@@ -23,7 +30,6 @@ async function getUser() {
   }
 
   const user: User = await res.json();
-  console.log(user);
 
   setUser(user);
 }
@@ -36,13 +42,19 @@ const [page, setPage] = createSignal(1);
 const UserPage: Component = () => {
   onMount(() => {
     getUser();
-    fetch_posts();
+    fetch_posts(user().id);
   });
 
-  async function fetch_posts() {
+  createEffect(() => {
+    if (user().id) {
+      fetch_posts(user().id);
+    }
+  });
+
+  async function fetch_posts(id: number) {
     setIsLoading(true);
     const res = await customFetch(
-      `https://api.creativeblogger.org/posts/username/${user().id}`
+      `https://api.creativeblogger.org/posts/username/${id}`
     );
 
     if (!res.ok) {
@@ -82,15 +94,20 @@ const UserPage: Component = () => {
           </strong>
         </h2>
       </div>
-      <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
-        <For each={posts()} fallback={"Aucun post pour le moment..."}>
-          {(post, _) => (
-            <NavLink href={`/posts/${post.slug}`}>
-              <PostPreviewComponent post={post} />
-            </NavLink>
-          )}
-        </For>
-      </div>
+      <Show when={user().permission >= 1}>
+        <h2 class="text-3xl m-7 text-center">
+          Article(s) posté(s) par l'utilisateur :
+        </h2>
+        <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
+          <For each={posts()} fallback={"Aucun post pour le moment..."}>
+            {(post, _) => (
+              <NavLink href={`/posts/${post.slug}`}>
+                <PostPreviewComponent post={post} />
+              </NavLink>
+            )}
+          </For>
+        </div>
+      </Show>
     </MetaProvider>
   );
 };

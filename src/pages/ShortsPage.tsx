@@ -8,9 +8,8 @@ import {
   isNotAcceptShortConditions,
 } from "../utils/functions_utils";
 import ShortsPreviewComponent from "../components/ShortsPreviewComponent";
-import SendLogo from "../assets/button_icons/send-logo.png";
 import ArrowUpLogo from "../assets/button_icons/arow-up.png";
-import { MetaProvider, Title, Meta, Link } from "@solidjs/meta";
+import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 import Logo from "../assets/img/short-logo.png";
 

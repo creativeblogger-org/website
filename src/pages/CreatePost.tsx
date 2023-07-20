@@ -1,5 +1,5 @@
-import { Meta, MetaProvider, Title } from "@solidjs/meta";
-import { Component, createSignal, lazy, onMount } from "solid-js";
+import { MetaProvider, Title } from "@solidjs/meta";
+import { Component, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
@@ -7,7 +7,6 @@ import {
   getError,
 } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
-import { NavLink } from "@solidjs/router";
 
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
@@ -28,8 +27,8 @@ async function onPostSubmit(e: Event) {
     document.getElementById("create-post-description") as HTMLInputElement
   ).value;
   const content = (
-    document.getElementById("create-post-content") as HTMLTextAreaElement
-  ).innerText;
+    document.getElementById("create-post-content") as HTMLInputElement
+  ).value;
   const image = (
     document.getElementById("create-post-image") as HTMLInputElement
   ).innerText;
@@ -498,6 +497,7 @@ const CreatePost: Component = () => {
           <input
             type="submit"
             value="Créer un nouveau post"
+            id="create-post-content"
             class="shadow-indigo-500/50 duration-200 hover:rounded-2xl bg-gradient-to-l text-white from-indigo-500 to-teal-500 p-2 rounded-md max-w-full"
           />
         </form>

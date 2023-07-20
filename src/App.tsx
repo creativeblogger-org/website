@@ -1,5 +1,5 @@
 import { Routes, Route } from "@solidjs/router";
-import { Component, Show, createEffect, lazy, on, onMount } from "solid-js";
+import { Component, Show, lazy, onMount } from "solid-js";
 import favicon from "./assets/img/logo2.png";
 import { MetaProvider, Link } from "@solidjs/meta";
 import {

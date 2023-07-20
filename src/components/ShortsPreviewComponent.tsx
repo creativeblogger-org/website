@@ -5,16 +5,14 @@ import {
   displayError,
   displaySuccess,
   getError,
-  getHumanDate,
 } from "../utils/functions_utils";
-import { fetch_post_by_slug } from "../pages/PostPage";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_shorts } from "../pages/ShortsPage";
-import { infos } from "./NavBar";
 import { convertMarkdownToHtml } from "./PostComponent";
+import AdminLogo from "../assets/button_icons/admin.png";
 
 async function update_comment(short: RudimentaryComment, new_content: string) {
   short.content = new_content;

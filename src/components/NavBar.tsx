@@ -109,16 +109,16 @@ const NavBar: Component = () => {
 
   return (
     <div class="text-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 mx-auto w-full">
-      <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-3" />
+      <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-1" />
       <NavLink
-        class=" mt-4 text-4xl md:text-5xl font-pangolin text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
+        class="sm:mt-4 mt-0 text-4xl md:text-5xl font-pangolin text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
         href="/"
         onclick={fetch_posts}
       >
         Creative Blogger
       </NavLink>
       <div class="flex justify-between">
-        <div class="m-4">
+        <div class="m-2 mt-4 sm:m-4">
           {/* <NavLink
             class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
             href="/about"
@@ -127,10 +127,10 @@ const NavBar: Component = () => {
           </NavLink> */}
           <button
             id="dropdown-btn-more"
-            class="text-teal-500 font-semibold rounded inline-flex items-center"
+            class="text-teal-500 font-semibold sm:inline-flex rounded items-center hidden sm:visible"
             onclick={toggleMenuMore}
           >
-            <span class="mr-1 text-xl sm:text-2xl md:text-3xl font-garamond">
+            <span class="sm:mr-1 text-xl sm:text-2xl md:text-3xl font-garamond">
               Plus
             </span>
             <svg
@@ -169,22 +169,22 @@ const NavBar: Component = () => {
             </div>
           )}
           <NavLink
-            class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+            class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-1 w-full duration-150 hover:text-indigo-500 hover:underline"
             href="/shorts"
           >
             Short Blog
           </NavLink>
         </div>
-        <div class="m-4">
+        <div class="m-2 mt-4 sm:m-4">
           <Show when={isNotConnected()}>
             <NavLink
-              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
               href="/login"
             >
               Connexion
             </NavLink>
             <NavLink
-              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
               href="/register"
             >
               Inscription
