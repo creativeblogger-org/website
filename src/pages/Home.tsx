@@ -2,9 +2,10 @@ import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { NavLink, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import ReloadImg from "../assets/button_icons/refresh.svg";
+import ReloadImg from "../assets/button_icons/refresh.png";
 import SearchLogo from "../assets/button_icons/search.png";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
+import ThemeSwitcher from "../components/ThemeSwitcher";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
@@ -133,7 +134,7 @@ const Home: Component = () => {
           </button>
         </div>
         <div
-          class="m-auto w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+          class="m-auto w-11/12 grid grid-cols-1 lg:grid-cols-2 home"
           id="posts"
         >
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
@@ -157,7 +158,7 @@ const Home: Component = () => {
               </button>
             </Show>
             <button
-              class="flex w-1/6 duration-200 enabled:hover:rounded-2xl p-2 justify-center rounded-md enabled:shadow-indigo-500/50 enabled:bg-gradient-to-l enabled:from-indigo-500 enabled:to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 enabled:focus-visible:outline-indigo-600 disabled:bg-gray-400"
+              class="flex w-1/3 sm:w-1/6 duration-200 enabled:hover:rounded-2xl p-2 justify-center rounded-md enabled:shadow-indigo-500/50 enabled:bg-gradient-to-l enabled:from-indigo-500 enabled:to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 enabled:focus-visible:outline-indigo-600 disabled:bg-gray-400"
               onclick={() => {
                 location.search = `?page=${page() + 1}`;
               }}

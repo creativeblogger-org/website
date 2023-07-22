@@ -1,7 +1,12 @@
 import { Component } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
-import { customFetch, displayError, displaySuccess, getError } from "../utils/functions_utils";
+import {
+  customFetch,
+  displayError,
+  displaySuccess,
+  getError,
+} from "../utils/functions_utils";
 
 const Register: Component = () => {
   return (
@@ -16,7 +21,7 @@ const Register: Component = () => {
       <div>
         <div class="flex min-h-full flex-col justify-center px-6 pb-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
               Ravis de vous accueillir !
             </h2>
           </div>
@@ -44,15 +49,15 @@ const Register: Component = () => {
                 const credentials: AuthSuccess = await res.json();
                 document.cookie = `token=${credentials.token}`;
 
-                displaySuccess("Compte créé avec succès ! Redirection...")
+                displaySuccess("Compte créé avec succès ! Redirection...");
 
-                setTimeout(() => location.assign("/"), 1000)
+                setTimeout(() => location.assign("/"), 1000);
               }}
             >
               <div>
                 <label
                   for="username"
-                  class="block text-sm font-medium leading-6 text-gray-900"
+                  class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Nom d'utilisateur :{" "}
                 </label>
@@ -61,12 +66,12 @@ const Register: Component = () => {
                   name="username"
                   id="username"
                   autocomplete="off"
-                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                   required
                 />
                 <label
                   for="email"
-                  class="block text-sm font-medium leading-6 text-gray-900"
+                  class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Adresse mail :
                 </label>
@@ -77,7 +82,7 @@ const Register: Component = () => {
                     type="email"
                     autocomplete="off"
                     required
-                    class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                   />
                 </div>
               </div>
@@ -86,7 +91,7 @@ const Register: Component = () => {
                 <div class="flex items-center justify-between">
                   <label
                     for="password"
-                    class="block text-sm font-medium leading-6 text-gray-900"
+                    class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                   >
                     Mot de passe :
                   </label>
@@ -98,12 +103,12 @@ const Register: Component = () => {
                     type="password"
                     autocomplete="current-password"
                     required
-                    class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                   />
                 </div>
                 <label
                   for="confirm-password"
-                  class="block text-sm font-medium leading-6 text-gray-900"
+                  class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   Confirmer le mot de passe :
                 </label>
@@ -112,7 +117,7 @@ const Register: Component = () => {
                   name="confirm-password"
                   id="confirm-password"
                   required
-                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                 />
               </div>
               <div class=" pt-3">
@@ -125,7 +130,7 @@ const Register: Component = () => {
               </div>
             </form>
 
-            <p class="mt-10 text-center text-sm text-gray-500">
+            <p class="mt-10 text-center text-sm text-gray-500 dark:text-gray-300">
               Déjà un compte ?{" "}
               <NavLink
                 href="/login"

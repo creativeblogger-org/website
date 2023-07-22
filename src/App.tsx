@@ -48,7 +48,7 @@ const App: Component = () => {
   return (
     <>
       <MetaProvider>
-        <div class="Home"></div>
+        <div class="Home bg-slate-700"></div>
         <Link rel="icon" type="image/png" href={favicon} />
       </MetaProvider>
       <Show when={error().length > 0}>

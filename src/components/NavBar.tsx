@@ -12,6 +12,7 @@ import {
   isNotConnected,
 } from "../utils/functions_utils";
 import { fetch_posts_by_tags, setPosts } from "../pages/Home";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const [isLoading, setIsLoading] = createSignal(false);
 const [page, setPage] = createSignal(1);
@@ -102,8 +103,10 @@ const NavBar: Component = () => {
       getInfos();
     }
     document.addEventListener("click", handleClickOutside);
+    document.addEventListener("click", handleClickOutsideMore);
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutsideMore);
     };
   });
 
@@ -144,12 +147,12 @@ const NavBar: Component = () => {
           {isOpenMore() && (
             <div
               id="dropdown-menu-more"
-              class="absolute text-gray-700 pt-1 bg-white rounded shadow-md"
+              class="absolute text-gray-700 pt-1 bg-white dark:bg-slate-700 rounded shadow-md"
             >
               <ul>
                 <li class="flex">
                   <NavLink
-                    class="rounded-t bg-white w-full duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
+                    class="rounded-t bg-white dark:bg-slate-700 w-full duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                     href="/about"
                     onclick={toggleMenuMore}
                   >
@@ -158,12 +161,17 @@ const NavBar: Component = () => {
                 </li>
                 <li class="flex">
                   <NavLink
-                    class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
+                    class="rounded-b bg-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                     href="/become"
                     onclick={toggleMenuMore}
                   >
                     Nous rejoindre
                   </NavLink>
+                </li>
+                <li class="flex m-2 justify-center">
+                  <div class="rounded-b bg-white dark:bg-slate-700 duration-150 w-full font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap">
+                    <ThemeSwitcher />
+                  </div>
                 </li>
               </ul>
             </div>
@@ -210,13 +218,13 @@ const NavBar: Component = () => {
             {isOpen() && (
               <div
                 id="dropdown-menu"
-                class="absolute text-gray-700 pt-1 right-0 bg-white rounded shadow-md"
+                class="absolute text-gray-700 pt-1 right-0 bg-white dark:bg-slate-700 rounded shadow-md"
               >
                 <ul>
                   <li class="flex">
                     <img src={ProfileImg} class="" alt="Profile Img" />
                     <NavLink
-                      class="rounded-t bg-white w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-t bg-white dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
                     >
                       Profile
@@ -225,7 +233,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={LogoutImg} class="" alt="Logout Img" />
                     <NavLink
-                      class="rounded-b bg-white duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
+                      class="rounded-b bg-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                       href="/"
                       onclick={logout}
                     >
@@ -240,7 +248,7 @@ const NavBar: Component = () => {
       </div>
       <div class="flex justify-center">
         <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href=""
           onclick={() => {
             fetch_posts_by_tags("news");
@@ -249,7 +257,7 @@ const NavBar: Component = () => {
           Actualités
         </NavLink>
         <NavLink
-          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href=""
           onclick={() => {
             fetch_posts_by_tags("tech");
@@ -258,7 +266,7 @@ const NavBar: Component = () => {
           Tech
         </NavLink>
         <NavLink
-          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href=""
           onclick={() => {
             fetch_posts_by_tags("culture");
@@ -267,7 +275,7 @@ const NavBar: Component = () => {
           Culture
         </NavLink>
         <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-pangolin border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
           href=""
           onclick={() => {
             fetch_posts_by_tags("fakeorreal");

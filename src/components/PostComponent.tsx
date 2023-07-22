@@ -247,7 +247,7 @@ const PostComponent = (props: {
               type="text"
               name="comment-content"
               id="comment-content"
-              class="rounded-md p-2 m-2 w-1/3"
+              class="rounded-md p-2 m-2 w-1/3 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
               placeholder="Ajoutez un commentaire..."
             />
             <button type="submit">

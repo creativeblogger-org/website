@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
 
 function getHumanDate(date: string) {
@@ -10,41 +10,53 @@ function getHumanDate(date: string) {
 const date = new Date().getDay();
 
 const PostPreviewComponent = (props: { post: Post }) => {
-  const style = `background-image: url('${props.post.image}');`;
+  const [description, setDescription] = createSignal("");
+  const style = `background-image: url('${props.post.image}'); height: 104px; width: 104px;`;
+
+  function ifDescTooLong(desc: string) {
+    if (desc !== undefined && desc !== null) {
+      if (desc.length > 40) {
+        setDescription(desc.substring(0, 35) + "...");
+      } else {
+        setDescription(desc);
+      }
+    }
+  }
+
+  onMount(() => {
+    ifDescTooLong(props.post.description);
+  });
+
   return (
-    <div
-      class="rounded-md m-5 border w-auto duration-150 hover:border-indigo-500"
-      style={style}
-    >
-      <div
-        class="h-full w-full overflow-hidden bg-fixed p-4 m-0 rounded-md"
-        style="background-color: rgba(0, 0, 0, 0.4)"
-      >
-        <h1 class="text-xl font-bold font-garamond text-center duration-150 text-white hover:text-indigo-500 md:text-4xl title-post">
-          {props.post.title}
-        </h1>
-        <div class="flex justify-center m-2">
-          <NavLink
-            href={"/users/" + props.post.author.username}
-            class="font-bold text-xl font-garamond duration-150 text-white hover:text-indigo-800"
-          >
-            @{props.post.author.username}
-          </NavLink>
+    <div class="rounded-md m-5 border border-slate-800 dark:border-white w-auto duration-150 hover:border-indigo-500">
+      <div class=" h-40 w-full flex items-center bg-fixed p-4 m-0 rounded-md">
+        <div class="p-2 rounded-md" style={style}></div>
+        <div class="text-black">
+          <h1 class="">
+            <p class="text-xl sm:text-2xl dark:text-white w-2/3 font-bold font-garamond mx-4 duration-150 hover:text-indigo-500">
+              {props.post.title}
+            </p>
+            <hr class="px-2 py-0 my-0 md:my-1 xl:my-2 mx-4 border-indigo-500 rounded-md" />
+            <p class="text-lg px-2 mx-4 dark:text-white">
+              {getHumanDate(props.post.created_at)}
+            </p>
+          </h1>
         </div>
-        <div class="flex justify-center text-white">
-          <span class="text-sm">
-            Créé le {getHumanDate(props.post.created_at)}
-          </span>
-        </div>
-        <div class="flex justify-center text-white">
-          <Show when={props.post.created_at != props.post.updated_at}>
-            <span class="text-sm">
-              Mis à jour le {getHumanDate(props.post.updated_at)}
-            </span>
-          </Show>
-        </div>
-        <div class="flex justify-center text-white">
-          <h2 class="text-center pt-2 text-xl">{props.post.description}</h2>
+        <div class="">
+          <p class="text-base mx-4 duration-150 md:inline-flex hidden md:visible text-black dark:text-white md:text-lg">
+            {description()}
+          </p>
+          <hr class="px-2 mx-4 my-1 rounded-md border-teal-500 hidden md:inline-flex md:visible md:w-2/3" />
+          <p class="px-2 mx-4 text-black dark:text-white text-base hidden md:inline-flex md:visible">
+            Auteur :{" "}
+            <NavLink
+              href={"/users/" + props.post.author.username}
+              class="font-bold text-base font-garamond duration-150 text-teal-500 hover:text-indigo-800"
+            >
+              {" "}
+              @{props.post.author.username}
+            </NavLink>
+          </p>
         </div>
       </div>
     </div>

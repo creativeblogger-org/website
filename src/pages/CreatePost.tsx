@@ -218,18 +218,18 @@ const CreatePost: Component = () => {
             type="text"
             name="title"
             id="create-post-title"
-            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             autocomplete="off"
           />
           <br />
           <label class="pb-3" for="image">
-            URL de l'image du post :
+            URL de l'image du post : ( 104 x 104 px )
           </label>
           <input
             type="text"
             name="image"
             id="create-post-image"
-            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             autocomplete="off"
             placeholder="https://image.creativeblogger.org/images/..."
           />
@@ -241,7 +241,7 @@ const CreatePost: Component = () => {
             type="text"
             name="description"
             id="create-post-description"
-            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             autocomplete="off"
           />
           <br />
@@ -276,7 +276,7 @@ const CreatePost: Component = () => {
               </div>
             </label>
             <label
-              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
               for="news"
             >
               Actualités
@@ -309,7 +309,7 @@ const CreatePost: Component = () => {
               </div>
             </label>
             <label
-              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
               for="tech"
             >
               Tech
@@ -342,7 +342,7 @@ const CreatePost: Component = () => {
               </div>
             </label>
             <label
-              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
               for="culture"
             >
               Culture
@@ -375,7 +375,7 @@ const CreatePost: Component = () => {
               </div>
             </label>
             <label
-              class="mt-px cursor-pointer select-none font-light text-gray-700"
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
               for="fakeorreal"
             >
               Démystification
@@ -488,7 +488,7 @@ const CreatePost: Component = () => {
           <br />
           <textarea
             id="create-post-content"
-            class="text-left bg-white text-black border-black border-2 p-2 w-full break-words min-h-[50vh] m-1 rounded-md"
+            class="text-left bg-white text-black border-black border-2 p-2 w-full break-words min-h-[50vh] m-1 rounded-md dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             value={text()}
             onInput={handleInputChange}
           ></textarea>

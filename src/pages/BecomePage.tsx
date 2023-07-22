@@ -42,7 +42,7 @@ const BecomePage: Component = () => {
                 Chez Creative Blogger, l'ambiance est super sympa, on est très
                 bienveillant ( depuis qu'on a viré l'élément nuisible de
                 l'équipe ), et rien que pour ça, ça vaut le coup de s'y
-                intéresser... je dis ça je dis rien.
+                intéresser... je dis ça, je dis rien.
               </p>
             </div>
           ) : null}
@@ -62,7 +62,7 @@ const BecomePage: Component = () => {
               </h1>
               <p class="text-white p-4">
                 Creative Blogger est unique dans le paysage blogging français de
-                part son idéologie du libre et gratuit mais également par notre
+                par son idéologie du libre et gratuit, mais également par notre
                 marketing et notre design. Nous rejoindre, c'est rejoindre un
                 mouvement jamais vu en France, et, comme dit le dicton " il y a
                 une première fois à tout "

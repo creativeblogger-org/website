@@ -10,7 +10,7 @@ import {
 import ShortsPreviewComponent from "../components/ShortsPreviewComponent";
 import ArrowUpLogo from "../assets/button_icons/arow-up.png";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
-import ReloadImg from "../assets/button_icons/refresh.svg";
+import ReloadImg from "../assets/button_icons/refresh.png";
 import Logo from "../assets/img/short-logo.png";
 
 const [shorts, setShorts] = createSignal([] as Short[]);
@@ -127,7 +127,7 @@ const ShortsPage = () => {
               ce que vous postez. Vous pourrez modifier ou supprimer vos posts
               qui, dans ce cas, se retrouveront supprimés de la base de données.{" "}
               <br />
-              Après 24h d'existence, les shorts sont supprimés en ne laissant
+              Après 72h d'existence, les shorts sont supprimés en ne laissant
               aucune trace. <br />
               Creative Blogger Org ne peut en aucun cas être tenus responsable
               du contenu posté par ses membres. <br />
@@ -158,7 +158,7 @@ const ShortsPage = () => {
               type="text"
               name="title"
               id="short-title"
-              class="text-black p-2 w-1/8 mb-2 mx-8 rounded-md border-black border-spacing-3 border-2"
+              class="text-black p-2 w-1/8 mb-2 mx-8 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
               autocomplete="off"
               placeholder="Titre du short"
             />
@@ -167,7 +167,7 @@ const ShortsPage = () => {
               type="text"
               name="content"
               id="short-content"
-              class="text-black p-2 mb-2 w-5/6 mx-8 rounded-md border-black border-spacing-3 border-2"
+              class="text-black p-2 mb-2 w-5/6 mx-8 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
               autocomplete="off"
               placeholder="Contenu du short"
             />

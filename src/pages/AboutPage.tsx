@@ -28,8 +28,8 @@ const AboutPage: Component = () => {
           <hr />
           <p class="text-center">
             S'occupe de la liaison entre le front et l'API, adore le langage V
-            et Rust, plutôt de nature calme,il a fait partir Micorksen ( ouf )
-            c'était incroyable et on raconte ça sur notre site ! ☮️
+            et Rust, plutôt de nature calme, il est le pilier qui maintient CB
+            en place ☮️
           </p>
         </div>
         <div class="m-3">

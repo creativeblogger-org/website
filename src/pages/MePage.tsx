@@ -10,6 +10,7 @@ import { MetaProvider, Title } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import { displaySuccess } from "../utils/functions_utils";
 import { getInfos, infos } from "../components/NavBar";
+import ThemeSwitcher from "../components/ThemeSwitcher";
 
 async function deleteUser() {
   const res = await customFetch(
@@ -78,12 +79,12 @@ const MePage: Component = () => {
             displaySuccess("Informations mises jour avec succès !");
           }}
         >
-          <label class="text-3xl text-black" for="username">
+          <label class="text-3xl text-black dark:text-white" for="username">
             Nom d'utilisateur :
           </label>
           <input
             type="text"
-            class="p-2 rounded-md border m-5"
+            class="p-2 rounded-md border m-5 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             name="username"
             id="username"
             value={infos().username}
@@ -91,12 +92,12 @@ const MePage: Component = () => {
             required
           />
           <br />
-          <label class="text-3xl text-black" for="email">
+          <label class="text-3xl text-black dark:text-white" for="email">
             Adresse email :
           </label>
           <input
             type="email"
-            class="p-2 rounded-md border m-5"
+            class="p-2 rounded-md border m-5 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             name="email"
             id="email"
             value={infos().email}
@@ -104,21 +105,23 @@ const MePage: Component = () => {
             required
           />
           <br />
-          <label class="text-3xl text-black" for="password">
+          <label class="text-3xl text-black dark:text-white" for="password">
             Changer le mot de passe :
           </label>
           <input
             type="password"
-            class="p-2 rounded-md border m-5"
+            class="p-2 rounded-md border m-5 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             name="password"
             id="password"
             autocomplete="off"
             required
           />
           <br />
-          <label class="text-3xl text-black">Permissions :</label>
+          <label class="text-3xl text-black dark:text-white">
+            Permissions :
+          </label>
           <h2 class="p-4">{findPermissions(infos().permission)}</h2>
-          <label class="text-3xl text-black">Créé le :</label>
+          <label class="text-3xl text-black dark:text-white">Créé le :</label>
           <h2 class="p-4">{getHumanDate(infos().created_at)}</h2>
           <Show when={infos().created_at !== infos().created_at}>
             <label class="text-3xl text-black">Modifier le :</label>
@@ -131,6 +134,10 @@ const MePage: Component = () => {
             Mettre à jour
           </button>
         </form>
+        <div class="flex justify-center m-5">
+          <h1 class="text-black dark:text-white mx-5">Thème :</h1>
+          <ThemeSwitcher />
+        </div>
 
         <hr class="p-2" />
         <Show when={infos().permission >= 1}>
