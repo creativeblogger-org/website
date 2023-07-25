@@ -139,9 +139,9 @@ const Home: Component = () => {
         >
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
-              <NavLink href={`/posts/${post.slug}`}>
+              <a href={`/posts/${post.slug}`}>
                 <PostPreviewComponent post={post} />
-              </NavLink>
+              </a>
             )}
           </For>
         </div>

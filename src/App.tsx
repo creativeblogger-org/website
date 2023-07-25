@@ -9,7 +9,6 @@ import {
   isConnected,
   success,
 } from "./utils/functions_utils";
-import { Socket, io } from "socket.io-client";
 
 const Home = lazy(() => import("./pages/Home"));
 const CreatePostButton = lazy(() => import("./components/CreatePostComponent"));
@@ -26,6 +25,7 @@ const MePage = lazy(() => import("./pages/MePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const BecomePage = lazy(() => import("./pages/BecomePage"));
 const ShortsPage = lazy(() => import("./pages/ShortsPage"));
+const ImagePage = lazy(() => import("./pages/ImageController"));
 
 const App: Component = () => {
   onMount(() => {
@@ -35,14 +35,6 @@ const App: Component = () => {
     window.addEventListener("online", () =>
       displaySuccess("Tu es de nouveau en ligne !")
     );
-
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
-
-    socket.on("connected", (msg: string) => {
-      console.log(msg);
-    });
-
-    socket.emit("ok", "slt");
   });
 
   return (
@@ -74,6 +66,7 @@ const App: Component = () => {
         <Route path={"/users/:username"} element={<UserPage />} />
         <Route path={"/become"} element={<BecomePage />} />
         <Route path={"/shorts"} element={<ShortsPage />} />
+        <Route path={"/img"} element={<ImagePage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />

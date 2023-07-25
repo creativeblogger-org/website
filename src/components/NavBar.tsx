@@ -1,4 +1,4 @@
-import { Component, Show, createSignal, onMount } from "solid-js";
+import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
 import Logo from "../assets/img/logo2.png";
 import LogoutImg from "../assets/button_icons/logout.png";
@@ -13,6 +13,8 @@ import {
 } from "../utils/functions_utils";
 import { fetch_posts_by_tags, setPosts } from "../pages/Home";
 import ThemeSwitcher from "./ThemeSwitcher";
+import RegisterLogo from "../assets/button_icons/register.png";
+import LoginLogo from "../assets/button_icons/login.png";
 
 const [isLoading, setIsLoading] = createSignal(false);
 const [page, setPage] = createSignal(1);
@@ -204,9 +206,7 @@ const NavBar: Component = () => {
               class="text-teal-500 font-semibold rounded inline-flex items-center"
               onclick={toggleMenu}
             >
-              <span class="mr-1 text-3xl font-garamond">
-                {infos().username}
-              </span>
+              <img class=" h-10" src="" alt="test" />
               <svg
                 class="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"

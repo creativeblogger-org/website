@@ -29,15 +29,15 @@ const PostPreviewComponent = (props: { post: Post }) => {
 
   return (
     <div class="rounded-md m-5 border border-slate-800 dark:border-white w-auto duration-150 hover:border-indigo-500">
-      <div class=" h-40 w-full flex items-center bg-fixed p-4 m-0 rounded-md">
+      <div class=" h-40 w-full flex items-center bg-fixed p-4 rounded-md">
         <div class="p-2 rounded-md" style={style}></div>
-        <div class="text-black">
+        <div class="text-black w-3/5">
           <h1 class="">
-            <p class="text-xl sm:text-2xl dark:text-white w-2/3 font-bold font-garamond mx-4 duration-150 hover:text-indigo-500">
+            <p class="text-xl sm:text-2xl w-full dark:text-white font-bold font-garamond mx-4 duration-150 hover:text-indigo-500">
               {props.post.title}
             </p>
             <hr class="px-2 py-0 my-0 md:my-1 xl:my-2 mx-4 border-indigo-500 rounded-md" />
-            <p class="text-lg px-2 mx-4 dark:text-white">
+            <p class="text-lg w-full px-2 mx-4 dark:text-white">
               {getHumanDate(props.post.created_at)}
             </p>
           </h1>
