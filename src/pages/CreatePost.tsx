@@ -31,7 +31,7 @@ async function onPostSubmit(e: Event) {
   ).value;
   const image = (
     document.getElementById("create-post-image") as HTMLInputElement
-  ).innerText;
+  ).value;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",

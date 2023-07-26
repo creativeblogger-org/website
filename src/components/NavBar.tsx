@@ -206,7 +206,7 @@ const NavBar: Component = () => {
               class="text-teal-500 font-semibold rounded inline-flex items-center"
               onclick={toggleMenu}
             >
-              <img class=" h-10" src="" alt="test" />
+              <img class=" h-10" src={infos().pp} alt={infos().username} />
               <svg
                 class="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
