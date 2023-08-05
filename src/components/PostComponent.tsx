@@ -17,6 +17,7 @@ import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
 import { fetch_shorts } from "../pages/ShortsPage";
+import { Marked } from "@ts-stack/markdown";
 
 function convertMarkdownToHtml(markdown: string) {
   if (markdown !== undefined && markdown !== null) {
@@ -208,7 +209,7 @@ const PostComponent = (props: {
           contentEditable={editing()}
           innerHTML={
             !editing()
-              ? convertMarkdownToHtml(props.post.content)
+              ? Marked.parse(props.post.content)
               : props.post.content
           }
         ></div>
