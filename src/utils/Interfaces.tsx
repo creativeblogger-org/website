@@ -36,6 +36,7 @@ interface Post {
   description: string;
   tags: string;
   image: string;
+  commentCount: number;
 }
 
 interface PostWithoutComments {
@@ -50,6 +51,7 @@ interface PostWithoutComments {
   description: string;
   tags: string;
   image: string;
+  commentCount: number;
 }
 
 interface RudimentaryPost {

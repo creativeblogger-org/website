@@ -208,9 +208,7 @@ const PostComponent = (props: {
           class="post-content text-lg md:text-xl break-words w-full md:w-2/3 border rounded-md p-8 mx-auto m-3"
           contentEditable={editing()}
           innerHTML={
-            !editing()
-              ? Marked.parse(props.post.content)
-              : props.post.content
+            !editing() ? Marked.parse(props.post.content) : props.post.content
           }
         ></div>
         <Show when={editing()}>
@@ -231,14 +229,14 @@ const PostComponent = (props: {
         <div class="m-auto w-full md:w-2/3">
           {/* Way to get number of posts will be modified in the v2 of the API */}
           <h1 class="text-xl mt-8 font-bold">
-            Commentaires ({props.comments.length})
+            Commentaires ({props.post.commentCount})
           </h1>
           <form
             onsubmit={(e) => {
               e.preventDefault();
 
               post_comment(
-                `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
+                `https://api.creativeblogger.org/comments/${props.post.id}`,
                 (document.getElementById("comment-content") as HTMLInputElement)
                   .value
               );

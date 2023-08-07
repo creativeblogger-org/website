@@ -226,7 +226,7 @@ const CreatePost: Component = () => {
             URL de l'image du post : ( 104 x 104 px )
           </label>
           <input
-            type="text"
+            type="file"
             name="image"
             id="create-post-image"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"

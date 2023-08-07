@@ -73,10 +73,17 @@ const UserPage: Component = () => {
       <div class="Home">
         <Title>Creative Blogger - {user().username}</Title>
       </div>
+      <h1 class="text-center text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
+        Fiche d'identité d'utilisateur :{" "}
+      </h1>
+      <div class="flex justify-center mt-2">
+        <img
+          src={user().pp}
+          alt="Cet utilisateur n'a pas de photo de profile"
+          class="h-20"
+        />
+      </div>
       <div class="text-center">
-        <h1 class="text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
-          Fiche d'identité d'utilisateur :{" "}
-        </h1>
         <h2 class="text-3xl m-7">
           Nom d'utilisateur :{" "}
           <strong class="text-teal-500">{user().username}</strong>

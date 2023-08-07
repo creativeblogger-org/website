@@ -38,9 +38,16 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   return (
     <div class="rounded-lg p-4 m-5 border w-auto duration-150 hover:border-indigo-500">
-      <h1 class="text-3xl font-bold text-center duration-150 hover:text-indigo-500">
-        {props.user.username}
-      </h1>
+      <a
+        href={"/users/" + props.user.username}
+        class="text-black dark:text-white"
+      >
+        <h1 class="text-3xl font-bold text-center duration-150 hover:text-indigo-500">
+          <img src={props.user.pp} alt="" class="h-10" />
+          {props.user.username}
+        </h1>{" "}
+      </a>
+
       <h2 class="text-center">ID de l'utilisateur : {props.user.id}</h2>
       <h3 class="text-center">
         Permission de l'utilisateur : {findPermissions(props.user.permission)}

@@ -206,7 +206,11 @@ const NavBar: Component = () => {
               class="text-teal-500 font-semibold rounded inline-flex items-center"
               onclick={toggleMenu}
             >
-              <img class=" h-10" src={infos().pp} alt={infos().username} />
+              <img
+                class="text-3xl h-10 md:h-16"
+                src={infos().pp}
+                alt={infos().username}
+              />
               <svg
                 class="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -226,6 +230,7 @@ const NavBar: Component = () => {
                     <NavLink
                       class="rounded-t bg-white dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
+                      onclick={() => setIsOpen(false)}
                     >
                       Profile
                     </NavLink>
