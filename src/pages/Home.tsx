@@ -14,7 +14,7 @@ const [page, setPage] = createSignal(1);
 async function fetch_posts_by_tags(tag: string) {
   setIsLoading(true);
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts/tag/${tag}/?limit=20&page=${
+    `https://api.creativeblogger.org/posts?tag=${tag}&limit=20&page=${
       page() - 1
     }`
   );
@@ -50,7 +50,7 @@ async function fetch_posts() {
 async function fetch_posts_by_content(content: string) {
   setIsLoading(true);
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts/content/${content}?limit=20&page=${
+    `https://api.creativeblogger.org/posts?q=${content}&limit=20&page=${
       page() - 1
     }`
   );

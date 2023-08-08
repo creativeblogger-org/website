@@ -205,7 +205,7 @@ const PostComponent = (props: {
         </div>
         <hr />
         <div
-          class="post-content text-lg md:text-xl break-words w-full md:w-2/3 border rounded-md p-8 mx-auto m-3"
+          class="post-content text-lg md:text-xl break-all w-full md:w-2/3 border rounded-md p-8 m-3 mx-auto"
           contentEditable={editing()}
           innerHTML={
             !editing() ? Marked.parse(props.post.content) : props.post.content

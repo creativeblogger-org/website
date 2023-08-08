@@ -54,7 +54,7 @@ const UserPage: Component = () => {
   async function fetch_posts(id: number) {
     setIsLoading(true);
     const res = await customFetch(
-      `https://api.creativeblogger.org/posts/username/${id}`
+      `https://api.creativeblogger.org/posts?user=${id}`
     );
 
     if (!res.ok) {

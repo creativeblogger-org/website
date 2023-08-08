@@ -7,6 +7,7 @@ import {
   getError,
 } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
+import { Marked } from "@ts-stack/markdown";
 
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
@@ -504,7 +505,7 @@ const CreatePost: Component = () => {
       </div>
       <div class="my-5">
         <h2 class="text-center text-3xl">Preview :</h2>
-        <div class="p-10" innerHTML={convertToMarkdown(text())}></div>
+        <div class="p-10" innerHTML={Marked.parse(text())}></div>
       </div>
     </MetaProvider>
   );
