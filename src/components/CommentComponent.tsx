@@ -62,18 +62,27 @@ function CommentComponent(props: { comment: Comment }) {
 
   return (
     <div class="p-2 rounded-lg border mt-5 relative">
-      <NavLink
-        href={"/users/" + props.comment.author.username}
-        class="font-garamond text-xl duration-150 hover:text-indigo-800"
-      >
-        @{props.comment.author.username}
-      </NavLink>{" "}
-      <span>
-        a posté ce commentaire le {getHumanDate(props.comment.created_at)}.{" "}
-      </span>
-      <Show when={props.comment.created_at != props.comment.updated_at}>
-        <span>Modifié le {getHumanDate(props.comment.updated_at)}</span>
-      </Show>
+      <div class="flex items-center">
+        <img
+          src={props.comment.author.pp}
+          alt=""
+          class="h-10 mx-2 flex flex-col"
+        />
+        <NavLink
+          href={"/users/" + props.comment.author.username}
+          class="font-garamond text-xl duration-150 hover:text-indigo-800"
+        >
+          @{props.comment.author.username}
+        </NavLink>{" "}
+        <span class="sm:inline-flex rounded items-center hidden sm:visible">
+          a posté ce commentaire le {getHumanDate(props.comment.created_at)}.{" "}
+        </span>
+        <Show when={props.comment.created_at != props.comment.updated_at}>
+          <span class="sm:inline-flex rounded items-center hidden sm:visible">
+            Modifié le {getHumanDate(props.comment.updated_at)}
+          </span>
+        </Show>
+      </div>
       <Show when={props.comment.has_permission}>
         <div class="absolute top-0 right-0">
           <button class="m-1" onclick={() => setEditing((edit) => !edit)}>

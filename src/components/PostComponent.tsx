@@ -159,6 +159,10 @@ const PostComponent = (props: {
     fetch_shorts();
   }
 
+  function imgLink() {
+    location.assign("/users/" + props.post.author.username);
+  }
+
   return (
     <div class="flex">
       <div class="p-4 m-5 relative">
@@ -187,7 +191,13 @@ const PostComponent = (props: {
             </button>
           </div>
         </Show>
-        <div class="flex justify-center m-2">
+        <div class="flex justify-center m-2 items-center">
+          <img
+            src={props.post.author.pp}
+            class="h-7 mx-1 hover:cursor-pointer"
+            onclick={imgLink}
+            alt=""
+          />
           <NavLink
             href={"/users/" + props.post.author.username}
             class="font-bold text-xl duration-150 font-garamond hover:text-indigo-800 hover:underline"
@@ -232,11 +242,12 @@ const PostComponent = (props: {
             Commentaires ({props.post.commentCount})
           </h1>
           <form
+            class="flex items-center"
             onsubmit={(e) => {
               e.preventDefault();
 
               post_comment(
-                `https://api.creativeblogger.org/comments/${props.post.id}`,
+                `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
                 (document.getElementById("comment-content") as HTMLInputElement)
                   .value
               );

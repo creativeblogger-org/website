@@ -105,7 +105,7 @@ const UserPage: Component = () => {
         <h2 class="text-3xl m-7 text-center">
           Article(s) posté(s) par l'utilisateur :
         </h2>
-        <div class="m-auto w-11/12 grid grid-cols-2 md:grid-cols-3" id="posts">
+        <div class="m-auto w-11/12 grid grid-cols-1 md:grid-cols-2" id="posts">
           <For each={posts()} fallback={"Aucun post pour le moment..."}>
             {(post, _) => (
               <NavLink href={`/posts/${post.slug}`}>

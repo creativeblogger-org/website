@@ -109,6 +109,7 @@ const MePage: Component = () => {
     if (inputElement.files && inputElement.files.length > 0) {
       setSelectedImage(inputElement.files[0]);
     }
+    displaySuccess("Votre image est prête !");
   }
 
   return (

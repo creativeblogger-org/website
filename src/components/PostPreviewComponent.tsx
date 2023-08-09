@@ -47,11 +47,11 @@ const PostPreviewComponent = (props: { post: Post }) => {
             {description()}
           </p>
           <hr class="px-2 mx-4 my-1 rounded-md border-teal-500 hidden md:inline-flex md:visible md:w-2/3" />
-          <p class="px-2 mx-4 text-black dark:text-white text-base hidden md:inline-flex md:visible">
-            Auteur :{" "}
+          <p class="px-2 mx-4 text-black dark:text-white text-base hidden md:inline-flex md:visible items-center">
+            Auteur :
             <a
               href={"/users/" + props.post.author.username}
-              class="font-bold text-base font-garamond duration-150 text-teal-500 hover:text-indigo-800"
+              class="font-bold text-base font-garamond duration-150 text-teal-500 hover:text-indigo-800 mx-1"
             >
               {" "}
               @{props.post.author.username}
