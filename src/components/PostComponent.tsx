@@ -162,7 +162,6 @@ const PostComponent = (props: {
   function imgLink() {
     location.assign("/users/" + props.post.author.username);
   }
-
   return (
     <div class="flex">
       <div class="p-4 m-5 relative">
@@ -238,9 +237,7 @@ const PostComponent = (props: {
         </Show>
         <div class="m-auto w-full md:w-2/3">
           {/* Way to get number of posts will be modified in the v2 of the API */}
-          <h1 class="text-xl mt-8 font-bold">
-            Commentaires ({props.post.commentCount})
-          </h1>
+          <h1 class="text-xl mt-8 font-bold">Commentaires</h1>
           <form
             class="flex items-center"
             onsubmit={(e) => {
@@ -257,7 +254,7 @@ const PostComponent = (props: {
               type="text"
               name="comment-content"
               id="comment-content"
-              class="rounded-md p-2 m-2 w-1/3 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+              class="rounded-md p-2 m-2 w-1/3 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100 border"
               placeholder="Ajoutez un commentaire..."
             />
             <button type="submit">

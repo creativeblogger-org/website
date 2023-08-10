@@ -110,6 +110,14 @@ const Footer: Component = () => {
                 - Application
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
+                href="/terms"
+              >
+                - Terms
+              </NavLink>
+            </li>
             {/* <li class="grid grid-cols-4 w-1/5 mx-auto my-2">
               <NavLink
                 class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
