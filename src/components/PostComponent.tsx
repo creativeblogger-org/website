@@ -23,6 +23,15 @@ import CommentComponent from "./CommentComponent";
 import { fetch_shorts } from "../pages/ShortsPage";
 import { Marked } from "@ts-stack/markdown";
 
+const [page, setPage] = createSignal(1);
+
+const [selectedValue, setSelectedValue] = createSignal("");
+
+function handleRadioChange(event: any) {
+  setSelectedValue(event.target.value);
+  console.log(selectedValue());
+}
+
 function convertMarkdownToHtml(markdown: string) {
   if (markdown !== undefined && markdown !== null) {
     return (
@@ -86,12 +95,28 @@ async function delete_post() {
   location.assign("/");
 }
 
-async function update_post(post: RudimentaryPost, new_content: string) {
-  post.content = new_content;
+async function update_post() {
+  const title = (
+    document.getElementById("create-post-title") as HTMLInputElement
+  ).value;
+  const description = (
+    document.getElementById("create-post-description") as HTMLInputElement
+  ).value;
+  const content = (document.querySelector(".post-content") as HTMLElement)
+    .innerText;
+  const image = (
+    document.getElementById("create-post-image") as HTMLInputElement
+  ).value;
   const res = await customFetch(
     `https://api.creativeblogger.org${location.pathname}`,
     "PUT",
-    JSON.stringify(post)
+    JSON.stringify({
+      title: title,
+      description: description,
+      content: content,
+      image: image,
+      tags: selectedValue(),
+    })
   );
 
   if (!res.ok) {
@@ -260,6 +285,179 @@ const PostComponent = (props: {
           </Show>
         </div>
         <hr />
+        <Show when={editing()}>
+          <label class="pb-3" for="title">
+            Titre du post :
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="create-post-title"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+            autocomplete="off"
+            value={props.post.title}
+          />
+          <br />
+          <label class="pb-3" for="image">
+            URL de l'image du post : ( 104 x 104 px )
+          </label>
+          <input
+            type="text"
+            name="image"
+            id="create-post-image"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+            autocomplete="off"
+            value={props.post.image}
+          />
+          <br />
+          <label class="pb-3" for="description">
+            Description du post :{" "}
+          </label>
+          <input
+            type="text"
+            name="description"
+            value={props.post.description}
+            id="create-post-description"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+            autocomplete="off"
+          />
+          <label class="pb-3" for="tags">
+            Tags du post :{" "}
+          </label>
+          <br />
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="news"
+              data-ripple-dark="true"
+            >
+              <input
+                id="news"
+                name="theme"
+                value="news"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "news"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
+              for="news"
+            >
+              Actualités
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="tech"
+              data-ripple-dark="true"
+            >
+              <input
+                id="tech"
+                name="theme"
+                value="tech"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "tech"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
+              for="tech"
+            >
+              Tech
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="culture"
+              data-ripple-dark="true"
+            >
+              <input
+                id="culture"
+                name="theme"
+                value="culture"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "cuture"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
+              for="culture"
+            >
+              Culture
+            </label>
+          </div>
+          <div class="inline-flex items-center">
+            <label
+              class="relative flex cursor-pointer items-center rounded-full p-3"
+              for="fakeorreal"
+              data-ripple-dark="true"
+            >
+              <input
+                id="fakeorreal"
+                name="theme"
+                value="fakeorreal"
+                onChange={handleRadioChange}
+                checked={selectedValue() === "fakeorreal"}
+                type="radio"
+                class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-teal-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
+              />
+              <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-teal-500 opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="#6366f1"
+                >
+                  <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                </svg>
+              </div>
+            </label>
+            <label
+              class="mt-px cursor-pointer select-none font-light text-gray-700 dark:text-white"
+              for="fakeorreal"
+            >
+              Démystification
+            </label>
+          </div>
+        </Show>
         <div
           class="post-content text-lg md:text-xl break-all w-full md:w-2/3 border rounded-md p-8 m-3 mx-auto"
           contentEditable={editing()}
@@ -269,15 +467,7 @@ const PostComponent = (props: {
         ></div>
         <Show when={editing()}>
           <div class="text-center">
-            <button
-              onclick={() =>
-                update_post(
-                  props.post,
-                  (document.querySelector(".post-content") as HTMLElement)
-                    .innerText
-                )
-              }
-            >
+            <button onclick={() => update_post()}>
               <img src={SaveIcon} alt="Save icon" width={24} height={24} />
             </button>
           </div>

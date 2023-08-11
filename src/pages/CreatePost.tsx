@@ -214,8 +214,6 @@ const CreatePost: Component = () => {
   );
   const [fullUploadedImagePath, setFullUploadedImagePath] = createSignal("");
 
-  let valueOfImgInput;
-
   async function handleImageUpload() {
     if (!selectedImage()) return;
 
