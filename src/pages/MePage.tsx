@@ -276,6 +276,13 @@ const MePage: Component = () => {
           >
             Pannel Admin
           </NavLink>
+          <hr class="m-2 p-2" />
+          <NavLink
+            class="duration-150 hover:text-indigo-500 hover:underline"
+            href="/social"
+          >
+            Page réseaux sociaux
+          </NavLink>
         </Show>
         <br />
         <br />

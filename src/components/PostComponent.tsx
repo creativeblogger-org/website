@@ -204,10 +204,10 @@ const PostComponent = (props: {
       <Show when={isAKids() && props.post.required_age > 0}>
         <div>
           <div class="fixed p-[20vw] pt-[10vh] pb-[10vh] top-0 left-0 h-screen z-[2] w-screen bg-black">
-            <h1 class="text-xl md:text-3xl lg:text-5xl underline font-bold text-orange-500 text-center w-full">
+            <h1 class="text-xl md:text-3xl lg:text-5xl underline font-bold text-orange-500 text-center w-full m-0 p-0">
               Il faut avoir {props.post.required_age} ans pour voir ce contenu !{" "}
             </h1>
-            <p class="text-sm sm:text-xl lg:text-2xl mt-1 sm:mt-5 lg:mt-16 mx-auto w-full sm:w-2/3 text-white">
+            <p class="text-sm sm:text-xl lg:text-2xl mt-1 sm:mt-3 lg:mt-8 mx-auto w-full text-white">
               Non ne vous inquiétez pas, vous ne vous êtes pas faits pirater !
               Si vous voyez ce contenu, c'est uniquement car, vous êtes
               potentiellement un enfant ( sorry pour les autres ) et que le
@@ -219,7 +219,7 @@ const PostComponent = (props: {
               le contenu" alors que ce n'est pas le cas, Creative Blogger ne
               pourra pas être tenu responsable.
             </p>
-            <div class="grid grid-cols-2 mt-16 w-full sm:w-2/3 mx-auto">
+            <div class="grid grid-cols-2 mt-10 w-full sm:w-2/3 mx-auto">
               <button
                 class="mx-2 bg-red-500 text-white p-2 text-xl rounded-md hover:rounded-xl duration-150"
                 onclick={haveLessThan15}
@@ -233,6 +233,9 @@ const PostComponent = (props: {
                 Je veux voir le contenu
               </button>
             </div>
+            <p class="text-black mt-5 text-center">
+              Les couleurs sont bien nan ? Tu penses à quoi toi ?
+            </p>
           </div>
         </div>
       </Show>
