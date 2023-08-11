@@ -1,5 +1,6 @@
 import { Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
+import WarningLogo from "../assets/button_icons/under-15.png";
 
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
@@ -34,7 +35,7 @@ const PostPreviewComponent = (props: { post: Post }) => {
         <div class="text-black w-3/5">
           <h1 class="">
             <p class="text-xl sm:text-2xl w-full dark:text-white font-bold font-garamond mx-4 duration-150 hover:text-indigo-500">
-              {props.post.title}
+              {props.post.title}{" "}
             </p>
             <hr class="px-2 py-0 my-0 md:my-1 xl:my-2 mx-4 border-indigo-500 rounded-md" />
             <p class="text-lg w-full px-2 mx-4 dark:text-white">

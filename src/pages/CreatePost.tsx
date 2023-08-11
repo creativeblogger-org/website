@@ -1,13 +1,20 @@
 import { MetaProvider, Title } from "@solidjs/meta";
-import { Component, createSignal, onMount } from "solid-js";
+import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
   displaySuccess,
   getError,
+  getToken,
 } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
 import { Marked } from "@ts-stack/markdown";
+import ky from "ky";
+import { getInfos, infos } from "../components/NavBar";
+
+interface UploadResponse {
+  path: string;
+}
 
 const [users, setUsers] = createSignal([] as User[]);
 const [isLoading, setIsLoading] = createSignal(false);
@@ -33,6 +40,9 @@ async function onPostSubmit(e: Event) {
   const image = (
     document.getElementById("create-post-image") as HTMLInputElement
   ).value;
+  const age_required = (
+    document.getElementById("create-age-required") as HTMLInputElement
+  ).value;
 
   const res = await customFetch(
     "https://api.creativeblogger.org/posts",
@@ -43,8 +53,11 @@ async function onPostSubmit(e: Event) {
       content: content,
       tags: selectedValue(),
       image: image,
+      required_age: age_required,
     })
   );
+
+  console.log(typeof age_required + age_required);
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -141,7 +154,7 @@ const CreatePost: Component = () => {
   }
 
   function handleHrClick() {
-    wrapSelection("\n---");
+    wrapSelection("\n\n---\n");
   }
 
   function handleYtbClick() {
@@ -167,7 +180,7 @@ const CreatePost: Component = () => {
   }
 
   function handleCenterClick() {
-    wrapTextSelection("|");
+    wrapTextSelection('<div style="text-center">');
   }
 
   function wrapTextSelection(wrapper: any) {
@@ -195,6 +208,63 @@ const CreatePost: Component = () => {
     setText(newText);
   }
 
+  const [selectedImage, setSelectedImage] = createSignal<File | null>(null);
+  const [uploadedImagePath, setUploadedImagePath] = createSignal<string | null>(
+    null
+  );
+  const [fullUploadedImagePath, setFullUploadedImagePath] = createSignal("");
+
+  let valueOfImgInput;
+
+  async function handleImageUpload() {
+    if (!selectedImage()) return;
+
+    try {
+      // Récupérer le token d'authentification
+      const token = getToken();
+
+      // Créer une instance ky avec les en-têtes
+      const api = ky.create({
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const formData = new FormData();
+      formData.append("image", selectedImage());
+
+      // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
+      const response = await api.post(
+        "https://api.creativeblogger.org/posts/upload",
+        {
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const responseData: UploadResponse = await response.json();
+        displaySuccess("L'image a été uploadée !");
+        setUploadedImagePath(responseData.path);
+        setFullUploadedImagePath(
+          `https://api.creativeblogger.org/public/posts/${responseData.path}`
+        );
+        // Effectuer les actions supplémentaires si nécessaire
+      } else {
+        displayError("L'image n'a pas été uploadée");
+      }
+    } catch (error) {
+      displayError("L'image n'a pas été uploadée" + error);
+    }
+  }
+
+  function handleFileChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      setSelectedImage(inputElement.files[0]);
+    }
+    displaySuccess("Votre image est prête !");
+  }
+
   onMount(() => {
     fetch_users();
   });
@@ -202,6 +272,54 @@ const CreatePost: Component = () => {
     <MetaProvider>
       <div class="Home">
         <Title>Creative Blogger - Create</Title>
+      </div>
+      <div class="flex justify-center">
+        <label
+          for="dropzone-file"
+          class="flex items-center justify-center w-2/6 md:w-1/6 m-5 h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        >
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg
+              aria-hidden="true"
+              class="w-10 h-10 mb-3 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              ></path>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <span class="font-semibold">Click to upload</span> or drag and
+              drop
+            </p>
+          </div>
+          <input
+            type="file"
+            name="file"
+            id="dropzone-file"
+            class="hidden"
+            accept=""
+            onChange={handleFileChange}
+          />
+        </label>
+        <div class="flex items-center">
+          <button
+            onClick={handleImageUpload}
+            class="mb-4 duration-200 h-14 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Upload Image
+          </button>
+          <Show when={uploadedImagePath()}>
+            <br />
+            <p class="mx-2">Image uploadée !</p>
+          </Show>
+        </div>
       </div>
       <div class="flex justify-center w-full">
         <form
@@ -232,7 +350,8 @@ const CreatePost: Component = () => {
             id="create-post-image"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             autocomplete="off"
-            placeholder="https://image.creativeblogger.org/images/..."
+            value={fullUploadedImagePath()}
+            placeholder="Uploadez une image, le lien se mettera automatiquement !"
           />
           <br />
           <label class="pb-3" for="description">
@@ -244,6 +363,18 @@ const CreatePost: Component = () => {
             id="create-post-description"
             class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
             autocomplete="off"
+          />
+          <br />
+          <label class="pb-3" for="age-required">
+            Âge minimal pour voir l'article :{" "}
+          </label>
+          <input
+            type="number"
+            name="age-required"
+            id="create-age-required"
+            class="text-black p-2 w-full m-1 rounded-md border-black border-spacing-3 border-2 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+            autocomplete="off"
+            placeholder="Mettez un nombre"
           />
           <br />
           <label class="pb-3" for="tags">
@@ -448,41 +579,6 @@ const CreatePost: Component = () => {
             onClick={handleListClick}
           >
             Liste
-          </button>
-          <button
-            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
-            type="button"
-            onClick={handleGridClick}
-          >
-            Colonne
-          </button>
-          <button
-            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500"
-            type="button"
-            onClick={handleTextClick}
-          >
-            Text
-          </button>
-          <button
-            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-red-500"
-            type="button"
-            onClick={() => handleColorButtonClick("red")}
-          >
-            Red
-          </button>
-          <button
-            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-blue-500"
-            type="button"
-            onClick={() => handleColorButtonClick("blue")}
-          >
-            Blue
-          </button>
-          <button
-            class="px-2 my-2 border rounded-md py-2 mx-3 duration-150 hover:border-indigo-500 hover:text-green-500"
-            type="button"
-            onClick={() => handleColorButtonClick("green")}
-          >
-            Green
           </button>
 
           <br />

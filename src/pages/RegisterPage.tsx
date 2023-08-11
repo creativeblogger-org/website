@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import {
@@ -32,13 +32,24 @@ const Register: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
+                const name = (
+                  document.getElementById("username") as HTMLInputElement
+                ).value;
+                const email = (
+                  document.getElementById("email") as HTMLInputElement
+                ).value;
+                const password = (
+                  document.getElementById("password") as HTMLInputElement
+                ).value;
+
                 const res = await customFetch(
-                  "https://api.creativeblogger.org/auth/register",
+                  "http://localhost:3333/auth/register",
                   "POST",
-                  new FormData(
-                    document.querySelector("form") as HTMLFormElement
-                  ),
-                  false
+                  JSON.stringify({
+                    username: name,
+                    email: email,
+                    password: password,
+                  })
                 );
 
                 if (!res.ok) {

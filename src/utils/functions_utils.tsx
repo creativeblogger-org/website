@@ -32,6 +32,19 @@ function getShortCookie() {
   return "";
 }
 
+function getKidsCookie() {
+  let cookies = document.cookie;
+  let token = cookies.split("; ").find((e) => e.startsWith("kids"));
+  if (token == undefined) {
+    return "";
+  }
+  token = token.substring(6);
+  if (token != undefined) {
+    return token;
+  }
+  return "";
+}
+
 function isConnected() {
   return getToken().length != 0;
 }
@@ -46,6 +59,14 @@ function isAcceptShortConditions() {
 
 function isNotAcceptShortConditions() {
   return getShortCookie().length === 0;
+}
+
+function isAKids() {
+  return getKidsCookie().length === 0;
+}
+
+function isNotAKids() {
+  return getKidsCookie() !== "true";
 }
 
 function getCookie(name: any) {
@@ -85,12 +106,15 @@ async function customFetch(
 
 const [error, setError] = createSignal("");
 const [success, setSuccess] = createSignal("");
+const [warning, setWarning] = createSignal("");
 const [errorTimer, setErrorTimer] = createSignal<number>();
 const [successTimer, setSuccessTimer] = createSignal<number>();
+const [warningTimer, setWarningTimer] = createSignal<number>();
 
 function displayError(error: string) {
   setSuccess("");
   setError(error);
+  setWarning("");
   clearTimeout(errorTimer());
   setErrorTimer(
     setTimeout(() => {
@@ -102,10 +126,23 @@ function displayError(error: string) {
 function displaySuccess(success: string) {
   setSuccess(success);
   setError("");
+  setWarning("");
   clearTimeout(successTimer());
   setSuccessTimer(
     setTimeout(() => {
       setSuccess("");
+    }, 2000)
+  );
+}
+
+function displayWarning(warning: string) {
+  setSuccess("");
+  setError("");
+  setWarning("");
+  clearTimeout(warningTimer());
+  setWarningTimer(
+    setTimeout(() => {
+      setWarning("");
     }, 2000)
   );
 }
@@ -125,12 +162,17 @@ function findPermissions(permission: number) {
 export {
   getHumanDate,
   getToken,
+  getKidsCookie,
   isConnected,
   isNotConnected,
+  isAKids,
+  isNotAKids,
   getError,
   customFetch,
   displayError,
   displaySuccess,
+  displayWarning,
+  warning,
   error,
   success,
   getCookie,

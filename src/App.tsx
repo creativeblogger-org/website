@@ -8,6 +8,7 @@ import {
   error,
   isConnected,
   success,
+  warning,
 } from "./utils/functions_utils";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -51,6 +52,11 @@ const App: Component = () => {
       <Show when={success().length > 0}>
         <h2 class="text-center text-green-600 pt-3 bg-white opacity-75 text-2xl fixed top-0 w-screen">
           {success()}
+        </h2>
+      </Show>
+      <Show when={warning().length > 0}>
+        <h2 class="text-center text-red-600 pt-3 bg-white opacity-75 text-2xl fixed top-0 w-screen">
+          {warning()}
         </h2>
       </Show>
       <NavBar />
