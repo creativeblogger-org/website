@@ -26,8 +26,11 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_writer() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/1`,
-      "PUT"
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      "PUT",
+      JSON.stringify({
+        permission: 1,
+      })
     );
     if (!res.ok) {
       displayError(getError(await res.json()));
@@ -40,8 +43,11 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_mods() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/2`,
-      "PUT"
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      "PUT",
+      JSON.stringify({
+        permission: 2,
+      })
     );
     if (!res.ok) {
       displayError(getError(await res.json()));
@@ -54,8 +60,11 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_member() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/0`,
-      "PUT"
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      "PUT",
+      JSON.stringify({
+        permission: 0,
+      })
     );
     if (!res.ok) {
       displayError(getError(await res.json()));
