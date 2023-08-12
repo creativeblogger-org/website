@@ -465,7 +465,9 @@ const PostComponent = (props: {
           class="post-content text-lg md:text-xl break-all w-full md:w-2/3 border rounded-md p-8 m-3 mx-auto"
           contentEditable={editing()}
           innerHTML={
-            !editing() ? Marked.parse(props.post.content) : props.post.content
+            !editing()
+              ? Marked.parse(props.post.content)
+              : Marked.parse(props.post.content)
           }
         ></div>
         <Show when={editing()}>

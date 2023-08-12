@@ -42,7 +42,6 @@ const PanelPage: Component = () => {
         />
       </div>
       <div class="p-3 w-full">
-        <hr class="m-5" />
         <h1 class="text-center text-4xl">Utilisateurs :</h1>
         <div class=" w-11/12 grid grid-cols-2 m-auto md:grid-cols-4" id="users">
           <For each={users()} fallback={"Aucun utilisateur pour le moment..."}>

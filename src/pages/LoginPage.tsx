@@ -52,7 +52,7 @@ const Login: Component = () => {
 
                 displaySuccess("Connecté avec succès ! Redirection...");
 
-                setTimeout(() => location.assign("/"), 1000);
+                setTimeout(() => location.assign("/"), 2000);
               }}
             >
               <div>

@@ -1,10 +1,12 @@
 import {
   customFetch,
   displayError,
+  displaySuccess,
   findPermissions,
   getError,
 } from "../utils/functions_utils";
 import { fetch_users } from "../pages/PanelPage";
+import { Show } from "solid-js";
 
 const UsersPreviewComponent = (props: { user: User }) => {
   async function delete_user() {
@@ -18,13 +20,13 @@ const UsersPreviewComponent = (props: { user: User }) => {
       return;
     }
 
-    alert("Utilisateur supprimé avec succès !");
+    displaySuccess("Utilisateur supprimé avec succès !");
     fetch_users();
   }
 
   async function become_writer() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/${props.user.username}/1`,
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/1`,
       "PUT"
     );
     if (!res.ok) {
@@ -32,7 +34,35 @@ const UsersPreviewComponent = (props: { user: User }) => {
       return;
     }
 
-    alert("L'utilisateur est bel et bien devenu rédacteur !");
+    displaySuccess("L'utilisateur est bel et bien devenu rédacteur !");
+    fetch_users();
+  }
+
+  async function become_mods() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/2`,
+      "PUT"
+    );
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("L'utilisateur est bel et bien devenu modérateur !");
+    fetch_users();
+  }
+
+  async function become_member() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/users/upgrade/${props.user.username}/0`,
+      "PUT"
+    );
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("L'utilisateur est bel et bien devenu membre !");
     fetch_users();
   }
 
@@ -60,6 +90,42 @@ const UsersPreviewComponent = (props: { user: User }) => {
           Delete
         </button>
       </div>
+      <Show when={props.user.permission < 3}>
+        <div>
+          <h1 class="text-center">Faire devenir :</h1>
+          <div class="grid grid-cols-1">
+            <Show when={props.user.permission !== 0}>
+              <button
+                class="bg-blue-500 p-2 m-3 rounded-md"
+                onclick={become_member}
+              >
+                Membre
+              </button>
+            </Show>
+            <Show when={props.user.permission !== 1}>
+              <button
+                class="bg-green-500 p-2 m-3 rounded-md"
+                onclick={become_writer}
+              >
+                Rédacteur
+              </button>
+            </Show>
+            <Show when={props.user.permission !== 2}>
+              <button
+                class="bg-orange-500 p-2 m-3 rounded-md text-xs lg:text-base"
+                onclick={become_mods}
+              >
+                Mods
+              </button>
+            </Show>
+          </div>
+        </div>
+      </Show>
+      <Show when={props.user.permission === 3}>
+        <div class="bg-black p-2 m-3 rounded-md text-xs lg:text-base text-center text-white">
+          Administrateur
+        </div>
+      </Show>
     </div>
   );
 };
