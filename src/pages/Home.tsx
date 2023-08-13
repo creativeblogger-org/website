@@ -5,7 +5,6 @@ import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.png";
 import SearchLogo from "../assets/button_icons/search.png";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
-import ThemeSwitcher from "../components/ThemeSwitcher";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 

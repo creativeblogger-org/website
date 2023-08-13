@@ -156,7 +156,7 @@ const MePage: Component = () => {
               name="file"
               id="dropzone-file"
               class="hidden"
-              accept=".png"
+              accept=".png, .jpg, .jpeg"
               onChange={handleFileChange}
             />
           </label>
