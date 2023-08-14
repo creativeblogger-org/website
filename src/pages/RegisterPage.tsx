@@ -142,9 +142,9 @@ const Register: Component = () => {
                 <input
                   type="date"
                   name="birthdate"
-                  value={userBirthdate()}
+                  value={userBirthdate() ?? ""}
                   onInput={(e) => {
-                    setUserBirthdate(e.target.value);
+                    setUserBirthdate((new Date(Date.parse(e.target.value))).toISOString());
                     console.log(userBirthdate());
                   }}
                   id="birthdate"

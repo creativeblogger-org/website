@@ -255,7 +255,7 @@ const MePage: Component = () => {
           </button>
         </form>
         <p class="text-black dark:text-white">Date de naissance :</p>
-        <h2>{infos().birthdate}</h2>
+        <h2>{(new Date(Date.parse(infos().birthdate))).toLocaleDateString()}</h2>
         <div class="flex justify-center m-5">
           <h1 class="text-black dark:text-white mx-5">Thème :</h1>
           <ThemeSwitcher />
