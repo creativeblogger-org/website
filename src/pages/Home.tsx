@@ -4,7 +4,12 @@ import { NavLink, useNavigate } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.png";
 import SearchLogo from "../assets/button_icons/search.png";
-import { customFetch, displayError, getError } from "../utils/functions_utils";
+import {
+  customFetch,
+  displayError,
+  getError,
+  isNotConnected,
+} from "../utils/functions_utils";
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
 
@@ -167,6 +172,11 @@ const Home: Component = () => {
             </button>
           </Show>
         </div>
+        <Show when={isNotConnected()}>
+          <h1 class="text-center text-orange-500 text-2xl my-4">
+            Connectez-vous pour accéder à plus d'articles !
+          </h1>
+        </Show>
       </div>
     </MetaProvider>
   );

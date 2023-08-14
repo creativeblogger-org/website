@@ -58,12 +58,12 @@ async function logout() {
     `https://api.creativeblogger.org/auth/logout`,
     "GET"
   );
+  delete_cookie();
   if (!res.ok) {
     displayError(getError(await res.json()));
     return;
   }
 
-  delete_cookie();
   displaySuccess("Vous avez été déconnecté avec succès !");
   location.assign("/");
 }
@@ -294,4 +294,4 @@ const NavBar: Component = () => {
 };
 
 export default NavBar;
-export { getInfos, infos };
+export { getInfos, infos, logout, delete_cookie };

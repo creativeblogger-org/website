@@ -7,6 +7,7 @@ interface User {
   update_at: string;
   password: string;
   pp: string;
+  birthdate: string;
 }
 
 interface Comment {

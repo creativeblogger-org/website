@@ -9,7 +9,7 @@ import {
 import { MetaProvider, Title } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import { displaySuccess } from "../utils/functions_utils";
-import { getInfos, infos } from "../components/NavBar";
+import { delete_cookie, getInfos, infos, logout } from "../components/NavBar";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 import ky from "ky";
 import { getToken } from "../utils/functions_utils";
@@ -19,7 +19,7 @@ async function deleteUser() {
     `https://api.creativeblogger.org/@me`,
     "DELETE"
   );
-
+  delete_cookie();
   if (!res.ok) {
     displayError(getError(await res.json()));
     return;
@@ -254,6 +254,8 @@ const MePage: Component = () => {
             Mettre à jour
           </button>
         </form>
+        <p class="text-black dark:text-white">Date de naissance :</p>
+        <h2>{infos().birthdate}</h2>
         <div class="flex justify-center m-5">
           <h1 class="text-black dark:text-white mx-5">Thème :</h1>
           <ThemeSwitcher />

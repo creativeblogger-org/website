@@ -4,12 +4,8 @@ import {
   customFetch,
   displayError,
   displaySuccess,
-  displayWarning,
-  getCookie,
   getError,
   getHumanDate,
-  getKidsCookie,
-  isAKids,
   isConnected,
 } from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg";
@@ -192,53 +188,8 @@ const PostComponent = (props: {
     location.assign("/users/" + props.post.author.username);
   }
 
-  function haveMoreThan15() {
-    document.cookie = `kids=${props.post.required_age}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
-    window.location.reload();
-  }
-  function haveLessThan15() {
-    location.assign("/");
-  }
   return (
     <div class="flex">
-      <Show when={isAKids() && props.post.required_age > 0}>
-        <div>
-          <div class="fixed p-[20vw] pt-[10vh] pb-[10vh] top-0 left-0 h-screen z-[2] w-screen bg-black">
-            <h1 class="text-xl md:text-3xl lg:text-5xl underline font-bold text-orange-500 text-center w-full m-0 p-0">
-              Il faut avoir {props.post.required_age} ans pour voir ce contenu !{" "}
-            </h1>
-            <p class="text-sm sm:text-xl lg:text-2xl mt-1 sm:mt-3 lg:mt-8 mx-auto w-full text-white">
-              Non ne vous inquiétez pas, vous ne vous êtes pas faits pirater !
-              Si vous voyez ce contenu, c'est uniquement car, vous êtes
-              potentiellement un enfant ( sorry pour les autres ) et que le
-              contenu que vous vous apprêtiez à voir n'est pas adapté pour vous.
-              Vous pouvez faire disparaître ce pop-up si vous avez l'âge requis
-              pour voir le contenu ( c'est-à-dire minimum{" "}
-              {props.post.required_age} ans), sinon nous vous prions de
-              retourner à la page d'accueil. Si vous cliquez sur "Je veux voir
-              le contenu" alors que ce n'est pas le cas, Creative Blogger ne
-              pourra pas être tenu responsable.
-            </p>
-            <div class="grid grid-cols-2 mt-10 w-full sm:w-2/3 mx-auto">
-              <button
-                class="mx-2 bg-red-500 text-white p-2 text-xl rounded-md hover:rounded-xl duration-150"
-                onclick={haveLessThan15}
-              >
-                Je ne veux pas voir le contenu
-              </button>
-              <button
-                onclick={haveMoreThan15}
-                class="bg-green-500 text-white text-xl p-2 mx-2 rounded-md hover:rounded-xl duration-150"
-              >
-                Je veux voir le contenu
-              </button>
-            </div>
-            <p class="text-black mt-5 text-center">
-              Les couleurs sont bien nan ? Tu penses à quoi toi ?
-            </p>
-          </div>
-        </div>
-      </Show>
       <div class="p-4 m-5 relative">
         <h1 class="text-4xl font-bold text-center font-pangolin">
           {props.post.title}

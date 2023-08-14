@@ -41,6 +41,11 @@ const Register: Component = () => {
                 const password = (
                   document.getElementById("password") as HTMLInputElement
                 ).value;
+                const birthdate = (
+                  document.getElementById("birthdate") as HTMLInputElement
+                ).value;
+
+                console.log(birthdate);
 
                 const res = await customFetch(
                   "http://localhost:3333/auth/register",
@@ -49,6 +54,7 @@ const Register: Component = () => {
                     username: name,
                     email: email,
                     password: password,
+                    birthdate: birthdate,
                   })
                 );
 
@@ -62,7 +68,7 @@ const Register: Component = () => {
 
                 displaySuccess("Compte créé avec succès ! Redirection...");
 
-                setTimeout(() => location.assign("/"), 1000);
+                setTimeout(() => location.assign("/"), 2000);
               }}
             >
               <div>
@@ -127,6 +133,19 @@ const Register: Component = () => {
                   type="password"
                   name="confirm-password"
                   id="confirm-password"
+                  required
+                  class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+                />
+                <label
+                  for="birthdate"
+                  class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                >
+                  Date de naissance
+                </label>
+                <input
+                  type="date"
+                  name="birthdate"
+                  id="birthdate"
                   required
                   class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                 />

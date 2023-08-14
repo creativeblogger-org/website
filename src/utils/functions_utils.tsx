@@ -32,19 +32,6 @@ function getShortCookie() {
   return "";
 }
 
-function getKidsCookie() {
-  let cookies = document.cookie;
-  let token = cookies.split("; ").find((e) => e.startsWith("kids"));
-  if (token == undefined) {
-    return "";
-  }
-  token = token.substring(6);
-  if (token != undefined) {
-    return token;
-  }
-  return "";
-}
-
 function isConnected() {
   return getToken().length != 0;
 }
@@ -59,14 +46,6 @@ function isAcceptShortConditions() {
 
 function isNotAcceptShortConditions() {
   return getShortCookie().length === 0;
-}
-
-function isAKids() {
-  return getKidsCookie().length === 0;
-}
-
-function isNotAKids() {
-  return getKidsCookie() !== "true";
 }
 
 function getCookie(name: any) {
@@ -162,11 +141,8 @@ function findPermissions(permission: number) {
 export {
   getHumanDate,
   getToken,
-  getKidsCookie,
   isConnected,
   isNotConnected,
-  isAKids,
-  isNotAKids,
   getError,
   customFetch,
   displayError,
