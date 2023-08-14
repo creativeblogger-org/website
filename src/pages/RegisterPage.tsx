@@ -9,7 +9,7 @@ import {
 } from "../utils/functions_utils";
 
 const Register: Component = () => {
-  const [userBirthdate, setUserBirthdate] = createSignal("");
+  const [userBirthdate, setUserBirthdate] = createSignal(0);
 
   return (
     <MetaProvider>
@@ -33,10 +33,6 @@ const Register: Component = () => {
               action=""
               onsubmit={async (e) => {
                 e.preventDefault();
-
-                const chosenDate = createMemo(() =>
-                  Date.parse(userBirthdate())
-                );
 
                 const name = (
                   document.getElementById("username") as HTMLInputElement
@@ -62,7 +58,7 @@ const Register: Component = () => {
                     email: email,
                     password: password,
                     birthdate: birthday,
-                    birthday: chosenDate(),
+                    birthday: userBirthdate(),
                   })
                 );
 
@@ -155,9 +151,8 @@ const Register: Component = () => {
                   name="birthday"
                   value={userBirthdate()}
                   onInput={(e) => {
-                    setUserBirthdate(e.target.value);
+                    setUserBirthdate(Date.parse(e.target.value));
                     console.log(userBirthdate());
-                    console.log(Date.parse(userBirthdate()));
                   }}
                   id="birthday"
                   required
