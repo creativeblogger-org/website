@@ -45,7 +45,7 @@ const Register: Component = () => {
                 ).value;
 
                 const res = await customFetch(
-                  "http://localhost:3333/auth/register",
+                  "https://api.creativeblogger.org/auth/register",
                   "POST",
                   JSON.stringify({
                     username: name,
