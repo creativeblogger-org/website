@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createMemo, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import {
@@ -9,6 +9,8 @@ import {
 } from "../utils/functions_utils";
 
 const Register: Component = () => {
+  const [userBirthdate, setUserBirthdate] = createSignal("");
+
   return (
     <MetaProvider>
       <div class="Home">
@@ -32,6 +34,10 @@ const Register: Component = () => {
               onsubmit={async (e) => {
                 e.preventDefault();
 
+                const chosenDate = createMemo(() =>
+                  Date.parse(userBirthdate())
+                );
+
                 const name = (
                   document.getElementById("username") as HTMLInputElement
                 ).value;
@@ -41,11 +47,12 @@ const Register: Component = () => {
                 const password = (
                   document.getElementById("password") as HTMLInputElement
                 ).value;
-                const birthdate = (
-                  document.getElementById("birthdate") as HTMLInputElement
+                // const birthdate = (
+                //   document.getElementById("birthdate") as HTMLInputElement
+                // ).value;
+                const birthday = (
+                  document.getElementById("birthday") as HTMLInputElement
                 ).value;
-
-                console.log(birthdate);
 
                 const res = await customFetch(
                   "http://localhost:3333/auth/register",
@@ -54,7 +61,8 @@ const Register: Component = () => {
                     username: name,
                     email: email,
                     password: password,
-                    birthdate: birthdate,
+                    birthdate: birthday,
+                    birthday: chosenDate,
                   })
                 );
 
@@ -144,8 +152,14 @@ const Register: Component = () => {
                 </label>
                 <input
                   type="date"
-                  name="birthdate"
-                  id="birthdate"
+                  name="birthday"
+                  value={userBirthdate()}
+                  onInput={(e) => {
+                    setUserBirthdate(e.target.value);
+                    console.log(userBirthdate());
+                    console.log(Date.parse(userBirthdate()));
+                  }}
+                  id="birthday"
                   required
                   class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                 />
