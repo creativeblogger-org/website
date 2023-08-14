@@ -9,7 +9,7 @@ import {
 } from "../utils/functions_utils";
 
 const Register: Component = () => {
-  const [userBirthdate, setUserBirthdate] = createSignal(0);
+  const [userBirthdate, setUserBirthdate] = createSignal("");
 
   return (
     <MetaProvider>
@@ -43,22 +43,15 @@ const Register: Component = () => {
                 const password = (
                   document.getElementById("password") as HTMLInputElement
                 ).value;
-                // const birthdate = (
-                //   document.getElementById("birthdate") as HTMLInputElement
-                // ).value;
-                const birthday = (
-                  document.getElementById("birthday") as HTMLInputElement
-                ).value;
 
                 const res = await customFetch(
-                  "https://api.creativeblogger.org/auth/register",
+                  "http://localhost:3333/auth/register",
                   "POST",
                   JSON.stringify({
                     username: name,
                     email: email,
                     password: password,
-                    birthdate: birthday,
-                    birthday: userBirthdate(),
+                    birthdate: userBirthdate(),
                   })
                 );
 
@@ -148,13 +141,13 @@ const Register: Component = () => {
                 </label>
                 <input
                   type="date"
-                  name="birthday"
+                  name="birthdate"
                   value={userBirthdate()}
                   onInput={(e) => {
-                    setUserBirthdate(Date.parse(e.target.value));
+                    setUserBirthdate(e.target.value);
                     console.log(userBirthdate());
                   }}
-                  id="birthday"
+                  id="birthdate"
                   required
                   class="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
                 />
