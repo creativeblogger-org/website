@@ -11,6 +11,7 @@ import { fetch_posts } from "./Home";
 import { Marked } from "@ts-stack/markdown";
 import ky from "ky";
 import { getInfos, infos } from "../components/NavBar";
+import { API_URL } from "../App";
 
 interface UploadResponse {
   path: string;
@@ -45,7 +46,7 @@ async function onPostSubmit(e: Event) {
   ).value;
 
   const res = await customFetch(
-    "https://api.creativeblogger.org/posts",
+    "${API_URL}/posts",
     "POST",
     JSON.stringify({
       title: title,
@@ -70,7 +71,7 @@ async function onPostSubmit(e: Event) {
 
 async function fetch_users() {
   setIsLoading(true);
-  const res = await customFetch("https://api.creativeblogger.org/verif/writer");
+  const res = await customFetch(`${API_URL}/verif/writer`);
 
   if (!res.ok) {
     setIsLoading(false);
@@ -233,7 +234,7 @@ const CreatePost: Component = () => {
 
       // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
       const response = await api.post(
-        "https://api.creativeblogger.org/posts/upload",
+        `${API_URL}/posts/upload`,
         {
           body: formData,
         }
@@ -244,7 +245,7 @@ const CreatePost: Component = () => {
         displaySuccess("L'image a été uploadée !");
         setUploadedImagePath(responseData.path);
         setFullUploadedImagePath(
-          `https://api.creativeblogger.org/public/posts/${responseData.path}`
+          `${API_URL}/public/posts/${responseData.path}`
         );
         // Effectuer les actions supplémentaires si nécessaire
       } else {

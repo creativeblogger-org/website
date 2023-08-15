@@ -13,10 +13,11 @@ import { delete_cookie, getInfos, infos, logout } from "../components/NavBar";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 import ky from "ky";
 import { getToken } from "../utils/functions_utils";
+import { API_URL } from "../App";
 
 async function deleteUser() {
   const res = await customFetch(
-    `https://api.creativeblogger.org/@me`,
+    `${API_URL}/@me`,
     "DELETE"
   );
   delete_cookie();
@@ -52,7 +53,7 @@ const MePage: Component = () => {
 
   async function deleteImage() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/@me/delete`,
+      `${API_URL}/@me/delete`,
       "DELETE"
     );
 
@@ -86,7 +87,7 @@ const MePage: Component = () => {
 
       // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
       const response = await api.post(
-        "https://api.creativeblogger.org/@me/upload",
+        `${API_URL}/@me/upload`,
         {
           body: formData,
         }
@@ -182,7 +183,7 @@ const MePage: Component = () => {
             e.preventDefault();
 
             const res = await customFetch(
-              "https://api.creativeblogger.org/@me",
+              `${API_URL}/@me`,
               "PUT",
               new FormData(
                 document.getElementById("update-infos-form") as HTMLFormElement

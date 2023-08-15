@@ -16,12 +16,13 @@ import {
 import { MetaProvider, Title } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import PostPreviewComponent from "../components/PostPreviewComponent";
+import { API_URL } from "../App";
 
 const [user, setUser] = createSignal({} as User);
 
 async function getUser() {
   const res = await customFetch(
-    `https://api.creativeblogger.org${location.pathname}`
+    `${API_URL}${location.pathname}`
   );
 
   if (!res.ok) {
@@ -54,7 +55,7 @@ const UserPage: Component = () => {
   async function fetch_posts(id: number) {
     setIsLoading(true);
     const res = await customFetch(
-      `https://api.creativeblogger.org/posts?user=${id}`
+      `${API_URL}/posts?user=${id}`
     );
 
     if (!res.ok) {

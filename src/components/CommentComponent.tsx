@@ -12,6 +12,7 @@ import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import SaveIcon from "../assets/button_icons/save.svg";
+import { API_URL } from "../App";
 
 async function update_comment(
   comment: RudimentaryComment,
@@ -19,7 +20,7 @@ async function update_comment(
 ) {
   comment.content = new_content;
   const res = await customFetch(
-    `https://api.creativeblogger.org/comments/${comment.id}`,
+    `${API_URL}/comments/${comment.id}`,
     "PUT",
     JSON.stringify(comment)
   );
@@ -35,7 +36,7 @@ async function update_comment(
 
 async function delete_comment(id: number) {
   const res = await customFetch(
-    `https://api.creativeblogger.org/comments/${id}`,
+    `${API_URL}/comments/${id}`,
     "DELETE"
   );
 

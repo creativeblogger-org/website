@@ -16,8 +16,8 @@ import ShortIcon from "../assets/img/short-logo.png";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
-import { fetch_shorts } from "../pages/ShortsPage";
 import { Marked } from "@ts-stack/markdown";
+import { API_URL } from "../App";
 
 const [page, setPage] = createSignal(1);
 
@@ -78,7 +78,7 @@ const [editing, setEditing] = createSignal(false);
 
 async function delete_post() {
   const res = await customFetch(
-    `https://api.creativeblogger.org${location.pathname}`,
+    `${API_URL}${location.pathname}`,
     "DELETE"
   );
 
@@ -104,7 +104,7 @@ async function update_post() {
     document.getElementById("create-post-image") as HTMLInputElement
   ).value;
   const res = await customFetch(
-    `https://api.creativeblogger.org${location.pathname}`,
+    `${API_URL}${location.pathname}`,
     "PUT",
     JSON.stringify({
       title: title,
@@ -159,31 +159,6 @@ const PostComponent = (props: {
     }
   });
 
-  async function postShort() {
-    const title = props.post.title;
-    const desc =
-      props.post.description +
-      `<br /> [Découvrez l'article !](https://creativeblogger.org/posts/${props.post.slug})`;
-
-    const res = await customFetch(
-      "https://api.creativeblogger.org/shorts",
-      "POST",
-      JSON.stringify({
-        title: title,
-        content: desc,
-      })
-    );
-
-    if (!res.ok) {
-      displayError(getError(await res.json()));
-      return;
-    }
-
-    displaySuccess("Short publié avec succès !");
-    location.assign("/shorts");
-    fetch_shorts();
-  }
-
   function imgLink() {
     location.assign("/users/" + props.post.author.username);
   }
@@ -194,13 +169,6 @@ const PostComponent = (props: {
         <h1 class="text-4xl font-bold text-center font-pangolin">
           {props.post.title}
         </h1>
-        <Show when={isConnected() === true}>
-          <div class="absolute top-20 left-0 p-2 flex gap-2 sm:top-0">
-            <button onclick={() => postShort()}>
-              <img src={ShortIcon} alt="Short Blog icon" class="h-8 sm:h-10" />
-            </button>
-          </div>
-        </Show>
         <Show when={props.post.has_permission}>
           <div class="absolute top-0 right-0 p-2 flex gap-2 invisible sm:visible">
             <button onclick={() => setEditing((edit) => !edit)}>
@@ -437,7 +405,7 @@ const PostComponent = (props: {
               e.preventDefault();
 
               post_comment(
-                `https://api.creativeblogger.org/posts/${props.post.slug}/comment`,
+                `${API_URL}/posts/${props.post.slug}/comment`,
                 (document.getElementById("comment-content") as HTMLInputElement)
                   .value
               );

@@ -5,6 +5,7 @@ import { NavLink } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
 import { fetch_posts } from "./Home";
+import { API_URL } from "../App";
 
 const [posts, setPosts] = createSignal([] as Post[]);
 const [users, setUsers] = createSignal([] as User[]);
@@ -12,7 +13,7 @@ const [isLoading, setIsLoading] = createSignal(false);
 
 async function fetch_users() {
   setIsLoading(true);
-  const res = await customFetch("https://api.creativeblogger.org/users");
+  const res = await customFetch(`${API_URL}/users`);
 
   if (!res.ok) {
     setIsLoading(false);

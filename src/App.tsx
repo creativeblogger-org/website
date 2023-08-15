@@ -11,6 +11,8 @@ import {
   warning,
 } from "./utils/functions_utils";
 
+const API_URL = "https://api.creativeblogger.org"
+
 const Home = lazy(() => import("./pages/Home"));
 const CreatePostButton = lazy(() => import("./components/CreatePostComponent"));
 const Error404 = lazy(() => import("./pages/Error404"));
@@ -25,7 +27,6 @@ const PanelPage = lazy(() => import("./pages/PanelPage"));
 const MePage = lazy(() => import("./pages/MePage"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const BecomePage = lazy(() => import("./pages/BecomePage"));
-const ShortsPage = lazy(() => import("./pages/ShortsPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SocialPage = lazy(() => import("./pages/SocialPage"));
 
@@ -72,7 +73,6 @@ const App: Component = () => {
         <Route path={"/profile"} element={<MePage />} />
         <Route path={"/users/:username"} element={<UserPage />} />
         <Route path={"/become"} element={<BecomePage />} />
-        <Route path={"/shorts"} element={<ShortsPage />} />
         <Route path={"/terms"} element={<TermsPage />} />
         <Route path={"/social"} element={<SocialPage />} />
         <Route path="*" element={<Error404 />} />
@@ -86,3 +86,4 @@ const App: Component = () => {
 };
 
 export default App;
+export { API_URL }

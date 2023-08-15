@@ -1,4 +1,4 @@
-import { Component, createMemo, createSignal } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import {
@@ -7,6 +7,7 @@ import {
   displaySuccess,
   getError,
 } from "../utils/functions_utils";
+import { API_URL } from "../App";
 
 const Register: Component = () => {
   const [userBirthdate, setUserBirthdate] = createSignal("");
@@ -44,14 +45,17 @@ const Register: Component = () => {
                   document.getElementById("password") as HTMLInputElement
                 ).value;
 
+                var convertedDate = new Date(userBirthdate()).toISOString()
+                console.log(convertedDate);
+
                 const res = await customFetch(
-                  "https://api.creativeblogger.org/auth/register",
+                  `${API_URL}/auth/register`,
                   "POST",
                   JSON.stringify({
                     username: name,
                     email: email,
                     password: password,
-                    birthdate: userBirthdate(),
+                    birthdate: convertedDate,
                   })
                 );
 
@@ -144,7 +148,7 @@ const Register: Component = () => {
                   name="birthdate"
                   value={userBirthdate() ?? ""}
                   onInput={(e) => {
-                    setUserBirthdate((new Date(Date.parse(e.target.value))).toISOString());
+                    setUserBirthdate(e.target.value);
                     console.log(userBirthdate());
                   }}
                   id="birthdate"

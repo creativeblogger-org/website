@@ -15,6 +15,7 @@ import { fetch_posts_by_tags, setPosts } from "../pages/Home";
 import ThemeSwitcher from "./ThemeSwitcher";
 import RegisterLogo from "../assets/button_icons/register.png";
 import LoginLogo from "../assets/button_icons/login.png";
+import { API_URL } from "../App";
 
 const [isLoading, setIsLoading] = createSignal(false);
 const [page, setPage] = createSignal(1);
@@ -22,7 +23,7 @@ const [page, setPage] = createSignal(1);
 async function fetch_posts() {
   setIsLoading(true);
   const res = await customFetch(
-    `https://api.creativeblogger.org/posts?limit=20&page=${page() - 1}`
+    `${API_URL}/posts?limit=20&page=${page() - 1}`
   );
 
   if (!res.ok) {
@@ -43,7 +44,7 @@ function delete_cookie() {
 const [infos, setInfos] = createSignal({} as User);
 
 async function getInfos() {
-  const res = await customFetch(`https://api.creativeblogger.org/@me/`, "GET");
+  const res = await customFetch(`${API_URL}/@me/`, "GET");
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -55,7 +56,7 @@ async function getInfos() {
 
 async function logout() {
   const res = await customFetch(
-    `https://api.creativeblogger.org/auth/logout`,
+    `${API_URL}/auth/logout`,
     "GET"
   );
   delete_cookie();

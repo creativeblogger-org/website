@@ -7,11 +7,12 @@ import {
 } from "../utils/functions_utils";
 import { fetch_users } from "../pages/PanelPage";
 import { Show } from "solid-js";
+import { API_URL } from "../App";
 
 const UsersPreviewComponent = (props: { user: User }) => {
   async function delete_user() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/${props.user.username}`,
+      `${API_URL}/users/${props.user.username}`,
       "DELETE"
     );
 
@@ -26,7 +27,7 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_writer() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      `${API_URL}/users/upgrade/${props.user.username}`,
       "PUT",
       JSON.stringify({
         permission: 1,
@@ -43,7 +44,7 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_mods() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      `${API_URL}/users/upgrade/${props.user.username}`,
       "PUT",
       JSON.stringify({
         permission: 2,
@@ -60,7 +61,7 @@ const UsersPreviewComponent = (props: { user: User }) => {
 
   async function become_member() {
     const res = await customFetch(
-      `https://api.creativeblogger.org/users/upgrade/${props.user.username}`,
+      `${API_URL}/users/upgrade/${props.user.username}`,
       "PUT",
       JSON.stringify({
         permission: 0,

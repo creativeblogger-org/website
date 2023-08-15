@@ -7,6 +7,7 @@ import {
   displaySuccess,
   getError,
 } from "../utils/functions_utils";
+import { API_URL } from "../App";
 
 const Login: Component = () => {
   return (
@@ -34,7 +35,7 @@ const Login: Component = () => {
                 e.preventDefault();
 
                 const res = await customFetch(
-                  "https://api.creativeblogger.org/auth/login",
+                  `${API_URL}/auth/login`,
                   "POST",
                   new FormData(
                     document.querySelector("form") as HTMLFormElement
