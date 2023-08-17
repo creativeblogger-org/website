@@ -9,8 +9,8 @@ const TermsPage: Component = () => {
         name="description"
         content="Creative Blogger - Projet collaboratif entre bloggers"
       />
+      <h1 class="text-center font-bold text-xl mt-2">Politique de confidentialité & conditions d'utilisation</h1>
       <div class="flex justify-center">
-        <h1>Politique de confidentialité & conditions d'utilisation</h1>
         <p class="p-2 rounded-md border m-5 w-1/2">
           Veuillez rester cordial dans vos propos. Vous pouvez y exprimer vos opinions tout en respectant celles des autres.
           <br />
