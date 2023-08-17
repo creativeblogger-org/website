@@ -15,21 +15,17 @@ const TermsPage: Component = () => {
           Veuillez rester cordial dans vos propos. Vous pouvez y exprimer vos
           opinions tout en respectant celles des autres.
           <br />
-          Nous vous rappelons également que vous seul êtes responsable de ce que
-          vous postez. Vous pouvez modifier ou supprimer vos posts qui, dans ce
-          cas, seront supprimés de la base de données.
+          Vous seul êtes responsable de ce que vous postez, tout contenu inapproprié sera supprimé et l'auteur pourra être sanctionné par un bannissement temporaire ou définitif. Vous pouvez modifier ou supprimer vos posts et commentaires qui, dans ce cas, seront supprimés de la base de données.
           <br />
-          Creative Blogger Org ne peut en aucun cas être tenu responsable du
-          contenu posté par ses membres.
+          Creative Blogger Org ne peut en aucun cas être tenu responsable du contenu posté par ses membres.
           <br />
-          Nous vous rappelons également que, dans un cadre juridique, nous
-          stockons votre IP.
+          Nous vous rappelons également que, dans un cadre juridique, nous stockons votre IP.
           <br />
-          Lors de l'inscription, nous collectons : <br /> 1. Le nom
-          d'utilisateur que vous avez donné dans le formulaire <br /> 2.
-          L'adresse e-mail que vous avez donné dans le formulaire <br /> 3. Le
-          mot de passe hasché que vous avez donné dans le formulaire <br /> 4.
-          La date de naissance que vous avez donné dans le formulaire
+          Lors de l'inscription, nous collectons : <br />
+          1. Votre nom d'utilisateur<br />
+          2. Votre adresse e-mail<br />
+          3. Votre mot de passe (dont seul le hash est stocké pour des raisons de sécurité)<br />
+          4. Votre date de naissance
         </p>
       </div>
     </MetaProvider>
