@@ -46,7 +46,7 @@ async function onPostSubmit(e: Event) {
   ).value;
 
   const res = await customFetch(
-    "${API_URL}/posts",
+    "https://api.creativeblogger.org/posts",
     "POST",
     JSON.stringify({
       title: title,
@@ -57,8 +57,6 @@ async function onPostSubmit(e: Event) {
       required_age: age_required,
     })
   );
-
-  console.log(typeof age_required + age_required);
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -233,12 +231,9 @@ const CreatePost: Component = () => {
       formData.append("image", selectedImage());
 
       // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
-      const response = await api.post(
-        `${API_URL}/posts/upload`,
-        {
-          body: formData,
-        }
-      );
+      const response = await api.post(`${API_URL}/posts/upload`, {
+        body: formData,
+      });
 
       if (response.ok) {
         const responseData: UploadResponse = await response.json();

@@ -22,9 +22,7 @@ const [page, setPage] = createSignal(1);
 
 async function fetch_posts() {
   setIsLoading(true);
-  const res = await customFetch(
-    `${API_URL}/posts?limit=20&page=${page() - 1}`
-  );
+  const res = await customFetch(`${API_URL}/posts?limit=20&page=${page() - 1}`);
 
   if (!res.ok) {
     setIsLoading(false);
@@ -55,10 +53,7 @@ async function getInfos() {
 }
 
 async function logout() {
-  const res = await customFetch(
-    `${API_URL}/auth/logout`,
-    "GET"
-  );
+  const res = await customFetch(`${API_URL}/auth/logout`, "GET");
   delete_cookie();
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -133,7 +128,7 @@ const NavBar: Component = () => {
           </NavLink> */}
           <button
             id="dropdown-btn-more"
-            class="text-teal-500 font-semibold sm:inline-flex rounded items-center hidden sm:visible"
+            class="text-teal-500 font-semibold inline-flex rounded items-center"
             onclick={toggleMenuMore}
           >
             <span class="sm:mr-1 text-xl sm:text-2xl md:text-3xl font-garamond">
@@ -179,12 +174,6 @@ const NavBar: Component = () => {
               </ul>
             </div>
           )}
-          <NavLink
-            class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 p-1 w-full duration-150 hover:text-indigo-500 hover:underline"
-            href="/shorts"
-          >
-            Short Blog
-          </NavLink>
         </div>
         <div class="m-2 mt-4 sm:m-4">
           <Show when={isNotConnected()}>
