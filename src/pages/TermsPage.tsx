@@ -23,6 +23,12 @@ const TermsPage: Component = () => {
           <br />
           Nous vous rappelons également que, dans un cadre juridique, nous
           stockons votre IP.
+          <br />
+          Lors de l'inscription, nous collectons : <br /> 1. Le nom
+          d'utilisateur que vous avez donné dans le formulaire <br /> 2.
+          L'adresse e-mail que vous avez donné dans le formulaire <br /> 3. Le
+          mot de passe hasché que vous avez donné dans le formulaire <br /> 5.
+          La date de naissance que vous avez donné dans le formulaire
         </p>
       </div>
     </MetaProvider>
