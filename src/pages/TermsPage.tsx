@@ -27,7 +27,7 @@ const TermsPage: Component = () => {
           Lors de l'inscription, nous collectons : <br /> 1. Le nom
           d'utilisateur que vous avez donné dans le formulaire <br /> 2.
           L'adresse e-mail que vous avez donné dans le formulaire <br /> 3. Le
-          mot de passe hasché que vous avez donné dans le formulaire <br /> 5.
+          mot de passe hasché que vous avez donné dans le formulaire <br /> 4.
           La date de naissance que vous avez donné dans le formulaire
         </p>
       </div>

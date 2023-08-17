@@ -19,8 +19,7 @@ const [page, setPage] = createSignal(1);
 async function fetch_posts_by_tags(tag: string) {
   setIsLoading(true);
   const res = await customFetch(
-    `${API_URL}/posts?tag=${tag}&limit=20&page=${page() - 1
-    }`
+    `${API_URL}/posts?tag=${tag}&limit=20&page=${page() - 1}`
   );
 
   if (!res.ok) {
@@ -36,9 +35,7 @@ async function fetch_posts_by_tags(tag: string) {
 
 async function fetch_posts() {
   setIsLoading(true);
-  const res = await customFetch(
-    `${API_URL}/posts?limit=20&page=${page() - 1}`
-  );
+  const res = await customFetch(`${API_URL}/posts?limit=20&page=${page() - 1}`);
 
   if (!res.ok) {
     setIsLoading(false);
@@ -54,8 +51,7 @@ async function fetch_posts() {
 async function fetch_posts_by_content(content: string) {
   setIsLoading(true);
   const res = await customFetch(
-    `${API_URL}/posts?q=${content}&limit=20&page=${page() - 1
-    }`
+    `${API_URL}/posts?q=${content}&limit=20&page=${page() - 1}`
   );
 
   if (!res.ok) {
@@ -129,8 +125,9 @@ const Home: Component = () => {
 
           <button
             onclick={fetch_posts}
-            class={`${isLoading() ? "animate-spin " : ""
-              }rounded-full border-white`}
+            class={`${
+              isLoading() ? "animate-spin " : ""
+            }rounded-full border-white`}
           >
             <img src={ReloadImg} class="h-8" alt="Reload image" />
           </button>
