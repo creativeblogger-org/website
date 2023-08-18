@@ -12,7 +12,7 @@ const date = new Date().getDay();
 
 const PostPreviewComponent = (props: { post: Post }) => {
   const [description, setDescription] = createSignal("");
-  const style = `background-image: url('${props.post.image}'); height: 104px; width: 104px;`;
+  const style = `background-image: url('${props.post.image}'); height: 104px;`;
 
   function ifDescTooLong(desc: string) {
     if (desc !== undefined && desc !== null) {
@@ -31,7 +31,10 @@ const PostPreviewComponent = (props: { post: Post }) => {
   return (
     <div class="rounded-md m-5 border border-slate-800 dark:border-white w-auto duration-150 hover:border-indigo-500">
       <div class=" h-40 w-full flex items-center bg-fixed p-4 rounded-md">
-        <div class="p-2 rounded-md" style={style}></div>
+        <div
+          class="p-2 rounded-md w-24 sm:w-24 md:w-36 lg:w-48 xl:w-40 2xl:w-32"
+          style={style}
+        ></div>
         <div class="text-black w-3/5">
           <h1 class="">
             <p class="text-xl sm:text-2xl w-full dark:text-white font-bold font-garamond mx-4 duration-150 hover:text-indigo-500">

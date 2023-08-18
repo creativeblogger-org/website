@@ -21,7 +21,7 @@ async function mastodonSend(e: Event) {
     .value;
 
   const res = await customFetch(
-    "http://localhost:3333/social/mastodon",
+    "https://api.creativeblogger.org/social/mastodon",
     "POST",
     JSON.stringify({
       title: title,

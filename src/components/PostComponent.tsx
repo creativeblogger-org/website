@@ -77,10 +77,7 @@ function convertMarkdownToHtml(markdown: string) {
 const [editing, setEditing] = createSignal(false);
 
 async function delete_post() {
-  const res = await customFetch(
-    `${API_URL}${location.pathname}`,
-    "DELETE"
-  );
+  const res = await customFetch(`${API_URL}${location.pathname}`, "DELETE");
 
   if (!res.ok) {
     displayError(getError(await res.json()));

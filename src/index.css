@@ -41,7 +41,9 @@ hr {
 .root {
   height: calc(100%);
 }
-
+.post-content p {
+  line-height: 1.8;
+}
 /* @media (prefers-color-scheme: dark) {
   .root {
     background-color: rgb(42, 53, 68);

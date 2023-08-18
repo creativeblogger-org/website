@@ -1,18 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <meta name="theme-color" content="#16b7a6" />
+    <title id="page-title">Creative Blogger</title>
+    <link rel="me" href="https://mastodon.social/@creativeblogger" />
+    <meta name="description" content="Project collaboratif entre bloggers" />
+    <link
+      rel="shortcut icon"
+      href="https://creativeblogger.org/assets/logo2-0c8c0aee.png"
+      type="image/x-icon"
+    />
+    <meta
+      name="keywords"
+      content="blog, bloggers, creative, creative blogger, créatif, collaboratif, open source, articles, news, tech, culture, enquête"
+    />
+    <meta property="og:title" content="Creative Blogger" />
+    <meta
+      property="og:description"
+      content="Projet collaboratif entre bloggers. Notre objectif est de créer une plate-forme centralisé dans laquelle un max de bloggers seront présents."
+    />
+    <meta
+      property="og:image"
+      content="https://creativeblogger.org/assets/banner-93a4ec7f.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="Creative Blogger, le projet collaboratif entre bloggers"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:site_name" content="Creative Blogger Org" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image:src"
+      content="https://creativeblogger.org/assets/banner-93a4ec7f.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Creative Blogger, le projet collaboratif entre bloggers"
+    />
+    <meta name="twitter:title" content="Creative Blogger" />
+    <meta name="twitter:site" content="@cblogorg1" />
+    <meta
+      name="twitter:description"
+      content="Projet collaboratif entre bloggers. Notre objectif est de créer une plate-forme centralisé dans laquelle un max de bloggers seront présents."
+    />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div
       class="root dark:bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:text-white"
       id="root"
     ></div>
 
+    <script>
+      window.setMetaTags = function (
+        title,
+        description,
+        imageUrl,
+        twitterTitle,
+        twitterDescription,
+        twitterImg,
+        twitterCard
+      ) {
+        document.title = title;
+        document.querySelector('meta[name="description"]').content =
+          description;
+        document.querySelector('meta[property="og:title"]').content = title;
+        document.querySelector('meta[property="og:description"]').content =
+          description;
+        document.querySelector('meta[property="og:image"]').content = imageUrl;
+        document.querySelector('meta[name="twitter:description"]').content =
+          twitterDescription;
+        document.querySelector('meta[name="twitter:title"]').content =
+          twitterTitle;
+        document.querySelector('meta[name="twitter:image:src"]').content =
+          twitterImg;
+        document.querySelector('meta[name="twitter:card"]').content =
+          twitterCard;
+      };
+    </script>
     <script src="/src/index.tsx" type="module"></script>
   </body>
 </html>

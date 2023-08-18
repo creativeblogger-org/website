@@ -2,6 +2,7 @@ import { Component } from "solid-js";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import imgError404 from "../assets/img/404.png";
 import { NavLink } from "@solidjs/router";
+import Banner from "../assets/img/banner.png";
 
 const Error404: Component = () => {
   return (
@@ -23,6 +24,7 @@ const Error404: Component = () => {
           >
             Retour en lieu sûr
           </NavLink>
+          <img src={Banner} alt="Bannière de CB" class="hidden" />
         </div>
         <br />
       </div>

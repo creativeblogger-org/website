@@ -11,7 +11,7 @@ import {
   warning,
 } from "./utils/functions_utils";
 
-const API_URL = "https://api.creativeblogger.org"
+const API_URL = "https://api.creativeblogger.org";
 
 const Home = lazy(() => import("./pages/Home"));
 const CreatePostButton = lazy(() => import("./components/CreatePostComponent"));
@@ -44,7 +44,6 @@ const App: Component = () => {
     <>
       <MetaProvider>
         <div class="Home bg-slate-700"></div>
-        <Link rel="icon" type="image/png" href={favicon} />
       </MetaProvider>
       <Show when={error().length > 0}>
         <h2 class="text-center text-red-500 pt-3 bg-white opacity-90 text-2xl fixed top-0 w-screen">
@@ -86,4 +85,4 @@ const App: Component = () => {
 };
 
 export default App;
-export { API_URL }
+export { API_URL };

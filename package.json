@@ -36,6 +36,7 @@
     "remark-gfm": "^3.0.1",
     "showdown": "^2.1.0",
     "solid-js": "^1.6.10",
+    "solid-start": "^0.3.3",
     "solidjs-use": "^2.1.0",
     "tw-elements": "^1.0.0-beta2",
     "twit": "^2.2.11",
