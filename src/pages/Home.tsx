@@ -145,7 +145,7 @@ const Home: Component = () => {
               onClick={toggleMenu}
               class="text-gray-500 hover:text-gray-700 px-5 focus:outline-none"
             >
-              <img src={SearchLogo} alt="search" class="h-8" />
+              <img loading="lazy" src={SearchLogo} alt="search" class="h-8" />
             </button>
           </div>
         </div>

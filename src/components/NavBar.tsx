@@ -110,7 +110,12 @@ const NavBar: Component = () => {
 
   return (
     <div class="text-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 mx-auto w-full">
-      <img src={Logo} alt="Logo de Creative Blogger" class="h-16 mx-auto m-1" />
+      <img
+        loading="lazy"
+        src={Logo}
+        alt="Logo de Creative Blogger"
+        class="h-16 mx-auto m-1"
+      />
       <NavLink
         class="sm:mt-4 mt-0 text-4xl md:text-5xl font-pangolin text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500"
         href="/"
@@ -243,7 +248,7 @@ const NavBar: Component = () => {
       </div>
       <div class="flex justify-center">
         <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
           href=""
           onclick={() => {
             fetch_posts_by_tags("news");
@@ -252,7 +257,7 @@ const NavBar: Component = () => {
           Actualités
         </NavLink>
         <NavLink
-          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
           href=""
           onclick={() => {
             fetch_posts_by_tags("tech");
@@ -261,7 +266,7 @@ const NavBar: Component = () => {
           Tech
         </NavLink>
         <NavLink
-          class="px-2 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 text-transparent font-garamond bg-clip-text bg-gradient-to-l from-teal-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
           href=""
           onclick={() => {
             fetch_posts_by_tags("culture");
@@ -270,7 +275,7 @@ const NavBar: Component = () => {
           Culture
         </NavLink>
         <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-transparent bg-clip-text bg-gradient-to-l from-indigo-500 to-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:bg-gradient-to-br"
+          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
           href=""
           onclick={() => {
             fetch_posts_by_tags("fakeorreal");

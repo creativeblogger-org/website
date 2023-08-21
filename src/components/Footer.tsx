@@ -35,43 +35,78 @@ const Footer: Component = () => {
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://twitter.com/cblogorg1"
             >
-              <img src={TwitterLogo} class="m-0 p-0" alt="Logo twitter" />
+              <img
+                loading="lazy"
+                src={TwitterLogo}
+                class="m-0 p-0"
+                alt="Logo twitter"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://github.com/creativeblogger-org"
             >
-              <img src={Githublogo} class="m-0 p-0" alt="Logo github" />
+              <img
+                loading="lazy"
+                src={Githublogo}
+                class="m-0 p-0"
+                alt="Logo github"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://discord.gg/uT8zVVn6rQ"
             >
-              <img src={DiscordLogo} class="m-0 p-0" alt="Logo discord" />
+              <img
+                loading="lazy"
+                src={DiscordLogo}
+                class="m-0 p-0"
+                alt="Logo discord"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://www.instagram.com/creativebloggerofficial/"
             >
-              <img src={InstaLogo} class="m-0 p-0" alt="Logo instgram" />
+              <img
+                loading="lazy"
+                src={InstaLogo}
+                class="m-0 p-0"
+                alt="Logo instgram"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://mastodon.social/invite/xco2jaQu"
             >
-              <img src={MastodonLogo} class="m-0 p-0" alt="Logo mastodon" />
+              <img
+                loading="lazy"
+                src={MastodonLogo}
+                class="m-0 p-0"
+                alt="Logo mastodon"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://matrix.to/#/#creative-blogger:matrix.org"
             >
-              <img src={ElementLogo} class="m-0 p-0" alt="Logo element" />
+              <img
+                loading="lazy"
+                src={ElementLogo}
+                class="m-0 p-0"
+                alt="Logo element"
+              />
             </NavLink>
             <NavLink
               class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
               href="https://www.youtube.com/channel/UCz8KjhrhdB8sHtPHfbjxOCw"
             >
-              <img src={YtbLogo} class="m-0 p-0" alt="Logo ytb" />
+              <img
+                loading="lazy"
+                src={YtbLogo}
+                class="m-0 p-0"
+                alt="Logo ytb"
+              />
             </NavLink>
           </div>
         </div>
@@ -97,14 +132,6 @@ const Footer: Component = () => {
             <li>
               <NavLink
                 class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
-                href="/shorts"
-              >
-                - Short Blog
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
                 href="https://app.creativeblogger.org"
               >
                 - Application
@@ -118,50 +145,6 @@ const Footer: Component = () => {
                 - Terms
               </NavLink>
             </li>
-            {/* <li class="grid grid-cols-4 w-1/5 mx-auto my-2">
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://twitter.com/cblogorg1"
-              >
-                <img src={TwitterLogo} class="m-0 p-0" alt="Logo twitter" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://github.com/creativeblogger-org"
-              >
-                <img src={Githublogo} class="m-0 p-0" alt="Logo github" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://discord.gg/uT8zVVn6rQ"
-              >
-                <img src={DiscordLogo} class="m-0 p-0" alt="Logo discord" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://www.instagram.com/creativebloggerofficial/"
-              >
-                <img src={InstaLogo} class="m-0 p-0" alt="Logo instgram" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://mastodon.social/invite/xco2jaQu"
-              >
-                <img src={MastodonLogo} class="m-0 p-0" alt="Logo mastodon" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://matrix.to/#/#creative-blogger:matrix.org"
-              >
-                <img src={ElementLogo} class="m-0 p-0" alt="Logo element" />
-              </NavLink>
-              <NavLink
-                class="text-teal-500 duration-150 my-1 mx-auto hover:text-indigo-500 hover:underline"
-                href="https://matrix.to/#/#creative-blogger:matrix.org"
-              >
-                <img src={YtbLogo} class="m-0 p-0" alt="Logo ytb" />
-              </NavLink>
-            </li> */}
           </ul>
         </div>
       </div>

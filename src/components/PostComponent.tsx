@@ -162,7 +162,7 @@ const PostComponent = (props: {
 
   return (
     <div class="flex">
-      <div class="p-4 m-5 relative">
+      <div class="sm:p-4 m-1 sm:m-5 relative">
         <h1 class="text-4xl font-bold text-center font-pangolin">
           {props.post.title}
         </h1>
@@ -378,7 +378,7 @@ const PostComponent = (props: {
           </div>
         </Show>
         <div
-          class="post-content text-lg md:text-xl break-all w-full md:w-2/3 border rounded-md p-8 m-3 mx-auto"
+          class="post-content text-lg md:text-xl break-words text-justify w-full md:w-2/3 border rounded-md sm:p-8 m-3 mx-auto"
           contentEditable={editing()}
           innerHTML={
             !editing()
@@ -412,7 +412,7 @@ const PostComponent = (props: {
               type="text"
               name="comment-content"
               id="comment-content"
-              class="rounded-md p-2 m-2 w-1/3 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100 border"
+              class="rounded-md p-2 m-2 w-2/3 sm:w-1/3 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100 border"
               placeholder="Ajoutez un commentaire..."
             />
             <button type="submit">
