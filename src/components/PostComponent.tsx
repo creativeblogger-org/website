@@ -383,7 +383,7 @@ const PostComponent = (props: {
           innerHTML={
             !editing()
               ? Marked.parse(props.post.content)
-              : Marked.parse(props.post.content)
+              : convertMarkdownToHtml(props.post.content)
           }
         ></div>
         <Show when={editing()}>

@@ -71,11 +71,11 @@ function CommentComponent(props: { comment: Comment }) {
         />
         <NavLink
           href={"/users/" + props.comment.author.username}
-          class="font-garamond text-xl duration-150 hover:text-indigo-800"
+          class="font-garamond text-xl duration-150 hover:text-indigo-800 mr-1"
         >
           @{props.comment.author.username}
         </NavLink>{" "}
-        <span class="sm:inline-flex rounded items-center hidden sm:visible">
+        <span class="sm:inline-flex rounded items-start hidden sm:visible">
           a posté ce commentaire le {getHumanDate(props.comment.created_at)}.{" "}
         </span>
         <Show when={props.comment.created_at != props.comment.updated_at}>

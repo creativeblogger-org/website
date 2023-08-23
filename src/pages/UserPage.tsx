@@ -77,18 +77,18 @@ const UserPage: Component = () => {
       <h1 class="text-center text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
         Fiche d'identité d'utilisateur :{" "}
       </h1>
-      <div class="flex justify-center mt-2">
+      <div class="p-2 border-2 rounded-md w-11/12 sm:w-1/2 xl:w-1/3 mx-auto duration-300 hover:border-indigo-500">
+        <div class="flex justify-center items-end mt-7">
         <img
           src={user().pp}
           alt="Cet utilisateur n'a pas de photo de profile"
-          class="h-20"
+          class="h-20 rounded-3xl p-0 m-0 mx-1"
         />
-      </div>
-      <div class="text-center">
-        <h2 class="text-3xl m-7">
-          Nom d'utilisateur :{" "}
+          <h2 class="text-3xl m-1">
           <strong class="text-teal-500">{user().username}</strong>
         </h2>
+      </div>
+      <div class="text-center">
         <h2 class="text-3xl m-7">
           Rôle :{" "}
           <strong class="text-teal-500">
@@ -102,6 +102,8 @@ const UserPage: Component = () => {
           </strong>
         </h2>
       </div>
+      </div>
+      
       <Show when={user().permission >= 1}>
         <h2 class="text-3xl m-7 text-center">
           Article(s) posté(s) par l'utilisateur :
