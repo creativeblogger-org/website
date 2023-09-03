@@ -5,7 +5,7 @@ import TwitterLogo from "../assets/button_icons/twitter.png";
 import Githublogo from "../assets/button_icons/github.png";
 import DiscordLogo from "../assets/button_icons/discord.png";
 import InstaLogo from "../assets/button_icons/insta.png";
-import MastodonLogo from "../assets/button_icons/mastodon.png";
+import MastodonLogo from "../assets/button_icons/mastodon.svg";
 import ElementLogo from "../assets/button_icons/element.png";
 import YtbLogo from "../assets/button_icons/ytb.png";
 
@@ -31,10 +31,7 @@ const Footer: Component = () => {
             connaître.
           </p>
           <div class="grid grid-cols-7 w-3/5 sm:w-4/5 lg:3/5 md:w-3/5 xl:w-2/5 my-2">
-            <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
-              href="https://twitter.com/cblogorg1"
-            >
+            <NavLink class="my-1 mx-2" href="https://twitter.com/cblogorg1">
               <img
                 loading="lazy"
                 src={TwitterLogo}
@@ -43,7 +40,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
+              class="my-1 mx-2"
               href="https://github.com/creativeblogger-org"
             >
               <img
@@ -53,19 +50,16 @@ const Footer: Component = () => {
                 alt="Logo github"
               />
             </NavLink>
-            <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
-              href="https://discord.gg/uT8zVVn6rQ"
-            >
+            <NavLink class="my-1 mx-2" href="https://discord.gg/uT8zVVn6rQ">
               <img
                 loading="lazy"
                 src={DiscordLogo}
-                class="m-0 p-0"
+                class="m-0 h-9 p-0"
                 alt="Logo discord"
               />
             </NavLink>
             <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
+              class="my-1 mx-2"
               href="https://www.instagram.com/creativebloggerofficial/"
             >
               <img
@@ -76,7 +70,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
+              class="my-1 mx-2"
               href="https://mastodon.social/invite/xco2jaQu"
             >
               <img
@@ -87,25 +81,14 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
+              class="my-1 mx-2"
               href="https://matrix.to/#/#creative-blogger:matrix.org"
             >
               <img
                 loading="lazy"
                 src={ElementLogo}
-                class="m-0 p-0"
+                class="m-0 h-9 p-0"
                 alt="Logo element"
-              />
-            </NavLink>
-            <NavLink
-              class="text-teal-500 duration-150 my-1 mx-1 hover:text-indigo-500 hover:underline"
-              href="https://www.youtube.com/channel/UCz8KjhrhdB8sHtPHfbjxOCw"
-            >
-              <img
-                loading="lazy"
-                src={YtbLogo}
-                class="m-0 p-0"
-                alt="Logo ytb"
               />
             </NavLink>
           </div>
@@ -124,14 +107,6 @@ const Footer: Component = () => {
             <li>
               <NavLink
                 class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
-                href="/about"
-              >
-                - A propos de nous
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
                 href="https://app.creativeblogger.org"
               >
                 - Application
@@ -143,6 +118,14 @@ const Footer: Component = () => {
                 href="/terms"
               >
                 - Terms
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
+                href="/brand"
+              >
+                - Brand
               </NavLink>
             </li>
           </ul>

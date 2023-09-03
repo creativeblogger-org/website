@@ -155,7 +155,7 @@ const NavBar: Component = () => {
               <ul>
                 <li class="flex">
                   <NavLink
-                    class="rounded-t bg-white dark:bg-slate-700 w-full duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
+                    class="rounded-t bg-white text-teal-500 dark:bg-slate-700 w-full duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                     href="/about"
                     onclick={toggleMenuMore}
                   >
@@ -164,7 +164,7 @@ const NavBar: Component = () => {
                 </li>
                 <li class="flex">
                   <NavLink
-                    class="rounded-b bg-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
+                    class="rounded-b bg-white text-teal-500 dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                     href="/become"
                     onclick={toggleMenuMore}
                   >

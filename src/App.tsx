@@ -29,6 +29,7 @@ const UserPage = lazy(() => import("./pages/UserPage"));
 const BecomePage = lazy(() => import("./pages/BecomePage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SocialPage = lazy(() => import("./pages/SocialPage"));
+const BrandPage = lazy(() => import("./pages/BrandPage"));
 
 const App: Component = () => {
   onMount(() => {
@@ -74,6 +75,7 @@ const App: Component = () => {
         <Route path={"/become"} element={<BecomePage />} />
         <Route path={"/terms"} element={<TermsPage />} />
         <Route path={"/social"} element={<SocialPage />} />
+        <Route path={"/brand"} element={<BrandPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
