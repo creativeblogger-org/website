@@ -5,6 +5,7 @@ import ReloadImg from "../assets/button_icons/refresh.svg";
 const [isLoading, setIsLoading] = createSignal(false);
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 import { API_URL } from "../App";
+import { Helmet } from "react-helmet";
 
 declare global {
   interface Window {

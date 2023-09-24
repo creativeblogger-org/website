@@ -54,7 +54,7 @@ const Footer: Component = () => {
               <img
                 loading="lazy"
                 src={DiscordLogo}
-                class="m-0 h-9 p-0"
+                class="m-0 p-0"
                 alt="Logo discord"
               />
             </NavLink>
@@ -87,7 +87,7 @@ const Footer: Component = () => {
               <img
                 loading="lazy"
                 src={ElementLogo}
-                class="m-0 h-9 p-0"
+                class="m-0 p-0"
                 alt="Logo element"
               />
             </NavLink>
