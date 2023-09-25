@@ -11,6 +11,7 @@ import {
   isNotConnected,
 } from "../utils/functions_utils";
 import { API_URL } from "../App";
+import Loading from "../components/Loading";
 
 declare global {
   interface Window {
@@ -27,7 +28,7 @@ declare global {
 }
 
 const [posts, setPosts] = createSignal([] as Post[]);
-const [isLoading, setIsLoading] = createSignal(false);
+const [isLoading, setIsLoading] = createSignal(true);
 
 const [page, setPage] = createSignal(1);
 
@@ -159,11 +160,14 @@ const Home: Component = () => {
           <img src={ReloadImg} class="h-8" alt="Reload image" />
         </button>
       </div>
+      <Show when={isLoading()}>
+        <Loading />
+      </Show>
       <div
         class="m-auto w-11/12 grid grid-cols-1 lg:grid-cols-2 home"
         id="posts"
       >
-        <For each={posts()} fallback={"Aucun post pour le moment..."}>
+        <For each={posts()} fallback={""}>
           {(post, _) => (
             <a href={`/posts/${post.slug}`}>
               <PostPreviewComponent post={post} />
@@ -194,7 +198,7 @@ const Home: Component = () => {
           </button>
         </Show>
       </div>
-      <Show when={isNotConnected()}>
+      <Show when={isNotConnected() && isLoading() === false}>
         <h1 class="text-center text-orange-500 text-2xl my-4">
           Connectez-vous pour accéder à plus d'articles !
         </h1>
