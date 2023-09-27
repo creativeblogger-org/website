@@ -31,7 +31,10 @@ const Footer: Component = () => {
             connaître.
           </p>
           <div class="grid grid-cols-7 w-3/5 sm:w-4/5 lg:3/5 md:w-3/5 xl:w-2/5 my-2">
-            <NavLink class="my-1 mx-2" href="https://twitter.com/cblogorg1">
+            <NavLink
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
+              href="https://twitter.com/cblogorg1"
+            >
               <img
                 loading="lazy"
                 src={TwitterLogo}
@@ -40,7 +43,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="my-1 mx-2"
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://github.com/creativeblogger-org"
             >
               <img
@@ -50,7 +53,10 @@ const Footer: Component = () => {
                 alt="Logo github"
               />
             </NavLink>
-            <NavLink class="my-1 mx-2" href="https://discord.gg/uT8zVVn6rQ">
+            <NavLink
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
+              href="https://discord.gg/uT8zVVn6rQ"
+            >
               <img
                 loading="lazy"
                 src={DiscordLogo}
@@ -59,7 +65,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="my-1 mx-2"
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://www.instagram.com/creativebloggerofficial/"
             >
               <img
@@ -70,7 +76,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="my-1 mx-2"
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://mastodon.social/invite/xco2jaQu"
             >
               <img
@@ -81,7 +87,7 @@ const Footer: Component = () => {
               />
             </NavLink>
             <NavLink
-              class="my-1 mx-2"
+              class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://matrix.to/#/#creative-blogger:matrix.org"
             >
               <img
@@ -107,7 +113,7 @@ const Footer: Component = () => {
             <li>
               <NavLink
                 class="text-teal-500 duration-150 font-garamond md:text-xl text-lg hover:text-indigo-500 hover:underline"
-                href="https://app.creativeblogger.org"
+                href="/app"
               >
                 - Application
               </NavLink>

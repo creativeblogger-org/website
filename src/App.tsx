@@ -1,4 +1,4 @@
-import { Routes, Route } from "@solidjs/router";
+import { Routes, Route, NavLink } from "@solidjs/router";
 import { Component, Show, lazy, onMount } from "solid-js";
 import favicon from "./assets/img/logo2.png";
 import { MetaProvider, Link } from "@solidjs/meta";
@@ -30,6 +30,7 @@ const BecomePage = lazy(() => import("./pages/BecomePage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SocialPage = lazy(() => import("./pages/SocialPage"));
 const BrandPage = lazy(() => import("./pages/BrandPage"));
+const AppPage = lazy(() => import("./pages/AppPage"));
 
 const App: Component = () => {
   onMount(() => {
@@ -61,6 +62,12 @@ const App: Component = () => {
           {warning()}
         </h2>
       </Show>
+      <h2 class="text-center text-white font-bold pt-1 bg-teal-500 text-xl w-screen fixed">
+        🎁 Téléchargez l'app mobile{" "}
+        <NavLink href="/app" class="text-indigo-500 underline">
+          ici
+        </NavLink>
+      </h2>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -76,6 +83,7 @@ const App: Component = () => {
         <Route path={"/terms"} element={<TermsPage />} />
         <Route path={"/social"} element={<SocialPage />} />
         <Route path={"/brand"} element={<BrandPage />} />
+        <Route path={"/app"} element={<AppPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
