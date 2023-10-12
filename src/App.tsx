@@ -1,15 +1,20 @@
 import { Routes, Route, NavLink } from "@solidjs/router";
-import { Component, Show, lazy, onMount } from "solid-js";
+import { Component, Show, createSignal, lazy, onMount } from "solid-js";
 import favicon from "./assets/img/logo2.png";
 import { MetaProvider, Link } from "@solidjs/meta";
 import {
+  customFetch,
   displayError,
   displaySuccess,
   error,
+  getError,
   isConnected,
   success,
   warning,
 } from "./utils/functions_utils";
+import { infos } from "./components/NavBar";
+
+const [banner, setBanner] = createSignal([] as Banner[]);
 
 const API_URL = "https://api.creativeblogger.org";
 
@@ -32,6 +37,20 @@ const SocialPage = lazy(() => import("./pages/SocialPage"));
 const BrandPage = lazy(() => import("./pages/BrandPage"));
 const AppPage = lazy(() => import("./pages/AppPage"));
 
+async function get_banner() {
+  const res = await customFetch(
+    `https://api.creativeblogger.org/global/banner`,
+    "GET"
+  );
+
+  if (!res.ok) {
+    displayError(getError(await res.json()));
+    return;
+  }
+  const banners: Banner[] = await res.json();
+  setBanner(banners);
+}
+
 const App: Component = () => {
   onMount(() => {
     window.addEventListener("offline", () =>
@@ -40,6 +59,8 @@ const App: Component = () => {
     window.addEventListener("online", () =>
       displaySuccess("Tu es de nouveau en ligne !")
     );
+    get_banner();
+    console.log(banner());
   });
 
   return (
@@ -62,12 +83,7 @@ const App: Component = () => {
           {warning()}
         </h2>
       </Show>
-      <h2 class="text-center text-white font-bold pt-1 bg-teal-500 text-xl w-screen fixed">
-        🎁 Téléchargez l'app mobile{" "}
-        <NavLink href="/app" class="text-indigo-500 underline">
-          ici
-        </NavLink>
-      </h2>
+
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -87,7 +103,7 @@ const App: Component = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
-      <Show when={isConnected()}>
+      <Show when={isConnected() && infos().permission >= 1}>
         <CreatePostButton />
       </Show>
     </>

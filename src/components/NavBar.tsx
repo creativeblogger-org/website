@@ -223,7 +223,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={ProfileImg} class="" alt="Profile Img" />
                     <NavLink
-                      class="rounded-t bg-white dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-t bg-white dark:text-white dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
                       onclick={() => setIsOpen(false)}
                     >
@@ -233,7 +233,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={LogoutImg} class="" alt="Logout Img" />
                     <NavLink
-                      class="rounded-b bg-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
+                      class="rounded-b bg-white dark:text-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                       href="/"
                       onclick={logout}
                     >

@@ -134,7 +134,7 @@ const Home: Component = () => {
                 {/* Input de recherche */}
                 <input
                   type="text"
-                  class="w-full h-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  class="w-full h-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-slate-800"
                   placeholder="Recherchez un article..."
                   value={searchContent()}
                   onInput={handleInputChange}

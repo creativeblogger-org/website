@@ -190,7 +190,7 @@ const PostComponent = (props: {
           />
           <NavLink
             href={"/users/" + props.post.author.username}
-            class="font-bold text-xl duration-150 font-garamond hover:text-indigo-800 hover:underline"
+            class="font-bold text-teal-500 text-xl duration-150 font-garamond hover:text-indigo-800 hover:underline"
           >
             @{props.post.author.username}
           </NavLink>

@@ -71,7 +71,7 @@ function CommentComponent(props: { comment: Comment }) {
         />
         <NavLink
           href={"/users/" + props.comment.author.username}
-          class="font-garamond text-xl duration-150 hover:text-indigo-800 mr-1"
+          class="font-garamond text-xl duration-150 text-teal-500 hover:text-indigo-800 mr-1"
         >
           @{props.comment.author.username}
         </NavLink>{" "}

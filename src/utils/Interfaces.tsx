@@ -80,14 +80,11 @@ interface ServerToClientEvents {
 interface ClientToServerEvents {
   ok: (msg: string) => void;
 }
-interface Short {
-  id: number;
-  title: string;
+interface Banner {
   content: string;
-  author: User;
-  created_at: string;
-  updated_at: string;
-  has_permission: boolean;
+  color: string;
+  text_link: string;
+  link: string;
 }
 
 interface ServerToClientEvents {
