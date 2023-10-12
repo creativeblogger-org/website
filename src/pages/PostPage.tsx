@@ -5,21 +5,6 @@ import ReloadImg from "../assets/button_icons/refresh.svg";
 const [isLoading, setIsLoading] = createSignal(false);
 import { Meta, MetaProvider, Title } from "@solidjs/meta";
 import { API_URL } from "../App";
-import { Helmet } from "react-helmet";
-
-declare global {
-  interface Window {
-    setMetaTags: (
-      title: string,
-      description: string,
-      imageUrl: string,
-      twitterTitle: string,
-      twitterDescription: string,
-      twitterImg: string,
-      twitterCard: string
-    ) => void;
-  }
-}
 
 const [post, setPost] = createSignal({ author: {} } as PostWithoutComments);
 const [comments, setComments] = createSignal([] as Comment[]);
@@ -45,30 +30,6 @@ const PostPage: Component = () => {
   onMount(() => {
     setPost({ author: {}, id: 0 } as Post);
     fetch_post_by_slug();
-  });
-
-  createEffect(() => {
-    if (post()) {
-      const pageTitle = `${post().title} - CB`;
-      const pageDescription = `${post().description}`;
-      const imageUrl = `${post().image}`;
-      const pageTwitterTitle = `${post().title}`;
-      const pageTwitterDescription = `${post().description}`;
-      const pageTwitterImg = `${post().image}`;
-      const pageTwitterCard = `app`;
-
-      if (typeof window !== "undefined" && window.setMetaTags) {
-        window.setMetaTags(
-          pageTitle,
-          pageDescription,
-          imageUrl,
-          pageTwitterTitle,
-          pageTwitterDescription,
-          pageTwitterImg,
-          pageTwitterCard
-        );
-      }
-    }
   });
 
   return (
