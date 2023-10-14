@@ -1,7 +1,5 @@
-import { Routes, Route, NavLink } from "@solidjs/router";
+import { Routes, Route } from "@solidjs/router";
 import { Component, Show, createSignal, lazy, onMount } from "solid-js";
-import favicon from "./assets/img/logo2.png";
-import { MetaProvider, Link } from "@solidjs/meta";
 import {
   customFetch,
   displayError,
@@ -65,9 +63,6 @@ const App: Component = () => {
 
   return (
     <>
-      <MetaProvider>
-        <div class="Home bg-slate-700"></div>
-      </MetaProvider>
       <Show when={error().length > 0}>
         <h2 class="text-center text-red-500 pt-3 bg-white opacity-90 text-2xl fixed top-0 w-screen">
           {error()}
@@ -103,7 +98,7 @@ const App: Component = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
-      <Show when={isConnected() && infos().permission >= 1}>
+      <Show when={isConnected() && infos().permission !== 0}>
         <CreatePostButton />
       </Show>
     </>

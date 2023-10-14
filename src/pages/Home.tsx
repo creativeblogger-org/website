@@ -1,7 +1,5 @@
 import { Component, For, Show, createEffect, createSignal } from "solid-js";
 import PostPreviewComponent from "../components/PostPreviewComponent";
-import { NavLink, useNavigate } from "@solidjs/router";
-import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import ReloadImg from "../assets/button_icons/refresh.png";
 import SearchLogo from "../assets/button_icons/search.png";
 import {
@@ -12,20 +10,6 @@ import {
 } from "../utils/functions_utils";
 import { API_URL } from "../App";
 import Loading from "../components/Loading";
-
-declare global {
-  interface Window {
-    setMetaTags: (
-      title: string,
-      description: string,
-      imageUrl: string,
-      twitterTitle: string,
-      twitterDescription: string,
-      twitterImg: string,
-      twitterCard: string
-    ) => void;
-  }
-}
 
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(true);
@@ -89,28 +73,6 @@ const Home: Component = () => {
     fetch_posts();
   });
 
-  const pageTitle = `Creative Blogger`;
-  const pageDescription = `Projet collaboratif entre bloggers`;
-  const imageUrl = `https://creativeblogger.org/assets/banner-93a4ec7f.png`;
-  const pageTwitterTitle = `Creative Blogger`;
-  const pageTwitterDescription = `Projet collaboratif entre bloggers. Notre objectif est de créer une plate-forme centralisé dans laquelle un max de bloggers seront présents.`;
-  const pageTwitterImg = `https://creativeblogger.org/assets/banner-93a4ec7f.png`;
-  const pageTwitterCard = `summary_large_image`;
-
-  if (typeof window !== "undefined" && window.setMetaTags) {
-    window.setMetaTags(
-      pageTitle,
-      pageDescription,
-      imageUrl,
-      pageTwitterTitle,
-      pageTwitterDescription,
-      pageTwitterImg,
-      pageTwitterCard
-    );
-  }
-
-  const navigate = useNavigate();
-
   const [searchContent, setSearchContent] = createSignal("");
 
   function handleInputChange(event: any) {
@@ -131,7 +93,6 @@ const Home: Component = () => {
           <div class="flex">
             {isOpen() && (
               <div class="w-full bg-white rounded-md shadow-lg">
-                {/* Input de recherche */}
                 <input
                   type="text"
                   class="w-full h-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-slate-800"
@@ -139,7 +100,6 @@ const Home: Component = () => {
                   value={searchContent()}
                   onInput={handleInputChange}
                 />
-                {/* Autres éléments du menu de recherche */}
               </div>
             )}
             <button

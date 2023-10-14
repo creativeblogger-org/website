@@ -7,7 +7,6 @@ import DiscordLogo from "../assets/button_icons/discord.png";
 import InstaLogo from "../assets/button_icons/insta.png";
 import MastodonLogo from "../assets/button_icons/mastodon.svg";
 import ElementLogo from "../assets/button_icons/element.png";
-import YtbLogo from "../assets/button_icons/ytb.png";
 
 const Footer: Component = () => {
   return (
@@ -34,6 +33,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://twitter.com/cblogorg1"
+              target="_blank"
             >
               <img
                 loading="lazy"
@@ -45,6 +45,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://github.com/creativeblogger-org"
+              target="_blank"
             >
               <img
                 loading="lazy"
@@ -56,6 +57,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://discord.gg/uT8zVVn6rQ"
+              target="_blank"
             >
               <img
                 loading="lazy"
@@ -67,6 +69,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://www.instagram.com/creativebloggerofficial/"
+              target="_blank"
             >
               <img
                 loading="lazy"
@@ -78,6 +81,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://mastodon.social/invite/xco2jaQu"
+              target="_blank"
             >
               <img
                 loading="lazy"
@@ -89,6 +93,7 @@ const Footer: Component = () => {
             <NavLink
               class="my-1 mx-2 pb-2 duration-150 hover:border-b-2"
               href="https://matrix.to/#/#creative-blogger:matrix.org"
+              target="_blank"
             >
               <img
                 loading="lazy"

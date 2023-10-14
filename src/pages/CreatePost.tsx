@@ -1,5 +1,4 @@
-import { MetaProvider, Title } from "@solidjs/meta";
-import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
+import { Component, Show, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
@@ -10,7 +9,6 @@ import {
 import { fetch_posts } from "./Home";
 import { Marked } from "@ts-stack/markdown";
 import ky from "ky";
-import { getInfos, infos } from "../components/NavBar";
 import { API_URL } from "../App";
 
 interface UploadResponse {
@@ -82,47 +80,6 @@ async function fetch_users() {
   setIsLoading(false);
 }
 
-function convertToMarkdown(text: any) {
-  return (
-    text
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.+?)\*/g, "<em>$1</em>")
-      .replace(
-        /`(.+?)`/g,
-        "<p class='bg-slate-800 p-4 m-5 rounded-md text-white'>$1</p>"
-      )
-      .replace(/!\[(.*?)\]\((.*?)\)/g, "<img alt='$1' src='$2'>")
-      .replace(/\---/g, "<hr />")
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-      .replace(/\n/g, "<br />")
-      // .replace(/\$\$(.*?)\$\$/g, '<span class="text-teal-500">$1</span>')
-      // .replace(/\$(.*?)\$/g, '<span class="text-indigo-500">$1</span>')
-      .replace(/\$red\$(.*?)\$red\$/g, '<span style="color: red;">$1</span>')
-      .replace(/\$blue\$(.*?)\$blue\$/g, '<span style="color: blue;">$1</span>')
-      .replace(
-        /\$green\$(.*?)\$green\$/g,
-        '<span style="color: green;">$1</span>'
-      )
-      .replace(/\^(.+?)\^/g, "<div>$1</div>")
-      .replace(
-        /\&(.*?)\&(.*?)\&(.*?)&/g,
-        "<div class='grid grid-cols-$1'>$2</div>"
-      )
-      .replace(/^- (.*)$/gm, "<ul class='list-disc'><li>$1</li></ul>")
-      .replace(/^# (.*)$/gm, "<h1 class='text-6xl'>$1</h1>")
-      .replace(/^## (.*)$/gm, "<h2 class='text-5xl'>$1</h2>")
-      .replace(/^### (.*)$/gm, "<h3 class='text-4xl'>$1</h3>")
-      .replace(/^#### (.*)$/gm, "<h4 class='text-3xl'>$1</h4>")
-      .replace(/^##### (.*)$/gm, "<h5 class='text-2xl'>$1</h5>")
-      .replace(/^###### (.*)$/gm, "<h6 class='text-xl'>$1</h6>")
-      .replace(/\|(.*?)\|/g, "<div class='flex justify-center'>$1</div>")
-      .replace(
-        /\[!\[\]\((.*?)\)\]\((.*?)\)/g,
-        '<div><a href="$2"><img src="$1" alt="YouTube Video"></a></div><div>YouTube Video: <a href="$2">$2</a></div>'
-      )
-  );
-}
-
 const CreatePost: Component = () => {
   const [text, setText] = createSignal("");
 
@@ -162,20 +119,8 @@ const CreatePost: Component = () => {
     );
   }
 
-  function handleGridClick() {
-    wrapSelection("&2&^Hello^^Hello 2^&2&");
-  }
-
   function handleListClick() {
     wrapSelection("- ");
-  }
-
-  function handleColorButtonClick(color: string) {
-    wrapTextSelection(`$${color}$`);
-  }
-
-  function handleTextClick() {
-    wrapSelection("# Ajoutez des '#' si vous voulez le texte en plus petit");
   }
 
   function handleCenterClick() {
@@ -217,10 +162,8 @@ const CreatePost: Component = () => {
     if (!selectedImage()) return;
 
     try {
-      // Récupérer le token d'authentification
       const token = getToken();
 
-      // Créer une instance ky avec les en-têtes
       const api = ky.create({
         headers: {
           Authorization: `Bearer ${token}`,
@@ -230,7 +173,6 @@ const CreatePost: Component = () => {
       const formData = new FormData();
       formData.append("image", selectedImage());
 
-      // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
       const response = await api.post(`${API_URL}/posts/upload`, {
         body: formData,
       });
@@ -242,7 +184,6 @@ const CreatePost: Component = () => {
         setFullUploadedImagePath(
           `${API_URL}/public/posts/${responseData.path}`
         );
-        // Effectuer les actions supplémentaires si nécessaire
       } else {
         displayError("L'image n'a pas été uploadée");
       }
@@ -263,10 +204,7 @@ const CreatePost: Component = () => {
     fetch_users();
   });
   return (
-    <MetaProvider>
-      <div class="Home">
-        <Title>Creative Blogger - Create</Title>
-      </div>
+    <div>
       <div class="flex justify-center">
         <label
           for="dropzone-file"
@@ -596,7 +534,7 @@ const CreatePost: Component = () => {
         <h2 class="text-center text-3xl">Preview :</h2>
         <div class="p-10" innerHTML={Marked.parse(text())}></div>
       </div>
-    </MetaProvider>
+    </div>
   );
 };
 

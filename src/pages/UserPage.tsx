@@ -21,9 +21,7 @@ import { API_URL } from "../App";
 const [user, setUser] = createSignal({} as User);
 
 async function getUser() {
-  const res = await customFetch(
-    `${API_URL}${location.pathname}`
-  );
+  const res = await customFetch(`${API_URL}${location.pathname}`);
 
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -37,8 +35,6 @@ async function getUser() {
 
 const [posts, setPosts] = createSignal([] as Post[]);
 const [isLoading, setIsLoading] = createSignal(false);
-
-const [page, setPage] = createSignal(1);
 
 const UserPage: Component = () => {
   onMount(() => {
@@ -54,9 +50,7 @@ const UserPage: Component = () => {
 
   async function fetch_posts(id: number) {
     setIsLoading(true);
-    const res = await customFetch(
-      `${API_URL}/posts?user=${id}`
-    );
+    const res = await customFetch(`${API_URL}/posts?user=${id}`);
 
     if (!res.ok) {
       setIsLoading(false);
@@ -70,40 +64,37 @@ const UserPage: Component = () => {
   }
 
   return (
-    <MetaProvider>
-      <div class="Home">
-        <Title>Creative Blogger - {user().username}</Title>
-      </div>
+    <div>
       <h1 class="text-center text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
         Fiche d'identité d'utilisateur :{" "}
       </h1>
       <div class="p-2 border-2 rounded-md w-11/12 sm:w-1/2 xl:w-1/3 mx-auto duration-300 hover:border-indigo-500">
         <div class="flex justify-center items-end mt-7">
-        <img
-          src={user().pp}
-          alt="Cet utilisateur n'a pas de photo de profile"
-          class="h-20 rounded-3xl p-0 m-0 mx-1"
-        />
+          <img
+            src={user().pp}
+            alt="Cet utilisateur n'a pas de photo de profile"
+            class="h-20 rounded-3xl p-0 m-0 mx-1"
+          />
           <h2 class="text-3xl m-1">
-          <strong class="text-teal-500">{user().username}</strong>
-        </h2>
+            <strong class="text-teal-500">{user().username}</strong>
+          </h2>
+        </div>
+        <div class="text-center">
+          <h2 class="text-3xl m-7">
+            Rôle :{" "}
+            <strong class="text-teal-500">
+              {findPermissions(user().permission)}
+            </strong>
+          </h2>
+          <h2 class="text-3xl m-7">
+            Créé le{" "}
+            <strong class="text-teal-500">
+              {getHumanDate(user().created_at)}
+            </strong>
+          </h2>
+        </div>
       </div>
-      <div class="text-center">
-        <h2 class="text-3xl m-7">
-          Rôle :{" "}
-          <strong class="text-teal-500">
-            {findPermissions(user().permission)}
-          </strong>
-        </h2>
-        <h2 class="text-3xl m-7">
-          Créé le{" "}
-          <strong class="text-teal-500">
-            {getHumanDate(user().created_at)}
-          </strong>
-        </h2>
-      </div>
-      </div>
-      
+
       <Show when={user().permission >= 1}>
         <h2 class="text-3xl m-7 text-center">
           Article(s) posté(s) par l'utilisateur :
@@ -118,7 +109,7 @@ const UserPage: Component = () => {
           </For>
         </div>
       </Show>
-    </MetaProvider>
+    </div>
   );
 };
 

@@ -1,14 +1,10 @@
-import { Show, createSignal, onMount } from "solid-js";
-import { NavLink } from "@solidjs/router";
-import WarningLogo from "../assets/button_icons/under-15.png";
+import { createSignal, onMount } from "solid-js";
 
 function getHumanDate(date: string) {
   const parsed_date = new Date(Date.parse(date));
 
   return `${parsed_date.toLocaleDateString()} à ${parsed_date.toLocaleTimeString()}`;
 }
-
-const date = new Date().getDay();
 
 const PostPreviewComponent = (props: { post: Post }) => {
   const [description, setDescription] = createSignal("");

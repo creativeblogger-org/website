@@ -6,7 +6,6 @@ import {
   getError,
   getHumanDate,
 } from "../utils/functions_utils";
-import { MetaProvider, Title } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import { displaySuccess } from "../utils/functions_utils";
 import { delete_cookie, getInfos, infos, logout } from "../components/NavBar";
@@ -16,10 +15,7 @@ import { getToken } from "../utils/functions_utils";
 import { API_URL } from "../App";
 
 async function deleteUser() {
-  const res = await customFetch(
-    `${API_URL}/@me`,
-    "DELETE"
-  );
+  const res = await customFetch(`${API_URL}/@me`, "DELETE");
   delete_cookie();
   if (!res.ok) {
     displayError(getError(await res.json()));
@@ -45,17 +41,8 @@ const MePage: Component = () => {
     getInfos();
   });
 
-  function isWriter() {
-    if (infos().permission === 2) {
-      return true;
-    }
-  }
-
   async function deleteImage() {
-    const res = await customFetch(
-      `${API_URL}/@me/delete`,
-      "DELETE"
-    );
+    const res = await customFetch(`${API_URL}/@me/delete`, "DELETE");
 
     if (!res.ok) {
       displayError(getError(await res.json()));
@@ -72,10 +59,8 @@ const MePage: Component = () => {
     if (!selectedImage()) return;
 
     try {
-      // Récupérer le token d'authentification
       const token = getToken();
 
-      // Créer une instance ky avec les en-têtes
       const api = ky.create({
         headers: {
           Authorization: `Bearer ${token}`,
@@ -85,18 +70,13 @@ const MePage: Component = () => {
       const formData = new FormData();
       formData.append("image", selectedImage());
 
-      // Effectuer la requête POST en utilisant l'instance ky avec les en-têtes
-      const response = await api.post(
-        `${API_URL}/@me/upload`,
-        {
-          body: formData,
-        }
-      );
+      const response = await api.post(`${API_URL}/@me/upload`, {
+        body: formData,
+      });
 
       if (response.ok) {
         displaySuccess("L'image a été uploadée !");
         getInfos();
-        // Effectuer les actions supplémentaires si nécessaire
       } else {
         displayError("L'image n'a pas été uploadée");
       }
@@ -114,10 +94,7 @@ const MePage: Component = () => {
   }
 
   return (
-    <MetaProvider>
-      <div class="Home">
-        <Title>Creative Blogger - {infos().username}</Title>
-      </div>
+    <div>
       <h1 class="text-center text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-indigo-500 text-5xl m-5">
         Votre profil :
       </h1>
@@ -255,7 +232,7 @@ const MePage: Component = () => {
           </button>
         </form>
         <p class="text-black dark:text-white">Date de naissance :</p>
-        <h2>{(new Date(Date.parse(infos().birthdate))).toLocaleDateString()}</h2>
+        <h2>{new Date(Date.parse(infos().birthdate)).toLocaleDateString()}</h2>
         <div class="flex justify-center m-5">
           <h1 class="text-black dark:text-white mx-5">Thème :</h1>
           <ThemeSwitcher />
@@ -295,7 +272,7 @@ const MePage: Component = () => {
           Supprimer mon compte
         </button>
       </div>
-    </MetaProvider>
+    </div>
   );
 };
 

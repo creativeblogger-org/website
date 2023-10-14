@@ -21,12 +21,11 @@ const ThemeSwitcher = () => {
         checked={isDarkMode()}
         onChange={toggleTheme}
         class="sr-only"
-        id="themeSwitcherInput" // Ajout de l'attribut id
+        id="themeSwitcherInput"
       />
       <span class="slider absolute top-0 left-0 w-12 h-6 rounded-full bg-white dark:bg-gray-800 shadow-md transform transition-transform cursor-pointer">
         <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-yellow-500 dark:bg-white transform transition-transform" />
       </span>
-      {/* Utilisation de l'attribut htmlFor pour lier l'étiquette à l'input */}
     </label>
   );
 };

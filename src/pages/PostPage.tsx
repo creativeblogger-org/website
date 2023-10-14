@@ -1,9 +1,8 @@
-import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
+import { Component, Show, createSignal, onMount } from "solid-js";
 import PostComponent from "../components/PostComponent";
 import { customFetch, displayError, getError } from "../utils/functions_utils";
 import ReloadImg from "../assets/button_icons/refresh.svg";
 const [isLoading, setIsLoading] = createSignal(false);
-import { Meta, MetaProvider, Title } from "@solidjs/meta";
 import { API_URL } from "../App";
 
 const [post, setPost] = createSignal({ author: {} } as PostWithoutComments);
@@ -46,11 +45,7 @@ const PostPage: Component = () => {
           </button>
         </div>
       </Show>
-      {/* <Show when={post().id != 0} fallback="Chargement..."> */}
-      <MetaProvider>
-        <PostComponent post={post()} comments={comments()} />
-      </MetaProvider>
-      {/* </Show> */}
+      <PostComponent post={post()} comments={comments()} />
     </div>
   );
 };

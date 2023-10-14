@@ -1,19 +1,10 @@
 import { Component } from "solid-js";
-import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import gifRiccardo from "../assets/gif/gif-riccardo.gif";
 import gifMael from "../assets/gif/gif-mael.gif";
-import { NavLink } from "@solidjs/router";
 
 const AboutPage: Component = () => {
   return (
-    <MetaProvider>
-      <div class="Home">
-        <Title>Creative Blogger - About</Title>
-        <Meta
-          name="description"
-          content="Creative Blogger - Projet collaboratif entre bloggers"
-        />
-      </div>
+    <div>
       <div class="grid grid-cols-1 sm:grid-cols-2 m-6">
         <div class="m-3">
           <img
@@ -61,7 +52,7 @@ const AboutPage: Component = () => {
       >
         Nous rejoindre !
       </a>
-    </MetaProvider>
+    </div>
   );
 };
 

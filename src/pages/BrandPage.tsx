@@ -1,5 +1,4 @@
 import { Component } from "solid-js";
-
 import CBLogo from "../assets/img/logo2.png";
 import CBBanner from "../assets/img/banner.png";
 import Error404 from "../assets/img/404.png";

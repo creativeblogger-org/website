@@ -1,4 +1,4 @@
-import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
+import { Component, Show, createSignal, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
 import Logo from "../assets/img/logo2.png";
 import LogoutImg from "../assets/button_icons/logout.png";
@@ -13,8 +13,6 @@ import {
 } from "../utils/functions_utils";
 import { fetch_posts_by_tags, setPosts } from "../pages/Home";
 import ThemeSwitcher from "./ThemeSwitcher";
-import RegisterLogo from "../assets/button_icons/register.png";
-import LoginLogo from "../assets/button_icons/login.png";
 import { API_URL } from "../App";
 
 const [isLoading, setIsLoading] = createSignal(false);
@@ -125,12 +123,6 @@ const NavBar: Component = () => {
       </NavLink>
       <div class="flex justify-between">
         <div class="m-2 mt-4 sm:m-4">
-          {/* <NavLink
-            class="text-teal-500 md:text-2xl md:p-5 p-2 duration-150 hover:text-indigo-500 hover:underline"
-            href="/about"
-          >
-            A Propos
-          </NavLink> */}
           <button
             id="dropdown-btn-more"
             class="text-teal-500 font-semibold inline-flex rounded items-center"

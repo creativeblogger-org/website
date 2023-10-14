@@ -93,9 +93,6 @@ const UsersPreviewComponent = (props: { user: User }) => {
         Permission de l'utilisateur : {findPermissions(props.user.permission)}
       </h3>
       <div class="flex justify-center">
-        {/* <button class="bg-green-500 p-2 m-3 rounded-md" onclick={become_writer}>
-          Writer
-        </button> */}
         <button class="bg-red-500 p-2 m-3 rounded-md" onclick={delete_user}>
           Delete
         </button>
