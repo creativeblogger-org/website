@@ -1,4 +1,4 @@
-import { Component, Show, createSignal, onMount } from "solid-js";
+import { Component, Show, createSignal, onCleanup, onMount } from "solid-js";
 import { NavLink } from "@solidjs/router";
 import Logo from "../assets/img/logo2.png";
 import LogoutImg from "../assets/button_icons/logout.png";
@@ -238,43 +238,72 @@ const NavBar: Component = () => {
           </Show>
         </div>
       </div>
-      <div class="flex justify-center">
-        <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
-          href=""
-          onclick={() => {
-            fetch_posts_by_tags("news");
-          }}
-        >
-          Actualités
-        </NavLink>
-        <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
-          href=""
-          onclick={() => {
-            fetch_posts_by_tags("tech");
-          }}
-        >
-          Tech
-        </NavLink>
-        <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
-          href=""
-          onclick={() => {
-            fetch_posts_by_tags("culture");
-          }}
-        >
-          Culture
-        </NavLink>
-        <NavLink
-          class="px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
-          href=""
-          onclick={() => {
-            fetch_posts_by_tags("fakeorreal");
-          }}
-        >
-          Démystification
-        </NavLink>
+      <div class="flex justify-center overflow-x-auto">
+        <div class="flex xl:justify-center" style="min-width: 100%;">
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("news");
+            }}
+          >
+            Actualités
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("tech");
+            }}
+          >
+            Tech
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("culture");
+            }}
+          >
+            Culture
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("fakeorreal");
+            }}
+          >
+            Démystification
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("sport");
+            }}
+          >
+            Sport
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("cinema");
+            }}
+          >
+            Cinéma
+          </NavLink>
+          <NavLink
+            class="mx-3 px-1 sm:px-3 md:px-5 pb-3 hover:border-b-2 hover:font-bold border-teal-500 font-garamond text-teal-500 text-xl sm:text-2xl md:text-3xl duration-75 hover:text-indigo-500"
+            href=""
+            onclick={() => {
+              fetch_posts_by_tags("litterature");
+            }}
+          >
+            Littérature
+          </NavLink>
+        </div>
       </div>
     </div>
   );

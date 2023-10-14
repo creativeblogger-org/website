@@ -65,6 +65,23 @@ async function fetch_posts_by_content(content: string) {
   setIsLoading(false);
 }
 
+async function fetch_posts_by_content_and_tag(content: string, tag: string) {
+  setIsLoading(true);
+  const res = await customFetch(
+    `${API_URL}/posts?q=${content}&tag=${tag}&limit=20&page=${page() - 1}`
+  );
+
+  if (!res.ok) {
+    setIsLoading(false);
+    displayError(getError(await res.json()));
+    return;
+  }
+
+  const posts: Post[] = await res.json();
+  setPosts(posts);
+  setIsLoading(false);
+}
+
 const Home: Component = () => {
   createEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -74,16 +91,26 @@ const Home: Component = () => {
   });
 
   const [searchContent, setSearchContent] = createSignal("");
+  const [searchTag, setSearchTag] = createSignal("");
 
   function handleInputChange(event: any) {
     setSearchContent(event.target.value);
     fetch_posts_by_content(searchContent());
   }
 
+  function handleChooseChange(event: any) {
+    setSearchTag(event.target.value);
+    fetch_posts_by_content_and_tag(searchContent(), searchTag());
+  }
+
   const [isOpen, setIsOpen] = createSignal(false);
 
   const toggleMenu = () => {
+    if (isOpen() === true && searchContent() !== "") {
+      fetch_posts();
+    }
     setIsOpen(!isOpen());
+    setSearchContent("");
   };
 
   return (
@@ -92,14 +119,25 @@ const Home: Component = () => {
         <div class="relative">
           <div class="flex">
             {isOpen() && (
-              <div class="w-full bg-white rounded-md shadow-lg">
-                <input
-                  type="text"
-                  class="w-full h-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-slate-800"
-                  placeholder="Recherchez un article..."
-                  value={searchContent()}
-                  onInput={handleInputChange}
-                />
+              <div>
+                <div class="w-full bg-white rounded-md shadow-lg">
+                  <input
+                    type="text"
+                    class="w-full h-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-slate-800"
+                    placeholder="Recherchez un article..."
+                    value={searchContent()}
+                    onInput={handleInputChange}
+                  />
+                </div>
+                <select onchange={handleChooseChange} name="theme" id="theme">
+                  <option value="news">Actualités</option>
+                  <option value="tech">Tech</option>
+                  <option value="culture">Culture</option>
+                  <option value="fakeorreal">Enquête</option>
+                  <option value="sport">Sport</option>
+                  <option value="cinema">Cinéma</option>
+                  <option value="litterature">Littérature</option>
+                </select>
               </div>
             )}
             <button
