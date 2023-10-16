@@ -90,16 +90,20 @@ const [errorTimer, setErrorTimer] = createSignal<number>();
 const [successTimer, setSuccessTimer] = createSignal<number>();
 const [warningTimer, setWarningTimer] = createSignal<number>();
 
+let timeoutId: NodeJS.Timeout | undefined;
+
 function displayError(error: string) {
   setSuccess("");
   setError(error);
   setWarning("");
   clearTimeout(errorTimer());
-  setErrorTimer(
-    setTimeout(() => {
-      setError("");
-    }, 2000)
-  );
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+
+  timeoutId = setTimeout(() => {
+    setError("");
+  }, 2000);
 }
 
 function displaySuccess(success: string) {
@@ -107,11 +111,13 @@ function displaySuccess(success: string) {
   setError("");
   setWarning("");
   clearTimeout(successTimer());
-  setSuccessTimer(
-    setTimeout(() => {
-      setSuccess("");
-    }, 2000)
-  );
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+
+  timeoutId = setTimeout(() => {
+    setError("");
+  }, 2000);
 }
 
 function displayWarning(warning: string) {
@@ -119,11 +125,13 @@ function displayWarning(warning: string) {
   setError("");
   setWarning("");
   clearTimeout(warningTimer());
-  setWarningTimer(
-    setTimeout(() => {
-      setWarning("");
-    }, 2000)
-  );
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+
+  timeoutId = setTimeout(() => {
+    setError("");
+  }, 2000);
 }
 
 function findPermissions(permission: number) {

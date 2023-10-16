@@ -42,9 +42,18 @@ const UserPage: Component = () => {
     fetch_posts(user().id);
   });
 
+  const [pp, setPP] = createSignal("");
+
   createEffect(() => {
     if (user().id) {
       fetch_posts(user().id);
+    }
+    if (user().id) {
+      if (user().pp === null) {
+        setPP("https://image.creativeblogger.org/images/default-pp.png");
+      } else {
+        setPP(user().pp);
+      }
     }
   });
 
@@ -71,8 +80,9 @@ const UserPage: Component = () => {
       <div class="p-2 border-2 rounded-md w-11/12 sm:w-1/2 xl:w-1/3 mx-auto duration-300 hover:border-indigo-500">
         <div class="flex justify-center items-end mt-7">
           <img
-            src={user().pp}
-            alt="Cet utilisateur n'a pas de photo de profile"
+            src={pp()}
+            alt={user().username + "PP"}
+            loading="lazy"
             class="h-20 rounded-3xl p-0 m-0 mx-1"
           />
           <h2 class="text-3xl m-1">

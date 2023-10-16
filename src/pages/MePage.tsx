@@ -1,4 +1,4 @@
-import { Component, Show, createSignal, onMount } from "solid-js";
+import { Component, Show, createEffect, createSignal, onMount } from "solid-js";
 import {
   customFetch,
   displayError,
@@ -68,7 +68,8 @@ const MePage: Component = () => {
       });
 
       const formData = new FormData();
-      formData.append("image", selectedImage());
+
+      formData.append("image", selectedImage() as Blob);
 
       const response = await api.post(`${API_URL}/@me/upload`, {
         body: formData,
@@ -88,10 +89,23 @@ const MePage: Component = () => {
   function handleFileChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      setSelectedImage(inputElement.files[0]);
+      const file = inputElement.files[0];
+      setSelectedImage(() => file);
     }
     displaySuccess("Votre image est prête !");
   }
+
+  const [pp, setPP] = createSignal("");
+
+  createEffect(() => {
+    if (infos().id) {
+      if (infos().pp === null) {
+        setPP("https://image.creativeblogger.org/images/default-pp.png");
+      } else {
+        setPP(infos().pp);
+      }
+    }
+  });
 
   return (
     <div>
@@ -101,7 +115,11 @@ const MePage: Component = () => {
       <div class="text-center text-teal-500 text-2xl">
         <div class="flex flex-col">
           <p class="text-3xl text-black dark:text-white">Photo :</p>
-          <img class="h-20" src={infos().pp} alt="Vous n'avez pas de photo" />
+          <img
+            class="h-20 rounded-3xl"
+            src={pp()}
+            alt="Vous n'avez pas de photo"
+          />
         </div>
         <div class="flex justify-center">
           <label
@@ -267,7 +285,7 @@ const MePage: Component = () => {
         <br />
         <button
           onclick={verif}
-          class="mx-auto w-1/3 sm:w-1/2 md:w-1/6 bg-red-500 text-white p-2 rounded-md mb-4"
+          class="mx-auto w-2/3 sm:w-1/2 md:w-1/6 bg-red-500 text-white p-2 rounded-md mb-4"
         >
           Supprimer mon compte
         </button>

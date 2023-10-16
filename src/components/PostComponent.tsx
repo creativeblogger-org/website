@@ -98,11 +98,18 @@ const PostComponent = (props: {
 }) => {
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
+  const [pp, setPP] = createSignal("");
+
   createEffect(() => {
     if (!editing()) {
       setEditIcon(EditIcon);
     } else {
       setEditIcon(CancelEditIcon);
+    }
+    if (props.post.author.pp === null) {
+      setPP("https://image.creativeblogger.org/images/default-pp.png");
+    } else {
+      setPP(props.post.author.pp);
     }
   });
 
@@ -132,10 +139,11 @@ const PostComponent = (props: {
         </Show>
         <div class="flex justify-center m-2 items-center">
           <img
-            src={props.post.author.pp}
-            class="h-7 mx-1 hover:cursor-pointer"
+            src={pp()}
+            class="h-7 mx-1 rounded-3xl hover:cursor-pointer"
+            loading="lazy"
             onclick={imgLink}
-            alt=""
+            alt={props.post.author.username + "PP"}
           />
           <NavLink
             href={"/users/" + props.post.author.username}

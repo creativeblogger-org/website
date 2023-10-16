@@ -114,8 +114,8 @@ const Home: Component = () => {
   };
 
   return (
-    <div class="p-3 pb-0">
-      <div class="flex justify-end w-11/12">
+    <div class="p-3 pb-0 z-0">
+      <div class="flex justify-end w-11/12 z-10">
         <div class="relative">
           <div class="flex">
             {isOpen() && (
@@ -186,7 +186,7 @@ const Home: Component = () => {
             </button>
           </Show>
           <button
-            class="flex w-1/3 sm:w-1/6 duration-200 enabled:hover:rounded-2xl p-2 justify-center rounded-md enabled:shadow-indigo-500/50 enabled:bg-gradient-to-l enabled:from-indigo-500 enabled:to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 enabled:focus-visible:outline-indigo-600 disabled:bg-gray-400"
+            class="flex w-2/3 sm:w-1/6 duration-200 enabled:hover:rounded-2xl p-2 justify-center rounded-md enabled:shadow-indigo-500/50 enabled:bg-gradient-to-l enabled:from-indigo-500 enabled:to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 enabled:focus-visible:outline-indigo-600 disabled:bg-gray-400"
             onclick={() => {
               location.search = `?page=${page() + 1}`;
             }}

@@ -171,7 +171,7 @@ const CreatePost: Component = () => {
       });
 
       const formData = new FormData();
-      formData.append("image", selectedImage());
+      formData.append("image", selectedImage() as Blob);
 
       const response = await api.post(`${API_URL}/posts/upload`, {
         body: formData,
@@ -195,7 +195,8 @@ const CreatePost: Component = () => {
   function handleFileChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      setSelectedImage(inputElement.files[0]);
+      const file = inputElement.files[0];
+      setSelectedImage(() => file);
     }
     displaySuccess("Votre image est prête !");
   }

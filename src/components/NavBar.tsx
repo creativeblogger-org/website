@@ -1,4 +1,11 @@
-import { Component, Show, createSignal, onCleanup, onMount } from "solid-js";
+import {
+  Component,
+  Show,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import { NavLink } from "@solidjs/router";
 import Logo from "../assets/img/logo2.png";
 import LogoutImg from "../assets/button_icons/logout.png";
@@ -106,6 +113,18 @@ const NavBar: Component = () => {
     };
   });
 
+  const [pp, setPP] = createSignal("");
+
+  createEffect(() => {
+    if (infos().id) {
+      if (infos().pp === null) {
+        setPP("https://image.creativeblogger.org/images/default-pp.png");
+      } else {
+        setPP(infos().pp);
+      }
+    }
+  });
+
   return (
     <div class="text-center bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 mx-auto w-full">
       <img
@@ -122,7 +141,7 @@ const NavBar: Component = () => {
         Creative Blogger
       </NavLink>
       <div class="flex justify-between">
-        <div class="m-2 mt-4 sm:m-4">
+        <div class="m-2 mt-4 sm:m-4 z-30">
           <button
             id="dropdown-btn-more"
             class="text-teal-500 font-semibold inline-flex rounded items-center"
@@ -194,8 +213,9 @@ const NavBar: Component = () => {
               onclick={toggleMenu}
             >
               <img
-                class="text-3xl h-10 md:h-16"
-                src={infos().pp}
+                class="text-3xl h-10 md:h-16 rounded-3xl"
+                loading="lazy"
+                src={pp()}
                 alt={infos().username}
               />
               <svg

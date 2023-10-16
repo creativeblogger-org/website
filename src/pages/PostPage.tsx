@@ -45,7 +45,9 @@ const PostPage: Component = () => {
           </button>
         </div>
       </Show>
-      <PostComponent post={post()} comments={comments()} />
+      <Show when={post().id !== 0}>
+        <PostComponent post={post()} comments={comments()} />
+      </Show>
     </div>
   );
 };

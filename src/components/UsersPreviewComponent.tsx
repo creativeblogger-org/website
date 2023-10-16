@@ -6,7 +6,7 @@ import {
   getError,
 } from "../utils/functions_utils";
 import { fetch_users } from "../pages/PanelPage";
-import { Show } from "solid-js";
+import { Show, createEffect, createSignal } from "solid-js";
 import { API_URL } from "../App";
 
 const UsersPreviewComponent = (props: { user: User }) => {
@@ -76,6 +76,16 @@ const UsersPreviewComponent = (props: { user: User }) => {
     fetch_users();
   }
 
+  const [pp, setPP] = createSignal("");
+
+  createEffect(() => {
+    if (props.user.pp === null) {
+      setPP("https://image.creativeblogger.org/images/default-pp.png");
+    } else {
+      setPP(props.user.pp);
+    }
+  });
+
   return (
     <div class="rounded-lg p-4 m-5 border w-auto duration-150 hover:border-indigo-500">
       <a
@@ -83,7 +93,12 @@ const UsersPreviewComponent = (props: { user: User }) => {
         class="text-black dark:text-white"
       >
         <h1 class="text-3xl font-bold text-center duration-150 hover:text-indigo-500">
-          <img src={props.user.pp} alt="" class="h-10" />
+          <img
+            src={pp()}
+            alt={props.user.username + "PP"}
+            class="h-10 rounded-3xl"
+            loading="lazy"
+          />
           {props.user.username}
         </h1>{" "}
       </a>
