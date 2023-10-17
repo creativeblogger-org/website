@@ -13,7 +13,6 @@ import {
   getError,
   getHumanDate,
 } from "../utils/functions_utils";
-import { MetaProvider, Title } from "@solidjs/meta";
 import { NavLink } from "@solidjs/router";
 import PostPreviewComponent from "../components/PostPreviewComponent";
 import { API_URL } from "../App";
@@ -74,7 +73,7 @@ const UserPage: Component = () => {
 
   return (
     <div>
-      <h1 class="text-center text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
+      <h1 class="text-center text-3xl sm:text-5xl m-7 text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-indigo-500 ">
         Fiche d'identité d'utilisateur :{" "}
       </h1>
       <div class="p-2 border-2 rounded-md w-11/12 sm:w-1/2 xl:w-1/3 mx-auto duration-300 hover:border-indigo-500">

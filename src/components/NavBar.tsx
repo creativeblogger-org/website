@@ -140,8 +140,8 @@ const NavBar: Component = () => {
       >
         Creative Blogger
       </NavLink>
-      <div class="flex justify-between">
-        <div class="m-2 mt-4 sm:m-4 z-30">
+      <div class="flex justify-center sm:justify-between">
+        <div class="m-2 mt-4 sm:m-4 z-30 hidden sm:block">
           <button
             id="dropdown-btn-more"
             class="text-teal-500 font-semibold inline-flex rounded items-center"
@@ -194,13 +194,13 @@ const NavBar: Component = () => {
         <div class="m-2 mt-4 sm:m-4">
           <Show when={isNotConnected()}>
             <NavLink
-              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-2xl sm:text-2xl md:text-3xl m-3 md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
               href="/login"
             >
               Connexion
             </NavLink>
             <NavLink
-              class="text-teal-500 font-garamond text-xl sm:text-2xl md:text-3xl md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
+              class="text-teal-500 font-garamond text-2xl sm:text-2xl md:text-3xl m-3 md:p-5 sm:p-2 px-1 duration-150 hover:text-indigo-500 hover:underline"
               href="/register"
             >
               Inscription
@@ -229,13 +229,13 @@ const NavBar: Component = () => {
             {isOpen() && (
               <div
                 id="dropdown-menu"
-                class="absolute text-gray-700 pt-1 right-0 bg-white dark:bg-slate-700 rounded shadow-md"
+                class="sm:absolute flex justify-center z-40 text-gray-700 pt-1 right-0 bg-white dark:bg-slate-700 rounded shadow-md"
               >
                 <ul>
                   <li class="flex">
                     <img src={ProfileImg} class="" alt="Profile Img" />
                     <NavLink
-                      class="rounded-t bg-white dark:text-white dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
+                      class="rounded-t bg-white text-teal-500 dark:bg-slate-700 w-full font-garamond text-xl md:text-2xl duration-150 hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 z-10 py-2 px-4 block whitespace-no-wrap"
                       href="/profile"
                       onclick={() => setIsOpen(false)}
                     >
@@ -245,7 +245,7 @@ const NavBar: Component = () => {
                   <li class="flex">
                     <img src={LogoutImg} class="" alt="Logout Img" />
                     <NavLink
-                      class="rounded-b bg-white dark:text-white dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
+                      class="rounded-b bg-white text-teal-500 dark:bg-slate-700 duration-150 font-garamond text-xl md:text-2xl hover:underline hover:bg-gray-400 dark:hover:bg-slate-800 hover:text-indigo-500 py-2 z-10 px-4 block whitespace-no-wrap"
                       href="/"
                       onclick={logout}
                     >

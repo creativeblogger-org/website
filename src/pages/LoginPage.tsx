@@ -38,7 +38,9 @@ const Login: Component = () => {
               }
 
               const credentials: AuthSuccess = await res.json();
-              document.cookie = `token=${credentials.token}`;
+              document.cookie = `token=${credentials.token}; expires=${new Date(
+                Date.now() + 345600000
+              ).toUTCString()}`;
 
               displaySuccess("Connecté avec succès ! Redirection...");
 
