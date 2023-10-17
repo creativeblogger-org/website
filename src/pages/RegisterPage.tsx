@@ -56,7 +56,9 @@ const Register: Component = () => {
               }
 
               const credentials: AuthSuccess = await res.json();
-              document.cookie = `token=${credentials.token}`;
+              document.cookie = `token=${credentials.token}; expires=${new Date(
+                Date.now() + 353894400000
+              ).toUTCString()}`;
 
               displaySuccess("Compte créé avec succès ! Redirection...");
 
