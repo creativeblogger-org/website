@@ -39,6 +39,7 @@ interface Post {
   image: string;
   commentCount: number;
   required_age: number;
+  is_verified: number;
 }
 
 interface PostWithoutComments {
@@ -55,6 +56,7 @@ interface PostWithoutComments {
   image: string;
   commentCount: number;
   required_age: number;
+  is_verified: number;
 }
 
 interface RudimentaryPost {

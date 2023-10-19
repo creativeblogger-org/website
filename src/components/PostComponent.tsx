@@ -10,12 +10,14 @@ import {
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
+import VerifiedIcon from "../assets/button_icons/verified.png";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
 import CommentComponent from "./CommentComponent";
 import { Marked } from "@ts-stack/markdown";
 import { API_URL } from "../App";
+import { infos } from "./NavBar";
 
 const [selectedValue, setSelectedValue] = createSignal("");
 
@@ -98,6 +100,21 @@ const PostComponent = (props: {
 }) => {
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
+  async function verified_post() {
+    const res = await customFetch(
+      `https://image.creativeblogger.org/posts/verified/${props.post.slug}`,
+      "POST"
+    );
+
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("Post mis à jour avec succès !");
+    location.reload();
+  }
+
   const [pp, setPP] = createSignal("");
 
   createEffect(() => {
@@ -135,6 +152,16 @@ const PostComponent = (props: {
                 height={24}
               ></img>
             </button>
+            <Show when={infos().permission === 3}>
+              <button onclick={() => verified_post()}>
+                <img
+                  src={VerifiedIcon}
+                  alt="Verified icon"
+                  width={24}
+                  height={24}
+                ></img>
+              </button>
+            </Show>
           </div>
         </Show>
         <div class="flex justify-center m-2 items-center">
@@ -155,10 +182,14 @@ const PostComponent = (props: {
         <div class="flex justify-center">
           <span>Créé le {getHumanDate(props.post.created_at)}</span>
         </div>
-        <div class="flex justify-center mb-4">
+        <div class="flex justify-center">
           <Show when={props.post.created_at != props.post.updated_at}>
             <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
           </Show>
+        </div>
+        <div class="flex justify-center items-center mb-4">
+          <img src={VerifiedIcon} class="mx-0" alt="Image de certification" />
+          <p class="mx-2">Article Certifié</p>
         </div>
         <hr />
         <Show when={editing()}>
