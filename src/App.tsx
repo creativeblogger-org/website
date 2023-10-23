@@ -34,6 +34,7 @@ const TermsPage = lazy(() => import("./pages/TermsPage"));
 const SocialPage = lazy(() => import("./pages/SocialPage"));
 const BrandPage = lazy(() => import("./pages/BrandPage"));
 const AppPage = lazy(() => import("./pages/AppPage"));
+const MyArticlesPage = lazy(() => import("./pages/MyArticles"));
 
 async function get_banner() {
   const res = await customFetch(
@@ -57,8 +58,6 @@ const App: Component = () => {
     window.addEventListener("online", () =>
       displaySuccess("Tu es de nouveau en ligne !")
     );
-    get_banner();
-    console.log(banner());
   });
 
   return (
@@ -95,6 +94,7 @@ const App: Component = () => {
         <Route path={"/social"} element={<SocialPage />} />
         <Route path={"/brand"} element={<BrandPage />} />
         <Route path={"/app"} element={<AppPage />} />
+        <Route path={"/my-articles"} element={<MyArticlesPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />

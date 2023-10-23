@@ -37,7 +37,6 @@ const Register: Component = () => {
               ).value;
 
               var convertedDate = new Date(userBirthdate()).toISOString();
-              console.log(convertedDate);
 
               const res = await customFetch(
                 `${API_URL}/auth/register`,
@@ -142,7 +141,6 @@ const Register: Component = () => {
                 value={userBirthdate() ?? ""}
                 onInput={(e) => {
                   setUserBirthdate(e.target.value);
-                  console.log(userBirthdate());
                 }}
                 id="birthdate"
                 required

@@ -112,7 +112,7 @@ function displaySuccess(success: string) {
   setWarning("");
   clearTimeout(successTimer());
   if (timeoutId) {
-    clearTimeout(timeoutId);
+    setSuccess("");
   }
 
   timeoutId = setTimeout(() => {

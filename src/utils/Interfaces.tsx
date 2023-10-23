@@ -40,6 +40,8 @@ interface Post {
   commentCount: number;
   required_age: number;
   is_verified: number;
+  likes: number;
+  views: number;
 }
 
 interface PostWithoutComments {
@@ -57,6 +59,8 @@ interface PostWithoutComments {
   commentCount: number;
   required_age: number;
   is_verified: number;
+  likes: number;
+  views: number;
 }
 
 interface RudimentaryPost {

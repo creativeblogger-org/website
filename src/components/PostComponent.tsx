@@ -11,6 +11,7 @@ import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
 import DeleteIcon from "../assets/button_icons/trash.svg";
 import VerifiedIcon from "../assets/button_icons/verified.png";
+import UnVerifiedIcon from "../assets/button_icons/unverified.png";
 import SaveIcon from "../assets/button_icons/save.svg";
 import { fetch_post_by_slug } from "../pages/PostPage";
 import SendIcon from "../assets/button_icons/send.svg";
@@ -18,12 +19,14 @@ import CommentComponent from "./CommentComponent";
 import { Marked } from "@ts-stack/markdown";
 import { API_URL } from "../App";
 import { infos } from "./NavBar";
+import LikeIcon from "../assets/button_icons/like.png";
+import UnLikeIcon from "../assets/button_icons/unlike.png";
+import LoveIcon from "../assets/button_icons/love.png";
 
 const [selectedValue, setSelectedValue] = createSignal("");
 
 function handleRadioChange(event: any) {
   setSelectedValue(event.target.value);
-  console.log(selectedValue());
 }
 
 const [editing, setEditing] = createSignal(false);
@@ -100,9 +103,9 @@ const PostComponent = (props: {
 }) => {
   const [editIcon, setEditIcon] = createSignal(EditIcon);
 
-  async function verified_post() {
+  async function like_post() {
     const res = await customFetch(
-      `https://image.creativeblogger.org/posts/verified/${props.post.slug}`,
+      `https://api.creativeblogger.org/posts/like/${props.post.id}`,
       "POST"
     );
 
@@ -111,7 +114,52 @@ const PostComponent = (props: {
       return;
     }
 
-    displaySuccess("Post mis à jour avec succès !");
+    displaySuccess("Post liké !");
+    location.reload();
+  }
+
+  async function unlike_post() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/posts/unlike/${props.post.id}`,
+      "DELETE"
+    );
+
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("Post unliké !");
+    location.reload();
+  }
+
+  async function verified_post() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/posts/verified/${props.post.slug}`,
+      "POST"
+    );
+
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("Le post a été certifié avec succès !");
+    location.reload();
+  }
+
+  async function unverified_post() {
+    const res = await customFetch(
+      `https://api.creativeblogger.org/posts/unverified/${props.post.slug}`,
+      "POST"
+    );
+
+    if (!res.ok) {
+      displayError(getError(await res.json()));
+      return;
+    }
+
+    displaySuccess("La certification du post a été retirée avec succès !");
     location.reload();
   }
 
@@ -153,14 +201,26 @@ const PostComponent = (props: {
               ></img>
             </button>
             <Show when={infos().permission === 3}>
-              <button onclick={() => verified_post()}>
-                <img
-                  src={VerifiedIcon}
-                  alt="Verified icon"
-                  width={24}
-                  height={24}
-                ></img>
-              </button>
+              {props.post.is_verified === 0 && (
+                <button onclick={() => verified_post()}>
+                  <img
+                    src={VerifiedIcon}
+                    alt="Verified icon"
+                    width={24}
+                    height={24}
+                  ></img>
+                </button>
+              )}
+              {props.post.is_verified === 1 && (
+                <button onclick={() => unverified_post()}>
+                  <img
+                    src={UnVerifiedIcon}
+                    alt="Unverified icon"
+                    width={24}
+                    height={24}
+                  ></img>
+                </button>
+              )}
             </Show>
           </div>
         </Show>
@@ -187,10 +247,16 @@ const PostComponent = (props: {
             <span>Mis à jour le {getHumanDate(props.post.updated_at)}</span>
           </Show>
         </div>
-        <div class="flex justify-center items-center mb-4">
-          <img src={VerifiedIcon} class="mx-0" alt="Image de certification" />
-          <p class="mx-2">Article Certifié</p>
+        <div class="flex justify-center items-center">
+          <img src={LoveIcon} class="mx-1" alt="love" />
+          <p class="text-xl">{props.post.likes}</p>
         </div>
+        {props.post.is_verified === 1 && (
+          <div class="flex justify-center items-center mb-4">
+            <img src={VerifiedIcon} class="mx-0" alt="Image de certification" />
+            <p class="mx-2">Article Certifié</p>
+          </div>
+        )}
         <hr />
         <Show when={editing()}>
           <label class="pb-3" for="title">
@@ -472,6 +538,20 @@ const PostComponent = (props: {
             </button>
           </div>
         </Show>
+        <div class="flex justify-center">
+          <img
+            src={LikeIcon}
+            onclick={like_post}
+            class="hover:cursor-pointer mx-3"
+            alt="Like"
+          />
+          <img
+            src={UnLikeIcon}
+            onclick={unlike_post}
+            class="hover:cursor-pointer mx-3"
+            alt="UnLike"
+          />
+        </div>
         <div class="m-auto w-full md:w-2/3">
           <h1 class="text-xl mt-8 font-bold">Commentaires</h1>
           <form

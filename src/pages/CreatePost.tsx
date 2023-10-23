@@ -21,7 +21,6 @@ const [selectedValue, setSelectedValue] = createSignal("");
 
 function handleRadioChange(event: any) {
   setSelectedValue(event.target.value);
-  console.log(selectedValue());
 }
 
 async function onPostSubmit(e: Event) {

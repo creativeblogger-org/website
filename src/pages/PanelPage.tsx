@@ -1,54 +1,38 @@
-import { Component, For, createSignal, onMount } from "solid-js";
+import { Component, For, Show, createSignal, onMount } from "solid-js";
 import UsersPreviewComponent from "../components/UsersPreviewComponent";
-import { NavLink } from "@solidjs/router";
 import {
   customFetch,
   displayError,
-  displaySuccess,
   getError,
+  getHumanDate,
 } from "../utils/functions_utils";
-import { fetch_posts } from "./Home";
 import { API_URL } from "../App";
+import LoveIcon from "../assets/button_icons/love.png";
+import PostPreviewComponent from "../components/PostPreviewComponent";
+import VerifiedIcon from "../assets/button_icons/verified.png";
 
-const [content, setContent] = createSignal("");
-const [color, setColor] = createSignal("");
-const [link, setLink] = createSignal("");
-const [textLink, setTextLink] = createSignal("");
+const [certifPosts, setCertifPosts] = createSignal([] as Post[]);
+const [users, setUsers] = createSignal([] as User[]);
+const [isLoading, setIsLoading] = createSignal(false);
 
-const [style, setStyle] = createSignal("");
+const [page, setPage] = createSignal(1);
 
-function handleContentChange(event: any) {
-  setContent(event.target.value);
-}
-function handleColorChange(event: any) {
-  setColor(event.target.value);
-  setStyle(
-    `text-center text-white font-bold pt-1 bg-${event.target.value}-500 text-xl`
-  );
-}
-function handleLinkChange(event: any) {
-  setLink(event.target.value);
-}
-function handleTextLinkChange(event: any) {
-  setTextLink(event.target.value);
-}
+const [allPosts, setAllPosts] = createSignal([] as Post[]);
 
-async function delete_banner() {
-  const res = await customFetch(
-    `https://api.creativeblogger.org/panel/delete`,
-    "DELETE"
-  );
+async function fetch_posts() {
+  setIsLoading(true);
+  const res = await customFetch(`${API_URL}/posts?limit=20&page=${page() - 1}`);
 
   if (!res.ok) {
+    setIsLoading(false);
     displayError(getError(await res.json()));
     return;
   }
-  displaySuccess("Bannière supprimée avec succès !");
-}
 
-const [posts, setPosts] = createSignal([] as Post[]);
-const [users, setUsers] = createSignal([] as User[]);
-const [isLoading, setIsLoading] = createSignal(false);
+  const posts: Post[] = await res.json();
+  setAllPosts(posts);
+  setIsLoading(false);
+}
 
 async function fetch_users() {
   setIsLoading(true);
@@ -66,123 +50,149 @@ async function fetch_users() {
   setIsLoading(false);
 }
 
+async function fetch_posts_asking_certif() {
+  setIsLoading(true);
+  const res = await customFetch(`${API_URL}/panel/certif/ask`);
+
+  if (!res.ok) {
+    setIsLoading(false);
+    displayError(getError(await res.json()));
+    return;
+  }
+
+  const posts: Post[] = await res.json();
+  setCertifPosts(posts);
+  setIsLoading(false);
+}
+
 const PanelPage: Component = () => {
   onMount(() => {
-    fetch_posts();
+    fetch_posts_asking_certif();
     fetch_users();
+    fetch_posts();
   });
+
+  const [showUsers, setShowUsers] = createSignal(false);
+  const [showCertif, setshowCertif] = createSignal(false);
+  const [showArticles, setshowArticles] = createSignal(false);
 
   return (
     <div class="p-3 w-full">
-      <h1 class="text-center text-4xl">Modifier le bandeau du site :</h1>
-      <form
-        class="flex justify-center mt-5 mb-10"
-        onsubmit={async (e) => {
-          e.preventDefault();
-          const textContent = (
-            document.getElementById("content") as HTMLInputElement
-          ).value;
-          const colorContent = (
-            document.getElementById("color") as HTMLInputElement
-          ).value;
-          const textLinkContent = (
-            document.getElementById("link_text") as HTMLInputElement
-          ).value;
-          const linkContent = (
-            document.getElementById("link") as HTMLInputElement
-          ).value;
-          console.log(textContent, colorContent, textLinkContent, linkContent);
-          const res = await customFetch(
-            `https://api.creativeblogger.org/panel/banner`,
-            "POST",
-            JSON.stringify({
-              content: textContent,
-              color: colorContent,
-              link_text: textLinkContent,
-              link: linkContent,
-            })
-          );
-
-          if (!res.ok) {
-            displayError(getError(await res.json()));
-            return;
-          }
-          displaySuccess("Nouvelle bannière mise en place !");
-        }}
-      >
-        <div>
-          <label for="content">Contenu :</label>
-          <input
-            required
-            type="text"
-            value={content()}
-            oninput={handleContentChange}
-            class="border rounded-xl p-1 mx-5 border-black w-2/3 mb-2 dark:bg-slate-800 dark:text-white dark:border-white"
-            id="content"
-          />
-          <br />
-          <label for="color">Couleur : (teal, orange, red)</label>
-          <input
-            required
-            value={color()}
-            oninput={handleColorChange}
-            type="text"
-            class="border rounded-xl p-1 mx-5 border-black w-24 mb-2 dark:bg-slate-800 dark:text-white dark:border-white"
-            id="color"
-          />
-          <br />
-          <label for="link_text">Texte du lien :</label>
-          <input
-            required
-            value={textLink()}
-            onInput={handleTextLinkChange}
-            type="text"
-            class="border rounded-xl p-1 mx-5 border-black w-1/3 mb-2 dark:bg-slate-800 dark:text-white dark:border-white"
-            id="link_text"
-          />
-          <br />
-          <label for="link">Contenu du lien :</label>
-          <input
-            required
-            value={link()}
-            onInput={handleLinkChange}
-            type="text"
-            class="border rounded-xl p-1 mx-5 border-black w-2/3 mb-2 dark:bg-slate-800 dark:text-white dark:border-white"
-            id="link"
-          />
-          <br />
-          <button
-            class="p-2 bg-teal-500 rounded-2xl duration-150 hover:bg-teal-600"
-            type="submit"
-          >
-            Envoyer
-          </button>
-          <button
-            onclick={delete_banner}
-            class="p-2 bg-red-500 rounded-2xl duration-150 hover:bg-red-600 mx-4"
-          >
-            Supprimer la bannière actuelle
-          </button>
-          <h2 class={style()}>
-            {content()}
-            <NavLink href={link()} class="text-indigo-500 mx-2 underline">
-              {textLink()}
-            </NavLink>
-          </h2>
-        </div>
-      </form>
-      <h1 class="text-center text-4xl">Utilisateurs :</h1>
-      <div
-        class=" w-11/12 grid grid-cols-1 sm:grid-cols-2 m-auto md:grid-cols-3 xl:grid-cols-4"
-        id="users"
-      >
-        <For each={users()} fallback={"Aucun utilisateur pour le moment..."}>
-          {(user, _) => <UsersPreviewComponent user={user} />}
-        </For>
+      <div class="grid grid-cols-3 mt-5 mb-9">
+        <button
+          onclick={() => {
+            if (showUsers() === false) {
+              setshowArticles(false);
+              setshowCertif(false);
+              setShowUsers(true);
+            } else {
+              setShowUsers(false);
+            }
+          }}
+          class="mx-auto px-2 py-5 bg-blue-300 w-1/2 rounded-3xl duration-150 text-lg sm:text-2xl hover:bg-blue-400"
+        >
+          Liste d'utilisateurs
+        </button>
+        <button
+          onclick={() => {
+            if (showCertif() === false) {
+              setShowUsers(false);
+              setshowArticles(false);
+              setshowCertif(true);
+            } else {
+              setshowCertif(false);
+            }
+          }}
+          class="mx-auto px-2 py-5 bg-blue-300 w-1/2 rounded-3xl duration-150 text-lg sm:text-2xl hover:bg-blue-400"
+        >
+          Demandes de certification
+        </button>
+        <button
+          onclick={() => {
+            if (showArticles() === false) {
+              setShowUsers(false);
+              setshowCertif(false);
+              setshowArticles(true);
+            } else {
+              setshowArticles(false);
+            }
+          }}
+          class="mx-auto px-2 py-5 bg-blue-300 w-1/2 rounded-3xl duration-150 text-lg sm:text-2xl hover:bg-blue-400"
+        >
+          Liste des articles
+        </button>
       </div>
+      <Show when={showUsers()}>
+        <h1 class="text-center text-4xl">Utilisateurs :</h1>
+        <div
+          class=" w-11/12 grid grid-cols-1 sm:grid-cols-2 m-auto md:grid-cols-3 xl:grid-cols-4"
+          id="users"
+        >
+          <For each={users()} fallback={"Aucun utilisateur pour le moment..."}>
+            {(user, _) => <UsersPreviewComponent user={user} />}
+          </For>
+        </div>
+      </Show>
+      <Show when={showCertif()}>
+        <h1 class="text-center text-4xl">Posts demandant la certification :</h1>
+        <div class="flex justify-center">
+          <For each={certifPosts()} fallback={"Aucun post pour le moment..."}>
+            {(post, _) => <h1>{post.title}</h1>}
+          </For>
+        </div>
+      </Show>
+      <Show when={showArticles()}>
+        <h1 class="text-center text-4xl">Articles :</h1>
+        <div
+          class="m-auto w-11/12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 home"
+          id="posts"
+        >
+          <For each={allPosts()} fallback={""}>
+            {(post, _) => (
+              <div class="rounded-md my-5 border border-slate-800 dark:border-white w-auto relative duration-150 hover:border-indigo-500 lg:mx-5">
+                <img
+                  src={post.image}
+                  class="mx-auto rounded-3xl"
+                  loading="lazy"
+                  alt="Image of the article"
+                />
+                <h1 class="text-center font-bold text-3xl my-2">
+                  {post.title}
+                </h1>
+                <h3 class="text-center italic text-xl mb-2">
+                  {post.description}
+                </h3>
+                <p class="text-center mb-2">
+                  Publié le {getHumanDate(post.created_at)}
+                </p>
+                <Show when={post.created_at != post.updated_at}>
+                  <p class="text-center mb-2">
+                    Mis à jour le {getHumanDate(post.updated_at)}
+                  </p>
+                </Show>
+                <div class="flex justify-center items-center">
+                  <img src={LoveIcon} class="mx-1" alt="love" />
+                  <p class="text-xl">{post.likes}</p>
+                </div>
+                <h4 class="text-center">{post.views} vue(s)</h4>
+                {post.is_verified === 1 && (
+                  <div class="flex justify-center items-center mb-4">
+                    <img
+                      src={VerifiedIcon}
+                      class="mx-0"
+                      alt="Image de certification"
+                    />
+                    <p class="mx-2">Article Certifié</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </For>
+        </div>
+      </Show>
     </div>
   );
 };
 
 export default PanelPage;
-export { setPosts, fetch_users };
+export { fetch_users };

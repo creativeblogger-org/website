@@ -259,10 +259,17 @@ const MePage: Component = () => {
         <hr class="p-2" />
         <Show when={infos().permission >= 1}>
           <NavLink
-            class="duration-150 hover:text-indigo-500 hover:underline"
+            class="duration-150 hover:text-indigo-500 hover:underline mx-5"
             href="/create"
           >
             Créer un article
+          </NavLink>
+          <p> | </p>
+          <NavLink
+            class="duration-150 hover:text-indigo-500 hover:underline mx-5"
+            href="/my-articles"
+          >
+            Mes articles
           </NavLink>
         </Show>
         <hr class="m-2 p-2" />
