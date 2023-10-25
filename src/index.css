@@ -31,8 +31,13 @@ img {
   }
 }
 
-.post a {
-  color: rgb(20, 184, 166);
+.post-content a {
+  border-bottom: 2px solid black;
+  transition: 0.1s;
+}
+.post-content a:hover {
+  color: gray;
+  border-bottom: 3px solid gray;
 }
 hr {
   margin-top: 20px;
