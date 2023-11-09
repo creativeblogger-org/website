@@ -167,7 +167,10 @@ const Home: Component = () => {
       >
         <For each={posts()} fallback={""}>
           {(post, _) => (
-            <a href={`/posts/${post.slug}`}>
+            <a
+              title={`${post.title}\n${post.description}`}
+              href={`/posts/${post.slug}`}
+            >
               <PostPreviewComponent post={post} />
             </a>
           )}

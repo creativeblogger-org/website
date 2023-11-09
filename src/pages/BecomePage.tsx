@@ -30,9 +30,8 @@ const BecomePage: Component = () => {
           </h1>
           <p class="text-white p-4">
             Chez Creative Blogger, l'ambiance est super sympa, on est très
-            bienveillant ( depuis qu'on a viré l'élément nuisible de l'équipe ),
-            et rien que pour ça, ça vaut le coup de s'y intéresser... je dis ça,
-            je dis rien.
+            bienveillant, et rien que pour ça, ça vaut le coup de s'y
+            intéresser... je dis ça, je dis rien.
           </p>
         </div>
       ) : null}
@@ -57,7 +56,10 @@ const BecomePage: Component = () => {
       ) : null}
       <h1 class="text-3xl text-center mt-10 mb-10">Alors, convaincus ?</h1>
       <div class="flex justify-center">
-        <a class="text-3xl pb-8" href="https://discord.gg/uT8zVVn6rQ">
+        <a
+          class="text-3xl pb-8 text-teal-500 underline duration-150 hover:text-indigo-500"
+          href="https://discord.gg/uT8zVVn6rQ"
+        >
           C'est ici !
         </a>
       </div>

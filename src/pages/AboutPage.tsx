@@ -13,32 +13,70 @@ const AboutPage: Component = () => {
             alt="Image GIF de l'avatar de riccardo"
           />
           <h2 class="text-5xl text-teal-500 text-center">Riccardo</h2>
-          <h3 class="text-2xl text-indigo-500 text-center">
-            Développeur back-end
-          </h3>
+          <h3 class="text-2xl text-indigo-500 text-center">Co-fondateur</h3>
           <hr />
           <p class="text-center">
             S'occupe de la liaison entre le front et l'API, adore le langage V
             et Rust, plutôt de nature calme, il est le pilier qui maintient CB
             en place ☮️
           </p>
+          <p class="text-center my-3 text-2xl">Les réseaux de Riccardo</p>
+          <div class="grid grid-cols-2 place-items-center">
+            <a
+              class="text-teal-500 underline text-xl duration-150 hover:text-indigo-500"
+              href="https://bsky.app/profile/riccardoroux.bsky.social"
+              target="_blank"
+            >
+              BlueSky
+            </a>
+            <a
+              class="text-teal-500 underline duration-150 text-xl mx-0 hover:text-indigo-500"
+              href="https://twitter.com/riccardorouxdev"
+              target="_blank"
+            >
+              Twitter
+            </a>
+          </div>
         </div>
         <div class="m-3">
           <img
             src={gifMael}
             class="mx-auto"
-            alt="Image GIF de l'avatar de Maël"
+            alt="Image GIF de l'avatar de SquareDot 3301"
           />
-          <h2 class="text-5xl text-teal-500 text-center">Maël</h2>
-          <h3 class="text-2xl text-indigo-500 text-center">
-            Fondateur, designer
-          </h3>
+          <h2 class="text-3xl md:text-5xl text-teal-500 text-center">
+            SquareDot 3301
+          </h2>
+          <h3 class="text-2xl text-indigo-500 text-center">Fondateur</h3>
           <hr />
           <p class="text-center">
-            Et voici l'être adulé par tout le monde ! Maël ( avec le ë, c'est
-            important ) ou aussi appelé par le nom point carré venant de mon
-            pseudo " .² " 💯
+            Et voici l'être adulé par tout le monde ! SquareDot 3️⃣3️⃣0️⃣1️⃣ ou
+            aussi appelé par le nom point carré venant de mon pseudo " .² " 💯
           </p>
+          <p class="text-center my-3 text-2xl">Les réseaux de SquareDot 3301</p>
+          <div class="grid grid-cols-3 place-items-center">
+            <a
+              class="text-teal-500 underline text-xl duration-150 mx-0 hover:text-indigo-500"
+              href="https://bsky.app/profile/squaredot.bsky.social"
+              target="_blank"
+            >
+              BlueSky
+            </a>
+            <a
+              class="text-teal-500 underline text-xl duration-150 mx-0 hover:text-indigo-500"
+              href="https://piaille.fr/@squaredot"
+              target="_blank"
+            >
+              Mastodon
+            </a>
+            <a
+              class="text-teal-500 underline duration-150 text-xl mx-0 hover:text-indigo-500"
+              href="https://twitter.com/squaredotcb"
+              target="_blank"
+            >
+              Twitter
+            </a>
+          </div>
         </div>
       </div>
       <div class="mt-12">
