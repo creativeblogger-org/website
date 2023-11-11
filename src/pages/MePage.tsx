@@ -13,6 +13,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher";
 import ky from "ky";
 import { getToken } from "../utils/functions_utils";
 import { API_URL } from "../App";
+import BMCLogo from "../assets/img/bmc-button.png";
 
 async function deleteUser() {
   const res = await customFetch(`${API_URL}/@me`, "DELETE");
@@ -231,6 +232,12 @@ const MePage: Component = () => {
             autocomplete="off"
             required
           />
+          <button
+            class="flex mx-auto mb-4 w-1/3 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            type="submit"
+          >
+            Mettre à jour
+          </button>
           <br />
           <label class="text-3xl text-black dark:text-white">
             Permissions :
@@ -242,12 +249,6 @@ const MePage: Component = () => {
             <label class="text-3xl text-black">Modifier le :</label>
             <h2 class="p-4">{getHumanDate(infos().update_at)}</h2>
           </Show>
-          <button
-            class="flex mx-auto mb-4 w-1/3 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            type="submit"
-          >
-            Mettre à jour
-          </button>
         </form>
         <p class="text-black dark:text-white">Date de naissance :</p>
         <h2>{new Date(Date.parse(infos().birthdate)).toLocaleDateString()}</h2>
@@ -255,7 +256,6 @@ const MePage: Component = () => {
           <h1 class="text-black dark:text-white mx-5">Thème :</h1>
           <ThemeSwitcher />
         </div>
-
         <hr class="p-2" />
         <Show when={infos().permission >= 1}>
           <NavLink
@@ -271,6 +271,52 @@ const MePage: Component = () => {
           >
             Mes articles
           </NavLink>
+          <p> | </p>
+          <form
+            onsubmit={async (e) => {
+              e.preventDefault();
+
+              const link = (
+                document.getElementById("buymeacoffee") as HTMLInputElement
+              ).value;
+              const res = await customFetch(
+                `${API_URL}/@me/buymeacoffee/${link}`,
+                "POST"
+              );
+              if (!res.ok) {
+                displayError(getError(await res.json()));
+                return;
+              }
+
+              displaySuccess(
+                "Votre compte Buy Me A Coffee a été ajouté avec succès !"
+              );
+            }}
+          >
+            <img src={BMCLogo} alt="Logo de Buy Me A Coffee" class="h-24" />
+            <label
+              class="text-3xl text-black dark:text-white"
+              for="buymeacoffee"
+            >
+              Ajouter un compte Buy Me A Coffee :
+            </label>
+            <br />
+            <input
+              type="text"
+              class="p-2 w-11/12 text-xl md:w-4/6 lg:w-2/6 rounded-md border m-5 dark:bg-slate-800 dark:text-white dark:placeholder:text-gray-500 dark:placeholder:opacity-100"
+              name="buymeacoffee"
+              id="buymeacoffee"
+              autocomplete="off"
+              required
+              placeholder="Votre nom d'utilisateur Buy Me A Coffee"
+            />
+            <button
+              class="flex mx-auto mb-4 w-1/6 duration-200 hover:rounded-2xl justify-center rounded-md shadow-indigo-500/50 bg-gradient-to-l from-indigo-500 to-teal-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              type="submit"
+            >
+              Ajouter
+            </button>
+          </form>
         </Show>
         <hr class="m-2 p-2" />
         <Show when={infos().permission === 3}>

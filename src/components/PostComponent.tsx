@@ -6,6 +6,7 @@ import {
   displaySuccess,
   getError,
   getHumanDate,
+  wantToShowBuyMeACoffee,
 } from "../utils/functions_utils";
 import EditIcon from "../assets/button_icons/edit.svg";
 import CancelEditIcon from "../assets/button_icons/x-circle.svg";
@@ -22,6 +23,7 @@ import { infos } from "./NavBar";
 import LikeIcon from "../assets/button_icons/like.png";
 import UnLikeIcon from "../assets/button_icons/unlike.png";
 import LoveIcon from "../assets/button_icons/love.png";
+import BCMLogo from "../assets/img/bmc-button.png";
 
 const [selectedValue, setSelectedValue] = createSignal("");
 
@@ -552,6 +554,43 @@ const PostComponent = (props: {
             alt="UnLike"
           />
         </div>
+        <Show
+          when={
+            props.post.author.buymeacoffee !== null &&
+            wantToShowBuyMeACoffee() === false
+          }
+        >
+          <div class="my-5">
+            <div class="text-center">
+              <h2 class="text-4xl pb-4 font-garamond font-bold">
+                Vous avez aimé ?
+              </h2>
+              <h3 class="text-xl">
+                Soutenez financièrement l'auteur de cet article !
+              </h3>
+            </div>
+            <a href={props.post.author.buymeacoffee} target="_blank">
+              <img
+                src={BCMLogo}
+                class="h-24 w-auto"
+                alt="Logo de Buy Me A Coffee"
+              />
+            </a>
+            <div class="flex justify-center">
+              <button
+                class="text-teal-500 underline duration-150 hover:text-indigo-500"
+                onclick={() => {
+                  document.cookie = `buymeacoffee=false; expires=${new Date(
+                    Date.now() + 353894400000
+                  ).toUTCString()}`;
+                  location.reload();
+                }}
+              >
+                Ne plus voir ceci
+              </button>
+            </div>
+          </div>
+        </Show>
         <div class="m-auto w-full md:w-2/3">
           <h1 class="text-xl mt-8 font-bold">Commentaires</h1>
           <form

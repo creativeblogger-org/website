@@ -19,9 +19,9 @@ function getToken() {
   return "";
 }
 
-function getShortCookie() {
+function getbuymeacoffeeCookie() {
   let cookies = document.cookie;
-  let token = cookies.split("; ").find((e) => e.startsWith("shorts"));
+  let token = cookies.split("; ").find((e) => e.startsWith("buymeacoffee"));
   if (token == undefined) {
     return "";
   }
@@ -40,12 +40,8 @@ function isNotConnected() {
   return getToken().length === 0;
 }
 
-function isAcceptShortConditions() {
-  return getShortCookie().length != 0;
-}
-
-function isNotAcceptShortConditions() {
-  return getShortCookie().length === 0;
+function wantToShowBuyMeACoffee() {
+  return getbuymeacoffeeCookie().length != 0;
 }
 
 function getCookie(name: any) {
@@ -90,20 +86,16 @@ const [errorTimer, setErrorTimer] = createSignal<number>();
 const [successTimer, setSuccessTimer] = createSignal<number>();
 const [warningTimer, setWarningTimer] = createSignal<number>();
 
-let timeoutId: NodeJS.Timeout | undefined;
-
 function displayError(error: string) {
   setSuccess("");
   setError(error);
   setWarning("");
-  clearTimeout(errorTimer());
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-  }
-
-  timeoutId = setTimeout(() => {
-    setError("");
-  }, 2000);
+  clearTimeout(successTimer());
+  setSuccessTimer(
+    setTimeout(() => {
+      setSuccess("");
+    }, 2000)
+  );
 }
 
 function displaySuccess(success: string) {
@@ -111,27 +103,17 @@ function displaySuccess(success: string) {
   setError("");
   setWarning("");
   clearTimeout(successTimer());
-  if (timeoutId) {
-    setSuccess("");
-  }
-
-  timeoutId = setTimeout(() => {
-    setError("");
-  }, 2000);
+  setSuccessTimer(
+    setTimeout(() => {
+      setSuccess("");
+    }, 2000)
+  );
 }
 
 function displayWarning(warning: string) {
   setSuccess("");
   setError("");
   setWarning("");
-  clearTimeout(warningTimer());
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-  }
-
-  timeoutId = setTimeout(() => {
-    setError("");
-  }, 2000);
 }
 
 function findPermissions(permission: number) {
@@ -161,7 +143,6 @@ export {
   success,
   getCookie,
   findPermissions,
-  getShortCookie,
-  isAcceptShortConditions,
-  isNotAcceptShortConditions,
+  getbuymeacoffeeCookie,
+  wantToShowBuyMeACoffee,
 };

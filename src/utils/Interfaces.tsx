@@ -8,6 +8,7 @@ interface User {
   password: string;
   pp: string;
   birthdate: string;
+  buymeacoffee: string;
 }
 
 interface Comment {
